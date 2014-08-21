@@ -1,0 +1,5 @@
+services:
+    phpbb.pages.listener:
+        class: phpbb\pages\event\listener
+        tags:
+            - { name: event.listener }
