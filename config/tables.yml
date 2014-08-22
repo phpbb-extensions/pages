@@ -1,0 +1,2 @@
+parameters:
+    tables.pages: %core.table_prefix%pages
