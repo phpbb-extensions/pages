@@ -192,11 +192,8 @@ class page_entity_content_test extends page_entity_base
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 
-		// Encode content to emulate how it comes out of the database
-		$stored_content = utf8_htmlspecialchars($content);
-
 		// Set the content
-		$result = $entity->set_content($stored_content);
+		$result = $entity->set_content($content);
 
 		// Assert the returned value is what we expect
 		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
@@ -204,10 +201,11 @@ class page_entity_content_test extends page_entity_base
 		// Enable HTML
 		$entity->content_enable_html();
 
-		// Assert content for edit is the same as stored content
-		$this->assertSame($stored_content, $entity->get_content_for_edit());
+		// Get what we're expecting from
+		$test = $this->content_test_helper($content, $entity->content_bbcode_enabled, $entity->content_magic_url_enabled, $entity->content_smilies_enabled, true);
 
-		// Assert content for display is as expected
-		$this->assertSame($content, $entity->get_content_for_display());
+		$this->assertSame($test['edit'], $entity->get_content_for_edit());
+
+		$this->assertSame($test['display'], $entity->get_content_for_display($censor_text));
 	}
 }
