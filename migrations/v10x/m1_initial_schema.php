@@ -62,6 +62,7 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 					'COLUMNS'	=> array(
 						'page_link_id'					=> array('UINT', null, 'auto_increment'),
 						'page_link_location'			=> array('VCHAR:255', ''),
+						'page_link_event_name'			=> array('VCHAR:255', ''),
 					),
 					'PRIMARY_KEY'	=> 'page_link_id',
 				),
