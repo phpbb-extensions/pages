@@ -71,12 +71,13 @@ class page implements page_interface
 	*/
 	public function load($id = 0, $route = '')
 	{
-		// Load by page route if provided, otherwise default to load by id
-		$sql_where = (!empty($route)) ? " WHERE page_route = '" . $this->db->sql_escape($route) . "'" : ' WHERE page_id = ' . (int) $id;
+		// Load by id if provided, otherwise default to load by page route
+		$sql_where = ($id <> 0) ? 'page_id = ' . (int) $id : "page_route = '" . $this->db->sql_escape($route) . "'";
 
 		// Get page from the database
 		$sql = 'SELECT *
-			FROM ' . $this->pages_table . $sql_where;
+			FROM ' . $this->pages_table . '
+			WHERE ' . $sql_where;
 		$result = $this->db->sql_query($sql);
 		$this->data = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
