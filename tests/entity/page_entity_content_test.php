@@ -178,6 +178,8 @@ class page_entity_content_test extends page_entity_base
 			array('This is a test <b>message</b>.'),
 			array('This is a test <b>message</b><br />This is a new line.'),
 			array('This is a test <b>message</b><br />This is a <a href="#">new line</a>. Føó.'),
+			array('This is a test <b>message</b><br />This has [b]bbcodes[/b] and smilies :) and urls http://www.phpbb.com to test.'),
+			array('<script>if (window.open && !window.closed) console.log("hello world");</script>'),
 		);
 	}
 
@@ -189,6 +191,11 @@ class page_entity_content_test extends page_entity_base
 	*/
 	public function test_html_content($content)
 	{
+		// Content will come from either $request->variable or the database.
+		// In either case the content is converted by htmlspecialchars, so
+		// we emulate that here on the test content be encoding it.
+		$encoded_content = utf8_htmlspecialchars($content);
+
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 
@@ -196,16 +203,15 @@ class page_entity_content_test extends page_entity_base
 		$entity->content_enable_html();
 
 		// Set the content
-		$result = $entity->set_content($content);
+		$result = $entity->set_content($encoded_content);
 
 		// Assert the returned value is what we expect
 		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
 
-		// Get what we're expecting from
-		$test = $this->content_test_helper($content, $entity->content_bbcode_enabled(), $entity->content_magic_url_enabled(), $entity->content_smilies_enabled(), true);
+		// Assert that the content for edit matches the original encoded content
+		$this->assertSame($encoded_content, $entity->get_content_for_edit());
 
-		$this->assertSame($test['edit'], $entity->get_content_for_edit());
-
-		$this->assertSame($test['display'], $entity->get_content_for_display());
+		// Assert that the content for display matches HTML decoded content
+		$this->assertSame($content, $entity->get_content_for_display());
 	}
 }
