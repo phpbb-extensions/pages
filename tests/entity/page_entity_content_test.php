@@ -192,8 +192,8 @@ class page_entity_content_test extends page_entity_base
 	public function test_html_content($content)
 	{
 		// Content will come from either $request->variable or the database.
-		// In either case the content is converted by htmlspecialchars, so
-		// we emulate that here on the test content be encoding it.
+		// In either case the content is encoded by htmlspecialchars, so
+		// we emulate that here on the test content by encoding it.
 		$encoded_content = utf8_htmlspecialchars($content);
 
 		// Setup the entity class
