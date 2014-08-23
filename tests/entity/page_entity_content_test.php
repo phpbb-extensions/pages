@@ -202,10 +202,10 @@ class page_entity_content_test extends page_entity_base
 		$entity->content_enable_html();
 
 		// Get what we're expecting from
-		$test = $this->content_test_helper($content, $entity->content_bbcode_enabled, $entity->content_magic_url_enabled, $entity->content_smilies_enabled, true);
+		$test = $this->content_test_helper($content, $entity->content_bbcode_enabled(), $entity->content_magic_url_enabled(), $entity->content_smilies_enabled(), true);
 
 		$this->assertSame($test['edit'], $entity->get_content_for_edit());
 
-		$this->assertSame($test['display'], $entity->get_content_for_display($censor_text));
+		$this->assertSame($test['display'], $entity->get_content_for_display());
 	}
 }
