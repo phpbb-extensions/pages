@@ -55,7 +55,6 @@ class page_entity_import_test extends page_entity_base
 		$map = array(
 			'page_id'					=> 'get_id',
 			'page_order' 				=> 'get_order',
-			'page_link_location_id'		=> 'get_link_location',
 			'page_route'				=> 'get_route',
 			'page_title'				=> 'get_title',
 			'page_description'			=> 'get_description',
@@ -91,11 +90,6 @@ class page_entity_import_test extends page_entity_base
 		// Out of range
 		$data[] = array_merge($import_data[1], array(
 			'page_order'	=> -1,
-		));
-
-		// Out of range
-		$data[] = array_merge($import_data[1], array(
-			'page_link_location_id'	=> -1,
 		));
 
 		// Out of range

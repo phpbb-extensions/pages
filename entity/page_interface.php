@@ -146,24 +146,6 @@ interface page_interface
 	public function set_order($order);
 
 	/**
-	* Get link location identifier
-	*
-	* @return string link location
-	* @access public
-	*/
-	public function get_link_location();
-
-	/**
-	* Set link location identifier
-	*
-	* @param int $id Link location identifier
-	* @return page_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
-	*/
-	public function set_link_location($id);
-
-	/**
 	* Get content for edit
 	*
 	* @return string

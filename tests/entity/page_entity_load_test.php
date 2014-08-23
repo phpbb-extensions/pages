@@ -30,7 +30,6 @@ class page_entity_load_test extends page_entity_base
 				array(
 					'page_id' => 1,
 					'page_order' => 1,
-					'page_link_location_id' => 1,
 					'page_route' => 'page_1',
 					'page_title' => 'title_1',
 					'page_description' => 'description_1',
@@ -44,7 +43,6 @@ class page_entity_load_test extends page_entity_base
 				array(
 					'page_id' => 2,
 					'page_order' => 2,
-					'page_link_location_id' => 1,
 					'page_route' => 'page_2',
 					'page_title' => 'title_2',
 					'page_description' => 'description_2',
@@ -58,7 +56,6 @@ class page_entity_load_test extends page_entity_base
 				array(
 					'page_id' => 3,
 					'page_order' => 1,
-					'page_link_location_id' => 2,
 					'page_route' => 'page_3',
 					'page_title' => 'title_3',
 					'page_description' => 'description_3',
@@ -72,7 +69,6 @@ class page_entity_load_test extends page_entity_base
 				array(
 					'page_id' => 4,
 					'page_order' => 2,
-					'page_link_location_id' => 2,
 					'page_route' => 'page_4',
 					'page_title' => 'title_4',
 					'page_description' => 'description_4',
@@ -105,7 +101,6 @@ class page_entity_load_test extends page_entity_base
 		$map = array(
 			'page_id'					=> 'get_id',
 			'page_order' 				=> 'get_order',
-			'page_link_location_id'		=> 'get_link_location',
 			'page_description'			=> 'get_description',
 			'page_route'				=> 'get_route',
 			'page_title'				=> 'get_title',

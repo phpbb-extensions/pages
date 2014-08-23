@@ -23,7 +23,6 @@ class page implements page_interface
 	*	page_title
 	*	page_description
 	*	page_route
-	*	page_link_location_id
 	*	page_order
 	*	page_content
 	*	page_content_bbcode_uid
@@ -113,7 +112,6 @@ class page implements page_interface
 			// column						=> data type (see settype())
 			'page_id'						=> 'integer',
 			'page_order'					=> 'set_order', // call set_order()
-			'page_link_location_id'			=> 'set_link_location', // call set_link_location()
 			'page_title'					=> 'set_title', // call set_title()
 			'page_description'				=> 'set_description', // call set_description()
 			'page_route'					=> 'set_route', // call set_route()
@@ -411,42 +409,6 @@ class page implements page_interface
 
 		// Set the route on our data array
 		$this->data['page_order'] = $order;
-
-		return $this;
-	}
-
-	/**
-	* Get link location identifier for where the link will be displayed
-	*
-	* @return int link location
-	* @access public
-	*/
-	public function get_link_location()
-	{
-		return (isset($this->data['page_link_location_id'])) ? (int) $this->data['page_link_location_id'] : 0;
-	}
-
-	/**
-	* Set link location identifier
-	*
-	* @param int $id Link location identifier
-	* @return page_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
-	*/
-	public function set_link_location($id)
-	{
-		// Enforce an integer
-		$id = (int) $id;
-
-		// If the data is less than 0, it's not unsigned and we'll throw an exception
-		if ($id < 0)
-		{
-			throw new \phpbb\pages\exception\out_of_bounds('page_link_location_id');
-		}
-
-		// Set the route on our data array
-		$this->data['page_link_location_id'] = $id;
 
 		return $this;
 	}

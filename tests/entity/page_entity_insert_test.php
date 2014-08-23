@@ -25,7 +25,6 @@ class page_entity_insert_test extends page_entity_base
 		$data = array(
 			'page_id'							=> 5,
 			'page_order'						=> 0,
-			'page_link_location_id'				=> 0,
 			'page_route'						=> 'inserted_route',
 			'page_title'						=> 'inserted_title',
 			'page_description'					=> 'inserted_description',
@@ -45,7 +44,6 @@ class page_entity_insert_test extends page_entity_base
 			->set_description($data['page_description'])
 			->set_content($data['page_content'])
 			->set_order($data['page_order'])
-			->set_link_location($data['page_link_location_id'])
 			->set_page_display($data['page_display'])
 			->set_page_display_guests($data['page_display_guests'])
 			->insert();
@@ -66,7 +64,6 @@ class page_entity_insert_test extends page_entity_base
 		$map = array(
 			'page_id'					=> 'get_id',
 			'page_order' 				=> 'get_order',
-			'page_link_location_id'		=> 'get_link_location',
 			'page_route'				=> 'get_route',
 			'page_title'				=> 'get_title',
 			'page_description'			=> 'get_description',

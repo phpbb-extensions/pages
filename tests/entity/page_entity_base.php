@@ -74,7 +74,6 @@ class page_entity_base extends \phpbb_database_test_case
 			1 => array(
 				'page_id'							=> 1,
 				'page_order'						=> 1,
-				'page_link_location_id'				=> 1,
 				'page_route'						=> 'route1',
 				'page_title'						=> '1 Title',
 				'page_description'					=> '1 Description',
@@ -89,7 +88,6 @@ class page_entity_base extends \phpbb_database_test_case
 			2 => array(
 				'page_id'							=> 2,
 				'page_order'						=> 2,
-				'page_link_location_id'				=> 1,
 				'page_route'						=> 'route2',
 				'page_title'						=> '2 Title',
 				'page_description'					=> '2 Description',
@@ -104,7 +102,6 @@ class page_entity_base extends \phpbb_database_test_case
 			3 => array(
 				'page_id'							=> 3,
 				'page_order'						=> 1,
-				'page_link_location_id'				=> 2,
 				'page_route'						=> 'route3',
 				'page_title'						=> '3 Title',
 				'page_description'					=> '3 Description',
@@ -119,7 +116,6 @@ class page_entity_base extends \phpbb_database_test_case
 			4 => array(
 				'page_id'							=> 4,
 				'page_order'						=> 2,
-				'page_link_location_id'				=> 2,
 				'page_route'						=> 'route4',
 				'page_title'						=> '4 Title',
 				'page_description'					=> '4 Description',
@@ -134,7 +130,6 @@ class page_entity_base extends \phpbb_database_test_case
 			5 => array(
 				'page_id'							=> 5,
 				'page_order'						=> 0,
-				'page_link_location_id'				=> 0,
 				'page_route'						=> 'route5',
 				'page_title'						=> '5 Title',
 				'page_description'					=> '5 Description',

@@ -22,7 +22,6 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 	*		page_title
 	*		page_description
 	*		page_route
-	*		page_link_location_id
 	*		page_order
 	*		page_content
 	*		page_content_bbcode_uid
@@ -43,7 +42,6 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 						'page_title'					=> array('VCHAR:200', ''),
 						'page_description'				=> array('VCHAR:255', ''),
 						'page_route'					=> array('VCHAR:100', ''),
-						'page_link_location_id'			=> array('UINT', 0),
 						'page_order'					=> array('UINT', 0),
 						'page_content'					=> array('TEXT_UNI', ''),
 						'page_content_bbcode_uid'		=> array('VCHAR:8', ''),
