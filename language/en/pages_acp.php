@@ -41,4 +41,8 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_PAGES_MANAGE'					=> 'Manage pages',
 	'ACP_PAGES_MANAGE_EXPLAIN'			=> 'From this page you can add, edit and delete pages.',
+	'ACP_PAGES_CREATE_PAGE'				=> 'Create page',
+	'ACP_PAGES_CREATE_PAGE_EXPLAIN'		=> 'Using the form below you can create a new page which will be displayed on your board.',
+	'ACP_PAGES_EDIT_PAGE'				=> 'Edit page',
+	'ACP_PAGES_EDIT_PAGE_EXPLAIN'		=> 'Using the form below you can update an existing page which will be displayed on your board.',
 ));
