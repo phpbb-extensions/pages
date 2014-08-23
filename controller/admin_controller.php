@@ -76,7 +76,7 @@ class admin_controller implements admin_interface
 	* @return null
 	* @access public
 	*/
-	public function display_rules()
+	public function display_pages()
 	{
 		// @todo
 	}
@@ -99,7 +99,7 @@ class admin_controller implements admin_interface
 	* @return null
 	* @access public
 	*/
-	public function edit_rule($page_id)
+	public function edit_page($page_id)
 	{
 		// @todo
 	}

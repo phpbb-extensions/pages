@@ -23,7 +23,7 @@ interface admin_interface
 	* @return null
 	* @access public
 	*/
-	public function display_rules();
+	public function display_pages();
 
 	/**
 	* Add a page
