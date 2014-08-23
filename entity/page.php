@@ -260,6 +260,12 @@ class page implements page_interface
 		// Enforce a string
 		$title = (string) $title;
 
+		// Title is a required field
+		if ($title == '')
+		{
+			throw new \phpbb\pages\exception\unexpected_value(array('title', 'FIELD_MISSING'));
+		}
+
 		// We limit the title length to 200 characters
 		if (truncate_string($title, 200) != $title)
 		{
@@ -332,8 +338,14 @@ class page implements page_interface
 		// Enforce a string
 		$route = (string) $route;
 
+		// Route is a required field
+		if ($route == '')
+		{
+			throw new \phpbb\pages\exception\unexpected_value(array('route', 'FIELD_MISSING'));
+		}
+
 		// Route should not contain any special characters
-		if (!preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/i', $route) && $route != '')
+		if (!preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/i', $route))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('route', 'ILLEGAL_CHARACTERS'));
 		}

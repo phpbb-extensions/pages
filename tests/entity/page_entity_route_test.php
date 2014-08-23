@@ -28,8 +28,6 @@ class page_entity_route_test extends page_entity_base
 			array('foo', 'foo'),
 			array('foø-bar', 'foø-bar'),
 			array('foó-bar', 'foó-bar'),
-			array('', ''),
-			array(null, ''),
 
 			// Maximum length
 			array(
@@ -87,6 +85,27 @@ class page_entity_route_test extends page_entity_base
 			array('foo*bar'),
 			array('foo\'bar'),
 			array('foo\\bar'),
+
+			// Only illegal chars or empty
+			array(null),
+			array(''),
+			array('%'),
+			array('('),
+			array(')'),
+			array('['),
+			array(']'),
+			array('{'),
+			array('}'),
+			array('!'),
+			array('<'),
+			array('>'),
+			array(','),
+			array(';'),
+			array('"'),
+			array('`'),
+			array('~'),
+			array('|'),
+			array(':'),
 
 			// Exceeds character maximum length
 			array(

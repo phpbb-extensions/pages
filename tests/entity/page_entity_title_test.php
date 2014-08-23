@@ -27,7 +27,6 @@ class page_entity_title_test extends page_entity_base
 			// sent to set_title(), expected from get_title()
 			array('foo', 'foo'),
 			array(1, '1'),
-			array(null, ''),
 
 			// Maximum length
 			array(
@@ -68,6 +67,8 @@ class page_entity_title_test extends page_entity_base
 	{
 		return array(
 			// title
+			array(''),
+			array(null),
 
 			// One character more than maximum length
 			array(
