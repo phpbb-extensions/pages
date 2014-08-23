@@ -40,5 +40,5 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// ACP modules
 	'ACP_PAGES'				=> 'Pages',
-	'ACP_PAGES_MANAGE'		=> 'Manage pages',
+	'ACP_PAGES_MANAGE'		=> 'Manage Pages',
 ));

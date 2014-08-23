@@ -39,7 +39,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	// Manage page
-	'ACP_PAGES_MANAGE'					=> 'Manage pages',
+	'ACP_PAGES_MANAGE'					=> 'Manage Pages',
 	'ACP_PAGES_MANAGE_EXPLAIN'			=> 'From this page you can add, edit and delete custom static pages.',
 	'ACP_PAGES_CREATE_PAGE'				=> 'Create page',
 	'ACP_PAGES_CREATE_PAGE_EXPLAIN'		=> 'Using the form below you can create a new custom static page for your board.',
