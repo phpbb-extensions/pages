@@ -66,6 +66,13 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 					),
 					'PRIMARY_KEY'	=> 'page_link_id',
 				),
+				$this->table_prefix . 'pages_pages_links'	=> array(
+					'COLUMNS'	=> array(
+						'page_id'						=> array('UINT', 0),
+						'page_link_id'					=> array('UINT', 0),
+					),
+					'PRIMARY_KEY'	=> array('page_id', 'page_link_id'),
+				),
 			),
 		);
 	}
