@@ -68,7 +68,7 @@ class pages_module
 			break;
 		}
 
-		// display the language selection menu.
+		// Display pages.
 		$admin_controller->display_pages();
 	}
 }
