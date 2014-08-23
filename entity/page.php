@@ -125,7 +125,7 @@ class page implements page_interface
 			'page_content_bbcode_uid'		=> 'string',
 			'page_content_bbcode_bitfield'	=> 'string',
 			'page_content_bbcode_options'	=> 'integer',
-			'page_content_allow_html'		=> 'integer',
+			'page_content_allow_html'		=> 'bool',
 		);
 
 		// Go through the basic fields and set them to our data array
@@ -158,7 +158,6 @@ class page implements page_interface
 		$validate_unsigned = array(
 			'page_id',
 			'page_content_bbcode_options',
-			'page_content_allow_html',
 		);
 
 		foreach ($validate_unsigned as $field)
