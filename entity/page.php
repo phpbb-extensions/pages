@@ -660,9 +660,9 @@ class page implements page_interface
 	public function content_enable_html()
 	{
 		// Disable bbcode, magic url and smiley flags
-		$this->set_content_option(OPTION_FLAG_BBCODE, true, false);
-		$this->set_content_option(OPTION_FLAG_LINKS, true, false);
-		$this->set_content_option(OPTION_FLAG_SMILIES, true, false);
+		$this->content_disable_bbcode()
+			->content_disable_smilies()
+			->content_disable_magic_url();
 
 		$this->data['page_content_allow_html'] = true;
 

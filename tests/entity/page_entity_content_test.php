@@ -192,14 +192,14 @@ class page_entity_content_test extends page_entity_base
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 
+		// Enable HTML
+		$entity->content_enable_html();
+
 		// Set the content
 		$result = $entity->set_content($content);
 
 		// Assert the returned value is what we expect
 		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
-
-		// Enable HTML
-		$entity->content_enable_html();
 
 		// Get what we're expecting from
 		$test = $this->content_test_helper($content, $entity->content_bbcode_enabled(), $entity->content_magic_url_enabled(), $entity->content_smilies_enabled(), true);
