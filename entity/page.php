@@ -333,6 +333,7 @@ class page implements page_interface
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
+	* @todo Routes must be unique
 	*/
 	public function set_route($route)
 	{
@@ -403,7 +404,7 @@ class page implements page_interface
 	}
 
 	/**
-	* Get link location identifier
+	* Get link location identifier for where the link will be displayed
 	*
 	* @return int link location
 	* @access public
