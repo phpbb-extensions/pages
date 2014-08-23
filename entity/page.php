@@ -333,7 +333,6 @@ class page implements page_interface
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
-	* @todo Routes must be unique
 	*/
 	public function set_route($route)
 	{
@@ -359,7 +358,21 @@ class page implements page_interface
 		}
 
 		// Routes must be unique
-		// TO-DO
+		if (!$this->get_id() || ($this->get_id() && $this->get_route() !== '' && $this->get_route() != $route))
+		{
+			$sql = 'SELECT 1
+				FROM ' . $this->pages_table . "
+				WHERE page_route = '" . $this->db->sql_escape($route) . "'
+					AND page_id <> " . $this->get_id();
+			$result = $this->db->sql_query_limit($sql, 1);
+			$row = $this->db->sql_fetchrow($result);
+			$this->db->sql_freeresult($result);
+
+			if ($row)
+			{
+				throw new \phpbb\pages\exception\unexpected_value(array('route', 'NOT_UNIQUE'));
+			}
+		}
 
 		// Set the route on our data array
 		$this->data['page_route'] = $route;

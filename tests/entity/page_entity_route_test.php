@@ -111,6 +111,9 @@ class page_entity_route_test extends page_entity_base
 			array(
 				str_repeat('a', 101),
 			),
+
+			// Route is not unique
+			array('page_1'),
 		);
 	}
 
