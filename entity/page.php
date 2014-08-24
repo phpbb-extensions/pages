@@ -116,7 +116,7 @@ class page implements page_interface
 			'page_description'				=> 'set_description', // call set_description()
 			'page_route'					=> 'set_route', // call set_route()
 			'page_display'					=> 'set_page_display', // call set_page_display()
-			'page_display_to_guests'		=> 'set_page_display_guests', // call set_page_display_guests()
+			'page_display_to_guests'		=> 'set_page_display_to_guests', // call set_page_display_to_guests()
 
 			// We do not pass to set_content() as generate_text_for_storage would run twice
 			'page_content'					=> 'string',
@@ -691,7 +691,7 @@ class page implements page_interface
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
-	public function set_page_display_guests($option)
+	public function set_page_display_to_guests($option)
 	{
 		// Enforce boolean
 		$option = (bool) $option;

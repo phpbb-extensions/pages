@@ -172,7 +172,7 @@ interface page_interface
 	public function set_content($content);
 
 	/**
-	* Check if bbcode is enabled on the message
+	* Check if bbcode is enabled on the content
 	*
 	* @return bool
 	* @access public
@@ -181,6 +181,7 @@ interface page_interface
 
 	/**
 	* Enable bbcode on the content
+	* This should be called before set_content(); content_enable_bbcode()->set_content()
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -189,6 +190,7 @@ interface page_interface
 
 	/**
 	* Disable bbcode on the content
+	* This should be called before set_content(); content_disable_bbcode()->set_content()
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -205,6 +207,7 @@ interface page_interface
 
 	/**
 	* Enable magic url on the content
+	* This should be called before set_content(); content_enable_magic_url()->set_content()
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -213,6 +216,7 @@ interface page_interface
 
 	/**
 	* Disable magic url on the content
+	* This should be called before set_content(); content_disable_magic_url()->set_content()
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -229,6 +233,7 @@ interface page_interface
 
 	/**
 	* Enable smilies on the content
+	* This should be called before set_content(); content_enable_smilies()->set_content()
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -237,6 +242,7 @@ interface page_interface
 
 	/**
 	* Disable smilies on the content
+	* This should be called before set_content(); content_disable_smilies()->set_content()
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -253,6 +259,8 @@ interface page_interface
 
 	/**
 	* Enable HTML on the content
+	* This should be called before set_content(); content_enable_html()->set_content()
+	* This should also be called after the bbcode, smilies and magic url setters
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -261,6 +269,7 @@ interface page_interface
 
 	/**
 	* Disable HTML on the content
+	* This should be called before set_content(); content_disable_html()->set_content()
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
