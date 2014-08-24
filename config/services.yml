@@ -3,3 +3,14 @@ services:
         class: phpbb\pages\event\listener
         tags:
             - { name: event.listener }
+
+    phpbb.pages.controller:
+        class: phpbb\pages\controller\main_controller
+        arguments:
+            - @config
+            - @controller.helper
+            - @service_container
+            - @template
+            - @user
+            - %core.root_path%
+            - %core.php_ext%
