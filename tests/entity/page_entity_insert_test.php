@@ -45,7 +45,7 @@ class page_entity_insert_test extends page_entity_base
 			->set_content($data['page_content'])
 			->set_order($data['page_order'])
 			->set_page_display($data['page_display'])
-			->set_page_display_guests($data['page_display_guests'])
+			->set_page_display_to_guests($data['page_display_to_guests'])
 			->insert();
 
 		// Assert the returned value is what we expect
