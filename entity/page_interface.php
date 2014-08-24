@@ -308,5 +308,5 @@ interface page_interface
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
-	public function set_page_display_guests($option);
+	public function set_page_display_to_guests($option);
 }
