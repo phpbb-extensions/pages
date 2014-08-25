@@ -71,12 +71,6 @@ class main_controller implements main_interface
 	*/
 	public function display($route)
 	{
-		// When pages are disbaled, redirect users back to the forum index
-		// if (empty($this->config['pages_enable']))
-		// {
-		// 	redirect(append_sid("{$this->root_path}index.$this->php_ext"));
-		// }
-
 		// Add pages controller language file
 		$this->user->add_lang_ext('phpbb/pages', 'pages_controller');
 
@@ -100,33 +94,27 @@ class main_controller implements main_interface
 			$display = false;
 		}
 
-		// If page can be displayed
-		if ($display && $entity->get_page_display())
+		// If page display is disabled
+		if (!$entity->get_page_display())
 		{
-			// Set the page title
-			$page_title = $entity->get_title();
+			$display = false;
+		}
 
-			// Display the page content
-			$this->template->assign_vars(array(
-				'PAGE_CONTENT'			=> $entity->get_content_for_display(),
-				'PAGE_TITLE'			=> $page_title,
-			));
+		// Set the page title
+		$page_title = ($display) ? $entity->get_title() : $this->user->lang('INFORMATION');
 
-			// Assign breadcrumb template vars for the page
+		// Display the page content
+		$this->template->assign_vars(array(
+			'PAGE_CONTENT'			=> ($display) ? $entity->get_content_for_display() : $this->user->lang('PAGE_NOT_AVAILABLE', $route),
+			'PAGE_TITLE'			=> $page_title,
+		));
+
+		// Assign breadcrumb template vars for the page if displayed
+		if ($display)
+		{
 			$this->template->assign_block_vars('navlinks', array(
 				'U_VIEW_FORUM'		=> $this->helper->route('phpbb_pages_main_controller', array('route' => $route)),
 				'FORUM_NAME'		=> $page_title,
-			));
-		}
-		else
-		{
-			// Set the page title
-			$page_title = $this->user->lang('INFORMATION');
-
-			// Display a page not available message
-			$this->template->assign_vars(array(
-				'PAGE_CONTENT'			=> $this->user->lang('PAGE_NOT_AVAILABLE', $route),
-				'PAGE_TITLE'			=> $page_title,
 			));
 		}
 
