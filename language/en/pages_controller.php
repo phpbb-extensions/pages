@@ -37,16 +37,6 @@ if (empty($lang) || !is_array($lang))
 // ’ » “ ” …
 //
 
-/*
-* These are errors which can be triggered by sending invalid data to the
-* pages extension API.
-*
-* These errors will never show to a user unless they are either modifying
-* the core pages extension code OR unless they are writing an extension
-* which makes calls to this extension.
-*
-* Translators: Feel free to not translate these language strings
-*/
 $lang = array_merge($lang, array(
 	'PAGE_NOT_AVAILABLE'		=> 'The requested page “%s” is not available.',
 ));
