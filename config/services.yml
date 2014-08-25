@@ -1,5 +1,10 @@
 services:
     phpbb.pages.listener:
         class: phpbb\pages\event\listener
+        arguments:
+            - @controller.helper
+            - @phpbb.pages.operator
+            - @user
+            - %core.php_ext%
         tags:
             - { name: event.listener }
