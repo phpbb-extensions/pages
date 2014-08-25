@@ -3,3 +3,10 @@ services:
         class: phpbb\pages\event\listener
         tags:
             - { name: event.listener }
+
+    phpbb.pages.operator:
+        class: phpbb\pages\operators\page
+        arguments:
+            - @dbal.conn
+            - @service_container
+            - %tables.pages%
