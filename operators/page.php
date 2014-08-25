@@ -72,7 +72,7 @@ class page implements page_interface
 	/**
 	* Add a page
 	*
-	* @param object $entity Rule entity with new data to insert
+	* @param object $entity Page entity with new data to insert
 	* @return page_interface Added page entity
 	* @access public
 	*/
