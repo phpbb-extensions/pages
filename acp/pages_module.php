@@ -18,7 +18,7 @@ class pages_module
 	{
 		global $phpbb_container, $request, $user;
 
-		// Add the board rules ACP lang file
+		// Add the pages ACP lang file
 		$user->add_lang_ext('phpbb/pages', 'pages_acp');
 
 		// Get an instance of the admin controller
