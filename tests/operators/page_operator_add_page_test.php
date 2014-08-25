@@ -47,4 +47,25 @@ class page_operator_add_page_test extends page_operator_base
 		$this->assertEquals(5, $result->get_id());
 		$this->assertEquals('route_added', $result->get_route());
 	}
+
+	/**
+	* Test adding a page fails
+	*
+	* @expectedException \phpbb\pages\exception\base
+	* @access public
+	*/
+	public function test_add_page_fails()
+	{
+		// Setup the entity class
+		$entity = new \phpbb\pages\entity\page($this->db, 'phpbb_pages');
+
+		// Load an existing page data
+		$entity->load(1);
+
+		// Setup the operator class
+		$operator = $this->get_page_operator();
+
+		// Attempt to add the existing the page data
+		$result = $operator->add_page($entity);
+	}
 }
