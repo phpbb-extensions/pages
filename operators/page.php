@@ -111,7 +111,7 @@ class page implements page_interface
 			WHERE page_id = $page_id";
 		$this->db->sql_query($sql);
 
-		// Reurn true/false if a page was deleted
+		// Return true/false if a page was deleted
 		return (bool) $this->db->sql_affectedrows();
 	}
 
