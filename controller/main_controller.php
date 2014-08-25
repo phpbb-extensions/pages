@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\Container;
 */
 class main_controller implements main_interface
 {
-	/** @var \phpbb\config\config */
-	protected $config;
-
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
@@ -32,34 +29,22 @@ class main_controller implements main_interface
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var string phpBB root path */
-	protected $root_path;
-
-	/** @var string phpEx */
-	protected $php_ext;
-
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config                $config             Config object
 	* @param \phpbb\controller\helper            $helper             Controller helper object
 	* @param Container                           $phpbb_container
 	* @param \phpbb\template\template            $template           Template object
 	* @param \phpbb\user                         $user               User object
-	* @param string                              $root_path          phpBB root path
-	* @param string                              $php_ext            phpEx
 	* @return \phpbb\pages\controller\main_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, Container $phpbb_container, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, Container $phpbb_container, \phpbb\template\template $template, \phpbb\user $user)
 	{
-		$this->config = $config;
 		$this->helper = $helper;
 		$this->phpbb_container = $phpbb_container;
 		$this->template = $template;
 		$this->user = $user;
-		$this->root_path = $root_path;
-		$this->php_ext = $php_ext;
 	}
 
 	/**
