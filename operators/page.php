@@ -192,26 +192,77 @@ class page implements page_interface
 	/**
 	* Insert page link location data for a page
 	*
-	* @param int Page identifier
-	* @param array Page link location identifiers
+	* @param int $page_id Page identifier
+	* @param array $link_ids Page link location identifiers
 	* @return bool True if data was added, false otherwise
 	* @access public
-	* @todo
 	*/
 	public function insert_page_links($page_id, $link_ids)
 	{
+		// First remove any existing page link data for this page
+		$this->remove_page_links($page_id);
+
+		$sql_ary = array();
+		foreach ($link_ids as $link_id)
+		{
+			$sql_ary[] = array(
+				'page_id'		=> (int) $page_id,
+				'page_link_id'	=> (int) $link_id,
+			);
+		}
+
+		if (sizeof($sql_ary))
+		{
+			// Insert the new page link data for this page
+			$this->db->sql_multi_insert($this->pages_pages_links_table, $sql_ary);
+		}
+
+		// Return true/false if page link data was added
+		return (bool) $this->db->sql_affectedrows();
 	}
 
 	/**
 	* Remove page link location data for a page
+	* This method usually need not be called outside of this class
 	*
-	* @param int Page identifier
-	* @param array Page link location identifiers
+	* @param int $page_id Page identifier
 	* @return bool True if data was removed, false otherwise
-	* @access public
-	* @todo
+	* @throws \phpbb\pages\exception\out_of_bounds
+	* @access protected
 	*/
-	public function remove_page_links($page_id, $link_ids)
+	protected function remove_page_links($page_id)
 	{
+		// Throw an exception if page identifier is invalid
+		if (!$this->get_page_id($page_id))
+		{
+			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+		}
+
+		// Delete the page's links from the database
+		$sql = 'DELETE FROM ' . $this->pages_pages_links_table . '
+			WHERE page_id = ' . (int) $page_id;
+		$this->db->sql_query($sql);
+
+		// Return true/false if page link data was deleted
+		return (bool) $this->db->sql_affectedrows();
+	}
+
+	/**
+	* Check if a page identifier exists in the database
+	*
+	* @param int $id Page identifier
+	* @return bool $row True if page exists, false otherwise
+	* @access protected
+	*/
+	protected function get_page_id($id)
+	{
+		$sql = 'SELECT 1
+			FROM ' . $this->pages_table . '
+			WHERE page_id = ' . (int) $id;
+		$result = $this->db->sql_query_limit($sql, 1);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		return $row;
 	}
 }

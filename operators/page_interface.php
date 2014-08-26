@@ -63,22 +63,10 @@ interface page_interface
 	/**
 	* Insert page link location data for a page
 	*
-	* @param int Page identifier
-	* @param array Page link location identifiers
+	* @param int $page_id Page identifier
+	* @param array $link_ids Page link location identifiers
 	* @return bool True if data was added, false otherwise
 	* @access public
-	* @todo
 	*/
 	public function insert_page_links($page_id, $link_ids);
-
-	/**
-	* Remove page link location data for a page
-	*
-	* @param int Page identifier
-	* @param array Page link location identifiers
-	* @return bool True if data was removed, false otherwise
-	* @access public
-	* @todo
-	*/
-	public function remove_page_links($page_id, $link_ids);
 }
