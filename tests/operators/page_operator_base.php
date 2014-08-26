@@ -62,6 +62,6 @@ class page_operator_base extends \phpbb_database_test_case
 	*/
 	protected function get_page_operator()
 	{
-		return new \phpbb\pages\operators\page($this->db, $this->container, 'phpbb_pages');
+		return new \phpbb\pages\operators\page($this->db, $this->container, 'phpbb_pages', 'phpbb_pages_links', 'phpbb_pages_pages_links');
 	}
 }

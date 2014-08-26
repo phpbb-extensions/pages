@@ -50,4 +50,35 @@ interface page_interface
 	* @access public
 	*/
 	public function get_page_routes();
+
+	/**
+	* Get all page link location data for generating page links
+	*
+	* @param array Optional array of page ids
+	* @return array Array of page link location data for the specified pages, or all pages
+	* @access public
+	*/
+	public function get_page_links($page_ids = array());
+
+	/**
+	* Insert page link location data for a page
+	*
+	* @param int Page identifier
+	* @param array Page link location identifiers
+	* @return bool True if data was added, false otherwise
+	* @access public
+	* @todo
+	*/
+	public function insert_page_links($page_id, $link_ids);
+
+	/**
+	* Remove page link location data for a page
+	*
+	* @param int Page identifier
+	* @param array Page link location identifiers
+	* @return bool True if data was removed, false otherwise
+	* @access public
+	* @todo
+	*/
+	public function remove_page_links($page_id, $link_ids);
 }

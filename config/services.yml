@@ -10,3 +10,5 @@ services:
             - @dbal.conn
             - @service_container
             - %tables.pages%
+            - %tables.pages_links%
+            - %tables.pages_pages_links%

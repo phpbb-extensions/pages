@@ -70,4 +70,35 @@
 			<value>0</value>
 		</row>
 	</table>
+	<table name="phpbb_pages_links">
+		<column>page_link_id</column>
+		<column>page_link_location</column>
+		<column>page_link_event_name</column>
+		<row>
+			<value>1</value>
+			<value>Nav Bar Links Before</value>
+			<value>overall_header_navigation_prepend</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>Nav Bar Links After</value>
+			<value>overall_header_navigation_append</value>
+		</row>
+	</table>
+	<table name="phpbb_pages_pages_links">
+		<column>page_id</column>
+		<column>page_link_id</column>
+		<row>
+			<value>1</value>
+			<value>1</value>
+		</row>
+		<row>
+			<value>1</value>
+			<value>2</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>1</value>
+		</row>
+	</table>
 </dataset>
