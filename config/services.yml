@@ -4,6 +4,7 @@ services:
         arguments:
             - @controller.helper
             - @phpbb.pages.operator
+            - @template
             - @user
             - %core.php_ext%
         tags:

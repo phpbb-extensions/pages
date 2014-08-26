@@ -23,6 +23,9 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\pages\operators\page */
 	protected $page_operator;
 
+	/** @var \phpbb\template\template */
+	protected $template;
+
 	/** @var \phpbb\user */
 	protected $user;
 
@@ -34,15 +37,17 @@ class listener implements EventSubscriberInterface
 	*
 	* @param \phpbb\controller\helper             $helper          Controller helper object
 	* @param \phpbb\pages\operators\page          $page_operator   Pages operator object
+	* @param \phpbb\template\template    $template           Template object
 	* @param \phpbb\user                          $user            User object
 	* @param string                               $php_ext         phpEx
 	* @return \phpbb\pages\event\listener
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\pages\operators\page $page_operator, \phpbb\user $user, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
 		$this->helper = $helper;
 		$this->page_operator = $page_operator;
+		$this->template = $template;
 		$this->user = $user;
 		$this->php_ext = $php_ext;
 	}
@@ -57,6 +62,7 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
+			'core.page_header'						=> 'add_page_links',
 			'core.user_setup'						=> 'load_language_on_setup',
 			'core.viewonline_overwrite_location'	=> 'viewonline_page',
 		);
@@ -77,6 +83,34 @@ class listener implements EventSubscriberInterface
 			'lang_set' => 'pages_common',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
+	}
+
+	/**
+	*
+	*
+	* @param object $event The event object
+	* @return null
+	* @access public
+	*/
+	public function add_page_links($event)
+	{
+		$rowset = $this->page_operator->get_page_links();
+
+		foreach ($rowset as $row)
+		{
+			// If page is not to be displayed
+			if (!$row['page_display'] || ($this->user->data['user_id'] == ANONYMOUS && !$row['page_display_to_guests']))
+			{
+				continue;
+			}
+
+			$this->template->assign_block_vars($row['page_link_event_name'] . '_links', array(
+				'U_LINK_URL' => $this->helper->route('phpbb_pages_main_controller', array('route' => $row['page_route'])),
+				'LINK_TITLE' => $row['page_title']
+			));
+
+			$this->template->assign_var('S_' . strtoupper($row['page_link_event_name']), true);
+		}
 	}
 
 	/**

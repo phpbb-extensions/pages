@@ -59,6 +59,7 @@ class event_listener_test extends \phpbb_test_case
 		$this->listener = new \phpbb\pages\event\listener(
 			$this->controller_helper,
 			new \phpbb\pages\tests\mock\page_operator(),
+			$this->template,
 			$this->user,
 			$this->php_ext
 		);
@@ -83,6 +84,7 @@ class event_listener_test extends \phpbb_test_case
 	public function test_getSubscribedEvents()
 	{
 		$this->assertEquals(array(
+			'core.page_header',
 			'core.user_setup',
 			'core.viewonline_overwrite_location',
 		), array_keys(\phpbb\pages\event\listener::getSubscribedEvents()));
