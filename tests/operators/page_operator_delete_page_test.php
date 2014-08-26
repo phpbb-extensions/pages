@@ -72,13 +72,15 @@ class page_operator_delete_page_test extends page_operator_base
 		return array(
 			array(''),
 			array(10),
+			array(null),
 		);
 	}
 
 	/**
-	* Test deleting non-existent pages which should return false
+	* Test deleting non-existent pages which should throw an exception
 	*
 	* @dataProvider delete_page_fails_data
+	* @expectedException \phpbb\pages\exception\base
 	* @access public
 	*/
 	public function test_delete_page_fails($page_id)
@@ -86,9 +88,6 @@ class page_operator_delete_page_test extends page_operator_base
 		// Setup the operator class
 		$operator = $this->get_page_operator();
 
-		$result = $operator->delete_page($page_id);
-
-		// Assert the delete operation returned false
-		$this->assertFalse($result);
+		$operator->delete_page($page_id);
 	}
 }

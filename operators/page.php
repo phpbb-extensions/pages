@@ -107,14 +107,9 @@ class page implements page_interface
 	*/
 	public function delete_page($page_id)
 	{
-		// Cast page identifier as integer
-		$page_id = (int) $page_id;
-
-		// Return false if something went wrong with page identifier
-		if (!$page_id)
-		{
-			return false;
-		}
+		// Remove any existing page link data for this page
+		// An exception will be thrown if page identifier is invalid
+		$this->remove_page_links($page_id);
 
 		// Delete the page from the database
 		$sql = 'DELETE FROM ' . $this->pages_table . "
