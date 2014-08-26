@@ -62,7 +62,7 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.page_header'						=> 'add_page_links',
+			'core.page_header'						=> 'show_page_links',
 			'core.user_setup'						=> 'load_language_on_setup',
 			'core.viewonline_overwrite_location'	=> 'viewonline_page',
 		);
@@ -86,19 +86,19 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	*
+	* Display links to pages in the specified page link locations
 	*
 	* @param object $event The event object
 	* @return null
 	* @access public
 	*/
-	public function add_page_links($event)
+	public function show_page_links($event)
 	{
 		$rowset = $this->page_operator->get_page_links();
 
 		foreach ($rowset as $row)
 		{
-			// If page is not to be displayed
+			// Skip page if it can not be displayed
 			if (!$row['page_display'] || ($this->user->data['user_id'] == ANONYMOUS && !$row['page_display_to_guests']))
 			{
 				continue;
