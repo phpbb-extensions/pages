@@ -1,2 +1,4 @@
 parameters:
     tables.pages: %core.table_prefix%pages
+    tables.pages_links: %core.table_prefix%pages_links
+    tables.pages_pages_links: %core.table_prefix%pages_pages_links
