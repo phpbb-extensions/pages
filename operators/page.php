@@ -156,9 +156,7 @@ class page implements page_interface
 	{
 		$sql_array = array(
 			'SELECT'		=> 'ppl.*, pl.page_link_location, pl.page_link_event_name, p.page_route, p.page_title, p.page_display, p.page_display_to_guests',
-
 			'FROM'			=> array($this->pages_pages_links_table => 'ppl'),
-
 			'LEFT_JOIN'		=> array(
 				array(
 					'FROM'	=> array($this->pages_links_table => 'pl'),
@@ -169,9 +167,7 @@ class page implements page_interface
 					'ON'	=> 'p.page_id = ppl.page_id',
 				),
 			),
-
 			'WHERE'			=> ($page_ids) ? $this->db->sql_in_set('ppl.page_id', $page_ids) : '',
-
 			'ORDER_BY'		=> 'p.page_order ASC',
 		);
 
