@@ -17,6 +17,9 @@ use Symfony\Component\DependencyInjection\Container;
 */
 class main_controller implements main_interface
 {
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
@@ -35,6 +38,7 @@ class main_controller implements main_interface
 	/**
 	* Constructor
 	*
+	* @param \phpbb\auth\auth            $auth               Authentication object
 	* @param \phpbb\controller\helper    $helper             Controller helper object
 	* @param Container                   $phpbb_container    Service container
 	* @param \phpbb\template\template    $template           Template object
@@ -42,8 +46,9 @@ class main_controller implements main_interface
 	* @return \phpbb\pages\controller\main_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, Container $phpbb_container, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, Container $phpbb_container, \phpbb\template\template $template, \phpbb\user $user)
 	{
+		$this->auth = $auth;
 		$this->helper = $helper;
 		$this->phpbb_container = $phpbb_container;
 		$this->template = $template;
@@ -101,14 +106,14 @@ class main_controller implements main_interface
 			return false;
 		}
 
-		// If user is a guest and page is not set to display to guests
+		// Return false if page is not set to display to guests
 		if ($this->user->data['user_id'] == ANONYMOUS && !$entity->get_page_display_to_guests())
 		{
 			return false;
 		}
 
-		// If page display is disabled
-		if (!$entity->get_page_display())
+		// Return false if page is not set to display and user is not an admin
+		if (!$this->auth->acl_get('a_') && !$entity->get_page_display())
 		{
 			return false;
 		}

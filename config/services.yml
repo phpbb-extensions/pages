@@ -7,6 +7,7 @@ services:
     phpbb.pages.controller:
         class: phpbb\pages\controller\main_controller
         arguments:
+            - @auth
             - @controller.helper
             - @service_container
             - @template
