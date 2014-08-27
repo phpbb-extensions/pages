@@ -27,12 +27,14 @@ class show_page_links_test extends event_listener_base
 					'overall_header_navigation_prepend_links' => array(
 						'U_LINK_URL' => 'app.php/page/page_1',
 						'LINK_TITLE' => 'title_1',
+						'ICON_LINK' => '',
 					),
 					'S_OVERALL_HEADER_NAVIGATION_PREPEND' => true,
 					// Links for page 2
 					'overall_header_navigation_append_links' => array(
 						'U_LINK_URL' => 'app.php/page/page_2',
 						'LINK_TITLE' => 'title_2',
+						'ICON_LINK' => '',
 					),
 					'S_OVERALL_HEADER_NAVIGATION_APPEND' => true,
 				),

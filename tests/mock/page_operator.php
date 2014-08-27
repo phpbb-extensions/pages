@@ -36,6 +36,11 @@ class page_operator extends \phpbb\pages\operators\page
 		return array('test' => 'Test Page');
 	}
 
+	public function get_page_icons()
+	{
+		return array();
+	}
+
 	public function get_page_links($page_ids = array())
 	{
 		return array(
