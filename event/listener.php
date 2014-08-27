@@ -17,6 +17,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class listener implements EventSubscriberInterface
 {
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
@@ -38,17 +41,19 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\controller\helper             $helper             Controller helper object
-	* @param \phpbb\pages\operators\page          $page_operator      Pages operator object
-	* @param \phpbb\template\template             $template           Template object
-	* @param \phpbb\user                          $user               User object
-	* @param string                               $$phpbb_root_path   phpbb_root_path
-	* @param string                               $php_ext            phpEx
+	* @param \phpbb\auth\auth               $auth               Authentication object
+	* @param \phpbb\controller\helper       $helper             Controller helper object
+	* @param \phpbb\pages\operators\page    $page_operator      Pages operator object
+	* @param \phpbb\template\template       $template           Template object
+	* @param \phpbb\user                    $user               User object
+	* @param string                         $phpbb_root_path    phpbb_root_path
+	* @param string                         $php_ext            phpEx
 	* @return \phpbb\pages\event\listener
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, $phpbb_root_path, $php_ext)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, $phpbb_root_path, $php_ext)
 	{
+		$this->auth = $auth;
 		$this->helper = $helper;
 		$this->page_operator = $page_operator;
 		$this->template = $template;
@@ -107,8 +112,8 @@ class listener implements EventSubscriberInterface
 
 		foreach ($rowset as $row)
 		{
-			// Skip page if it can not be displayed
-			if (!$row['page_display'] || ($this->user->data['user_id'] == ANONYMOUS && !$row['page_display_to_guests']))
+			// Skip page if it should not be displayed (admins always have access to a page)
+			if ((!$this->auth->acl_get('a_') && !$row['page_display']) || ($this->user->data['user_id'] == ANONYMOUS && !$row['page_display_to_guests']))
 			{
 				continue;
 			}

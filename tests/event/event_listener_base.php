@@ -31,6 +31,7 @@ class event_listener_base extends \phpbb_test_case
 		// Load/Mock classes required by the event listener class
 		$this->php_ext = $phpEx;
 		$this->root_path = $phpbb_root_path;
+		$this->auth = $this->getMock('\phpbb\auth\auth');
 		$this->template = new \phpbb\pages\tests\mock\template();
 		$this->user = new \phpbb\user('\phpbb\datetime');
 		$this->controller_helper = new \phpbb_mock_controller_helper(
@@ -53,6 +54,7 @@ class event_listener_base extends \phpbb_test_case
 	protected function get_listener()
 	{
 		return new \phpbb\pages\event\listener(
+			$this->auth,
 			$this->controller_helper,
 			new \phpbb\pages\tests\mock\page_operator(),
 			$this->template,

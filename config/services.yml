@@ -2,6 +2,7 @@ services:
     phpbb.pages.listener:
         class: phpbb\pages\event\listener
         arguments:
+            - @auth
             - @controller.helper
             - @phpbb.pages.operator
             - @template
