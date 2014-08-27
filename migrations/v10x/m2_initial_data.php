@@ -54,12 +54,16 @@ class m2_initial_data extends \phpbb\db\migration\migration
 		// Define our default page link locations/events
 		$page_link_locations = array(
 			// event name						=>	// description
-			'navbar_header_quick_links_before'	=>	'Quick links Menu Top',
-			'navbar_header_quick_links_after'	=>	'Quick Links Menu Bottom',
-			'overall_header_navigation_prepend'	=>	'Nav Bar Links Before',
-			'overall_header_navigation_append'	=>	'Nav Bar Links After',
-			'overall_header_breadcrumbs_before'	=>	'Nav Bar Breadcrumbs Before',
-			'overall_header_breadcrumbs_after'	=>	'Nav Bar Breadcrumbs After',
+			'navbar_header_quick_links_before'	=> 'Quick links Menu Top',
+			'navbar_header_quick_links_after'	=> 'Quick Links Menu Bottom',
+			'overall_header_navigation_prepend'	=> 'Nav Bar Before Links',
+			'overall_header_navigation_append'	=> 'Nav Bar After Links',
+			'overall_header_breadcrumbs_before'	=> 'Nav Bar Before Breadcrumbs',
+			'overall_header_breadcrumbs_after'	=> 'Nav Bar After Breadcrumbs',
+			'overall_footer_timezone_before'	=> 'Footer Before Time Zone',
+			'overall_footer_timezone_after'		=> 'Footer After Time Zone',
+			'overall_footer_teamlink_before'	=> 'Footer Before Team Link',
+			'overall_footer_teamlink_after'		=> 'Footer After Team Link',
 		);
 
 		// Insert data
