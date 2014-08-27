@@ -52,6 +52,15 @@ interface page_interface
 	public function get_page_routes();
 
 	/**
+	* Get custom page link icons (pages_*.gif)
+	* Added by the user to the core style/theme/images directores
+	*
+	* @return array Array of icon image paths
+	* @access public
+	*/
+	public function get_page_icons();
+
+	/**
 	* Get all page link location data for generating page links
 	*
 	* @param array Optional array of page ids

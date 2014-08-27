@@ -17,11 +17,14 @@ use Symfony\Component\DependencyInjection\Container;
 */
 class page implements page_interface
 {
+	/** @var Container */
+	protected $phpbb_container;
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var Container */
-	protected $phpbb_container;
+	/** @var \phpbb\extension\manager */
+	protected $extension_manager;
 
 	/** @var string */
 	protected $pages_table;
@@ -35,18 +38,20 @@ class page implements page_interface
 	/**
 	* Constructor
 	*
+	* @param Container $phpbb_container Service container
 	* @param \phpbb\db\driver\driver_interface $db Database connection
-	* @param Container $phpbb_container
+	* @param \phpbb\extension\manager $$extension_manager Extension manager object
 	* @param string $pages_table Table name
 	* @param string $pages_links_table Table name
 	* @param string $pages_pages_links_table Table name
 	* @return \phpbb\pages\operators\page
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, Container $phpbb_container, $pages_table, $pages_links_table, $pages_pages_links_table)
+	public function __construct(Container $phpbb_container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, $pages_table, $pages_links_table, $pages_pages_links_table)
 	{
-		$this->db = $db;
 		$this->phpbb_container = $phpbb_container;
+		$this->db = $db;
+		$this->extension_manager = $extension_manager;
 		$this->pages_table = $pages_table;
 		$this->pages_links_table = $pages_links_table;
 		$this->pages_pages_links_table = $pages_pages_links_table;
@@ -143,6 +148,24 @@ class page implements page_interface
 
 		// Return an array of all page routes
 		return $routes;
+	}
+
+	/**
+	* Get custom page link icons (pages_*.gif)
+	* Added by the user to the core style/theme/images directores
+	*
+	* @return array Array of icon image paths
+	* @access public
+	*/
+	public function get_page_icons()
+	{
+		$finder = $this->extension_manager->get_finder();
+
+		return $finder
+			->prefix('pages_')
+			->suffix('.gif')
+			->core_path('styles/')
+			->find();
 	}
 
 	/**

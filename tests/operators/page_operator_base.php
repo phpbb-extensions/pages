@@ -26,7 +26,7 @@ class page_operator_base extends \phpbb_database_test_case
 		return array('phpbb/pages');
 	}
 
-	protected $container, $db, $entity;
+	protected $container, $db, $extension_manager;
 
 	public function getDataSet()
 	{
@@ -50,7 +50,7 @@ class page_operator_base extends \phpbb_database_test_case
 			->will($this->returnCallback(function() use ($db) {
 				return new \phpbb\pages\entity\page($db, 'phpbb_pages');
 			}));
-
+		$this->extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 	}
 
@@ -62,6 +62,6 @@ class page_operator_base extends \phpbb_database_test_case
 	*/
 	protected function get_page_operator()
 	{
-		return new \phpbb\pages\operators\page($this->db, $this->container, 'phpbb_pages', 'phpbb_pages_links', 'phpbb_pages_pages_links');
+		return new \phpbb\pages\operators\page($this->container, $this->db, $this->extension_manager, 'phpbb_pages', 'phpbb_pages_links', 'phpbb_pages_pages_links');
 	}
 }

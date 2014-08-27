@@ -7,8 +7,9 @@ services:
     phpbb.pages.operator:
         class: phpbb\pages\operators\page
         arguments:
-            - @dbal.conn
             - @service_container
+            - @dbal.conn
+            - @ext.manager
             - %tables.pages%
             - %tables.pages_links%
             - %tables.pages_pages_links%
