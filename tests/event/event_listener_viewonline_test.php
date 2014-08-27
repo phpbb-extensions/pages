@@ -10,7 +10,7 @@
 
 namespace phpbb\pages\tests\event;
 
-class viewonline_test extends event_listener_base
+class event_listener_viewonline_test extends event_listener_base
 {
 	/**
 	* Data set for test_viewonline_page

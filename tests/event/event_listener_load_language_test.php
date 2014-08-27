@@ -10,7 +10,7 @@
 
 namespace phpbb\pages\tests\event;
 
-class load_language_test extends event_listener_base
+class event_listener_load_language_test extends event_listener_base
 {
 	/**
 	* Data set for test_load_language_on_setup

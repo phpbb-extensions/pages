@@ -43,28 +43,7 @@ class page_operator extends \phpbb\pages\operators\page
 
 	public function get_page_links($page_ids = array())
 	{
-		return array(
-			array(
-				'page_id' => 1,
-				'page_link_id' => 1,
-				'page_link_location' => 'Nav Bar Links Before',
-				'page_link_event_name' => 'overall_header_navigation_prepend',
-				'page_route' => 'page_1',
-				'page_title' => 'title_1',
-				'page_display' => 1,
-				'page_display_to_guests' => 1,
-			),
-			array(
-				'page_id' => 2,
-				'page_link_id' => 2,
-				'page_link_location' => 'Nav Bar Links After',
-				'page_link_event_name' => 'overall_header_navigation_append',
-				'page_route' => 'page_2',
-				'page_title' => 'title_2',
-				'page_display' => 1,
-				'page_display_to_guests' => 1,
-			),
-		);
+		return array();
 	}
 
 	public function insert_page_links($page_id, $link_ids)
