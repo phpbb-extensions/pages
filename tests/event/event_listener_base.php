@@ -10,8 +10,6 @@
 
 namespace phpbb\pages\tests\event;
 
-require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
-
 class event_listener_base extends \phpbb_test_case
 {
 	protected $controller_helper, $template, $user, $root_path, $php_ext;
