@@ -119,7 +119,7 @@ class listener implements EventSubscriberInterface
 			{
 				if (strpos($icon_path, $this->user->style['style_path'] . '/theme/images/pages_' . $row['page_route'] . '.gif') !== false)
 				{
-					$custom_icon = $this->phpbb_root_path . $icon_path;
+					$custom_icon = 'pages_' . $row['page_route'] . '.gif';
 					break;
 				}
 			}
