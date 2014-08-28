@@ -10,7 +10,7 @@
 
 namespace phpbb\pages\controller;
 
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
 * Main controller
@@ -23,8 +23,8 @@ class main_controller implements main_interface
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
-	/** @var Container */
-	protected $phpbb_container;
+	/** @var ContainerInterface */
+	protected $container;
 
 	/** @var \phpbb\template\template */
 	protected $template;
@@ -38,19 +38,19 @@ class main_controller implements main_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\auth\auth            $auth               Authentication object
-	* @param \phpbb\controller\helper    $helper             Controller helper object
-	* @param Container                   $phpbb_container    Service container
-	* @param \phpbb\template\template    $template           Template object
-	* @param \phpbb\user                 $user               User object
+	* @param \phpbb\auth\auth            $auth         Authentication object
+	* @param \phpbb\controller\helper    $helper       Controller helper object
+	* @param ContainerInterface          $container    Service container interface
+	* @param \phpbb\template\template    $template     Template object
+	* @param \phpbb\user                 $user         User object
 	* @return \phpbb\pages\controller\main_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, Container $phpbb_container, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, ContainerInterface $container, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->auth = $auth;
 		$this->helper = $helper;
-		$this->phpbb_container = $phpbb_container;
+		$this->container = $container;
 		$this->template = $template;
 		$this->user = $user;
 		$this->page = array();
@@ -94,7 +94,7 @@ class main_controller implements main_interface
 	protected function load_page_data($route)
 	{
 		// Initiate the page entity
-		$entity = $this->phpbb_container->get('phpbb.pages.entity');
+		$entity = $this->container->get('phpbb.pages.entity');
 
 		// Load the requested page by route
 		try
