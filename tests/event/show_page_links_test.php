@@ -80,7 +80,7 @@ class show_page_links_test extends \phpbb_database_test_case
 			dirname(__FILE__) . '/../../'
 		);
 
-		$phpbb_container = $this->getMock('Symfony\Component\DependencyInjection\Container');
+		$phpbb_container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
 		$this->listener = new \phpbb\pages\event\listener(
 			$this->auth,
 			$this->controller_helper,
