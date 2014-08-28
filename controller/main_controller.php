@@ -33,7 +33,7 @@ class main_controller implements main_interface
 	protected $user;
 
 	/** @var array */
-	protected $output;
+	protected $page;
 
 	/**
 	* Constructor
@@ -53,7 +53,7 @@ class main_controller implements main_interface
 		$this->phpbb_container = $phpbb_container;
 		$this->template = $template;
 		$this->user = $user;
-		$this->output = array();
+		$this->page = array();
 	}
 
 	/**
@@ -65,23 +65,23 @@ class main_controller implements main_interface
 	*/
 	public function display($route)
 	{
-		// Add pages controller language file
+		// Add the pages controller language file
 		$this->user->add_lang_ext('phpbb/pages', 'pages_controller');
 
 		// Load the page data to display
 		$display = $this->load_page_data($route);
 
-		// Store the page data in the output array
-		$this->output['page_route'] = $route;
-		$this->output['page_title'] = ($display) ? $display->get_title() : $this->user->lang('INFORMATION');
-		$this->output['page_content'] = ($display) ? $display->get_content_for_display() : $this->user->lang('PAGE_NOT_AVAILABLE', $route);
+		// Store the page data in an array property
+		$this->page['route'] = $route;
+		$this->page['title'] = ($display) ? $display->get_title() : $this->user->lang('INFORMATION');
+		$this->page['content'] = ($display) ? $display->get_content_for_display() : $this->user->lang('PAGE_NOT_AVAILABLE', $route);
 
 		// Assign all page template vars
 		$this->assign_template_vars();
 		$this->assign_breadcrumbs($display);
 
 		// Send all data to the template file
-		return $this->helper->render('pages_controller.html', $this->output['page_title']);
+		return $this->helper->render('pages_controller.html', $this->page['title']);
 	}
 
 	/**
@@ -106,13 +106,13 @@ class main_controller implements main_interface
 			return false;
 		}
 
-		// Return false if page is not set to display to guests
+		// Return false if page display to guests is disabled
 		if ($this->user->data['user_id'] == ANONYMOUS && !$entity->get_page_display_to_guests())
 		{
 			return false;
 		}
 
-		// Return false if page is not set to display and user is not an admin
+		// Return false if page display is disabled and user is not an admin
 		if (!$this->auth->acl_get('a_') && !$entity->get_page_display())
 		{
 			return false;
@@ -122,7 +122,7 @@ class main_controller implements main_interface
 	}
 
 	/**
-	* Assign the page content to template variable
+	* Assign the page data to template variables
 	*
 	* @return null
 	* @access protected
@@ -130,8 +130,8 @@ class main_controller implements main_interface
 	protected function assign_template_vars()
 	{
 		$this->template->assign_vars(array(
-			'PAGE_CONTENT'	=> (isset($this->output['page_content'])) ? $this->output['page_content'] : '',
-			'PAGE_TITLE'	=> (isset($this->output['page_title'])) ? $this->output['page_title'] : '',
+			'PAGE_TITLE'	=> $this->page['title'],
+			'PAGE_CONTENT'	=> $this->page['content'],
 		));
 	}
 
@@ -147,8 +147,8 @@ class main_controller implements main_interface
 		if ($display)
 		{
 			$this->template->assign_block_vars('navlinks', array(
-				'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $this->output['page_route'])),
-				'FORUM_NAME'	=> (isset($this->output['page_title'])) ? $this->output['page_title'] : '',
+				'FORUM_NAME'	=> $this->page['title'],
+				'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $this->page['route'])),
 			));
 		}
 	}
