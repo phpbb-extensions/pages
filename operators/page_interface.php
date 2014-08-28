@@ -44,7 +44,7 @@ interface page_interface
 	public function delete_page($page_id);
 
 	/**
-	* Get a page routes (for use in viewonline)
+	* Get page routes (for use in viewonline)
 	*
 	* @return array Array of routes and page titles for all pages
 	* @access public

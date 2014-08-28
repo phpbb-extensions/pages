@@ -40,7 +40,7 @@ class page implements page_interface
 	*
 	* @param Container $phpbb_container Service container
 	* @param \phpbb\db\driver\driver_interface $db Database connection
-	* @param \phpbb\extension\manager $$extension_manager Extension manager object
+	* @param \phpbb\extension\manager $extension_manager Extension manager object
 	* @param string $pages_table Table name
 	* @param string $pages_links_table Table name
 	* @param string $pages_pages_links_table Table name
@@ -126,7 +126,7 @@ class page implements page_interface
 	}
 
 	/**
-	* Get a page routes (for use in viewonline)
+	* Get page routes (for use in viewonline)
 	*
 	* @return array Array of routes and page titles for all pages
 	* @access public
