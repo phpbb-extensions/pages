@@ -10,15 +10,15 @@
 
 namespace phpbb\pages\operators;
 
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
 * Operator for a set of pages
 */
 class page implements page_interface
 {
-	/** @var Container */
-	protected $phpbb_container;
+	/** @var ContainerInterface */
+	protected $container;
 
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
@@ -38,18 +38,18 @@ class page implements page_interface
 	/**
 	* Constructor
 	*
-	* @param Container $phpbb_container Service container
-	* @param \phpbb\db\driver\driver_interface $db Database connection
-	* @param \phpbb\extension\manager $extension_manager Extension manager object
-	* @param string $pages_table Table name
-	* @param string $pages_links_table Table name
-	* @param string $pages_pages_links_table Table name
+	* @param ContainerInterface                   $container                Service container interface
+	* @param \phpbb\db\driver\driver_interface    $db                       Database connection
+	* @param \phpbb\extension\manager             $extension_manager        Extension manager object
+	* @param string                               $pages_table              Table name
+	* @param string                               $pages_links_table        Table name
+	* @param string                               $pages_pages_links_table  Table name
 	* @return \phpbb\pages\operators\page
 	* @access public
 	*/
-	public function __construct(Container $phpbb_container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, $pages_table, $pages_links_table, $pages_pages_links_table)
+	public function __construct(ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, $pages_table, $pages_links_table, $pages_pages_links_table)
 	{
-		$this->phpbb_container = $phpbb_container;
+		$this->container = $container;
 		$this->db = $db;
 		$this->extension_manager = $extension_manager;
 		$this->pages_table = $pages_table;
@@ -76,7 +76,7 @@ class page implements page_interface
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			// Import each page row into an entity
-			$entities[] = $this->phpbb_container->get('phpbb.pages.entity')->import($row);
+			$entities[] = $this->container->get('phpbb.pages.entity')->import($row);
 		}
 		$this->db->sql_freeresult($result);
 
