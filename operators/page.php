@@ -159,12 +159,35 @@ class page implements page_interface
 	*/
 	public function get_page_icons()
 	{
+		return $this->find('styles/', 'pages_', '.gif');
+	}
+
+	/**
+	* Get custom page templates (pages_*.html)
+	* Added by the user to the core style/template directores
+	*
+	* @return array Array of template file paths
+	* @access public
+	*/
+	public function get_page_templates()
+	{
+		return $this->find('styles/', 'pages_', '.html');
+	}
+
+	/**
+	* Find files
+	*
+	* @return array Array of found file paths
+	* @access protected
+	*/
+	protected function find($path, $prefix, $suffix)
+	{
 		$finder = $this->extension_manager->get_finder();
 
 		return $finder
-			->prefix('pages_')
-			->suffix('.gif')
-			->core_path('styles/')
+			->prefix($prefix)
+			->suffix($suffix)
+			->core_path($path)
 			->find();
 	}
 

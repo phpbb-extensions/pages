@@ -61,6 +61,15 @@ interface page_interface
 	public function get_page_icons();
 
 	/**
+	* Get custom page templates (pages_*.html)
+	* Added by the user to the core style/template directores
+	*
+	* @return array Array of template file paths
+	* @access public
+	*/
+	public function get_page_templates();
+
+	/**
 	* Get all page link location data for generating page links
 	*
 	* @param array Optional array of page ids
