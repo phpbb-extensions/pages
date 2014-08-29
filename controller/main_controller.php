@@ -81,7 +81,7 @@ class main_controller implements main_interface
 		$this->assign_breadcrumbs($display);
 
 		// Send all data to the template file
-		return $this->helper->render('pages_controller.html', $this->page['title']);
+		return $this->helper->render('pages_default.html', $this->page['title']);
 	}
 
 	/**
