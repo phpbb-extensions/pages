@@ -38,5 +38,5 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ACL_A_PAGES'		=> 'Can manage pages',
+	'ACL_A_PAGES'		=> 'Can manage Pages',
 ));
