@@ -52,9 +52,6 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 						'page_display_to_guests'		=> array('BOOL', 0),
 					),
 					'PRIMARY_KEY'	=> 'page_id',
-					'KEYS'			=> array(
-						'page_route'		=> array('UNIQUE', 'page_route'),
-					),
 				),
 				$this->table_prefix . 'pages_links'	=> array(
 					'COLUMNS'	=> array(
