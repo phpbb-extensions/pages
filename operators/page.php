@@ -233,7 +233,7 @@ class page implements page_interface
 	*
 	* @param int $page_id Page identifier
 	* @param array $link_ids Page link location identifiers
-	* @return void
+	* @return page_interface $this object for chaining calls
 	* @throws \phpbb\pages\exception\out_of_bounds
 	* @access public
 	*/
@@ -256,6 +256,8 @@ class page implements page_interface
 			// Insert the new page link data for this page
 			$this->db->sql_multi_insert($this->pages_pages_links_table, $sql_ary);
 		}
+
+		return $this;
 	}
 
 	/**
