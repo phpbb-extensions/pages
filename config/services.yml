@@ -1,3 +1,6 @@
+imports:
+    - { resource: tables.yml }
+
 services:
     phpbb.pages.listener:
         class: phpbb\pages\event\listener
@@ -11,3 +14,10 @@ services:
             - %core.php_ext%
         tags:
             - { name: event.listener }
+
+    phpbb.pages.entity:
+        class: phpbb\pages\entity\page
+        scope: prototype # scope MUST be prototype for this to work!
+        arguments:
+            - @dbal.conn
+            - %tables.pages%
