@@ -21,9 +21,9 @@ class page_operator_add_page_links_test extends page_operator_base
 	public function add_page_links_test_data()
 	{
 		return array(
-			array(1, array(1, 2), true),
-			array(2, array(2), true),
-			array(3, array(), false), // no data to add
+			array(1, array(1, 2)),
+			array(2, array(2)),
+			array(3, array()), // no data to add
 		);
 	}
 
@@ -33,16 +33,25 @@ class page_operator_add_page_links_test extends page_operator_base
 	* @dataProvider add_page_links_test_data
 	* @access public
 	*/
-	public function test_add_page_links($page_id, $link_ids, $expected)
+	public function test_add_page_links($page_id, $link_ids)
 	{
 		// Setup the operator class
 		$operator = $this->get_page_operator();
 
 		// Add the page links
-		$result = $operator->insert_page_links($page_id, $link_ids);
+		$operator->insert_page_links($page_id, $link_ids);
+
+		// Now grab the page link data as an array
+		$rowset = $operator->get_page_links($page_id);
+
+		$expected = array();
+		foreach ($rowset as $row)
+		{
+			$expected[] = $row['page_link_id'];
+		}
 
 		// Assert the page link data was added
-		$this->assertEquals($expected, $result);
+		$this->assertEquals($expected, $link_ids);
 	}
 
 	/**

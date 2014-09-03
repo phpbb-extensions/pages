@@ -233,7 +233,7 @@ class page implements page_interface
 	*
 	* @param int $page_id Page identifier
 	* @param array $link_ids Page link location identifiers
-	* @return bool True if data was added, false otherwise
+	* @return void
 	* @throws \phpbb\pages\exception\out_of_bounds
 	* @access public
 	*/
@@ -256,9 +256,6 @@ class page implements page_interface
 			// Insert the new page link data for this page
 			$this->db->sql_multi_insert($this->pages_pages_links_table, $sql_ary);
 		}
-
-		// Return true/false if page link data was added
-		return (bool) $this->db->sql_affectedrows();
 	}
 
 	/**
@@ -266,7 +263,7 @@ class page implements page_interface
 	* This method usually need not be called outside of this class
 	*
 	* @param int $page_id Page identifier
-	* @return bool True if data was removed, false otherwise
+	* @return void
 	* @throws \phpbb\pages\exception\out_of_bounds
 	* @access protected
 	*/
@@ -282,9 +279,6 @@ class page implements page_interface
 		$sql = 'DELETE FROM ' . $this->pages_pages_links_table . '
 			WHERE page_id = ' . (int) $page_id;
 		$this->db->sql_query($sql);
-
-		// Return true/false if page link data was deleted
-		return (bool) $this->db->sql_affectedrows();
 	}
 
 	/**
