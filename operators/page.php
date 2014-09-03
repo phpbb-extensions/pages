@@ -108,6 +108,7 @@ class page implements page_interface
 	*
 	* @param int $page_id The page identifier to delete
 	* @return bool True if row was deleted, false otherwise
+	* @throws \phpbb\pages\exception\out_of_bounds
 	* @access public
 	*/
 	public function delete_page($page_id)
@@ -233,6 +234,7 @@ class page implements page_interface
 	* @param int $page_id Page identifier
 	* @param array $link_ids Page link location identifiers
 	* @return bool True if data was added, false otherwise
+	* @throws \phpbb\pages\exception\out_of_bounds
 	* @access public
 	*/
 	public function insert_page_links($page_id, $link_ids)
