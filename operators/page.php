@@ -188,7 +188,8 @@ class page implements page_interface
 			->prefix($prefix)
 			->suffix($suffix)
 			->core_path($path)
-			->find();
+			->find()
+		;
 	}
 
 	/**
