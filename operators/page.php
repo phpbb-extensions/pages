@@ -270,7 +270,7 @@ class page implements page_interface
 	protected function remove_page_links($page_id)
 	{
 		// Throw an exception if page identifier is invalid
-		if (!$this->get_page_id($page_id))
+		if (!$this->page_id_exists($page_id))
 		{
 			throw new \phpbb\pages\exception\out_of_bounds('page_id');
 		}
@@ -291,7 +291,7 @@ class page implements page_interface
 	* @return bool $row True if page exists, false otherwise
 	* @access protected
 	*/
-	protected function get_page_id($id)
+	protected function page_id_exists($id)
 	{
 		$sql = 'SELECT 1
 			FROM ' . $this->pages_table . '
