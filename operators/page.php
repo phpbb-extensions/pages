@@ -118,8 +118,8 @@ class page implements page_interface
 		$this->remove_page_links($page_id);
 
 		// Delete the page from the database
-		$sql = 'DELETE FROM ' . $this->pages_table . "
-			WHERE page_id = $page_id";
+		$sql = 'DELETE FROM ' . $this->pages_table . '
+			WHERE page_id = ' (int) $page_id;
 		$this->db->sql_query($sql);
 
 		// Return true/false if a page was deleted
