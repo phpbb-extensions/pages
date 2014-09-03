@@ -12,6 +12,17 @@ namespace phpbb\pages\tests\controller;
 
 class page_main_controller_test extends \phpbb_database_test_case
 {
+	/**
+	* Define the extensions to be tested
+	*
+	* @return array vendor/name of extension(s) to test
+	* @access static
+	*/
+	static protected function setup_extensions()
+	{
+		return array('phpbb/pages');
+	}
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(dirname(__FILE__) . '/../entity/fixtures/page.xml');
