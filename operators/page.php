@@ -303,6 +303,6 @@ class page implements page_interface
 		$row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 
-		return $row;
+		return (bool) $row;
 	}
 }
