@@ -126,7 +126,6 @@ class page_operator_get_page_links_test extends page_operator_base
 	{
 		return array(
 			array(100, array()),
-			array('foobar', array()),
 		);
 	}
 
