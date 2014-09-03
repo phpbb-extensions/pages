@@ -12,12 +12,23 @@ namespace phpbb\pages\tests\event;
 
 class show_page_links_test extends \phpbb_database_test_case
 {
+	/**
+	* Define the extensions to be tested
+	*
+	* @return array vendor/name of extension(s) to test
+	* @access static
+	*/
+	static protected function setup_extensions()
+	{
+		return array('phpbb/pages');
+	}
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/page.xml');
 	}
 
-	protected $controller_helper, $listener, $template, $user;
+	protected $controller_helper, $db, $listener, $template, $user;
 
 	/**
 	* Data set for test_show_page_links
