@@ -119,7 +119,7 @@ class page implements page_interface
 
 		// Delete the page from the database
 		$sql = 'DELETE FROM ' . $this->pages_table . '
-			WHERE page_id = ' (int) $page_id;
+			WHERE page_id = ' . (int) $page_id;
 		$this->db->sql_query($sql);
 
 		// Return true/false if a page was deleted
