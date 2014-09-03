@@ -215,7 +215,7 @@ class page implements page_interface
 				),
 			),
 			'WHERE'			=> ($page_ids) ? $this->db->sql_in_set('ppl.page_id', $page_ids) : '',
-			'ORDER_BY'		=> 'p.page_order ASC',
+			'ORDER_BY'		=> 'p.page_order ASC, pl.page_link_id ASC',
 		);
 
 		$sql = $this->db->sql_build_query('SELECT', $sql_array);
