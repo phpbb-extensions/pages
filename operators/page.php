@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 */
 class page implements page_interface
 {
-	/** @var \phpbb\cache\service */
+	/** @var \phpbb\cache\driver\driver_interface */
 	protected $cache;
 
 	/** @var ContainerInterface */
@@ -41,7 +41,7 @@ class page implements page_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\cache\service                 $cache                    Cache service
+	* @param \phpbb\cache\driver\driver_interface $cache                    Cache driver interface
 	* @param ContainerInterface                   $container                Service container interface
 	* @param \phpbb\db\driver\driver_interface    $db                       Database connection
 	* @param \phpbb\extension\manager             $extension_manager        Extension manager object
@@ -51,7 +51,7 @@ class page implements page_interface
 	* @return \phpbb\pages\operators\page
 	* @access public
 	*/
-	public function __construct(\phpbb\cache\service $cache, ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, $pages_table, $pages_links_table, $pages_pages_links_table)
+	public function __construct(\phpbb\cache\driver\driver_interface $cache, ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, $pages_table, $pages_links_table, $pages_pages_links_table)
 	{
 		$this->cache = $cache;
 		$this->container = $container;
