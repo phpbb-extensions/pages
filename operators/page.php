@@ -233,7 +233,7 @@ class page implements page_interface
 		);
 
 		$sql = $this->db->sql_build_query('SELECT', $sql_array);
-		$result = $this->db->sql_query($sql);
+		$result = $this->db->sql_query($sql, 3600);
 
 		$rows = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
