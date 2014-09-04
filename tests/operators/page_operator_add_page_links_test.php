@@ -21,6 +21,7 @@ class page_operator_add_page_links_test extends page_operator_base
 	public function add_page_links_test_data()
 	{
 		return array(
+			// page_id, page_link_ids
 			array(1, array(1, 2)),
 			array(2, array(2)),
 			array(3, array()), // no data to add
@@ -33,25 +34,25 @@ class page_operator_add_page_links_test extends page_operator_base
 	* @dataProvider add_page_links_test_data
 	* @access public
 	*/
-	public function test_add_page_links($page_id, $link_ids)
+	public function test_add_page_links($page_id, $data)
 	{
 		// Setup the operator class
 		$operator = $this->get_page_operator();
 
 		// Add the page links
-		$operator->insert_page_links($page_id, $link_ids);
+		$operator->insert_page_links($page_id, $data);
 
-		// Now grab the page link data as an array
-		$rowset = $operator->get_page_links($page_id);
+		// Now get the page link data as an array
+		$page_links = $operator->get_page_links($page_id);
 
-		$expected = array();
-		foreach ($rowset as $row)
+		$page_link_ids = array();
+		foreach ($page_links as $page_link)
 		{
-			$expected[] = $row['page_link_id'];
+			$page_link_ids[] = $page_link['page_link_id'];
 		}
 
 		// Assert the page link data was added
-		$this->assertEquals($expected, $link_ids);
+		$this->assertEquals($data, $page_link_ids);
 	}
 
 	/**
@@ -63,6 +64,7 @@ class page_operator_add_page_links_test extends page_operator_base
 	public function add_page_links_fails_test_data()
 	{
 		return array(
+			// page_id, page_link_ids
 			array('', array(1, 2)),
 			array(100, array(1, 2)),
 			array(null, array(1, 2)),
@@ -76,12 +78,12 @@ class page_operator_add_page_links_test extends page_operator_base
 	* @expectedException \phpbb\pages\exception\base
 	* @access public
 	*/
-	public function test_add_page_links_fails($page_id, $link_ids)
+	public function test_add_page_links_fails($page_id, $data)
 	{
 		// Setup the operator class
 		$operator = $this->get_page_operator();
 
 		// Add the page links
-		$operator->insert_page_links($page_id, $link_ids);
+		$operator->insert_page_links($page_id, $data);
 	}
 }
