@@ -77,6 +77,7 @@ class show_page_links_test extends \phpbb_database_test_case
 
 		// Load/Mock classes required by the event listener class
 		$this->auth = $this->getMock('\phpbb\auth\auth');
+		$this->cache = new \phpbb_mock_cache();
 		$this->template = new \phpbb\pages\tests\mock\template();
 		$this->user = new \phpbb\user('\phpbb\datetime');
 		$this->ext_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
@@ -95,7 +96,7 @@ class show_page_links_test extends \phpbb_database_test_case
 		$this->listener = new \phpbb\pages\event\listener(
 			$this->auth,
 			$this->controller_helper,
-			new \phpbb\pages\operators\page($phpbb_container, $this->db, $this->ext_manager, 'phpbb_pages', 'phpbb_pages_links', 'phpbb_pages_pages_links'),
+			new \phpbb\pages\operators\page($this->cache, $phpbb_container, $this->db, $this->ext_manager, 'phpbb_pages', 'phpbb_pages_links', 'phpbb_pages_pages_links'),
 			$this->template,
 			$this->user,
 			$phpbb_root_path,
