@@ -265,7 +265,7 @@ class page implements page_interface
 	* This method usually need not be called outside of this class
 	*
 	* @param int $page_id Page identifier
-	* @return void
+	* @return page_interface $this object for chaining calls
 	* @throws \phpbb\pages\exception\out_of_bounds
 	* @access protected
 	*/
@@ -281,6 +281,8 @@ class page implements page_interface
 		$sql = 'DELETE FROM ' . $this->pages_pages_links_table . '
 			WHERE page_id = ' . (int) $page_id;
 		$this->db->sql_query($sql);
+
+		return $this;
 	}
 
 	/**
