@@ -17,6 +17,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 */
 class page implements page_interface
 {
+	/** @var \phpbb\cache\service */
+	protected $cache;
+
 	/** @var ContainerInterface */
 	protected $container;
 
@@ -38,6 +41,7 @@ class page implements page_interface
 	/**
 	* Constructor
 	*
+	* @param \phpbb\cache\service                 $cache                    Cache service
 	* @param ContainerInterface                   $container                Service container interface
 	* @param \phpbb\db\driver\driver_interface    $db                       Database connection
 	* @param \phpbb\extension\manager             $extension_manager        Extension manager object
@@ -47,8 +51,9 @@ class page implements page_interface
 	* @return \phpbb\pages\operators\page
 	* @access public
 	*/
-	public function __construct(ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, $pages_table, $pages_links_table, $pages_pages_links_table)
+	public function __construct(\phpbb\cache\service $cache, ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, $pages_table, $pages_links_table, $pages_pages_links_table)
 	{
+		$this->cache = $cache;
 		$this->container = $container;
 		$this->db = $db;
 		$this->extension_manager = $extension_manager;
@@ -160,7 +165,15 @@ class page implements page_interface
 	*/
 	public function get_page_icons()
 	{
-		return $this->find('styles/', 'pages_', '.gif');
+		// For efficiency, found icons are cached
+		if (($icons = $this->cache->get('_pages_icons')) === false)
+		{
+			$icons = $this->find('styles/', 'pages_', '.gif');
+
+			$this->cache->put('_pages_icons', $icons);
+		}
+
+		return $icons;
 	}
 
 	/**
