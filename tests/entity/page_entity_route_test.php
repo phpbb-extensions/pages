@@ -150,7 +150,7 @@ class page_entity_route_test extends page_entity_base
 	}
 
 	/**
-	* Test setting unique anchor
+	* Test setting unique routes
 	*
 	* @dataProvider unique_route_test_data
 	* @access public
