@@ -149,10 +149,13 @@ class listener implements EventSubscriberInterface
 	*/
 	public function viewonline_page($event)
 	{
+		// Are any users on app.php?
 		if ($event['on_page'][1] == 'app')
 		{
+			// Load our page routes and titles
 			$routes = $this->page_operator->get_page_routes();
 
+			// If any of our pages are being viewed, update the event vars with our routes and titles
 			foreach ($routes as $route => $page_title)
 			{
 				if ($event['row']['session_page'] == 'app.' . $this->php_ext . '/page/' . $route)
