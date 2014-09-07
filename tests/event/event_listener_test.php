@@ -32,6 +32,7 @@ class event_listener_test extends event_listener_base
 	{
 		$this->assertEquals(array(
 			'core.page_header',
+			'core.permissions',
 			'core.user_setup',
 			'core.viewonline_overwrite_location',
 		), array_keys(\phpbb\pages\event\listener::getSubscribedEvents()));
