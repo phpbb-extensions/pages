@@ -10,7 +10,7 @@
 
 namespace phpbb\pages\tests\operators;
 
-class page_operator_add_page_links_test extends page_operator_base
+class page_operator_insert_page_links_test extends page_operator_base
 {
 	/**
 	* Test data for the test_add_page_links() function
@@ -18,23 +18,23 @@ class page_operator_add_page_links_test extends page_operator_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function add_page_links_test_data()
+	public function insert_page_links_test_data()
 	{
 		return array(
 			// page_id, page_link_ids
 			array(1, array(1, 2)),
 			array(2, array(2)),
-			array(3, array()), // no data to add
+			array(3, array()), // no data to insert
 		);
 	}
 
 	/**
-	* Test adding page links
+	* Test inserting page links
 	*
-	* @dataProvider add_page_links_test_data
+	* @dataProvider insert_page_links_test_data
 	* @access public
 	*/
-	public function test_add_page_links($page_id, $data)
+	public function test_insert_page_links($page_id, $data)
 	{
 		// Setup the operator class
 		$operator = $this->get_page_operator();
@@ -51,17 +51,17 @@ class page_operator_add_page_links_test extends page_operator_base
 			$page_link_ids[] = $page_link['page_link_id'];
 		}
 
-		// Assert the page link data was added
+		// Assert the page link data was inserted
 		$this->assertEquals($data, $page_link_ids);
 	}
 
 	/**
-	* Test data for the test_add_page_links_fails() function
+	* Test data for the test_insert_page_links_fails() function
 	*
 	* @return array Array of test data
 	* @access public
 	*/
-	public function add_page_links_fails_test_data()
+	public function insert_page_links_fails_test_data()
 	{
 		return array(
 			// page_id, page_link_ids
@@ -72,13 +72,13 @@ class page_operator_add_page_links_test extends page_operator_base
 	}
 
 	/**
-	* Test adding page links fails
+	* Test inserting page links fails
 	*
-	* @dataProvider add_page_links_fails_test_data
+	* @dataProvider insert_page_links_fails_test_data
 	* @expectedException \phpbb\pages\exception\base
 	* @access public
 	*/
-	public function test_add_page_links_fails($page_id, $data)
+	public function test_insert_page_links_fails($page_id, $data)
 	{
 		// Setup the operator class
 		$operator = $this->get_page_operator();
