@@ -84,6 +84,7 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 			'drop_tables'	=> array(
 				$this->table_prefix . 'pages',
 				$this->table_prefix . 'pages_links',
+				$this->table_prefix . 'pages_pages_links',
 			),
 		);
 	}
