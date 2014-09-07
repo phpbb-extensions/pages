@@ -73,9 +73,24 @@ class listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.page_header'						=> 'show_page_links',
+			'core.permissions'						=> 'add_permission',
 			'core.user_setup'						=> 'load_language_on_setup',
 			'core.viewonline_overwrite_location'	=> 'viewonline_page',
 		);
+	}
+
+	/**
+	* Load common language files during user setup
+	*
+	* @param object $event The event object
+	* @return null
+	* @access public
+	*/
+	public function add_permission($event)
+	{
+		$permissions = $event['permissions'];
+		$permissions['a_pages'] = array('lang' => 'ACL_A_PAGES', 'cat' => 'misc');
+		$event['permissions'] = $permissions;
 	}
 
 	/**

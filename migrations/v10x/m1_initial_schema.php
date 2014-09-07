@@ -43,7 +43,7 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 						'page_description'				=> array('VCHAR:255', ''),
 						'page_route'					=> array('VCHAR:100', ''),
 						'page_order'					=> array('UINT', 0),
-						'page_content'					=> array('TEXT_UNI', ''),
+						'page_content'					=> array('MTEXT_UNI', ''),
 						'page_content_bbcode_uid'		=> array('VCHAR:8', ''),
 						'page_content_bbcode_bitfield'	=> array('VCHAR:255', ''),
 						'page_content_bbcode_options'	=> array('UINT:11', 7),
