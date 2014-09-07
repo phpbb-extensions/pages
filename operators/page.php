@@ -298,6 +298,9 @@ class page implements page_interface
 			WHERE page_id = ' . (int) $page_id;
 		$this->db->sql_query($sql);
 
+		// Destroy cached page links
+		$this->cache->destroy('sql', $this->pages_pages_links_table);
+
 		return $this;
 	}
 
