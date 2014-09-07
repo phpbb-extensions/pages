@@ -232,8 +232,11 @@ class page implements page_interface
 			'ORDER_BY'		=> 'p.page_order ASC, ppl.page_link_id ASC',
 		);
 
+		// Cache the SQL query for 1 hour if page_ids is empty
+		$cache_ttl = (empty($page_ids)) ? 3600 : 0;
+
 		$sql = $this->db->sql_build_query('SELECT', $sql_array);
-		$result = $this->db->sql_query($sql, 3600);
+		$result = $this->db->sql_query($sql, $cache_ttl);
 
 		$rows = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
