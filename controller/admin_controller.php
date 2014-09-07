@@ -65,7 +65,7 @@ class admin_controller implements admin_interface
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
-		$this->container = $phpbb_container
+		$this->container = $phpbb_container;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 	}
