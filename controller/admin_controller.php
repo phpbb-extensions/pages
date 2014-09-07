@@ -10,7 +10,7 @@
 
 namespace phpbb\pages\controller;
 
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
 * Admin controller
@@ -32,7 +32,7 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var Container */
+	/** @var ContainerInterface */
 	protected $phpbb_container;
 
 	/** @var string phpBB root path */
@@ -52,13 +52,13 @@ class admin_controller implements admin_interface
 	* @param \phpbb\request\request               $request         Request object
 	* @param \phpbb\template\template             $template        Template object
 	* @param \phpbb\user                          $user            User object
-	* @param Container                            $phpbb_container Service container
+	* @param ContainerInterface                   $phpbb_container Service container interface
 	* @param string                               $root_path       phpBB root path
 	* @param string                               $php_ext         phpEx
 	* @return \phpbb\pages\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->db = $db;
