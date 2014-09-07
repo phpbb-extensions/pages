@@ -80,7 +80,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Load common language files during user setup
+	* Add administrative permissions to manage Pages
 	*
 	* @param object $event The event object
 	* @return null
