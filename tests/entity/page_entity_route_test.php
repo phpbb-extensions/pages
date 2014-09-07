@@ -132,4 +132,86 @@ class page_entity_route_test extends page_entity_base
 		// Load the entity
 		$entity->set_route($route);
 	}
+
+	/**
+	* Test data for the test_unique_route() function
+	*
+	* @return array Array of test data
+	* @access public
+	*/
+	public function unique_route_test_data()
+	{
+		return array(
+			// id, sent to set_route(), expected from get_route()
+			array(null, 'foo', 'foo'), // new page, route is unique, expect unqiue route to pass
+			array(1, 'page_1', 'page_1'), // exisiting page, current route = new route, expect route to pass
+			array(1, 'bar', 'bar'), // exisiting page, current route != new route, new route is unique, expect new route to pass
+		);
+	}
+
+	/**
+	* Test setting unique routes
+	*
+	* @dataProvider unique_route_test_data
+	* @access public
+	*/
+	public function test_unique_route($id, $route, $expected)
+	{
+		// Setup the entity class
+		$entity = $this->get_page_entity();
+
+		// Load the page from the db if it exists
+		if (!is_null($id))
+		{
+			$entity->load($id);
+		}
+
+		// Set the route
+		$result = $entity->set_route($route);
+
+		// Assert the returned value is what we expect
+		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+
+		// Assert that the route matches what's expected
+		$this->assertSame($expected, $entity->get_route($route));
+	}
+
+	/**
+	* Test data for the test_unique_route_fails() function
+	*
+	* @return array Array of test data
+	* @access public
+	*/
+	public function unique_route_test_fails_data()
+	{
+		return array(
+			// id // sent to set_route()
+			array(null, ''), // new page, no route
+			array(null, 'page_1'), // new page, new route is not unique (exists already in db)
+			array(1, ''), // exisiting page, no route
+			array(1, 'page_2'), // exisiting page, current route != new route, new route is not unique (exists already in db)
+		);
+	}
+
+	/**
+	* Test setting non-unique data on the route which should throw an exception
+	*
+	* @dataProvider unique_route_test_fails_data
+	* @expectedException \phpbb\pages\exception\base
+	* @access public
+	*/
+	public function test_unique_route_fails($id, $route)
+	{
+		// Setup the entity class
+		$entity = $this->get_page_entity();
+
+		// Load the page from the db if it exists
+		if (!is_null($id))
+		{
+			$entity->load($id);
+		}
+
+		// Set the route
+		$entity->set_route($route);
+	}
 }
