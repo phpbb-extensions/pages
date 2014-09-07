@@ -76,9 +76,20 @@ class main_controller implements main_interface
 		$this->page['title'] = ($display) ? $display->get_title() : $this->user->lang('INFORMATION');
 		$this->page['content'] = ($display) ? $display->get_content_for_display() : $this->user->lang('PAGE_NOT_AVAILABLE', $route);
 
-		// Assign all page template vars
-		$this->assign_template_vars();
-		$this->assign_breadcrumbs($display);
+		// Assign the page data to template variables
+		$this->template->assign_vars(array(
+			'PAGE_TITLE'	=> $this->page['title'],
+			'PAGE_CONTENT'	=> $this->page['content'],
+		));
+
+		// Create breadcrumbs
+		if ($display)
+		{
+			$this->template->assign_block_vars('navlinks', array(
+				'FORUM_NAME'	=> $this->page['title'],
+				'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $this->page['route'])),
+			));
+		}
 
 		// Send all data to the template file
 		return $this->helper->render('pages_default.html', $this->page['title']);
@@ -119,37 +130,5 @@ class main_controller implements main_interface
 		}
 
 		return $entity;
-	}
-
-	/**
-	* Assign the page data to template variables
-	*
-	* @return null
-	* @access protected
-	*/
-	protected function assign_template_vars()
-	{
-		$this->template->assign_vars(array(
-			'PAGE_TITLE'	=> $this->page['title'],
-			'PAGE_CONTENT'	=> $this->page['content'],
-		));
-	}
-
-	/**
-	* Create breadcrumbs
-	*
-	* @param object $display The display entity object
-	* @return null
-	* @access protected
-	*/
-	protected function assign_breadcrumbs($display = false)
-	{
-		if ($display)
-		{
-			$this->template->assign_block_vars('navlinks', array(
-				'FORUM_NAME'	=> $this->page['title'],
-				'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $this->page['route'])),
-			));
-		}
 	}
 }
