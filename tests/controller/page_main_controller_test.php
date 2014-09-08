@@ -73,8 +73,8 @@ class page_main_controller_test extends \phpbb_database_test_case
 
 		$controller = new \phpbb\pages\controller\main_controller(
 			$this->auth,
-			$this->controller_helper,
 			$this->container,
+			$this->controller_helper,
 			$this->template,
 			$this->user
 		);

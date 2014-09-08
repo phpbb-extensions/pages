@@ -18,8 +18,8 @@ services:
         class: phpbb\pages\controller\main_controller
         arguments:
             - @auth
-            - @controller.helper
             - @service_container
+            - @controller.helper
             - @template
             - @user
 

@@ -20,11 +20,11 @@ class main_controller implements main_interface
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
-	/** @var \phpbb\controller\helper */
-	protected $helper;
-
 	/** @var ContainerInterface */
 	protected $container;
+
+	/** @var \phpbb\controller\helper */
+	protected $helper;
 
 	/** @var \phpbb\template\template */
 	protected $template;
@@ -39,18 +39,18 @@ class main_controller implements main_interface
 	* Constructor
 	*
 	* @param \phpbb\auth\auth            $auth         Authentication object
-	* @param \phpbb\controller\helper    $helper       Controller helper object
 	* @param ContainerInterface          $container    Service container interface
+	* @param \phpbb\controller\helper    $helper       Controller helper object
 	* @param \phpbb\template\template    $template     Template object
 	* @param \phpbb\user                 $user         User object
 	* @return \phpbb\pages\controller\main_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, ContainerInterface $container, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\auth\auth $auth, ContainerInterface $container, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->auth = $auth;
-		$this->helper = $helper;
 		$this->container = $container;
+		$this->helper = $helper;
 		$this->template = $template;
 		$this->user = $user;
 	}
