@@ -53,7 +53,6 @@ class main_controller implements main_interface
 		$this->container = $container;
 		$this->template = $template;
 		$this->user = $user;
-		$this->page = array();
 	}
 
 	/**
@@ -71,28 +70,26 @@ class main_controller implements main_interface
 		// Load the page data to display
 		$display = $this->load_page_data($route);
 
-		// Store the page data in an array property
-		$this->page['route'] = $route;
-		$this->page['title'] = ($display) ? $display->get_title() : $this->user->lang('INFORMATION');
-		$this->page['content'] = ($display) ? $display->get_content_for_display() : $this->user->lang('PAGE_NOT_AVAILABLE', $route);
+		// Set the page title to use
+		$page_title = ($display) ? $display->get_title() : $this->user->lang('INFORMATION');
 
 		// Assign the page data to template variables
 		$this->template->assign_vars(array(
-			'PAGE_TITLE'	=> $this->page['title'],
-			'PAGE_CONTENT'	=> $this->page['content'],
+			'PAGE_TITLE'	=> $page_title,
+			'PAGE_CONTENT'	=> ($display) ? $display->get_content_for_display() : $this->user->lang('PAGE_NOT_AVAILABLE', $route),
 		));
 
 		// Create breadcrumbs
 		if ($display)
 		{
 			$this->template->assign_block_vars('navlinks', array(
-				'FORUM_NAME'	=> $this->page['title'],
-				'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $this->page['route'])),
+				'FORUM_NAME'	=> $page_title,
+				'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $route)),
 			));
 		}
 
 		// Send all data to the template file
-		return $this->helper->render('pages_default.html', $this->page['title']);
+		return $this->helper->render('pages_default.html', $page_title);
 	}
 
 	/**
