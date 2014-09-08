@@ -25,3 +25,14 @@ services:
         arguments:
             - @dbal.conn
             - %tables.pages%
+
+    phpbb.pages.operator:
+        class: phpbb\pages\operators\page
+        arguments:
+            - @cache.driver
+            - @service_container
+            - @dbal.conn
+            - @ext.manager
+            - %tables.pages%
+            - %tables.pages_links%
+            - %tables.pages_pages_links%
