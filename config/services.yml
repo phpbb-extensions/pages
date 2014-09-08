@@ -14,6 +14,15 @@ services:
             - %core.root_path%
             - %core.php_ext%
 
+    phpbb.pages.controller:
+        class: phpbb\pages\controller\main_controller
+        arguments:
+            - @auth
+            - @controller.helper
+            - @service_container
+            - @template
+            - @user
+
     phpbb.pages.listener:
         class: phpbb\pages\event\listener
         tags:
@@ -26,11 +35,13 @@ services:
             - @dbal.conn
             - %tables.pages%
 
-    phpbb.pages.controller:
-        class: phpbb\pages\controller\main_controller
+    phpbb.pages.operator:
+        class: phpbb\pages\operators\page
         arguments:
-            - @auth
-            - @controller.helper
+            - @cache.driver
             - @service_container
-            - @template
-            - @user
+            - @dbal.conn
+            - @ext.manager
+            - %tables.pages%
+            - %tables.pages_links%
+            - %tables.pages_pages_links%
