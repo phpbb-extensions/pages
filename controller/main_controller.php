@@ -32,9 +32,6 @@ class main_controller implements main_interface
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var array */
-	protected $page;
-
 	/**
 	* Constructor
 	*
