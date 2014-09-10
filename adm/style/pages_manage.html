@@ -1,3 +1,63 @@
 <!-- INCLUDE overall_header.html -->
 
+<!-- IF S_ADD_PAGE or S_EDIT_PAGE -->
+
+<!-- ELSE -->
+
+	<h1>{L_ACP_PAGES_MANAGE}</h1>
+
+	<p>{L_ACP_PAGES_MANAGE_EXPLAIN}</p>
+
+	<form id="pages_purge_icons" method="post" action="{U_ACTION}">
+		<fieldset>
+			<legend>{L_GENERAL_OPTIONS}</legend>
+			<dl>
+				<dt><label for="action_purge_icon_cache">{L_ACP_PAGES_PURGE_ICONS_LABEL}</label><br /><span>{L_ACP_PAGES_PURGE_ICONS_EXPLAIN}</span></dt>
+				<dd><input class="button2" type="submit" id="action_purge_icon_cache" name="action_purge_icon_cache" value="{L_ACP_PAGES_PURGE_ICONS}" /></dd>
+			</dl>
+			<input type="hidden" name="action" value="purge_icons" />
+		</fieldset>
+	</form>
+
+	<table class="table1 zebra-table fixed-width-table">
+		<thead>
+			<tr>
+				<th style="width: 15%;">{L_ACP_PAGE_TITLE}</th>
+				<th style="width: 20%;">{L_ACP_PAGE_DESCRIPTION}</th>
+				<th style="width: 15%;">{L_ACP_PAGE_ROUTE}</th>
+				<th style="width: 20%;">{L_ACP_PAGE_TEMPLATE}</th>
+				<th style="width: 10%;">{L_ACP_PAGE_ORDER}</th>
+				<th style="width: 10%;">{L_ACP_PAGE_LINK}</th>
+				<th style="width: 10%;">{L_ACTION}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- BEGIN pages -->
+				<tr>
+					<td>{pages.PAGE_TITLE}</td>
+					<td>{pages.PAGE_DESCRIPTION}</td>
+					<td>{pages.PAGE_ROUTE}</td>
+					<td>{pages.PAGE_TEMPLATE}</td>
+					<td>{pages.PAGE_ORDER}</td>
+					<td><a href="{pages.U_PAGE_ROUTE}">{L_ACP_PAGE_VIEW}</a></td>
+					<td><a href="{pages.U_EDIT}">{ICON_EDIT}</a> <a href="{pages.U_DELETE}" data-ajax="row_delete">{ICON_DELETE}</a></td>
+				</tr>
+			<!-- BEGINELSE -->
+				<tr>
+					<td colspan="7" style="text-align: center;">{L_ACP_PAGE_EMPTY}</td>
+				</tr>
+			<!-- END pages -->
+		</tbody>
+	</table>
+
+	<form id="pages_add_page" method="post" action="{U_ACTION}">
+		<fieldset class="quick">
+			<input class="button2" type="submit" name="submit" value="{L_ACP_PAGES_CREATE_PAGE}" />
+			<input type="hidden" name="action" value="add" />
+			{S_FORM_TOKEN}
+		</fieldset>
+	</form>
+
+<!-- ENDIF -->
+
 <!-- INCLUDE overall_footer.html -->
