@@ -17,14 +17,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 */
 class admin_controller implements admin_interface
 {
-	/** @var \phpbb\config\config */
-	protected $config;
+	/** @var \phpbb\controller\helper */
+	protected $helper;
 
-	/** @var \phpbb\db\driver\driver_interface */
-	protected $db;
+	/** @var \phpbb\log\log */
+	protected $log;
 
-	/** @var \phpbb\request\request */
-	protected $request;
+	/** @var \phpbb\pages\operators\page */
+	protected $page_operator;
 
 	/** @var \phpbb\template\template */
 	protected $template;
@@ -35,39 +35,29 @@ class admin_controller implements admin_interface
 	/** @var ContainerInterface */
 	protected $phpbb_container;
 
-	/** @var string phpBB root path */
-	protected $root_path;
-
-	/** @var string phpEx */
-	protected $php_ext;
-
 	/** string Custom form action */
 	protected $u_action;
 
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config                 $config          Config object
-	* @param \phpbb\db\driver\driver_interface    $db              Database object
-	* @param \phpbb\request\request               $request         Request object
+	* @param \phpbb\controller\helper             $helper          Controller helper object
+	* @param \phpbb\log\log                       $log             The phpBB log system
+	* @param \phpbb\pages\operators\page          $page_operator   Pages operator object
 	* @param \phpbb\template\template             $template        Template object
 	* @param \phpbb\user                          $user            User object
 	* @param ContainerInterface                   $phpbb_container Service container interface
-	* @param string                               $root_path       phpBB root path
-	* @param string                               $php_ext         phpEx
 	* @return \phpbb\pages\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, $root_path, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container)
 	{
-		$this->config = $config;
-		$this->db = $db;
-		$this->request = $request;
+		$this->helper = $helper;
+		$this->log = $log;
+		$this->page_operator = $page_operator;
 		$this->template = $template;
 		$this->user = $user;
 		$this->container = $phpbb_container;
-		$this->root_path = $root_path;
-		$this->php_ext = $php_ext;
 	}
 
 	/**

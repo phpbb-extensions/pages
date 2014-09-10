@@ -5,14 +5,12 @@ services:
     phpbb.pages.admin.controller:
         class: phpbb\pages\controller\admin_controller
         arguments:
-            - @config
-            - @dbal.conn
-            - @request
+            - @controller.helper
+            - @log
+            - @phpbb.pages.operator
             - @template
             - @user
             - @service_container
-            - %core.root_path%
-            - %core.php_ext%
 
     phpbb.pages.listener:
         class: phpbb\pages\event\listener
