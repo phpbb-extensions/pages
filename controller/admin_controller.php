@@ -68,7 +68,31 @@ class admin_controller implements admin_interface
 	*/
 	public function display_pages()
 	{
-		// @todo
+		// Grab all the pages from the db
+		$entities = $this->page_operator->get_pages();
+
+		// Process each page entity for display
+		foreach ($entities as $entity)
+		{
+			// Set output block vars for display in the template
+			$this->template->assign_block_vars('pages', array(
+				'PAGE_TITLE'		=> $entity->get_title(),
+				'PAGE_DESCRIPTION'	=> $entity->get_description(),
+				'PAGE_ROUTE'		=> $entity->get_route(),
+				'PAGE_TEMPLATE'		=> $entity->get_template(),
+				'PAGE_ORDER'		=> $entity->get_order(),
+
+				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;page_id=" . $entity->get_id(),
+				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;page_id=" . $entity->get_id(),
+				'U_PAGE_ROUTE'		=> $this->helper->route('phpbb_pages_main_controller', array('route' => $entity->get_route())),
+			));
+		}
+
+		// Set output vars for display in the template
+		$this->template->assign_vars(array(
+			'U_ACTION'		=> $this->u_action,
+			'U_ADD_PAGE'	=> "{$this->u_action}&amp;action=add",
+		));
 	}
 
 	/**
