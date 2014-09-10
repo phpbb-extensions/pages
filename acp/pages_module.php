@@ -16,7 +16,7 @@ class pages_module
 
 	function main($id, $mode)
 	{
-		global $phpbb_container, $request, $user;
+		global $cache, $phpbb_container, $request, $user;
 
 		// Add the pages ACP lang file
 		$user->add_lang_ext('phpbb/pages', 'pages_acp');
@@ -66,9 +66,14 @@ class pages_module
 				// Delete a page
 				$admin_controller->delete_page($page_id);
 			break;
+
+			case 'purge_icons':
+				// Purge icon cache
+				$cache->destroy('_pages_icons');
+			break;
 		}
 
-		// Display pages.
+		// Display pages
 		$admin_controller->display_pages();
 	}
 }
