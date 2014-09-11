@@ -140,12 +140,12 @@ class admin_controller implements admin_interface
 	*/
 	public function delete_page($page_id)
 	{
-		// Initiate and load the page entity
-		$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
-
 		// Use a confirmation box routine when deleting a page
 		if (confirm_box(true))
 		{
+			// Initiate and load the page entity
+			$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
+
 			// Default confirmation message of deleted page and link back to the previous screen
 			$message = $this->user->lang('ACP_PAGE_DELETE_SUCCESS') . adm_back_link($this->u_action);
 			$errors = false;
