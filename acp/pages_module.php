@@ -75,8 +75,8 @@ class pages_module
 					confirm_box(false, $user->lang('ACP_PAGE_DELETE_CONFIRM'), build_hidden_fields(array(
 						'page_id'	=> $page_id,
 						'mode'		=> $mode,
-						'action'	=> $action))
-					);
+						'action'	=> $action,
+					)));
 				}
 			break;
 
