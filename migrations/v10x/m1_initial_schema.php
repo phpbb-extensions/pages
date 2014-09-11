@@ -16,6 +16,20 @@ namespace phpbb\pages\migrations\v10x;
 class m1_initial_schema extends \phpbb\db\migration\migration
 {
 	/**
+	* Assign migration file dependencies for this migration
+	*
+	* @return array Array of migration files
+	* @static
+	* @access public
+	*/
+	static public function depends_on()
+	{
+		return array(
+			'\phpbb\pages\migrations\converter\c1_convert_table',
+		);
+	}
+
+	/**
 	* Add the pages table schema to the database:
 	*	pages:
 	*		page_id
