@@ -128,7 +128,7 @@ class listener implements EventSubscriberInterface
 		foreach ($rowset as $row)
 		{
 			// Skip page if it should not be displayed (admins always have access to a page)
-			if ((!$this->auth->acl_get('a_') && !$row['page_display']) || ($this->user->data['user_id'] == ANONYMOUS && !$row['page_display_to_guests']))
+			if ((!$row['page_display'] && !$this->auth->acl_get('a_')) || (!$row['page_display_to_guests'] && $this->user->data['user_id'] == ANONYMOUS))
 			{
 				continue;
 			}
