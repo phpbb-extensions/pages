@@ -5,14 +5,13 @@ services:
     phpbb.pages.admin.controller:
         class: phpbb\pages\controller\admin_controller
         arguments:
-            - @config
-            - @dbal.conn
+            - @controller.helper
+            - @log
+            - @phpbb.pages.operator
             - @request
             - @template
             - @user
             - @service_container
-            - %core.root_path%
-            - %core.php_ext%
 
     phpbb.pages.controller:
         class: phpbb\pages\controller\main_controller

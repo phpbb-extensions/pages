@@ -41,4 +41,7 @@ $lang = array_merge($lang, array(
 	// ACP modules
 	'ACP_PAGES'				=> 'Pages',
 	'ACP_PAGES_MANAGE'		=> 'Manage Pages',
+
+	// Logs
+	'ACP_PAGE_DELETED_LOG'	=> '<strong>Page successfully deleted</strong><br />» %s',
 ));

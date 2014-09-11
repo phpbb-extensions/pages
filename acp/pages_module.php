@@ -16,7 +16,7 @@ class pages_module
 
 	function main($id, $mode)
 	{
-		global $phpbb_container, $request, $user;
+		global $cache, $phpbb_container, $request, $user;
 
 		// Add the pages ACP lang file
 		$user->add_lang_ext('phpbb/pages', 'pages_acp');
@@ -63,12 +63,30 @@ class pages_module
 			break;
 
 			case 'delete':
-				// Delete a page
-				$admin_controller->delete_page($page_id);
+				// Use a confirm box routine when deleting a page
+				if (confirm_box(true))
+				{
+					// Delete page on confirmation from the user
+					$admin_controller->delete_page($page_id);
+				}
+				else
+				{
+					// Request confirmation from the user to delete the page
+					confirm_box(false, $user->lang('ACP_PAGE_DELETE_CONFIRM'), build_hidden_fields(array(
+						'page_id'	=> $page_id,
+						'mode'		=> $mode,
+						'action'	=> $action,
+					)));
+				}
+			break;
+
+			case 'purge_icons':
+				// Purge icon cache
+				$cache->destroy('_pages_icons');
 			break;
 		}
 
-		// Display pages.
+		// Display pages
 		$admin_controller->display_pages();
 	}
 }
