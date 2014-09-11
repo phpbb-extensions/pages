@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+	<table name="phpbb_pages">
+		<column>page_id</column>
+		<column>page_order</column>
+		<column>page_route</column>
+		<column>page_title</column>
+		<column>page_content</column>
+		<column>page_display</column>
+		<column>page_display_to_guests</column>
+		<row>
+			<value>1</value>
+			<value>1</value>
+			<value>page_1</value>
+			<value>title_1</value>
+			<value>message_1</value>
+			<value>1</value>
+			<value>1</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>2</value>
+			<value>page_2</value>
+			<value>title_2</value>
+			<value>message_2</value>
+			<value>1</value>
+			<value>1</value>
+		</row>
+	</table>
+	<table name="phpbb_pages_links">
+		<column>page_link_id</column>
+		<column>page_link_location</column>
+		<column>page_link_event_name</column>
+		<row>
+			<value>1</value>
+			<value>Nav Bar Links Before</value>
+			<value>overall_header_navigation_prepend</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>Nav Bar Links After</value>
+			<value>overall_header_navigation_append</value>
+		</row>
+	</table>
+	<table name="phpbb_pages_pages_links">
+		<column>page_id</column>
+		<column>page_link_id</column>
+		<row>
+			<value>1</value>
+			<value>1</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>2</value>
+		</row>
+	</table>
+</dataset>

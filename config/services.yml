@@ -24,6 +24,14 @@ services:
 
     phpbb.pages.listener:
         class: phpbb\pages\event\listener
+        arguments:
+            - @auth
+            - @controller.helper
+            - @phpbb.pages.operator
+            - @template
+            - @user
+            - %core.root_path%
+            - %core.php_ext%
         tags:
             - { name: event.listener }
 
