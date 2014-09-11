@@ -84,6 +84,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_allow_html'			=> 0,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
+				'page_template'						=> 'pages_default.html',
 			),
 			2 => array(
 				'page_id'							=> 2,
@@ -98,6 +99,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_allow_html'			=> 0,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
+				'page_template'						=> 'pages_default.html',
 			),
 			3 => array(
 				'page_id'							=> 3,
@@ -112,6 +114,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_allow_html'			=> 0,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
+				'page_template'						=> 'pages_default.html',
 			),
 			4 => array(
 				'page_id'							=> 4,
@@ -126,6 +129,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_allow_html'			=> 0,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
+				'page_template'						=> 'pages_default.html',
 			),
 			5 => array(
 				'page_id'							=> 5,
@@ -140,6 +144,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_allow_html'			=> 1,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
+				'page_template'						=> 'pages_default.html',
 			),
 		);
 	}

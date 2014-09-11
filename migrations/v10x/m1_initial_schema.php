@@ -50,6 +50,7 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 						'page_content_allow_html'		=> array('BOOL', 0),
 						'page_display'					=> array('BOOL', 0),
 						'page_display_to_guests'		=> array('BOOL', 0),
+						'page_template'					=> array('VCHAR:255', ''),
 					),
 					'PRIMARY_KEY'	=> 'page_id',
 				),

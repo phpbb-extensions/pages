@@ -13,6 +13,7 @@
 		<column>page_content_allow_html</column>
 		<column>page_display</column>
 		<column>page_display_to_guests</column>
+		<column>page_template</column>
 		<row>
 			<value>1</value>
 			<value>1</value>
@@ -26,6 +27,7 @@
 			<value>0</value>
 			<value>1</value>
 			<value>1</value>
+			<value>pages_default.html</value>
 		</row>
 		<row>
 			<value>2</value>
@@ -40,6 +42,7 @@
 			<value>0</value>
 			<value>1</value>
 			<value>1</value>
+			<value>pages_default.html</value>
 		</row>
 		<row>
 			<value>3</value>
@@ -54,6 +57,7 @@
 			<value>0</value>
 			<value>1</value>
 			<value>0</value>
+			<value>pages_default.html</value>
 		</row>
 		<row>
 			<value>4</value>
@@ -68,6 +72,7 @@
 			<value>1</value>
 			<value>0</value>
 			<value>0</value>
+			<value>pages_default.html</value>
 		</row>
 	</table>
 	<table name="phpbb_pages_links">

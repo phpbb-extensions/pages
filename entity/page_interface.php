@@ -146,6 +146,24 @@ interface page_interface
 	public function set_order($order);
 
 	/**
+	* Get page template
+	*
+	* @return string page template
+	* @access public
+	*/
+	public function get_template();
+
+	/**
+	* Set page template
+	*
+	* @param string $template Page template name
+	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	* @throws \phpbb\pages\exception\unexpected_value
+	*/
+	public function set_template($template);
+
+	/**
 	* Get content for edit
 	*
 	* @return string
