@@ -1,0 +1,54 @@
+<?php
+/**
+*
+* Pages extension for the phpBB Forum Software package.
+*
+* @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
+*/
+
+namespace phpbb\pages\migrations\converter;
+
+/**
+* Converter stage 3: Convert module
+*/
+class c3_convert_module extends \phpbb\db\migration\migration
+{
+	/**
+	* Skip this migration if an ACP_PAGES module does not exist
+	*
+	* @return bool True if table does not exist
+	* @access public
+	*/
+	public function effectively_installed()
+	{
+		$sql = 'SELECT module_id
+			FROM ' . $this->table_prefix . "modules
+			WHERE module_class = 'acp'
+				AND module_langname = 'ACP_PAGES'";
+		$result = $this->db->sql_query($sql);
+		$module_id = (int) $this->db->sql_fetchfield('module_id');
+		$this->db->sql_freeresult($result);
+
+		// Skip migration if ACP_PAGES module does not exist
+		return !$module_id;
+	}
+
+	/**
+	* Add or update data in the database
+	*
+	* @return array Array of table data
+	* @access public
+	*/
+	public function update_data()
+	{
+		return array(
+			// Remove old ACP_PAGES module if it exists
+			array('if', array(
+				array('module.exists', array('acp', false, 'ACP_PAGES')),
+				array('module.remove', array('acp', false, 'ACP_PAGES')),
+			)),
+		);
+	}
+}

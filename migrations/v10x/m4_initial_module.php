@@ -24,7 +24,10 @@ class m4_initial_module extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\pages\migrations\v10x\m3_initial_permission');
+		return array(
+			'\phpbb\pages\migrations\converter\c3_convert_module',
+			'\phpbb\pages\migrations\v10x\m3_initial_permission',
+		);
 	}
 
 	/**
