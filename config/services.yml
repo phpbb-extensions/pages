@@ -8,6 +8,7 @@ services:
             - @controller.helper
             - @log
             - @phpbb.pages.operator
+            - @request
             - @template
             - @user
             - @service_container

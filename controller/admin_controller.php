@@ -26,6 +26,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\pages\operators\page */
 	protected $page_operator;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var \phpbb\template\template */
 	protected $template;
 
@@ -44,17 +47,19 @@ class admin_controller implements admin_interface
 	* @param \phpbb\controller\helper             $helper          Controller helper object
 	* @param \phpbb\log\log                       $log             The phpBB log system
 	* @param \phpbb\pages\operators\page          $page_operator   Pages operator object
+	* @param \phpbb\request\request               $request         Request object
 	* @param \phpbb\template\template             $template        Template object
 	* @param \phpbb\user                          $user            User object
 	* @param ContainerInterface                   $phpbb_container Service container interface
 	* @return \phpbb\pages\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container)
 	{
 		$this->helper = $helper;
 		$this->log = $log;
 		$this->page_operator = $page_operator;
+		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
 		$this->container = $phpbb_container;
@@ -140,45 +145,34 @@ class admin_controller implements admin_interface
 	*/
 	public function delete_page($page_id)
 	{
-		// Use a confirmation box routine when deleting a page
-		if (confirm_box(true))
+		// Initiate and load the page entity
+		$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
+
+		try
 		{
-			// Initiate and load the page entity
-			$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
-
-			// Default confirmation message of deleted page and link back to the previous screen
-			$message = $this->user->lang('ACP_PAGE_DELETE_SUCCESS') . adm_back_link($this->u_action);
-			$errors = false;
-
-			try
-			{
-				// Delete the page on confirmation
-				$this->page_operator->delete_page($page_id);
-			}
-			catch (\phpbb\pages\exception\base $e)
-			{
-				// Display an error message if unable to delete successfully
-				$message = $this->user->lang('ACP_PAGE_DELETE_ERRORED') . adm_back_link($this->u_action);
-				$errors = true;
-			}
-
-			// Log the action
-			if (!$errors)
-			{
-				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGE_DELETED_LOG', time(), array($entity->get_title()));
-			}
-
-			// Show user result message
-			trigger_error($message);
+			// Delete the page
+			$this->page_operator->delete_page($page_id);
 		}
-		else
+		catch (\phpbb\pages\exception\base $e)
 		{
-			// Request confirmation from the user to delete the page
-			confirm_box(false, $this->user->lang('ACP_PAGE_DELETE_CONFIRM'));
+			// Display an error message if delete failed
+			trigger_error($this->user->lang('ACP_PAGE_DELETE_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
+		}
 
-			// Use a redirect to take the user back to the previous screen
-			// if the user chose not delete the page from the confirmation page.
-			redirect($this->u_action);
+		// Log the action
+		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGE_DELETED_LOG', time(), array($entity->get_title()));
+
+		// If AJAX was used, show user a result message
+		if ($this->request->is_ajax())
+		{
+			$json_response = new \phpbb\json_response;
+			$json_response->send(array(
+				'MESSAGE_TITLE'	=> $this->user->lang['INFORMATION'],
+				'MESSAGE_TEXT'	=> $this->user->lang('ACP_PAGE_DELETE_SUCCESS'),
+				'REFRESH_DATA'	=> array(
+					'time'	=> 3
+				)
+			));
 		}
 	}
 
