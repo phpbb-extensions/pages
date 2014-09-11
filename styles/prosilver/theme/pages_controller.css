@@ -1,0 +1,30 @@
+.content p, .content h1, .content h2, .content h3, .content h4 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	color: inherit;
+	text-transform: none;
+	vertical-align: baseline;
+	line-height: 1.3em;
+}
+
+.pages-content {
+	line-height: 1.3em;
+	font-size: 1.25em;
+}
+
+.pages-title {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 2em;
+	margin: 0.8em 0 0.2em 0;
+}
+
+.pages-content h1 { font-size: 2em }
+.pages-content h2 { font-size: 1.5em }
+.pages-content h3 { font-size: 1.17em }
+.pages-content h4 { font-size: 1em }
+.pages-content h5 { font-size: .83em }
+.pages-content h6 { font-size: .75em }
