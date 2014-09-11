@@ -41,6 +41,11 @@ class page_operator extends \phpbb\pages\operators\page
 		return array();
 	}
 
+	public function get_page_templates()
+	{
+		return array();
+	}
+
 	public function get_page_links($page_ids = array())
 	{
 		return array();

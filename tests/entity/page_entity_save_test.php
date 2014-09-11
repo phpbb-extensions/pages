@@ -64,7 +64,8 @@ class page_entity_save_test extends page_entity_base
 		$entity
 			->set_route($expected['page_route'])
 			->set_title($expected['page_title'])
-			->save();
+			->save()
+		;
 
 		// Re-load the data from the database
 		$result = $entity->load($id);
