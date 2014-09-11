@@ -1,0 +1,3 @@
+phpbb_pages_main_controller:
+    pattern: /page/{route}
+    defaults: { _controller: phpbb.pages.controller:display }

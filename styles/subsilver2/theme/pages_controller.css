@@ -1,0 +1,18 @@
+.gen p, .gen h1, .gen h2, .gen h3, .gen h4 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	color: inherit;
+	text-transform: none;
+	vertical-align: baseline;
+	line-height: 1.3em;
+}
+
+.gen h1 { font-size: 2em }
+.gen h2 { font-size: 1.5em }
+.gen h3 { font-size: 1.17em }
+.gen h4 { font-size: 1em }
+.gen h5 { font-size: .83em }
+.gen h6 { font-size: .75em }
