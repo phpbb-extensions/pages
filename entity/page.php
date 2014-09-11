@@ -31,6 +31,7 @@ class page implements page_interface
 	*	page_content_allow_html
 	*	page_display
 	*	page_display_to_guests
+	*	page_template
 	* @access protected
 	*/
 	protected $data;
@@ -117,6 +118,7 @@ class page implements page_interface
 			'page_route'					=> 'set_route', // call set_route()
 			'page_display'					=> 'set_page_display', // call set_page_display()
 			'page_display_to_guests'		=> 'set_page_display_to_guests', // call set_page_display_to_guests()
+			'page_template'					=> 'set_template', // call set_template()
 
 			// We do not pass to set_content() as generate_text_for_storage would run twice
 			'page_content'					=> 'string',
@@ -409,6 +411,49 @@ class page implements page_interface
 
 		// Set the route on our data array
 		$this->data['page_order'] = $order;
+
+		return $this;
+	}
+
+	/**
+	* Get page template
+	*
+	* @return string page template
+	* @access public
+	*/
+	public function get_template()
+	{
+		return (!empty($this->data['page_template'])) ? (string) $this->data['page_template'] : 'pages_default.html';
+	}
+
+	/**
+	* Set page template
+	*
+	* @param string $template Page template name
+	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	* @throws \phpbb\pages\exception\unexpected_value
+	*/
+	public function set_template($template)
+	{
+		// Enforce a string
+		$template = (string) $template;
+
+		// Template name should follow pages_*.html naming convention
+		// and contain only letters, numbers, hyphens and underscores
+		if ($template != '' && !preg_match('/^pages_[A-Za-z0-9-_]+\.html$/', $template))
+		{
+			throw new \phpbb\pages\exception\unexpected_value(array('template', 'ILLEGAL_CHARACTERS'));
+		}
+
+		// We limit the template name length to 255 characters
+		if (truncate_string($template, 255) != $template)
+		{
+			throw new \phpbb\pages\exception\unexpected_value(array('template', 'TOO_LONG'));
+		}
+
+		// Set the title on our data array
+		$this->data['page_template'] = $template;
 
 		return $this;
 	}

@@ -85,8 +85,11 @@ class main_controller implements main_interface
 			));
 		}
 
+		// Set the page template to use
+		$page_template = ($display) ? $display->get_template() : 'pages_default.html';
+
 		// Send all data to the template file
-		return $this->helper->render('pages_default.html', $page_title);
+		return $this->helper->render($page_template, $page_title);
 	}
 
 	/**
