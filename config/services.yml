@@ -12,6 +12,15 @@ services:
             - @user
             - @service_container
 
+    phpbb.pages.controller:
+        class: phpbb\pages\controller\main_controller
+        arguments:
+            - @auth
+            - @service_container
+            - @controller.helper
+            - @template
+            - @user
+
     phpbb.pages.listener:
         class: phpbb\pages\event\listener
         tags:
