@@ -305,6 +305,25 @@ class page implements page_interface
 	}
 
 	/**
+	* Get page link location names and identifiers
+	*
+	* @return array Array of page link location names and identifiers
+	* @access public
+	*/
+	public function get_link_locations()
+	{
+		$sql = 'SELECT page_link_id, page_link_location
+			FROM ' . $this->pages_links_table . '
+			ORDER BY page_link_id ASC';
+		$result = $this->db->sql_query($sql);
+
+		$rows = $this->db->sql_fetchrowset($result);
+		$this->db->sql_freeresult($result);
+
+		return $rows;
+	}
+
+	/**
 	* Check if a page identifier exists in the database
 	*
 	* @param int $id Page identifier
