@@ -72,7 +72,7 @@ class pages_module
 				else
 				{
 					// Request confirmation from the user to delete the page
-					confirm_box(false, $user->lang('ACP_PAGE_DELETE_CONFIRM'), build_hidden_fields(array(
+					confirm_box(false, $user->lang('ACP_PAGES_DELETE_CONFIRM'), build_hidden_fields(array(
 						'page_id'	=> $page_id,
 						'mode'		=> $mode,
 						'action'	=> $action,

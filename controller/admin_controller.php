@@ -81,15 +81,15 @@ class admin_controller implements admin_interface
 		{
 			// Set output block vars for display in the template
 			$this->template->assign_block_vars('pages', array(
-				'PAGE_TITLE'		=> $entity->get_title(),
-				'PAGE_DESCRIPTION'	=> $entity->get_description(),
-				'PAGE_ROUTE'		=> $entity->get_route(),
-				'PAGE_TEMPLATE'		=> $entity->get_template(),
-				'PAGE_ORDER'		=> $entity->get_order(),
+				'PAGES_TITLE'		=> $entity->get_title(),
+				'PAGES_DESCRIPTION'	=> $entity->get_description(),
+				'PAGES_ROUTE'		=> $entity->get_route(),
+				'PAGES_TEMPLATE'	=> $entity->get_template(),
+				'PAGES_ORDER'		=> $entity->get_order(),
 
 				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;page_id=" . $entity->get_id(),
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;page_id=" . $entity->get_id(),
-				'U_PAGE_ROUTE'		=> $this->helper->route('phpbb_pages_main_controller', array('route' => $entity->get_route())),
+				'U_PAGES_ROUTE'		=> $this->helper->route('phpbb_pages_main_controller', array('route' => $entity->get_route())),
 			));
 		}
 
@@ -156,11 +156,11 @@ class admin_controller implements admin_interface
 		catch (\phpbb\pages\exception\base $e)
 		{
 			// Display an error message if delete failed
-			trigger_error($this->user->lang('ACP_PAGE_DELETE_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($this->user->lang('ACP_PAGES_DELETE_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		// Log the action
-		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGE_DELETED_LOG', time(), array($entity->get_title()));
+		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_DELETED_LOG', time(), array($entity->get_title()));
 
 		// If AJAX was used, show user a result message
 		if ($this->request->is_ajax())
@@ -168,7 +168,7 @@ class admin_controller implements admin_interface
 			$json_response = new \phpbb\json_response;
 			$json_response->send(array(
 				'MESSAGE_TITLE'	=> $this->user->lang['INFORMATION'],
-				'MESSAGE_TEXT'	=> $this->user->lang('ACP_PAGE_DELETE_SUCCESS'),
+				'MESSAGE_TEXT'	=> $this->user->lang('ACP_PAGES_DELETE_SUCCESS'),
 				'REFRESH_DATA'	=> array(
 					'time'	=> 3
 				)
