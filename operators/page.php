@@ -168,7 +168,7 @@ class page implements page_interface
 		// For efficiency, found icons are cached
 		if (($icons = $this->cache->get('_pages_icons')) === false)
 		{
-			$icons = $this->find('styles/', 'pages_', '.gif');
+			$icons = $this->find('styles', 'pages_', '.gif');
 
 			$this->cache->put('_pages_icons', $icons);
 		}
@@ -185,7 +185,7 @@ class page implements page_interface
 	*/
 	public function get_page_templates()
 	{
-		return $this->find('styles/', 'pages_', '.html');
+		return $this->find('styles', 'pages_', '.html');
 	}
 
 	/**
@@ -201,7 +201,8 @@ class page implements page_interface
 		return $finder
 			->prefix($prefix)
 			->suffix($suffix)
-			->core_path($path)
+			->core_path("$path/")
+			->extension_directory("/$path")
 			->find()
 		;
 	}
