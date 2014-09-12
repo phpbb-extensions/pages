@@ -32,7 +32,7 @@ class pages_module
 		$admin_controller->set_page_url($this->u_action);
 
 		// Load a template from adm/style for our ACP page
-		$this->tpl_name = 'pages_manage';
+		$this->tpl_name = 'manage_pages';
 
 		// Set the page title for our ACP page
 		$this->page_title = $user->lang('ACP_PAGES_MANAGE');
