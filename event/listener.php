@@ -74,7 +74,6 @@ class listener implements EventSubscriberInterface
 		return array(
 			'core.page_header'						=> 'show_page_links',
 			'core.permissions'						=> 'add_permission',
-			'core.user_setup'						=> 'load_language_on_setup',
 			'core.viewonline_overwrite_location'	=> 'viewonline_page',
 		);
 	}
@@ -91,23 +90,6 @@ class listener implements EventSubscriberInterface
 		$permissions = $event['permissions'];
 		$permissions['a_pages'] = array('lang' => 'ACL_A_PAGES', 'cat' => 'misc');
 		$event['permissions'] = $permissions;
-	}
-
-	/**
-	* Load common language files during user setup
-	*
-	* @param object $event The event object
-	* @return null
-	* @access public
-	*/
-	public function load_language_on_setup($event)
-	{
-		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = array(
-			'ext_name' => 'phpbb/pages',
-			'lang_set' => 'pages_common',
-		);
-		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
 	/**
@@ -167,6 +149,9 @@ class listener implements EventSubscriberInterface
 		// Are any users on app.php?
 		if ($event['on_page'][1] == 'app')
 		{
+			// Load our language file
+			$this->user->add_lang_ext('phpbb/pages', 'pages_common');
+
 			// Load our page routes and titles
 			$routes = $this->page_operator->get_page_routes();
 
