@@ -54,6 +54,10 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_ORDER'					=> 'Order',
 	'ACP_PAGES_LINK'					=> 'Link',
 	'ACP_PAGES_VIEW'					=> 'View page',
+	'ACP_PAGES_STATUS'					=> 'Status',
+	'ACP_PAGES_PUBLISHED'				=> 'Published',
+	'ACP_PAGES_PUBLISHED_NO_GUEST'		=> 'Published (member only)',
+	'ACP_PAGES_PRIVATE'					=> 'Private',
 	'ACP_PAGES_EMPTY'					=> 'No pages found',
 
 	// Purge icons
