@@ -411,7 +411,6 @@ class admin_controller implements admin_interface
 		return $options;
 	}
 
-
 	/**
 	* Create <option> tags for page link locations
 	*
