@@ -37,7 +37,7 @@ class page_operator_base extends \phpbb_database_test_case
 	{
 		parent::setUp();
 
-		global $phpbb_dispatcher;
+		global $phpbb_dispatcher, $phpbb_root_path;
 
 		$this->db = $this->new_dbal();
 		$db = $this->db;
@@ -51,7 +51,16 @@ class page_operator_base extends \phpbb_database_test_case
 				return new \phpbb\pages\entity\page($db, 'phpbb_pages');
 			}))
 		;
-		$this->extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
+		$this->extension_manager = new \phpbb_mock_extension_manager(
+			$phpbb_root_path,
+			array(
+				'phpbb/pages' => array(
+					'ext_name' => 'phpbb/pages',
+					'ext_active' => '1',
+					'ext_path' => 'ext/phpbb/pages/',
+				),
+			)
+		);
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 		$this->cache = new \phpbb_mock_cache();
 	}

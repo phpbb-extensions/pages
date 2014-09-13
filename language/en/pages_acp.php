@@ -47,22 +47,22 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EDIT_PAGE_EXPLAIN'		=> 'Using the form below you can update an existing custom static page for your board.',
 
 	// Display pages list
-	'ACP_PAGE_TITLE'					=> 'Title',
-	'ACP_PAGE_DESCRIPTION'				=> 'Description',
-	'ACP_PAGE_ROUTE'					=> 'Route',
-	'ACP_PAGE_TEMPLATE'					=> 'Template',
-	'ACP_PAGE_ORDER'					=> 'Order',
-	'ACP_PAGE_LINK'						=> 'Link',
-	'ACP_PAGE_VIEW'						=> 'View page',
-	'ACP_PAGE_EMPTY'					=> 'No pages found',
+	'ACP_PAGES_TITLE'					=> 'Title',
+	'ACP_PAGES_DESCRIPTION'				=> 'Description',
+	'ACP_PAGES_ROUTE'					=> 'Route',
+	'ACP_PAGES_TEMPLATE'				=> 'Template',
+	'ACP_PAGES_ORDER'					=> 'Order',
+	'ACP_PAGES_LINK'					=> 'Link',
+	'ACP_PAGES_VIEW'					=> 'View page',
+	'ACP_PAGES_EMPTY'					=> 'No pages found',
 
 	// Purge icons
 	'ACP_PAGES_PURGE_ICONS'				=> 'Purge icons',
 	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purge pages icons cache',
 	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'When adding custom page link icons, you may need to purge the icon cache to see the new icons. Place custom icons named <samp>pages_route.gif</samp>, where <samp>route</samp> is the Page’s route name, in phpBB’s <samp>styles/*/theme/images/</samp> folders.',
 
-	// Delete page
-	'ACP_PAGE_DELETE_CONFIRM'			=> 'Are you sure you want to delete this page?',
-	'ACP_PAGE_DELETE_SUCCESS'			=> 'Page successfully deleted.',
-	'ACP_PAGE_DELETE_ERRORED'			=> 'Page could not be deleted.',
+	// Messages shown to user
+	'ACP_PAGES_DELETE_CONFIRM'			=> 'Are you sure you want to delete this page?',
+	'ACP_PAGES_DELETE_SUCCESS'			=> 'Page successfully deleted.',
+	'ACP_PAGES_DELETE_ERRORED'			=> 'Page could not be deleted.',
 ));

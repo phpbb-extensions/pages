@@ -32,7 +32,7 @@ class pages_module
 		$admin_controller->set_page_url($this->u_action);
 
 		// Load a template from adm/style for our ACP page
-		$this->tpl_name = 'pages_manage';
+		$this->tpl_name = 'manage_pages';
 
 		// Set the page title for our ACP page
 		$this->page_title = $user->lang('ACP_PAGES_MANAGE');
@@ -72,7 +72,7 @@ class pages_module
 				else
 				{
 					// Request confirmation from the user to delete the page
-					confirm_box(false, $user->lang('ACP_PAGE_DELETE_CONFIRM'), build_hidden_fields(array(
+					confirm_box(false, $user->lang('ACP_PAGES_DELETE_CONFIRM'), build_hidden_fields(array(
 						'page_id'	=> $page_id,
 						'mode'		=> $mode,
 						'action'	=> $action,

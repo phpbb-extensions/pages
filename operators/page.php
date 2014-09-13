@@ -168,7 +168,7 @@ class page implements page_interface
 		// For efficiency, found icons are cached
 		if (($icons = $this->cache->get('_pages_icons')) === false)
 		{
-			$icons = $this->find('styles/', 'pages_', '.gif');
+			$icons = $this->find('styles', 'pages_', '.gif');
 
 			$this->cache->put('_pages_icons', $icons);
 		}
@@ -185,7 +185,7 @@ class page implements page_interface
 	*/
 	public function get_page_templates()
 	{
-		return $this->find('styles/', 'pages_', '.html');
+		return $this->find('styles', 'pages_', '.html');
 	}
 
 	/**
@@ -201,7 +201,8 @@ class page implements page_interface
 		return $finder
 			->prefix($prefix)
 			->suffix($suffix)
-			->core_path($path)
+			->core_path("$path/")
+			->extension_directory("/$path")
 			->find()
 		;
 	}
@@ -302,6 +303,25 @@ class page implements page_interface
 		$this->cache->destroy('sql', $this->pages_pages_links_table);
 
 		return $this;
+	}
+
+	/**
+	* Get page link location names and identifiers
+	*
+	* @return array Array of page link location names and identifiers
+	* @access public
+	*/
+	public function get_link_locations()
+	{
+		$sql = 'SELECT page_link_id, page_link_location
+			FROM ' . $this->pages_links_table . '
+			ORDER BY page_link_id ASC';
+		$result = $this->db->sql_query($sql);
+
+		$rows = $this->db->sql_fetchrowset($result);
+		$this->db->sql_freeresult($result);
+
+		return $rows;
 	}
 
 	/**

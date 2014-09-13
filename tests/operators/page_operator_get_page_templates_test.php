@@ -46,6 +46,12 @@ class page_operator_get_page_templates_test extends page_operator_base
 		// Grab the route data as an array
 		$templates = $operator->get_page_templates();
 
+		foreach ($expected as $key => $ext)
+		{
+			$this->assertArrayHasKey($key, $templates);
+			$this->assertEquals($templates[$key], $ext);
+		}
+
 		$this->assertEquals($expected, $templates);
 	}
 }

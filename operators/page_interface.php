@@ -89,4 +89,12 @@ interface page_interface
 	* @access public
 	*/
 	public function insert_page_links($page_id, $link_ids);
+
+	/**
+	* Get page link location names and identifiers
+	*
+	* @return array Array of page link location names and identifiers
+	* @access public
+	*/
+	public function get_link_locations();
 }
