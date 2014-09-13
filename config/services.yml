@@ -12,6 +12,8 @@ services:
             - @template
             - @user
             - @service_container
+            - %core.root_path%
+            - %core.php_ext%
 
     phpbb.pages.controller:
         class: phpbb\pages\controller\main_controller
