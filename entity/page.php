@@ -403,8 +403,8 @@ class page implements page_interface
 		// Enforce an integer
 		$order = (int) $order;
 
-		// If the data is less than 0, it's not unsigned and we'll throw an exception
-		if ($order < 0)
+		// If the data is out of range we'll throw an exception
+		if ($order < 0 || $order > 16777215)
 		{
 			throw new \phpbb\pages\exception\out_of_bounds('page_order');
 		}
