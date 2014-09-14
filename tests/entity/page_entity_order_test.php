@@ -65,6 +65,7 @@ class page_entity_order_test extends page_entity_base
 		return array(
 			array(-1),
 			array('-1'),
+			array(16777216),
 		);
 	}
 

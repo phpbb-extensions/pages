@@ -1,6 +1,111 @@
 <!-- INCLUDE overall_header.html -->
 
+<a id="maincontent"></a>
+
 <!-- IF S_ADD_PAGE or S_EDIT_PAGE -->
+
+	<!-- INCLUDEJS @phpbb_pages/scripts.js -->
+
+	<script>
+		var form_name = 'add_edit_page';
+		var text_name = 'page_content';
+		var load_draft = false;
+		var upload = false;
+		var imageTag = false;
+	</script>
+
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+
+	<!-- IF S_ADD_PAGE -->
+		<h1>{L_ACP_PAGES_CREATE_PAGE}</h1>
+
+		<p>{L_ACP_PAGES_CREATE_PAGE_EXPLAIN}</p>
+	<!-- ELSE -->
+		<h1>{L_ACP_PAGES_EDIT_PAGE} {L_COLON}{L_COLON} {PAGES_TITLE}</h1>
+
+		<p>{L_ACP_PAGES_EDIT_PAGE_EXPLAIN}</p>
+	<!-- ENDIF -->
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="add_edit_page" method="post" action="{U_ACTION}">
+		<fieldset>
+			<legend>{L_ACP_PAGES_SETTINGS}</legend>
+			<!-- IF S_EDIT_PAGE -->
+				<dl>
+					<dt><label>{L_ACP_PAGES_FORM_VIEW_PAGE}{L_COLON}</label></dt>
+					<dd><a href="{U_VIEW_PAGE}">{L_ACP_PAGES_VIEW}</a></dd>
+				</dl>
+			<!-- ENDIF -->
+			<dl>
+				<dt><label for="page_title">{L_ACP_PAGES_FORM_TITLE}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_TITLE_EXPLAIN}</span></dt>
+				<dd><input class="text medium" type="text" id="page_title" name="page_title" value="{PAGES_TITLE}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="page_description">{L_ACP_PAGES_FORM_DESC}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_DESC_EXPLAIN}</span></dt>
+				<dd><input class="text medium" type="text" id="page_description" name="page_description" value="{PAGES_DESCRIPTION}" maxlength="255" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="page_route">{L_ACP_PAGES_FORM_ROUTE}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_ROUTE_EXPLAIN}</span></dt>
+				<dd><input class="text medium" type="text" id="page_route" name="page_route" value="{PAGES_ROUTE}" maxlength="200" /></dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>{L_ACP_PAGES_FORM_CONTENT}</legend>
+			<p>{L_ACP_PAGES_FORM_CONTENT_EXPLAIN}</p>
+
+			<!-- INCLUDE acp_posting_buttons.html -->
+
+			<dl class="responsive-columns">
+				<dt style="width: 90px;" id="color_palette_placeholder" data-orientation="v" data-height="12" data-width="15" data-bbcode="true"></dt>
+				<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px;">
+					<textarea name="page_content" rows="25" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{PAGES_CONTENT}</textarea>
+				</dd>
+				<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px; margin-top: 5px;">
+					<label><input type="checkbox" class="radio html-off" name="parse_bbcode"<!-- IF S_PARSE_BBCODE_CHECKED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_BBCODE}</label>
+					<label><input type="checkbox" class="radio html-off" name="parse_smilies"<!-- IF S_PARSE_SMILIES_CHECKED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_SMILIES}</label>
+					<label><input type="checkbox" class="radio html-off" name="parse_magic_url"<!-- IF S_PARSE_MAGIC_URL_CHECKED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_URLS}</label>
+					<label><input type="checkbox" class="radio html-on" name="parse_html"<!-- IF S_PARSE_HTML_CHECKED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_HTML}</label>
+				</dd>
+				<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px; margin-top: 10px;"><strong>{L_OPTIONS}{L_COLON} </strong>{BBCODE_STATUS} :: {IMG_STATUS} :: {FLASH_STATUS} :: {URL_STATUS} :: {SMILIES_STATUS}</dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>{L_ACP_PAGES_OPTIONS}</legend>
+			<dl>
+				<dt><label for="page_template">{L_ACP_PAGES_FORM_TEMPLATE}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_TEMPLATE_EXPLAIN}</span></dt>
+				<dd><select name="page_template" id="page_template"><option value="">{L_ACP_PAGES_FORM_TEMPLATE_SELECT}</option>{PAGES_TEMPLATE_OPTIONS}</select></dd>
+			</dl>
+			<dl>
+				<dt><label for="page_order">{L_ACP_PAGES_FORM_ORDER}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_ORDER_EXPLAIN}</span></dt>
+				<dd><input type="number" id="page_order" size="6" maxlength="6" min="0" max="999999" name="page_order" value="{PAGES_ORDER}" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="page_links">{L_ACP_PAGES_FORM_LINKS}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_LINKS_EXPLAIN}</span></dt>
+				<dd><select name="page_links[]" id="page_links" size="10" multiple="multiple">{PAGES_LINK_OPTIONS}</select></dd>
+			</dl>
+			<dl>
+				<dt><label for="page_display">{L_ACP_PAGES_FORM_DISPLAY}:</label><br /><span>{L_ACP_PAGES_FORM_DISPLAY_EXPLAIN}</span></dt>
+				<dd><label><input type="radio" class="radio" id="page_display" name="page_display" value="1"<!-- IF S_PAGES_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="page_display" value="0"<!-- IF not S_PAGES_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+			</dl>
+			<dl>
+				<dt><label for="page_guest_display">{L_ACP_PAGES_FORM_GUESTS}:</label><br /><span>{L_ACP_PAGES_FORM_GUESTS_EXPLAIN}</span></dt>
+				<dd><label><input type="radio" class="radio" id="page_guest_display" name="page_guest_display" value="1"<!-- IF S_PAGES_GUEST_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input type="radio" class="radio" name="page_guest_display" value="0"<!-- IF not S_PAGES_GUEST_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+			</dl>
+		</fieldset>
+		<fieldset class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+			{S_FORM_TOKEN}
+		</fieldset>
+	</form>
 
 <!-- ELSE -->
 
