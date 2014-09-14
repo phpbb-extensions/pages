@@ -33,22 +33,18 @@ class page_operator extends \phpbb\pages\operators\page
 
 	public function get_page_routes()
 	{
-		return array('test' => 'Test Page');
 	}
 
 	public function get_page_icons()
 	{
-		return array();
 	}
 
 	public function get_page_templates()
 	{
-		return array();
 	}
 
 	public function get_page_links($page_ids = array())
 	{
-		return array();
 	}
 
 	public function insert_page_links($page_id, $link_ids)

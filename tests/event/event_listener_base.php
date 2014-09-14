@@ -44,6 +44,7 @@ class event_listener_base extends \phpbb_test_case
 			$phpEx,
 			dirname(__FILE__) . '/../../'
 		);
+		$this->page_operator = $this->getMock('\phpbb\pages\tests\mock\page_operator');
 	}
 
 	/**
@@ -56,7 +57,7 @@ class event_listener_base extends \phpbb_test_case
 		return new \phpbb\pages\event\listener(
 			$this->auth,
 			$this->controller_helper,
-			new \phpbb\pages\tests\mock\page_operator(),
+			$this->page_operator,
 			$this->template,
 			$this->user,
 			$this->root_path,

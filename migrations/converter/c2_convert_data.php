@@ -75,7 +75,7 @@ class c2_convert_data extends \phpbb\db\migration\migration
 			$import_data[$row['page_id']]['page_title']						= isset($row['page_title']) ? substr($row['page_title'], 0, 200) : '';
 			$import_data[$row['page_id']]['page_description']				= isset($row['page_desc']) ? substr($row['page_desc'], 0, 255) : '';
 			$import_data[$row['page_id']]['page_route']						= isset($row['page_url']) ? substr($row['page_url'], 0, 100) : '';
-			$import_data[$row['page_id']]['page_order']						= isset($row['page_order']) ? $row['page_order'] : 0;
+			$import_data[$row['page_id']]['page_order']						= isset($row['page_order']) ? min($row['page_order'], 16777215) : 0;
 			$import_data[$row['page_id']]['page_content']					= isset($row['page_content']) ? $row['page_content'] : '';
 			$import_data[$row['page_id']]['page_content_bbcode_uid']		= isset($row['bbcode_uid']) ? $row['bbcode_uid'] : '';
 			$import_data[$row['page_id']]['page_content_bbcode_bitfield']	= isset($row['bbcode_bitfield']) ? $row['bbcode_bitfield'] : '';

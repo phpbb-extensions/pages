@@ -128,10 +128,11 @@
 		<thead>
 			<tr>
 				<th style="width: 15%;">{L_ACP_PAGES_TITLE}</th>
-				<th style="width: 20%;">{L_ACP_PAGES_DESCRIPTION}</th>
-				<th style="width: 15%;">{L_ACP_PAGES_ROUTE}</th>
-				<th style="width: 20%;">{L_ACP_PAGES_TEMPLATE}</th>
+				<th style="width: 15%;">{L_ACP_PAGES_DESCRIPTION}</th>
+				<th style="width: 10%;">{L_ACP_PAGES_ROUTE}</th>
+				<th style="width: 15%;">{L_ACP_PAGES_TEMPLATE}</th>
 				<th style="width: 10%;">{L_ACP_PAGES_ORDER}</th>
+				<th style="width: 15%;">{L_ACP_PAGES_STATUS}</th>
 				<th style="width: 10%;">{L_ACP_PAGES_LINK}</th>
 				<th style="width: 10%;">{L_ACTION}</th>
 			</tr>
@@ -144,12 +145,21 @@
 					<td>{pages.PAGES_ROUTE}</td>
 					<td>{pages.PAGES_TEMPLATE}</td>
 					<td>{pages.PAGES_ORDER}</td>
+					<td>
+						<!-- IF pages.S_PAGES_DISPLAY and pages.S_PAGES_GUEST_DISPLAY -->
+							{L_ACP_PAGES_PUBLISHED}
+						<!-- ELSEIF pages.S_PAGES_DISPLAY -->
+							{L_ACP_PAGES_PUBLISHED_NO_GUEST}
+						<!-- ELSE -->
+							{L_ACP_PAGES_PRIVATE}
+						<!-- ENDIF -->
+					</td>
 					<td><a href="{pages.U_PAGES_ROUTE}">{L_ACP_PAGES_VIEW}</a></td>
 					<td><a href="{pages.U_EDIT}">{ICON_EDIT}</a> <a href="{pages.U_DELETE}" data-ajax="row_delete">{ICON_DELETE}</a></td>
 				</tr>
 			<!-- BEGINELSE -->
 				<tr>
-					<td colspan="7" style="text-align: center;">{L_ACP_PAGES_EMPTY}</td>
+					<td colspan="8" style="text-align: center;">{L_ACP_PAGES_EMPTY}</td>
 				</tr>
 			<!-- END pages -->
 		</tbody>
