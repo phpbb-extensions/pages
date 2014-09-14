@@ -41,12 +41,10 @@
 					<td>{pages.PAGES_TEMPLATE}</td>
 					<td>{pages.PAGES_ORDER}</td>
 					<td>
-						<!-- IF pages.S_PAGES_DISPLAY -->
-							<!-- IF pages.S_PAGES_GUEST_DISPLAY -->
-								{L_ACP_PAGES_PUBLISHED}
-							<!-- ELSE -->
-								{L_ACP_PAGES_PUBLISHED_NO_GUEST}
-							<!-- ENDIF -->
+						<!-- IF pages.S_PAGES_DISPLAY and pages.S_PAGES_GUEST_DISPLAY -->
+							{L_ACP_PAGES_PUBLISHED}
+						<!-- ELSEIF pages.S_PAGES_DISPLAY -->
+							{L_ACP_PAGES_PUBLISHED_NO_GUEST}
 						<!-- ELSE -->
 							{L_ACP_PAGES_PRIVATE}
 						<!-- ENDIF -->
