@@ -43,5 +43,11 @@ Page templates follow phpBB's style inheritance. A page template designed for Pr
 
 We recommend keeping custom icons and templates stored in phpBB's style directories rather than in Pages' style directories, as this prevents accidental deletion of your custom files whenever the Pages extension is updated.
 
+## Converting from a MOD
+
+Pages can convert/import data from [Static Pages MOD 1.0.3](https://www.phpbb.com/customise/db/mod/static_pages). If Pages finds the Static Pages MOD data in your database, it will automagically convert it when you enable Pages. To complete the transition, we recommend you review the Static Pages MOD's install instructions in order to remove the file-edits to `constants.php` and delete all of the included files the MOD added to your forum.
+
+Note: Pages will keep a backup of the Static Pages MOD data in a database table named `pages_mod_backup`. Pages will never delete or alter this backup table. Pages has not been tested with any other similar MODs.
+
 ## License
 [GNU General Public License v2](http://opensource.org/licenses/GPL-2.0)
