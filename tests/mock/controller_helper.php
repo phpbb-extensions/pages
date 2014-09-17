@@ -21,7 +21,7 @@ class controller_helper extends \phpbb\controller\helper
 	{
 	}
 
-	public function route($route, array $params = array(), $is_amp = true, $session_id = false)
+	public function route($route, array $params = array(), $is_amp = true, $session_id = false, $reference_type = false)
 	{
 		return $route . '#' . serialize($params);
 	}
