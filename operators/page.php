@@ -199,6 +199,7 @@ class page implements page_interface
 		$finder = $this->extension_manager->get_finder();
 
 		return $finder
+			->set_extensions(array('phpbb/pages'))
 			->prefix($prefix)
 			->suffix($suffix)
 			->core_path("$path/")
