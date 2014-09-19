@@ -48,8 +48,21 @@ class c1_convert_table extends \phpbb\db\migration\migration
 	*/
 	public function rename_pages_table()
 	{
-		$sql = "ALTER TABLE {$this->table_prefix}pages
-			RENAME TO {$this->table_prefix}pages_mod_backup";
+		switch($this->db->get_sql_layer())
+		{
+			// SQL Server dbms support this syntax
+			case 'mssql':
+			case 'mssql_odbc':
+			case 'mssqlnative':
+				$sql = "EXEC sp_rename '{$this->table_prefix}pages', '{$this->table_prefix}pages_mod_backup'";
+			break;
+
+			// All other dbms support this syntax
+			default:
+				$sql = "ALTER TABLE {$this->table_prefix}pages RENAME TO {$this->table_prefix}pages_mod_backup";
+			break;
+		}
+
 		$this->db->sql_query($sql);
 	}
 }
