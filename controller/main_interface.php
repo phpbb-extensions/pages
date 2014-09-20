@@ -21,7 +21,7 @@ interface main_interface
 	* Display the page
 	*
 	* @param string $route The route name for a page
-	* @return Symfony\Component\HttpFoundation\Response A Symfony Response object
+	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	* @access public
 	*/
 	public function display($route);
