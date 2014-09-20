@@ -232,7 +232,7 @@ class page implements page_interface
 					'ON'	=> 'p.page_id = ppl.page_id',
 				),
 			),
-			'WHERE'			=> ($page_ids) ? $this->db->sql_in_set('ppl.page_id', $page_ids) : '',
+			'WHERE'			=> (!empty($page_ids)) ? $this->db->sql_in_set('ppl.page_id', $page_ids) : '',
 			'ORDER_BY'		=> 'p.page_order ASC, ppl.page_link_id ASC',
 		);
 

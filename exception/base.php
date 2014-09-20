@@ -30,11 +30,11 @@ class base extends \Exception
 	*
 	* @param string|array $message
 	* @param int $code
-	* @param Exception $previous
+	* @param \Exception $previous
 	* @return \phpbb\pages\exception\base
 	* @access public
 	*/
-	public function __construct($message = null, $code = 0, Exception $previous = null)
+	public function __construct($message = null, $code = 0, \Exception $previous = null)
 	{
 		// We're slightly changing the way exceptions work
 		// Tools, such as xdebug, expect the message to be a string, so to prevent errors

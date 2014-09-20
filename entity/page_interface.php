@@ -26,7 +26,7 @@ interface page_interface
 	* @access public
 	* @throws \phpbb\pages\exception\out_of_bounds
 	*/
-	public function load($id);
+	public function load($id = 0, $route = '');
 
 	/**
 	* Import data for a page

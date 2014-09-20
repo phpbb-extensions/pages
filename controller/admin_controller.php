@@ -427,7 +427,7 @@ class admin_controller implements admin_interface
 		// Get all page links assigned to the page identifier from the database
 		if ($page_id && empty($current))
 		{
-			$page_links = $this->page_operator->get_page_links($page_id);
+			$page_links = $this->page_operator->get_page_links(array($page_id));
 
 			foreach ($page_links as $page_link)
 			{
