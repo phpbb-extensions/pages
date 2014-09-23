@@ -79,7 +79,12 @@
 			<legend>{L_ACP_PAGES_OPTIONS}</legend>
 			<dl>
 				<dt><label for="page_template">{L_ACP_PAGES_FORM_TEMPLATE}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_TEMPLATE_EXPLAIN}</span></dt>
-				<dd><select name="page_template" id="page_template"><option value="">{L_ACP_PAGES_FORM_TEMPLATE_SELECT}</option>{PAGES_TEMPLATE_OPTIONS}</select></dd>
+				<dd><select name="page_template" id="page_template">
+					<option value="">{L_ACP_PAGES_FORM_TEMPLATE_SELECT}</option>
+					<!-- BEGIN page_template_options -->
+						<option value="{page_template_options.VALUE}"<!-- IF page_template_options.S_SELECTED --> selected="selected"<!-- ENDIF -->>{page_template_options.VALUE}</option>
+					<!-- END page_template_options -->
+				</select></dd>
 			</dl>
 			<dl>
 				<dt><label for="page_order">{L_ACP_PAGES_FORM_ORDER}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_ORDER_EXPLAIN}</span></dt>
@@ -87,7 +92,11 @@
 			</dl>
 			<dl>
 				<dt><label for="page_links">{L_ACP_PAGES_FORM_LINKS}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_LINKS_EXPLAIN}</span></dt>
-				<dd><select name="page_links[]" id="page_links" size="10" multiple="multiple">{PAGES_LINK_OPTIONS}</select></dd>
+				<dd><select name="page_links[]" id="page_links" size="10" multiple="multiple">
+					<!-- BEGIN page_link_options -->
+						<option value="{page_link_options.VALUE}"<!-- IF page_link_options.S_SELECTED --> selected="selected"<!-- ENDIF -->>{page_link_options.LABEL}</option>
+					<!-- END page_link_options -->
+				</select></dd>
 			</dl>
 			<dl>
 				<dt><label for="page_display">{L_ACP_PAGES_FORM_DISPLAY}:</label><br /><span>{L_ACP_PAGES_FORM_DISPLAY_EXPLAIN}</span></dt>

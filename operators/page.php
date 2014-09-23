@@ -191,6 +191,9 @@ class page implements page_interface
 	/**
 	* Find files
 	*
+	* @param string $path The path to search in
+	* @param string $prefix The prefix to search for
+	* @param string $suffix The suffix to search for
 	* @return array Array of found file paths
 	* @access protected
 	*/
@@ -211,7 +214,7 @@ class page implements page_interface
 	/**
 	* Get all page link location data for generating page links
 	*
-	* @param array Optional array of page ids
+	* @param array $page_ids Optional array of page ids
 	* @return array Array of page link location data for the specified pages, or all pages
 	* @access public
 	*/
@@ -230,7 +233,7 @@ class page implements page_interface
 					'ON'	=> 'p.page_id = ppl.page_id',
 				),
 			),
-			'WHERE'			=> ($page_ids) ? $this->db->sql_in_set('ppl.page_id', $page_ids) : '',
+			'WHERE'			=> (!empty($page_ids)) ? $this->db->sql_in_set('ppl.page_id', $page_ids) : '',
 			'ORDER_BY'		=> 'p.page_order ASC, ppl.page_link_id ASC',
 		);
 

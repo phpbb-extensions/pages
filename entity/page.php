@@ -51,7 +51,7 @@ class page implements page_interface
 	*
 	* @param \phpbb\db\driver\driver_interface    $db                 Database object
 	* @param string                               $pages_table        Name of the table used to store page data
-	* @return null
+	* @return \phpbb\pages\entity\page
 	* @access public
 	*/
 	public function __construct(\phpbb\db\driver\driver_interface $db, $pages_table)

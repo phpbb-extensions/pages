@@ -73,7 +73,7 @@ interface page_interface
 	/**
 	* Get all page link location data for generating page links
 	*
-	* @param array Optional array of page ids
+	* @param array $page_ids Optional array of page ids
 	* @return array Array of page link location data for the specified pages, or all pages
 	* @access public
 	*/

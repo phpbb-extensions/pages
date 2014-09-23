@@ -289,6 +289,12 @@ class admin_controller implements admin_interface
 			}
 		}
 
+		// Set template vars for Page Template select menu
+		$this->create_page_template_options($entity->get_template());
+
+		// Set template vars for Page Link Locations select menu
+		$this->create_page_link_options($entity->get_id(), $data['page_links']);
+
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_ERROR'			=> (sizeof($errors)) ? true : false,
@@ -299,9 +305,6 @@ class admin_controller implements admin_interface
 			'PAGES_CONTENT'		=> $entity->get_content_for_edit(),
 			'PAGES_DESCRIPTION'	=> $entity->get_description(),
 			'PAGES_ORDER'		=> $entity->get_order(),
-
-			'PAGES_LINK_OPTIONS'		=> $this->create_page_link_options($entity->get_id(), $data['page_links']),
-			'PAGES_TEMPLATE_OPTIONS'	=> $this->create_page_template_options($entity->get_template()),
 
 			'S_PAGES_DISPLAY'			=> $entity->get_page_display(),
 			'S_PAGES_GUEST_DISPLAY'		=> $entity->get_page_display_to_guests(),
@@ -385,49 +388,49 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	* Create <option> tags for available page templates
+	* Set template var options for page template select menus
 	*
 	* @param string	$current Name of the template currently stored in the database
-	* @return string HTML <option> tags for page template options
+	* @return null
 	* @access protected
 	*/
 	protected function create_page_template_options($current)
 	{
 		// Grab all avaliable pages_*.html files
-		$templates = $this->page_operator->get_page_templates();
+		$page_templates = $this->page_operator->get_page_templates();
 
 		// Clean up template names and simplify the array
-		$templates = array_map(function ($value) {
+		$page_templates = array_map(function ($value) {
 			return basename($value);
-		}, array_keys($templates));
+		}, array_keys($page_templates));
 
 		// Remove duplicates array items
-		$templates = array_unique($templates);
+		$page_templates = array_unique($page_templates);
 
-		$options = '';
-		foreach ($templates as $template)
+		// Set the options list template vars
+		foreach ($page_templates as $page_template)
 		{
-			$selected = ($template == $current) ? ' selected="selected"' : '';
-			$options .= '<option value="' . $template . '"' . $selected . '>' . $template . '</option>';
+			$this->template->assign_block_vars('page_template_options', array(
+				'VALUE'			=> $page_template,
+				'S_SELECTED'	=> ($page_template == $current) ? true : false,
+			));
 		}
-
-		return $options;
 	}
 
 	/**
-	* Create <option> tags for page link locations
+	* Set template var options for page link location menus
 	*
 	* @param int $page_id Page identifier
 	* @param array $current Currently selected link locations (from the form data)
-	* @return string HTML <option> tags for page link locations options
+	* @return null
 	* @access protected
 	*/
 	protected function create_page_link_options($page_id = 0, $current = array())
 	{
-		// Get all page links assigned to the page identifier from the database
+		// Get all page links assigned to the page (if it's being edited)
 		if ($page_id && empty($current))
 		{
-			$page_links = $this->page_operator->get_page_links($page_id);
+			$page_links = $this->page_operator->get_page_links(array($page_id));
 
 			foreach ($page_links as $page_link)
 			{
@@ -438,14 +441,14 @@ class admin_controller implements admin_interface
 		// Get all link location names and identifiers
 		$link_locations = $this->page_operator->get_link_locations();
 
-		// Build the options list
-		$options = '';
+		// Set the options list template vars
 		foreach ($link_locations as $link)
 		{
-			$selected = (in_array($link['page_link_id'], $current)) ? ' selected="selected"' : '';
-			$options .= '<option value="' . $link['page_link_id'] . '"' . $selected . '>' . $link['page_link_location'] . '</option>';
+			$this->template->assign_block_vars('page_link_options', array(
+				'VALUE'			=> $link['page_link_id'],
+				'LABEL'			=> $link['page_link_location'],
+				'S_SELECTED'	=> (in_array($link['page_link_id'], $current)) ? true : false,
+			));
 		}
-
-		return $options;
 	}
 }
