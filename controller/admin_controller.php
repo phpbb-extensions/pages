@@ -446,7 +446,7 @@ class admin_controller implements admin_interface
 		{
 			$this->template->assign_block_vars('page_link_options', array(
 				'VALUE'			=> $link['page_link_id'],
-				'LABEL'			=> $link['page_link_location'],
+				'LABEL'			=> $this->user->lang($link['page_link_location']),
 				'S_SELECTED'	=> (in_array($link['page_link_id'], $current)) ? true : false,
 			));
 		}

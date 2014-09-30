@@ -96,4 +96,16 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'If set to no, only registered users will be able to access the page.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Page link',
 	'PARSE_HTML'						=> 'Parse HTML',
+
+	// Page link location names
+	'NAV_BAR_LINKS_BEFORE'				=> 'Nav Bar Before Links',
+	'NAV_BAR_LINKS_AFTER'				=> 'Nav Bar After Links',
+	'NAV_BAR_CRUMBS_BEFORE'				=> 'Nav Bar Before Breadcrumbs',
+	'NAV_BAR_CRUMBS_AFTER'				=> 'Nav Bar After Breadcrumbs',
+	'FOOTER_TIMEZONE_BEFORE'			=> 'Footer Before Time Zone',
+	'FOOTER_TIMEZONE_AFTER'				=> 'Footer After Time Zone',
+	'FOOTER_TEAMS_BEFORE'				=> 'Footer Before Team Link',
+	'FOOTER_TEAMS_AFTER'				=> 'Footer After Team Link',
+	'QUICK_LINK_MENU_BEFORE'			=> 'Quick Links Menu Top',
+	'QUICK_LINK_MENU_AFTER'				=> 'Quick Links Menu Bottom',
 ));

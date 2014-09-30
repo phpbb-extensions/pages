@@ -52,6 +52,7 @@ class m2_initial_data extends \phpbb\db\migration\migration
 		$insert_buffer = new \phpbb\db\sql_insert_buffer($this->db, $this->table_prefix . 'pages_links');
 
 		// Define our default page link locations/events
+		// NOTE: These names are updated in m5_update_link_names.php
 		$page_link_locations = array(
 			// event name						=>	// description
 			'overall_header_navigation_prepend'	=> 'Nav Bar Before Links',
