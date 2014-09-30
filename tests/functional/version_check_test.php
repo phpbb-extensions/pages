@@ -22,8 +22,6 @@ class version_check_test extends pages_functional_base
 	*/
 	public function test_version_check()
 	{
-		$this->markTestSkipped('Version info files not online yet.');
-
 		// Log in to the ACP
 		$this->login();
 		$this->admin_login();
