@@ -81,12 +81,12 @@
 		<column>page_link_event_name</column>
 		<row>
 			<value>1</value>
-			<value>Nav Bar Links Before</value>
+			<value>NAV_BAR_LINKS_BEFORE</value>
 			<value>overall_header_navigation_prepend</value>
 		</row>
 		<row>
 			<value>2</value>
-			<value>Nav Bar Links After</value>
+			<value>NAV_BAR_LINKS_AFTER</value>
 			<value>overall_header_navigation_append</value>
 		</row>
 	</table>
