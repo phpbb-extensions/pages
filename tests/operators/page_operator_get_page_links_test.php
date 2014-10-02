@@ -27,7 +27,7 @@ class page_operator_get_page_links_test extends page_operator_base
 					array(
 						'page_id' => 1,
 						'page_link_id' => 1,
-						'page_link_location' => 'Nav Bar Links Before',
+						'page_link_location' => 'NAV_BAR_LINKS_BEFORE',
 						'page_link_event_name' => 'overall_header_navigation_prepend',
 						'page_route' => 'page_1',
 						'page_title' => 'title_1',
@@ -37,7 +37,7 @@ class page_operator_get_page_links_test extends page_operator_base
 					array(
 						'page_id' => 1,
 						'page_link_id' => 2,
-						'page_link_location' => 'Nav Bar Links After',
+						'page_link_location' => 'NAV_BAR_LINKS_AFTER',
 						'page_link_event_name' => 'overall_header_navigation_append',
 						'page_route' => 'page_1',
 						'page_title' => 'title_1',
@@ -52,7 +52,7 @@ class page_operator_get_page_links_test extends page_operator_base
 					array(
 						'page_id' => 2,
 						'page_link_id' => 1,
-						'page_link_location' => 'Nav Bar Links Before',
+						'page_link_location' => 'NAV_BAR_LINKS_BEFORE',
 						'page_link_event_name' => 'overall_header_navigation_prepend',
 						'page_route' => 'page_2',
 						'page_title' => 'title_2',
@@ -67,7 +67,7 @@ class page_operator_get_page_links_test extends page_operator_base
 					array(
 						'page_id' => 1,
 						'page_link_id' => 1,
-						'page_link_location' => 'Nav Bar Links Before',
+						'page_link_location' => 'NAV_BAR_LINKS_BEFORE',
 						'page_link_event_name' => 'overall_header_navigation_prepend',
 						'page_route' => 'page_1',
 						'page_title' => 'title_1',
@@ -77,7 +77,7 @@ class page_operator_get_page_links_test extends page_operator_base
 					array(
 						'page_id' => 1,
 						'page_link_id' => 2,
-						'page_link_location' => 'Nav Bar Links After',
+						'page_link_location' => 'NAV_BAR_LINKS_AFTER',
 						'page_link_event_name' => 'overall_header_navigation_append',
 						'page_route' => 'page_1',
 						'page_title' => 'title_1',
@@ -87,7 +87,7 @@ class page_operator_get_page_links_test extends page_operator_base
 					array(
 						'page_id' => 2,
 						'page_link_id' => 1,
-						'page_link_location' => 'Nav Bar Links Before',
+						'page_link_location' => 'NAV_BAR_LINKS_BEFORE',
 						'page_link_event_name' => 'overall_header_navigation_prepend',
 						'page_route' => 'page_2',
 						'page_title' => 'title_2',

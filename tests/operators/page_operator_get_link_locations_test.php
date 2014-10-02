@@ -25,11 +25,11 @@ class page_operator_get_link_locations_test extends page_operator_base
 				array(
 					array(
 						'page_link_id' => 1,
-						'page_link_location' => 'Nav Bar Links Before'
+						'page_link_location' => 'NAV_BAR_LINKS_BEFORE'
 					),
 					array(
 						'page_link_id' => 2,
-						'page_link_location' => 'Nav Bar Links After'
+						'page_link_location' => 'NAV_BAR_LINKS_AFTER'
 					),
 				),
 			),
