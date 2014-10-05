@@ -314,7 +314,7 @@ class admin_controller implements admin_interface
 			'S_PARSE_MAGIC_URL_CHECKED'	=> $entity->content_magic_url_enabled(),
 			'S_PARSE_HTML_CHECKED'		=> $entity->content_html_enabled(),
 
-			'BBCODE_STATUS'		=> $this->user->lang('BBCODE_IS_ON', '<a href="' . append_sid("{$this->root_path}faq.$this->php_ext", 'mode=bbcode') . '">', '</a>'),
+			'BBCODE_STATUS'		=> $this->user->lang('BBCODE_IS_ON', '<a href="' . append_sid("{$this->root_path}faq.{$this->php_ext}", 'mode=bbcode') . '">', '</a>'),
 			'SMILIES_STATUS'	=> $this->user->lang('SMILIES_ARE_ON'),
 			'IMG_STATUS'		=> $this->user->lang('IMAGES_ARE_ON'),
 			'FLASH_STATUS'		=> $this->user->lang('FLASH_IS_ON'),
