@@ -131,6 +131,7 @@ class listener implements EventSubscriberInterface
 				'U_LINK_URL' => $this->helper->route('phpbb_pages_main_controller', array('route' => $row['page_route'])),
 				'LINK_TITLE' => $row['page_title'],
 				'ICON_LINK' => $custom_icon,
+				'ICON_CLASS' => $row['page_route'],
 			));
 
 			$this->template->assign_var('S_' . strtoupper($row['page_link_event_name']), true);
