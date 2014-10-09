@@ -46,6 +46,7 @@ class show_page_links_test extends \phpbb_database_test_case
 						'U_LINK_URL' => 'app.php/page/page_1',
 						'LINK_TITLE' => 'title_1',
 						'ICON_LINK' => '',
+						'ICON_CLASS' => 'page_1',
 					),
 					'S_OVERALL_HEADER_NAVIGATION_PREPEND' => true,
 					// Links for page 2
@@ -53,6 +54,7 @@ class show_page_links_test extends \phpbb_database_test_case
 						'U_LINK_URL' => 'app.php/page/page_2',
 						'LINK_TITLE' => 'title_2',
 						'ICON_LINK' => '',
+						'ICON_CLASS' => 'page_2',
 					),
 					'S_OVERALL_HEADER_NAVIGATION_APPEND' => true,
 				),
