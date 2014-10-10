@@ -37,6 +37,8 @@ To get started, your custom icons must follow a specific naming structure of the
 
 The custom icons should be kept in phpBB's style/*/theme/images directories, for example: `phpbb/styles/prosilver/theme/images/pages_foobar.gif`. You should add your custom icon to every style installed on your board (you can design different icons for each style if necessary). If Pages can't find an icon it will fallback to its default icon.
 
+Alternatively, style authors and other experienced users that don't want to use individual image files for icons, can use the CSS classes which are added to the page links automatically. These classes allow you to change the styling of the link (including icons) to replace the default icon, using CSS. These classes follow the naming structure of the form: `icon-page-route` wherein `route` is the name of the route as defined in the extension's ACP module.
+
 ### Custom Page Templates
 
 Custom page templates offer tremendous flexibility for the appearance and content of your Pages. They can be used to bring additional HTML content, javascript and CSS to your Pages or to better integrate your Pages with other styles installed on your board.

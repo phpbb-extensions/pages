@@ -44,6 +44,7 @@ class show_page_links_test extends \phpbb_database_test_case
 					// Links for page 1
 					'overall_header_navigation_prepend_links' => array(
 						'U_LINK_URL' => 'app.php/page/page_1',
+						'LINK_ROUTE' => 'page_1',
 						'LINK_TITLE' => 'title_1',
 						'ICON_LINK' => '',
 					),
@@ -51,6 +52,7 @@ class show_page_links_test extends \phpbb_database_test_case
 					// Links for page 2
 					'overall_header_navigation_append_links' => array(
 						'U_LINK_URL' => 'app.php/page/page_2',
+						'LINK_ROUTE' => 'page_2',
 						'LINK_TITLE' => 'title_2',
 						'ICON_LINK' => '',
 					),
