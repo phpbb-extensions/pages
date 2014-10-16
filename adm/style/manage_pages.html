@@ -58,7 +58,9 @@
 		<fieldset>
 			<legend>{L_ACP_PAGES_FORM_CONTENT}</legend>
 			<p>{L_ACP_PAGES_FORM_CONTENT_EXPLAIN}</p>
-
+            <!-- IF S_WYSIWYG -->
+            	<!-- EVENT acp_pages_wysiwyg_editor -->
+            <!-- ELSE -->
 			<!-- INCLUDE acp_posting_buttons.html -->
 
 			<dl class="responsive-columns">
@@ -74,6 +76,7 @@
 				</dd>
 				<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px; margin-top: 10px;"><strong>{L_OPTIONS}{L_COLON} </strong>{BBCODE_STATUS} :: {IMG_STATUS} :: {FLASH_STATUS} :: {URL_STATUS} :: {SMILIES_STATUS}</dd>
 			</dl>
+            <!-- ENDIF -->
 		</fieldset>
 		<fieldset>
 			<legend>{L_ACP_PAGES_OPTIONS}</legend>

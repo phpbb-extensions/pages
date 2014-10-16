@@ -496,6 +496,18 @@ class page implements page_interface
 		if ($this->content_html_enabled())
 		{
 			$content = htmlspecialchars_decode($content, ENT_COMPAT);
+
+			/**
+			* Event to modify html pages
+			*
+			* @event pages.content.display
+			* @var	content		content of page
+			* @var	route	    route from page
+			* @since 3.1.0-RC5
+			*/
+			$route = $this->get_route();
+			$vars = array('content', 'route');
+			extract($phpbb_dispatcher->trigger_event('core.pages.content.display', compact($vars)));
 		}
 		else
 		{

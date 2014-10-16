@@ -166,6 +166,8 @@ class admin_controller implements admin_interface
 	*/
 	protected function add_edit_page_data($entity)
 	{
+		global $phpbb_dispatcher;
+
 		// Create an array to collect errors that will be output to the user
 		$errors = array();
 
@@ -295,6 +297,16 @@ class admin_controller implements admin_interface
 		// Set template vars for Page Link Locations select menu
 		$this->create_page_link_options($entity->get_id(), $data['page_links']);
 
+		/**
+		* Event to modify html pages
+		*
+		* @event pages.content.modify
+		* @var	content		content of page
+		* @since 3.1.0-RC5
+		*/
+		$content = $entity->get_content_for_edit();
+		$vars = array('content');
+		extract($phpbb_dispatcher->trigger_event('core.pages.content.modify', compact($vars)));
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_ERROR'			=> (sizeof($errors)) ? true : false,
