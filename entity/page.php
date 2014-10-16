@@ -486,33 +486,35 @@ class page implements page_interface
 	*/
 	public function get_content_for_display($censor_text = true)
 	{
+		global $phpbb_dispatcher;
 		// If these haven't been set yet; use defaults
 		$content = (isset($this->data['page_content'])) ? $this->data['page_content'] : '';
 		$uid = (isset($this->data['page_content_bbcode_uid'])) ? $this->data['page_content_bbcode_uid'] : '';
 		$bitfield = (isset($this->data['page_content_bbcode_bitfield'])) ? $this->data['page_content_bbcode_bitfield'] : '';
 		$options = (isset($this->data['page_content_bbcode_options'])) ? (int) $this->data['page_content_bbcode_options'] : 0;
-
+		$content_html_enabled = $this->content_html_enabled();
+		
 		// Generate for display
-		if ($this->content_html_enabled())
+		if ($content_html_enabled)
 		{
 			$content = htmlspecialchars_decode($content, ENT_COMPAT);
-
-			/**
-			* Event to modify html pages
-			*
-			* @event pages.content.display
-			* @var	content		content of page
-			* @var	route	    route from page
-			* @since 3.1.0-RC5
-			*/
-			$route = $this->get_route();
-			$vars = array('content', 'route');
-			extract($phpbb_dispatcher->trigger_event('core.pages.content.display', compact($vars)));
 		}
 		else
 		{
 			$content = generate_text_for_display($content, $uid, $bitfield, $options, $censor_text);
 		}
+		
+		/**
+		* Event to modify html pages
+		*
+		* @event pages.content.display
+		* @var	content		content of page
+		* @var	route	    route from page
+		* @since 3.1.0-RC5
+		*/
+		$route = $this->get_route();
+		$vars = array('content', 'route', 'uid', 'bitfield', 'options', 'content_html_enabled');
+		extract($phpbb_dispatcher->trigger_event('core.pages.content.display', compact($vars)));
 
 		return $content;
 	}
