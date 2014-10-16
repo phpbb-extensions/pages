@@ -39,6 +39,9 @@ class page implements page_interface
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
+	/** @var dispatcher */
+	protected $dispatcher;
+
 	/**
 	* The database table the page data is stored in
 	*
@@ -54,9 +57,10 @@ class page implements page_interface
 	* @return \phpbb\pages\entity\page
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, $pages_table)
+	public function __construct(\phpbb\db\driver\driver_interface $db, $dispatcher, $pages_table)
 	{
 		$this->db = $db;
+		$this->dispatcher = $dispatcher;
 		$this->pages_table = $pages_table;
 	}
 
@@ -486,13 +490,14 @@ class page implements page_interface
 	*/
 	public function get_content_for_display($censor_text = true)
 	{
-		global $phpbb_dispatcher;
 		// If these haven't been set yet; use defaults
 		$content = (isset($this->data['page_content'])) ? $this->data['page_content'] : '';
 		$uid = (isset($this->data['page_content_bbcode_uid'])) ? $this->data['page_content_bbcode_uid'] : '';
 		$bitfield = (isset($this->data['page_content_bbcode_bitfield'])) ? $this->data['page_content_bbcode_bitfield'] : '';
 		$options = (isset($this->data['page_content_bbcode_options'])) ? (int) $this->data['page_content_bbcode_options'] : 0;
+
 		$content_html_enabled = $this->content_html_enabled();
+		$route = $this->get_route();
 		
 		// Generate for display
 		if ($content_html_enabled)
@@ -505,16 +510,15 @@ class page implements page_interface
 		}
 		
 		/**
-		* Event to modify html pages
+		* Event to modify page content
 		*
-		* @event pages.content.display
+		* @event phpbb.pages.modify_content_for_display
 		* @var	content		content of page
 		* @var	route	    route from page
-		* @since 3.1.0-RC5
+		* @since 1.0.0-RC1
 		*/
-		$route = $this->get_route();
 		$vars = array('content', 'route', 'uid', 'bitfield', 'options', 'content_html_enabled');
-		extract($phpbb_dispatcher->trigger_event('core.pages.content.display', compact($vars)));
+		extract($this->dispatcher->trigger_event('phpbb.pages.modify_content_for_display', compact($vars)));
 
 		return $content;
 	}

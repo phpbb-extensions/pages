@@ -12,6 +12,7 @@ services:
             - @template
             - @user
             - @service_container
+            - @dispatcher
             - %core.root_path%
             - %core.php_ext%
 
@@ -42,6 +43,7 @@ services:
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
             - @dbal.conn
+            - @dispatcher
             - %tables.pages%
 
     phpbb.pages.operator:

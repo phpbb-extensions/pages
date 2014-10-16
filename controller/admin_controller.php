@@ -38,6 +38,9 @@ class admin_controller implements admin_interface
 	/** @var ContainerInterface */
 	protected $phpbb_container;
 
+	/** @var dispatcher */
+	protected $dispatcher;
+
 	/** @var string phpBB root path */
 	protected $root_path;
 
@@ -62,7 +65,7 @@ class admin_controller implements admin_interface
 	* @return \phpbb\pages\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, $root_path, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, $dispatcher, $root_path, $php_ext)
 	{
 		$this->helper = $helper;
 		$this->log = $log;
@@ -71,6 +74,7 @@ class admin_controller implements admin_interface
 		$this->template = $template;
 		$this->user = $user;
 		$this->container = $phpbb_container;
+		$this->dispatcher = $dispatcher;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 	}
@@ -166,8 +170,6 @@ class admin_controller implements admin_interface
 	*/
 	protected function add_edit_page_data($entity)
 	{
-		global $phpbb_dispatcher;
-
 		// Create an array to collect errors that will be output to the user
 		$errors = array();
 
@@ -298,15 +300,16 @@ class admin_controller implements admin_interface
 		$this->create_page_link_options($entity->get_id(), $data['page_links']);
 
 		/**
-		* Event to modify html pages
+		* Event to modify page content
 		*
 		* @event pages.content.modify
 		* @var	content		content of page
-		* @since 3.1.0-RC5
+		* @since 1.0.0-RC1
 		*/
 		$content = $entity->get_content_for_edit();
 		$vars = array('content');
-		extract($phpbb_dispatcher->trigger_event('core.pages.content.modify', compact($vars)));
+		extract($this->dispatcher->trigger_event('phpbb.pages.modify_content', compact($vars)));
+
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_ERROR'			=> (sizeof($errors)) ? true : false,
