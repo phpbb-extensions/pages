@@ -38,8 +38,8 @@ class admin_controller implements admin_interface
 	/** @var ContainerInterface */
 	protected $phpbb_container;
 
-	/** @var dispatcher */
-	protected $dispatcher;
+	/** @var \phpbb\event\dispatcher_interface */
+	protected $phpbb_dispatcher;
 
 	/** @var string phpBB root path */
 	protected $root_path;
@@ -60,12 +60,13 @@ class admin_controller implements admin_interface
 	* @param \phpbb\template\template             $template        Template object
 	* @param \phpbb\user                          $user            User object
 	* @param ContainerInterface                   $phpbb_container Service container interface
+	* @param \phpbb\event\dispatcher_interface	  $phpbb_dispatcher	Event dispatcher
 	* @param string                               $root_path       phpBB root path
 	* @param string                               $php_ext         phpEx
 	* @return \phpbb\pages\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, $dispatcher, $root_path, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
 	{
 		$this->helper = $helper;
 		$this->log = $log;
@@ -74,7 +75,7 @@ class admin_controller implements admin_interface
 		$this->template = $template;
 		$this->user = $user;
 		$this->container = $phpbb_container;
-		$this->dispatcher = $dispatcher;
+		$this->phpbb_dispatcher = $phpbb_dispatcher;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 	}
@@ -298,17 +299,17 @@ class admin_controller implements admin_interface
 
 		// Set template vars for Page Link Locations select menu
 		$this->create_page_link_options($entity->get_id(), $data['page_links']);
+		$content_for_edit = $entity->get_content_for_edit();
 
 		/**
 		* Event to modify page content
 		*
-		* @event pages.content.modify
-		* @var	content		content of page
+		* @event phpbb.pages.modify_content
+		* @var	content_for_edit		content of page
 		* @since 1.0.0-RC1
 		*/
-		$content = $entity->get_content_for_edit();
-		$vars = array('content');
-		extract($this->dispatcher->trigger_event('phpbb.pages.modify_content', compact($vars)));
+		$vars = array('content_for_edit');
+		extract($this->phpbb_dispatcher->trigger_event('phpbb.pages.modify_content', compact($vars)));
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(

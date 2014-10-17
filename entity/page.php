@@ -39,8 +39,8 @@ class page implements page_interface
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var dispatcher */
-	protected $dispatcher;
+	/** @var \phpbb\event\dispatcher_interface */
+	protected $phpbb_dispatcher;
 
 	/**
 	* The database table the page data is stored in
@@ -53,14 +53,15 @@ class page implements page_interface
 	* Constructor
 	*
 	* @param \phpbb\db\driver\driver_interface    $db                 Database object
+	* @param \phpbb\event\dispatcher_interface	  $phpbb_dispatcher   Event dispatcher
 	* @param string                               $pages_table        Name of the table used to store page data
 	* @return \phpbb\pages\entity\page
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, $dispatcher, $pages_table)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table)
 	{
 		$this->db = $db;
-		$this->dispatcher = $dispatcher;
+		$this->phpbb_dispatcher = $phpbb_dispatcher;
 		$this->pages_table = $pages_table;
 	}
 
@@ -513,12 +514,16 @@ class page implements page_interface
 		* Event to modify page content
 		*
 		* @event phpbb.pages.modify_content_for_display
-		* @var	content		content of page
-		* @var	route	    route from page
+		* @var	content					content of page
+		* @var	route					route from page
+		* @var	uid						page_content_bbcode_uid
+		* @var	bitfield				page_content_bbcode_bitfield
+		* @var	options					page_content_bbcode_options
+		* @var	content_html_enabled	page_content_allow_html
 		* @since 1.0.0-RC1
 		*/
 		$vars = array('content', 'route', 'uid', 'bitfield', 'options', 'content_html_enabled');
-		extract($this->dispatcher->trigger_event('phpbb.pages.modify_content_for_display', compact($vars)));
+		extract($this->phpbb_dispatcher->trigger_event('phpbb.pages.modify_content_for_display', compact($vars)));
 
 		return $content;
 	}

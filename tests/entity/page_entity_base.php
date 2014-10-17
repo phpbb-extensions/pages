@@ -48,7 +48,7 @@ class page_entity_base extends \phpbb_database_test_case
 		$config = new \phpbb\config\config(array());
 		set_config(null, null, null, $config);
 
-		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
+		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
 	}
 
 	/**
@@ -59,6 +59,7 @@ class page_entity_base extends \phpbb_database_test_case
 	*/
 	protected function get_page_entity()
 	{
+		return new \phpbb\pages\entity\page($this->db, $this->dispatcher, 'phpbb_pages');
 		return new \phpbb\pages\entity\page($this->db, 'phpbb_pages');
 	}
 

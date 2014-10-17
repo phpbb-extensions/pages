@@ -62,14 +62,14 @@ class page_main_controller_test extends \phpbb_database_test_case
 				return new \phpbb\pages\entity\page($db, 'phpbb_pages');
 			}))
 		;
-		$this->template = new \phpbb\pages\tests\mock\template();
-		$this->user = new \phpbb\user('\phpbb\datetime');
-		$this->controller_helper = new \phpbb\pages\tests\mock\controller_helper();
-
 		// // Global vars called upon during execution
 		$cache = new \phpbb_mock_cache();
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 		$user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
+
+		$this->template = new \phpbb\pages\tests\mock\template();
+		$this->user = new \phpbb\user('\phpbb\datetime');
+		$this->controller_helper = new \phpbb\pages\tests\mock\controller_helper();
 
 		$controller = new \phpbb\pages\controller\main_controller(
 			$this->auth,
