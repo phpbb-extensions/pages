@@ -39,7 +39,7 @@ class admin_controller implements admin_interface
 	protected $phpbb_container;
 
 	/** @var \phpbb\event\dispatcher_interface */
-	protected $phpbb_dispatcher;
+	protected $dispatcher;
 
 	/** @var string phpBB root path */
 	protected $root_path;
@@ -60,13 +60,13 @@ class admin_controller implements admin_interface
 	* @param \phpbb\template\template             $template        Template object
 	* @param \phpbb\user                          $user            User object
 	* @param ContainerInterface                   $phpbb_container Service container interface
-	* @param \phpbb\event\dispatcher_interface    $phpbb_dispatcher Event dispatcher
+	* @param \phpbb\event\dispatcher_interface    $dispatcher      Event dispatcher
 	* @param string                               $root_path       phpBB root path
 	* @param string                               $php_ext         phpEx
 	* @return \phpbb\pages\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $dispatcher, $root_path, $php_ext)
 	{
 		$this->helper = $helper;
 		$this->log = $log;
@@ -75,7 +75,7 @@ class admin_controller implements admin_interface
 		$this->template = $template;
 		$this->user = $user;
 		$this->container = $phpbb_container;
-		$this->phpbb_dispatcher = $phpbb_dispatcher;
+		$this->dispatcher = $dispatcher;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 	}
@@ -309,7 +309,7 @@ class admin_controller implements admin_interface
 		* @since 1.0.0-RC1
 		*/
 		$vars = array('content_for_edit');
-		extract($this->phpbb_dispatcher->trigger_event('phpbb.pages.acp_modify_content', compact($vars)));
+		extract($this->dispatcher->trigger_event('phpbb.pages.acp_modify_content', compact($vars)));
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
