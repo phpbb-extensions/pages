@@ -304,12 +304,12 @@ class admin_controller implements admin_interface
 		/**
 		* Event to modify page content
 		*
-		* @event phpbb.pages.modify_content
-		* @var	content_for_edit		content of page
+		* @event phpbb.pages.acp_modify_content
+		* @var	content_for_edit content of page
 		* @since 1.0.0-RC1
 		*/
 		$vars = array('content_for_edit');
-		extract($this->phpbb_dispatcher->trigger_event('phpbb.pages.modify_content', compact($vars)));
+		extract($this->phpbb_dispatcher->trigger_event('phpbb.pages.acp_modify_content', compact($vars)));
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
