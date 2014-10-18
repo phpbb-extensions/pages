@@ -60,7 +60,7 @@ class admin_controller implements admin_interface
 	* @param \phpbb\template\template             $template        Template object
 	* @param \phpbb\user                          $user            User object
 	* @param ContainerInterface                   $phpbb_container Service container interface
-	* @param \phpbb\event\dispatcher_interface	  $phpbb_dispatcher	Event dispatcher
+	* @param \phpbb\event\dispatcher_interface    $phpbb_dispatcher Event dispatcher
 	* @param string                               $root_path       phpBB root path
 	* @param string                               $php_ext         phpEx
 	* @return \phpbb\pages\controller\admin_controller
