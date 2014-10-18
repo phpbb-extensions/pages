@@ -514,12 +514,12 @@ class page implements page_interface
 		* Event to modify page content
 		*
 		* @event phpbb.pages.modify_content_for_display
-		* @var	content					content of page
-		* @var	route					route from page
-		* @var	uid						page_content_bbcode_uid
-		* @var	bitfield				page_content_bbcode_bitfield
-		* @var	options					page_content_bbcode_options
-		* @var	content_html_enabled	page_content_allow_html
+		* @var	content         content of page
+		* @var	route           route from page
+		* @var	uid             page_content_bbcode_uid
+		* @var	bitfield        page_content_bbcode_bitfield
+		* @var	options         page_content_bbcode_options
+		* @var	content_html_enabled page_content_allow_html
 		* @since 1.0.0-RC1
 		*/
 		$vars = array('content', 'route', 'uid', 'bitfield', 'options', 'content_html_enabled');
