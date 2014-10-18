@@ -39,7 +39,7 @@ class admin_controller implements admin_interface
 	protected $phpbb_container;
 
 	/** @var \phpbb\event\dispatcher_interface */
-	protected $dispatcher;
+	protected $phpbb_dispatcher;
 
 	/** @var string phpBB root path */
 	protected $root_path;
@@ -53,20 +53,20 @@ class admin_controller implements admin_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\controller\helper             $helper          Controller helper object
-	* @param \phpbb\log\log                       $log             The phpBB log system
-	* @param \phpbb\pages\operators\page          $page_operator   Pages operator object
-	* @param \phpbb\request\request               $request         Request object
-	* @param \phpbb\template\template             $template        Template object
-	* @param \phpbb\user                          $user            User object
-	* @param ContainerInterface                   $phpbb_container Service container interface
-	* @param \phpbb\event\dispatcher_interface    $dispatcher      Event dispatcher
-	* @param string                               $root_path       phpBB root path
-	* @param string                               $php_ext         phpEx
+	* @param \phpbb\controller\helper             $helper           Controller helper object
+	* @param \phpbb\log\log                       $log              The phpBB log system
+	* @param \phpbb\pages\operators\page          $page_operator    Pages operator object
+	* @param \phpbb\request\request               $request          Request object
+	* @param \phpbb\template\template             $template         Template object
+	* @param \phpbb\user                          $user             User object
+	* @param ContainerInterface                   $phpbb_container  Service container interface
+	* @param \phpbb\event\dispatcher_interface    $phpbb_dispatcher Event dispatcher
+	* @param string                               $root_path        phpBB root path
+	* @param string                               $php_ext          phpEx
 	* @return \phpbb\pages\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $dispatcher, $root_path, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
 	{
 		$this->helper = $helper;
 		$this->log = $log;
@@ -75,7 +75,7 @@ class admin_controller implements admin_interface
 		$this->template = $template;
 		$this->user = $user;
 		$this->container = $phpbb_container;
-		$this->dispatcher = $dispatcher;
+		$this->dispatcher = $phpbb_dispatcher;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 	}
@@ -305,7 +305,7 @@ class admin_controller implements admin_interface
 		* Event to modify page content data sent to the message editor
 		*
 		* @event phpbb.pages.acp_modify_content
-		* @var	content_for_edit content of page
+		* @var string content_for_edit Page content encoded for edit 
 		* @since 1.0.0-RC1
 		*/
 		$vars = array('content_for_edit');
