@@ -302,7 +302,7 @@ class admin_controller implements admin_interface
 		$content_for_edit = $entity->get_content_for_edit();
 
 		/**
-		* Event to modify page content
+		* Event to modify page content data sent to the message editor
 		*
 		* @event phpbb.pages.acp_modify_content
 		* @var	content_for_edit content of page
