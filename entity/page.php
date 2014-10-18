@@ -40,7 +40,7 @@ class page implements page_interface
 	protected $db;
 
 	/** @var \phpbb\event\dispatcher_interface */
-	protected $dispatcher;
+	protected $phpbb_dispatcher;
 
 	/**
 	* The database table the page data is stored in
@@ -53,15 +53,15 @@ class page implements page_interface
 	* Constructor
 	*
 	* @param \phpbb\db\driver\driver_interface    $db                 Database object
-	* @param \phpbb\event\dispatcher_interface	  $dispatcher         Event dispatcher
+	* @param \phpbb\event\dispatcher_interface	  $phpbb_dispatcher   Event dispatcher
 	* @param string                               $pages_table        Name of the table used to store page data
 	* @return \phpbb\pages\entity\page
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\event\dispatcher_interface $dispatcher, $pages_table)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table)
 	{
 		$this->db = $db;
-		$this->dispatcher = $dispatcher;
+		$this->dispatcher = $phpbb_dispatcher;
 		$this->pages_table = $pages_table;
 	}
 
