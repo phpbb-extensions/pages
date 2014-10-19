@@ -514,12 +514,12 @@ class page implements page_interface
 		* Event to modify page content
 		*
 		* @event phpbb.pages.modify_content_for_display
-		* @var	content         content of page
-		* @var	route           route from page
-		* @var	uid             a randomly generated unique identifier to mark the bbcodes identified by the first pass encoding
-		* @var	bitfield        a bit field containing the information which bbcode is used in the text so only the relavant ones need to be loaded from the database
-		* @var	options         a bit field containing the information whether bbcode, smilies and magic urls are enabled 
-		* @var	content_html_enabled page_content_allow_html
+		* @var	string content         content of page
+		* @var	string route           route from page
+		* @var	string uid             a randomly generated unique identifier to mark the bbcodes identified by the first pass encoding
+		* @var	string bitfield        a bit field containing the information which bbcode is used in the text so only the relavant ones need to be loaded from the database
+		* @var	string options         a bit field containing the information whether bbcode, smilies and magic urls are enabled 
+		* @var	bool content_html_enabled page_content_allow_html
 		* @since 1.0.0-RC1
 		*/
 		$vars = array('content', 'route', 'uid', 'bitfield', 'options', 'content_html_enabled');
