@@ -516,9 +516,9 @@ class page implements page_interface
 		* @event phpbb.pages.modify_content_for_display
 		* @var	content         content of page
 		* @var	route           route from page
-		* @var	uid             page_content_bbcode_uid
-		* @var	bitfield        page_content_bbcode_bitfield
-		* @var	options         page_content_bbcode_options
+		* @var	uid             a randomly generated unique identifier to mark the bbcodes identified by the first pass encoding
+		* @var	bitfield        a bit field containing the information which bbcode is used in the text so only the relavant ones need to be loaded from the database
+		* @var	options         a bit field containing the information whether bbcode, smilies and magic urls are enabled 
 		* @var	content_html_enabled page_content_allow_html
 		* @since 1.0.0-RC1
 		*/
