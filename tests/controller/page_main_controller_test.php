@@ -53,14 +53,14 @@ class page_main_controller_test extends \phpbb_database_test_case
 
 		// Load/Mock classes required by the controller class
 		$db = $this->new_dbal();
-		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
+		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 		$this->auth = $this->getMock('\phpbb\auth\auth');
 		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.pages.entity')
-			->will($this->returnCallback(function() use ($db) {
-				return new \phpbb\pages\entity\page($db, $this->dispatcher, 'phpbb_pages');
+			->will($this->returnCallback(function() use ($db, $phpbb_dispatcher) {
+				return new \phpbb\pages\entity\page($db, $phpbb_dispatcher, 'phpbb_pages');
 			}))
 		;
 		$this->template = new \phpbb\pages\tests\mock\template();
@@ -70,10 +70,6 @@ class page_main_controller_test extends \phpbb_database_test_case
 		// Global vars called upon during execution
 		$cache = new \phpbb_mock_cache();
 		$user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
-
-		$this->template = new \phpbb\pages\tests\mock\template();
-		$this->user = new \phpbb\user('\phpbb\datetime');
-		$this->controller_helper = new \phpbb\pages\tests\mock\controller_helper();
 
 		$controller = new \phpbb\pages\controller\main_controller(
 			$this->auth,

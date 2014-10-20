@@ -499,7 +499,7 @@ class page implements page_interface
 
 		$content_html_enabled = $this->content_html_enabled();
 		$route = $this->get_route();
-		
+
 		// Generate for display
 		if ($content_html_enabled)
 		{
@@ -509,17 +509,17 @@ class page implements page_interface
 		{
 			$content = generate_text_for_display($content, $uid, $bitfield, $options, $censor_text);
 		}
-		
+
 		/**
 		* Event to modify page content
 		*
 		* @event phpbb.pages.modify_content_for_display
-		* @var	string content         content of page
-		* @var	string route           route from page
-		* @var	string uid             a randomly generated unique identifier to mark the bbcodes identified by the first pass encoding
-		* @var	string bitfield        a bit field containing the information which bbcode is used in the text so only the relavant ones need to be loaded from the database
-		* @var	string options         a bit field containing the information whether bbcode, smilies and magic urls are enabled 
-		* @var	bool content_html_enabled page_content_allow_html
+		* @var string content               Page content
+		* @var string route                 Page route
+		* @var string uid                   Page content bbcode uid
+		* @var string bitfield              Page content bbcode bitfield
+		* @var int    options               Page content bbcode options
+		* @var bool   content_html_enabled  Is HTML allowed in page content
 		* @since 1.0.0-RC1
 		*/
 		$vars = array('content', 'route', 'uid', 'bitfield', 'options', 'content_html_enabled');

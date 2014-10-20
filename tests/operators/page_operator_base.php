@@ -49,8 +49,8 @@ class page_operator_base extends \phpbb_database_test_case
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.pages.entity')
-			->will($this->returnCallback(function() use ($db) {
-				return new \phpbb\pages\entity\page($db, $this->dispatcher, 'phpbb_pages');
+			->will($this->returnCallback(function() use ($db, $phpbb_dispatcher) {
+				return new \phpbb\pages\entity\page($db, $phpbb_dispatcher, 'phpbb_pages');
 			}))
 		;
 		$this->extension_manager = new \phpbb_mock_extension_manager(
