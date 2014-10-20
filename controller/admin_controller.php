@@ -305,11 +305,9 @@ class admin_controller implements admin_interface
 		* Event to modify page content data sent to the message editor
 		*
 		* @event phpbb.pages.acp_modify_content
-		* @var string content_for_edit Page content encoded for edit
 		* @since 1.0.0-RC1
 		*/
-		$vars = array('content_for_edit');
-		extract($this->dispatcher->trigger_event('phpbb.pages.acp_modify_content', compact($vars)));
+		$this->dispatcher->trigger_event('phpbb.pages.acp_modify_content');
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
