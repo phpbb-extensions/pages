@@ -39,6 +39,9 @@ class page implements page_interface
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
+	/** @var \phpbb\event\dispatcher_interface */
+	protected $phpbb_dispatcher;
+
 	/**
 	* The database table the page data is stored in
 	*
@@ -50,13 +53,15 @@ class page implements page_interface
 	* Constructor
 	*
 	* @param \phpbb\db\driver\driver_interface    $db                 Database object
+	* @param \phpbb\event\dispatcher_interface    $phpbb_dispatcher   Event dispatcher
 	* @param string                               $pages_table        Name of the table used to store page data
 	* @return \phpbb\pages\entity\page
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, $pages_table)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table)
 	{
 		$this->db = $db;
+		$this->dispatcher = $phpbb_dispatcher;
 		$this->pages_table = $pages_table;
 	}
 
@@ -492,8 +497,11 @@ class page implements page_interface
 		$bitfield = (isset($this->data['page_content_bbcode_bitfield'])) ? $this->data['page_content_bbcode_bitfield'] : '';
 		$options = (isset($this->data['page_content_bbcode_options'])) ? (int) $this->data['page_content_bbcode_options'] : 0;
 
+		$content_html_enabled = $this->content_html_enabled();
+		$route = $this->get_route();
+
 		// Generate for display
-		if ($this->content_html_enabled())
+		if ($content_html_enabled)
 		{
 			$content = htmlspecialchars_decode($content, ENT_COMPAT);
 		}
@@ -501,6 +509,21 @@ class page implements page_interface
 		{
 			$content = generate_text_for_display($content, $uid, $bitfield, $options, $censor_text);
 		}
+
+		/**
+		* Event to modify page content
+		*
+		* @event phpbb.pages.modify_content_for_display
+		* @var string content               Page content
+		* @var string route                 Page route
+		* @var string uid                   Page content bbcode uid
+		* @var string bitfield              Page content bbcode bitfield
+		* @var int    options               Page content bbcode options
+		* @var bool   content_html_enabled  Is HTML allowed in page content
+		* @since 1.0.0-RC1
+		*/
+		$vars = array('content', 'route', 'uid', 'bitfield', 'options', 'content_html_enabled');
+		extract($this->dispatcher->trigger_event('phpbb.pages.modify_content_for_display', compact($vars)));
 
 		return $content;
 	}

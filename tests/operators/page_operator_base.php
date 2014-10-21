@@ -44,11 +44,13 @@ class page_operator_base extends \phpbb_database_test_case
 
 		// mock container for the entity service
 		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
+		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
+		$this->cache = new \phpbb_mock_cache();
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.pages.entity')
-			->will($this->returnCallback(function() use ($db) {
-				return new \phpbb\pages\entity\page($db, 'phpbb_pages');
+			->will($this->returnCallback(function() use ($db, $phpbb_dispatcher) {
+				return new \phpbb\pages\entity\page($db, $phpbb_dispatcher, 'phpbb_pages');
 			}))
 		;
 		$this->extension_manager = new \phpbb_mock_extension_manager(
@@ -61,8 +63,6 @@ class page_operator_base extends \phpbb_database_test_case
 				),
 			)
 		);
-		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
-		$this->cache = new \phpbb_mock_cache();
 	}
 
 	/**
