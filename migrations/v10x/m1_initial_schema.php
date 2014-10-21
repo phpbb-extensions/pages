@@ -24,9 +24,7 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array(
-			'\phpbb\pages\migrations\converter\c1_convert_table',
-		);
+		return array('\phpbb\pages\migrations\converter\c1_convert_table');
 	}
 
 	/**
