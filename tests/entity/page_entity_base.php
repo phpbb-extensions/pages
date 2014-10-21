@@ -60,7 +60,6 @@ class page_entity_base extends \phpbb_database_test_case
 	protected function get_page_entity()
 	{
 		return new \phpbb\pages\entity\page($this->db, $this->dispatcher, 'phpbb_pages');
-		return new \phpbb\pages\entity\page($this->db, 'phpbb_pages');
 	}
 
 	/**
