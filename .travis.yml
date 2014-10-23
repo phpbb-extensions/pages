@@ -39,6 +39,7 @@ branches:
     - master
     - develop
     - /^develop-.*$/
+    - /^release-.*$/
 
 install:
   - composer install --dev --no-interaction --prefer-source
