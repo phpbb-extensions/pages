@@ -3,14 +3,15 @@
 	"type": "phpbb-extension",
 	"description": "An extension which allows you to add static pages to your phpBB forum",
 	"homepage": "https://phpbb.com",
-	"version": "1.0.0-RC1",
+	"version": "1.0.0",
 	"keywords": ["phpbb", "extension", "static", "pages"],
 	"license": "GPL-2.0",
 	"authors": [
 		{
-			"name": "Nathan Guse",
-			"email": "nathaniel.guse@gmail.com",
-			"role": "Extensions Development Team Lead"
+			"name": "Marc Alexander",
+			"email": "admin@m-a-styles.de",
+			"homepage": "http://www.m-a-styles.de",
+			"role": "Extensions Team Consultant"
 		},
 		{
 			"name": "Michael Cullum",
@@ -19,18 +20,21 @@
 			"role": "Extensions Team Consultant"
 		},
 		{
-			"name": "Marc Alexander",
-			"email": "admin@m-a-styles.de",
-			"homepage": "http://www.m-a-styles.de",
-			"role": "Extensions Team Consultant"
-		},
-		{
 			"name": "Matt Friedman",
 			"homepage": "http://mattfriedman.me",
-			"role": "Extensions Development Team"
+			"role": "Extensions Development Team Lead"
+		},
+		{
+			"name": "Nathan Guse",
+			"email": "nathaniel.guse@gmail.com",
+			"role": "Former Extensions Development Team Lead"
 		},
 		{
 			"name": "Lukasz Kaczynski",
+			"role": "Extensions Development Team"
+		},
+		{
+			"name": "John Peskens",
 			"role": "Extensions Development Team"
 		}
 	],
