@@ -408,7 +408,11 @@ class page implements page_interface
 		// Enforce an integer
 		$order = (int) $order;
 
-		// If the data is out of range we'll throw an exception
+		/*
+		* If the data is out of range we'll throw an exception. We use 16777215 as a
+		* maximum because it matches MySQL unsigned mediumint maximum value which is
+		* the lowest amongst DBMS supported by phpBB.
+		*/
 		if ($order < 0 || $order > 16777215)
 		{
 			throw new \phpbb\pages\exception\out_of_bounds('page_order');
