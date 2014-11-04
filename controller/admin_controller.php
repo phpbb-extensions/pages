@@ -47,7 +47,7 @@ class admin_controller implements admin_interface
 	/** @var string phpEx */
 	protected $php_ext;
 
-	/** string Custom form action */
+	/** @var string Custom form action */
 	protected $u_action;
 
 	/**
