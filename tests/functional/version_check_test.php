@@ -26,15 +26,13 @@ class version_check_test extends pages_functional_base
 		$this->login();
 		$this->admin_login();
 
-		// Load the Extension Manager module and re-check all versions
-		$crawler = self::request('GET', "adm/index.php?i=acp_extensions&mode=main&action=list&versioncheck_force=1&sid={$this->sid}");
+		$this->add_lang('acp/extensions');
 
-		// Assert that the name of our extension is in the extension manager list
-		$this->assertContains(strtolower($this->lang('ACP_PAGES')), strtolower($crawler->filter('tr.ext_enabled td')->eq(0)->text()));
+		// Load the Pages extension details
+		$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&action=details&ext_name=phpbb%2Fpages&sid=' . $this->sid);
 
-		// Assert that the version check feature is working
-		// The extension name is always strong, but the extension version will also be strong
-		// if the version check feature is working, so we test for more than one strong tag.
-		$this->assertGreaterThan(1, $crawler->filter('tr.ext_enabled td strong')->count());
+		// Assert extension is up to date
+		$this->assertGreaterThan(0, $crawler->filter('.successbox')->count());
+		$this->assertContains($this->lang('UP_TO_DATE', 'Pages'), $crawler->text());
 	}
 }
