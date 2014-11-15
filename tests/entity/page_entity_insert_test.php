@@ -83,7 +83,7 @@ class page_entity_insert_test extends page_entity_base
 
 	/**
 	* Try inserting a page that already exists into the database
-	* Entities with an exisiting page_id will fail to insert
+	* Entities with an existing page_id will fail to insert
 	*
 	* @expectedException \phpbb\pages\exception\out_of_bounds
 	* @access public
@@ -99,7 +99,7 @@ class page_entity_insert_test extends page_entity_base
 		// Import an existing page entity
 		$entity->import($import_data[1]);
 
-		// Try to insert the exisiting page entity
+		// Try to insert the existing page entity
 		$entity->insert();
 	}
 }

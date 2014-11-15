@@ -144,8 +144,8 @@ class page_entity_route_test extends page_entity_base
 		return array(
 			// id, sent to set_route(), expected from get_route()
 			array(null, 'foo', 'foo'), // new page, route is unique, expect unqiue route to pass
-			array(1, 'page_1', 'page_1'), // exisiting page, current route = new route, expect route to pass
-			array(1, 'bar', 'bar'), // exisiting page, current route != new route, new route is unique, expect new route to pass
+			array(1, 'page_1', 'page_1'), // existing page, current route = new route, expect route to pass
+			array(1, 'bar', 'bar'), // existing page, current route != new route, new route is unique, expect new route to pass
 		);
 	}
 
@@ -188,8 +188,8 @@ class page_entity_route_test extends page_entity_base
 			// id // sent to set_route()
 			array(null, ''), // new page, no route
 			array(null, 'page_1'), // new page, new route is not unique (exists already in db)
-			array(1, ''), // exisiting page, no route
-			array(1, 'page_2'), // exisiting page, current route != new route, new route is not unique (exists already in db)
+			array(1, ''), // existing page, no route
+			array(1, 'page_2'), // existing page, current route != new route, new route is not unique (exists already in db)
 		);
 	}
 
