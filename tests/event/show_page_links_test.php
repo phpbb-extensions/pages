@@ -96,6 +96,7 @@ class show_page_links_test extends \phpbb_database_test_case
 			new \phpbb\controller\provider(),
 			$this->ext_manager,
 			new \phpbb\symfony_request($request),
+			$request,
 			new \phpbb\filesystem(),
 			'',
 			$phpEx,
