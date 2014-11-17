@@ -47,6 +47,7 @@ class event_listener_base extends \phpbb_test_case
 			new \phpbb\controller\provider(),
 			new \phpbb_mock_extension_manager($phpbb_root_path),
 			new \phpbb\symfony_request($request),
+			$request,
 			new \phpbb\filesystem(),
 			'',
 			$phpEx,
