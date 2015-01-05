@@ -95,11 +95,10 @@ class listener implements EventSubscriberInterface
 	/**
 	* Display links to pages in the specified page link locations
 	*
-	* @param object $event The event object
 	* @return null
 	* @access public
 	*/
-	public function show_page_links($event)
+	public function show_page_links()
 	{
 		// Get all page link data
 		$rowset = $this->page_operator->get_page_links();
