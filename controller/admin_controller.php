@@ -92,6 +92,7 @@ class admin_controller implements admin_interface
 		$entities = $this->page_operator->get_pages();
 
 		// Process each page entity for display
+		/* @var $entity \phpbb\pages\entity\page */
 		foreach ($entities as $entity)
 		{
 			// Set output block vars for display in the template
@@ -149,6 +150,7 @@ class admin_controller implements admin_interface
 	public function edit_page($page_id)
 	{
 		// Initiate and load the page entity
+		/* @var $entity \phpbb\pages\entity\page */
 		$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
 
 		// Process the edited page
@@ -280,6 +282,7 @@ class admin_controller implements admin_interface
 				else
 				{
 					// Add the new page entity to the database
+					/* @var $entity \phpbb\pages\entity\page */
 					$entity = $this->page_operator->add_page($entity);
 
 					// Save the page link location data (now that we can access the new id)
@@ -358,6 +361,7 @@ class admin_controller implements admin_interface
 	public function delete_page($page_id)
 	{
 		// Initiate and load the page entity
+		/* @var $entity \phpbb\pages\entity\page */
 		$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
 
 		try

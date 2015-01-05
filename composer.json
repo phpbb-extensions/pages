@@ -2,7 +2,7 @@
 	"name": "phpbb/pages",
 	"type": "phpbb-extension",
 	"description": "An extension which allows you to add static pages to your phpBB forum",
-	"homepage": "https://phpbb.com",
+	"homepage": "https://www.phpbb.com",
 	"version": "1.0.1",
 	"keywords": ["phpbb", "extension", "static", "pages"],
 	"license": "GPL-2.0",
