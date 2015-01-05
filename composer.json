@@ -51,9 +51,9 @@
 			"phpbb/phpbb": ">=3.1.0-RC3,<3.2.*@dev"
 		},
 		"version-check": {
-			"host": "version.phpbb.com",
-			"directory": "/phpbb-extensions",
-			"filename": "pages_versions.json"
+			"host": "www.phpbb.com",
+			"directory": "/customise/db/extension/pages",
+			"filename": "version_check"
 		}
 	}
 }
