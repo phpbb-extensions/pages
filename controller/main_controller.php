@@ -40,7 +40,6 @@ class main_controller implements main_interface
 	* @param \phpbb\controller\helper    $helper       Controller helper object
 	* @param \phpbb\template\template    $template     Template object
 	* @param \phpbb\user                 $user         User object
-	* @return \phpbb\pages\controller\main_controller
 	* @access public
 	*/
 	public function __construct(\phpbb\auth\auth $auth, ContainerInterface $container, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)

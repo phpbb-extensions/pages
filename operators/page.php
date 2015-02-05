@@ -48,7 +48,6 @@ class page implements page_interface
 	* @param string                               $pages_table              Table name
 	* @param string                               $pages_links_table        Table name
 	* @param string                               $pages_pages_links_table  Table name
-	* @return \phpbb\pages\operators\page
 	* @access public
 	*/
 	public function __construct(\phpbb\cache\driver\driver_interface $cache, ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, $pages_table, $pages_links_table, $pages_pages_links_table)

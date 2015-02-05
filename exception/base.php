@@ -31,7 +31,6 @@ class base extends \Exception
 	* @param string|array $message
 	* @param int $code
 	* @param \Exception $previous
-	* @return \phpbb\pages\exception\base
 	* @access public
 	*/
 	public function __construct($message = null, $code = 0, \Exception $previous = null)

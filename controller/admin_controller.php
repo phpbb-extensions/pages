@@ -63,7 +63,6 @@ class admin_controller implements admin_interface
 	* @param \phpbb\event\dispatcher_interface    $phpbb_dispatcher Event dispatcher
 	* @param string                               $root_path        phpBB root path
 	* @param string                               $php_ext          phpEx
-	* @return \phpbb\pages\controller\admin_controller
 	* @access public
 	*/
 	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
