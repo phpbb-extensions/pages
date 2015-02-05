@@ -17,8 +17,6 @@ class page_entity_insert_test extends page_entity_base
 {
 	/**
 	* Test inserting new page data
-	*
-	* @access public
 	*/
 	public function test_insert()
 	{
@@ -86,7 +84,6 @@ class page_entity_insert_test extends page_entity_base
 	* Entities with an existing page_id will fail to insert
 	*
 	* @expectedException \phpbb\pages\exception\out_of_bounds
-	* @access public
 	*/
 	public function test_insert_fails()
 	{

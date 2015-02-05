@@ -16,7 +16,6 @@ class show_page_links_test extends \phpbb_database_test_case
 	* Define the extensions to be tested
 	*
 	* @return array vendor/name of extension(s) to test
-	* @access static
 	*/
 	static protected function setup_extensions()
 	{
@@ -66,7 +65,6 @@ class show_page_links_test extends \phpbb_database_test_case
 	* Test the show_page_links event
 	*
 	* @dataProvider show_page_links_data
-	* @access public
 	*/
 	public function test_show_page_links($expected)
 	{

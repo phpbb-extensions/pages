@@ -16,7 +16,6 @@ class page_operator_get_link_locations_test extends page_operator_base
 	* Test data for the test_get_link_locations() function
 	*
 	* @return array Array of test routes
-	* @access public
 	*/
 	public function get_link_locations_test_data()
 	{
@@ -40,7 +39,6 @@ class page_operator_get_link_locations_test extends page_operator_base
 	* Test getting link locations from the database
 	*
 	* @dataProvider get_link_locations_test_data
-	* @access public
 	*/
 	public function test_get_link_locations($expected)
 	{

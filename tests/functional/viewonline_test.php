@@ -17,8 +17,6 @@ class viewonline_test extends pages_functional_base
 {
 	/**
 	* Visit a page as user "admin"
-	*
-	* @access public
 	*/
 	public function test_viewonline_setup()
 	{
@@ -46,7 +44,6 @@ class viewonline_test extends pages_functional_base
 	* without having to log out "admin" first.
 	*
 	* @depends test_viewonline_setup
-	* @access public
 	*/
 	public function test_viewonline_check($page_title)
 	{

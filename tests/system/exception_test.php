@@ -14,8 +14,6 @@ class exception_test extends \phpbb_test_case
 {
 	/**
 	* Get an instance of phpbb\user
-	*
-	* @access public
 	*/
 	public function get_user_instance()
 	{
@@ -44,7 +42,6 @@ class exception_test extends \phpbb_test_case
 	* Data for test_exceptions function
 	*
 	* @return array
-	* @access public
 	*/
 	public function exceptions_test_data()
 	{
@@ -83,7 +80,6 @@ class exception_test extends \phpbb_test_case
 	* Test some exceptions and make sure they're translated
 	*
 	* @dataProvider exceptions_test_data
-	* @access public
 	*/
 	public function test_exceptions($exception_name, $message, $expected)
 	{
@@ -101,8 +97,6 @@ class exception_test extends \phpbb_test_case
 
 	/**
 	* Test exception language file is being loaded
-	*
-	* @access public
 	*/
 	public function test_exceptions_lang()
 	{

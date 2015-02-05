@@ -16,7 +16,6 @@ class page_operator_insert_page_links_test extends page_operator_base
 	* Test data for the test_add_page_links() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function insert_page_links_test_data()
 	{
@@ -32,7 +31,6 @@ class page_operator_insert_page_links_test extends page_operator_base
 	* Test inserting page links
 	*
 	* @dataProvider insert_page_links_test_data
-	* @access public
 	*/
 	public function test_insert_page_links($page_id, $data)
 	{
@@ -59,7 +57,6 @@ class page_operator_insert_page_links_test extends page_operator_base
 	* Test data for the test_insert_page_links_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function insert_page_links_fails_test_data()
 	{
@@ -76,7 +73,6 @@ class page_operator_insert_page_links_test extends page_operator_base
 	*
 	* @dataProvider insert_page_links_fails_test_data
 	* @expectedException \phpbb\pages\exception\base
-	* @access public
 	*/
 	public function test_insert_page_links_fails($page_id, $data)
 	{

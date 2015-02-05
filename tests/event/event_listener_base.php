@@ -16,8 +16,6 @@ class event_listener_base extends \phpbb_test_case
 
 	/**
 	* Setup test environment
-	*
-	* @access public
 	*/
 	public function setUp()
 	{
@@ -59,7 +57,7 @@ class event_listener_base extends \phpbb_test_case
 	/**
 	* Get the event listener
 	*
-	* @access protected
+	* @return \phpbb\pages\event\listener
 	*/
 	protected function get_listener()
 	{

@@ -19,7 +19,6 @@ class page_entity_route_test extends page_entity_base
 	* Test data for the test_route() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function route_test_data()
 	{
@@ -41,7 +40,6 @@ class page_entity_route_test extends page_entity_base
 	* Test setting route
 	*
 	* @dataProvider route_test_data
-	* @access public
 	*/
 	public function test_route($route, $expected)
 	{
@@ -62,7 +60,6 @@ class page_entity_route_test extends page_entity_base
 	* Test data for the test_route_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function route_fails_test_data()
 	{
@@ -122,7 +119,6 @@ class page_entity_route_test extends page_entity_base
 	*
 	* @dataProvider route_fails_test_data
 	* @expectedException \phpbb\pages\exception\base
-	* @access public
 	*/
 	public function test_route_fails($route)
 	{
@@ -137,7 +133,6 @@ class page_entity_route_test extends page_entity_base
 	* Test data for the test_unique_route() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function unique_route_test_data()
 	{
@@ -153,7 +148,6 @@ class page_entity_route_test extends page_entity_base
 	* Test setting unique routes
 	*
 	* @dataProvider unique_route_test_data
-	* @access public
 	*/
 	public function test_unique_route($id, $route, $expected)
 	{
@@ -180,7 +174,6 @@ class page_entity_route_test extends page_entity_base
 	* Test data for the test_unique_route_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function unique_route_test_fails_data()
 	{
@@ -198,7 +191,6 @@ class page_entity_route_test extends page_entity_base
 	*
 	* @dataProvider unique_route_test_fails_data
 	* @expectedException \phpbb\pages\exception\base
-	* @access public
 	*/
 	public function test_unique_route_fails($id, $route)
 	{

@@ -14,8 +14,6 @@ class event_listener_viewonline_test extends event_listener_base
 {
 	/**
 	* Get an instance of phpbb\user
-	*
-	* @access public
 	*/
 	public function get_user_instance()
 	{
@@ -44,7 +42,6 @@ class event_listener_viewonline_test extends event_listener_base
 	* Data set for test_viewonline_page
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function viewonline_page_data()
 	{
@@ -110,7 +107,6 @@ class event_listener_viewonline_test extends event_listener_base
 	* Test the viewonline_page event
 	*
 	* @dataProvider viewonline_page_data
-	* @access public
 	*/
 	public function test_viewonline_page($on_page, $row, $location_url, $location, $expected_location_url, $expected_location)
 	{

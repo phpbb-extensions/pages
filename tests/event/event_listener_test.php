@@ -14,8 +14,6 @@ class event_listener_test extends event_listener_base
 {
 	/**
 	* Test the event listener is constructed correctly
-	*
-	* @access public
 	*/
 	public function test_construct()
 	{
@@ -25,8 +23,6 @@ class event_listener_test extends event_listener_base
 
 	/**
 	* Test the event listener is subscribing events
-	*
-	* @access public
 	*/
 	public function test_getSubscribedEvents()
 	{

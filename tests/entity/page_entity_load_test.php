@@ -19,7 +19,6 @@ class page_entity_load_test extends page_entity_base
 	* Test data for the test_load() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function load_test_data()
 	{
@@ -84,7 +83,6 @@ class page_entity_load_test extends page_entity_base
 	* Test loading page data from the database
 	*
 	* @dataProvider load_test_data
-	* @access public
 	*/
 	public function test_load($id, $route, $data)
 	{
@@ -121,7 +119,6 @@ class page_entity_load_test extends page_entity_base
 	* Test data for the test_load_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function load_fails_test_data()
 	{
@@ -137,7 +134,6 @@ class page_entity_load_test extends page_entity_base
 	*
 	* @dataProvider load_fails_test_data
 	* @expectedException \phpbb\pages\exception\out_of_bounds
-	* @access public
 	*/
 	public function test_load_fails($id)
 	{

@@ -16,7 +16,6 @@ class page_main_controller_test extends \phpbb_database_test_case
 	* Define the extensions to be tested
 	*
 	* @return array vendor/name of extension(s) to test
-	* @access static
 	*/
 	static protected function setup_extensions()
 	{
@@ -32,7 +31,6 @@ class page_main_controller_test extends \phpbb_database_test_case
 	* Test data for the test_display() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function display_data()
 	{
@@ -45,7 +43,6 @@ class page_main_controller_test extends \phpbb_database_test_case
 	* Test controller display
 	*
 	* @dataProvider display_data
-	* @access public
 	*/
 	public function test_display($status_code, $page_content)
 	{

@@ -44,7 +44,6 @@ class page_entity_content_test extends page_entity_base
 	* Test data for the test_content() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function content_test_data()
 	{
@@ -68,7 +67,6 @@ class page_entity_content_test extends page_entity_base
 	* content and tests them all
 	*
 	* @dataProvider content_test_data
-	* @access public
 	*/
 	public function test_content($content)
 	{
@@ -144,7 +142,6 @@ class page_entity_content_test extends page_entity_base
 	* @param bool $enable_smilies
 	* @param bool $censor_text
 	* @return array
-	* @access protected
 	*/
 	protected function content_test_helper($content, $enable_bbcode, $enable_magic_url, $enable_smilies, $censor_text)
 	{
@@ -168,7 +165,6 @@ class page_entity_content_test extends page_entity_base
 	* Test data for the test_html_content() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function html_content_test_data()
 	{
@@ -187,7 +183,6 @@ class page_entity_content_test extends page_entity_base
 	* Test setting html content
 	*
 	* @dataProvider html_content_test_data
-	* @access public
 	*/
 	public function test_html_content($content)
 	{

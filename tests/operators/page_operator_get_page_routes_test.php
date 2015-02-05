@@ -16,7 +16,6 @@ class page_operator_get_page_routes_test extends page_operator_base
 	* Test data for the test_get_routes() function
 	*
 	* @return array Array of test routes
-	* @access public
 	*/
 	public function get_routes_test_data()
 	{
@@ -36,7 +35,6 @@ class page_operator_get_page_routes_test extends page_operator_base
 	* Test getting page routes from the database
 	*
 	* @dataProvider get_routes_test_data
-	* @access public
 	*/
 	public function test_get_routes($expected)
 	{

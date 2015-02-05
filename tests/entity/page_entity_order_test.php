@@ -19,7 +19,6 @@ class page_entity_order_test extends page_entity_base
 	* Test data for the test_page_order() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function page_order_test_data()
 	{
@@ -37,7 +36,6 @@ class page_entity_order_test extends page_entity_base
 	* Test setting page order
 	*
 	* @dataProvider page_order_test_data
-	* @access public
 	*/
 	public function test_page_order($order, $expected)
 	{
@@ -58,7 +56,6 @@ class page_entity_order_test extends page_entity_base
 	* Test data for the test_order_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function order_fails_test_data()
 	{
@@ -74,7 +71,6 @@ class page_entity_order_test extends page_entity_base
 	*
 	* @dataProvider order_fails_test_data
 	* @expectedException \phpbb\pages\exception\base
-	* @access public
 	*/
 	public function test_order_fails($order)
 	{

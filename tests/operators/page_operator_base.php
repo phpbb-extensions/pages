@@ -19,7 +19,6 @@ class page_operator_base extends \phpbb_database_test_case
 	* Define the extensions to be tested
 	*
 	* @return array vendor/name of extension(s) to test
-	* @access static
 	*/
 	static protected function setup_extensions()
 	{
@@ -69,7 +68,6 @@ class page_operator_base extends \phpbb_database_test_case
 	* Get the page operator
 	*
 	* @return \phpbb\pages\operators\page
-	* @access protected
 	*/
 	protected function get_page_operator()
 	{
