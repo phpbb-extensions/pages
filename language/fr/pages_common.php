@@ -39,5 +39,5 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'PAGES_VIEWONLINE'		=> 'Consulte %s',
+	'PAGES_VIEWONLINE'		=> 'Consulte la page %s',
 ));
