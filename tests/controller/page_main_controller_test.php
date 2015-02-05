@@ -12,6 +12,12 @@ namespace phpbb\pages\tests\controller;
 
 class page_main_controller_test extends \phpbb_database_test_case
 {
+	protected $auth;
+	protected $container;
+	protected $controller_helper;
+	protected $template;
+	protected $user;
+
 	/**
 	* Define the extensions to be tested
 	*
@@ -52,6 +58,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$db = $this->new_dbal();
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 		$this->auth = $this->getMock('\phpbb\auth\auth');
+
 		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
 		$this->container->expects($this->any())
 			->method('get')
@@ -60,9 +67,22 @@ class page_main_controller_test extends \phpbb_database_test_case
 				return new \phpbb\pages\entity\page($db, $phpbb_dispatcher, 'phpbb_pages');
 			}))
 		;
-		$this->template = new \phpbb\pages\tests\mock\template();
+
+		$this->template = $this->getMockBuilder('\phpbb\template\template')
+			->getMock()
+		;
+
 		$this->user = new \phpbb\user('\phpbb\datetime');
-		$this->controller_helper = new \phpbb\pages\tests\mock\controller_helper();
+
+		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->controller_helper->expects($this->any())
+			->method('render')
+			->willReturnCallback(function ($template_file, $page_title = '', $status_code = 200, $display_online_list = false) {
+				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
+			})
+		;
 
 		// Global vars called upon during execution
 		$cache = new \phpbb_mock_cache();
