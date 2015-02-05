@@ -2,7 +2,7 @@
 /**
 *
 * Pages extension for the phpBB Forum Software package.
-* French translation by ForumsFaciles (www.forumsfaciles.fr).
+* French translation by ForumsFaciles (www.forumsfaciles.fr) & Galixte (http://www.galixte.com)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -41,7 +41,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// ACP modules
 	'ACP_PAGES'				=> 'Pages',
-	'ACP_PAGES_MANAGE'		=> 'Gestion des Pages',
+	'ACP_PAGES_MANAGE'		=> 'Gestion des pages',
 
 	// Logs
 	'ACP_PAGES_ADDED_LOG'	=> '<strong>Page ajoutée</strong><br />» %s',
