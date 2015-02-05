@@ -41,7 +41,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// ACP modules
 	'ACP_PAGES'				=> 'Pages',
-	'ACP_PAGES_MANAGE'		=> 'Gestion des pages',
+	'ACP_PAGES_MANAGE'		=> 'Gestion de Pages',
 
 	// Logs
 	'ACP_PAGES_ADDED_LOG'	=> '<strong>Page ajoutée</strong><br />» %s',
