@@ -63,7 +63,7 @@ $lang = array_merge($lang, array(
 
 	// Purge icons
 	'ACP_PAGES_PURGE_ICONS'				=> 'Purger les icônes',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purger les icônes du cache des pages :',
+	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purger les icônes du cache des pages',
 	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Lorsque vous ajoutez  une icône au lien de la page personnalisée, vous devez purger le cache des icônes pour voir apparaître ce nouvel icône.<br /> Placez le dans le dossier <samp>styles/*/theme/images/</samp> de phpBB et nommez le <samp>pages_route.gif</samp>, où <samp>route</samp> correspond au chemin de la page.',
 
 	// Messages shown to user
@@ -91,9 +91,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Les pages seront triées selon ce champ, permettant ainsi d’organiser l’ordre dans lequel vous souhaitez que leurs liens apparaissent. Les nombres les plus petits seront affichés avant les grands nombres.',
 	'ACP_PAGES_FORM_LINKS'				=> 'Emplacements pour le lien de la page',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Sélectionnez un ou plusieurs emplacements où le lien de cette page apparaîtra. Utilisez CTRL+CLICK (ou CMD + CLICK sur Mac) pour (dé)sélectionner plus d’un item.',
-	'ACP_PAGES_FORM_DISPLAY'			=> 'Afficher la page ',
+	'ACP_PAGES_FORM_DISPLAY'			=> 'Afficher la page',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Si défini sur non, la page ne sera pas accessible aux utilisateurs néanmoins les administrateurs y auront accès, leur permettant d’avoir un aperçu pendant la création.',
-	'ACP_PAGES_FORM_GUESTS'				=> 'Afficher la page aux invités ',
+	'ACP_PAGES_FORM_GUESTS'				=> 'Afficher la page aux invités',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Si défini sur non, seuls les utilisateurs enregistrés pourront accéder à la page.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Lien de la page',
 	'PARSE_HTML'						=> 'Parser le HTML',
