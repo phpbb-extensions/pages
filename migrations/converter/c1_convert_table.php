@@ -48,7 +48,7 @@ class c1_convert_table extends \phpbb\db\migration\migration
 	*/
 	public function rename_pages_table()
 	{
-		switch($this->db->get_sql_layer())
+		switch ($this->db->get_sql_layer())
 		{
 			// SQL Server dbms support this syntax
 			case 'mssql':
