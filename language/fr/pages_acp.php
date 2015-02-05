@@ -2,7 +2,7 @@
 /**
 *
 * Pages extension for the phpBB Forum Software package.
-* French translation by ForumsFaciles (www.forumsfaciles.fr)
+* French translation by ForumsFaciles (www.forumsfaciles.fr) & Galixte (http://www.galixte.com)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -63,15 +63,15 @@ $lang = array_merge($lang, array(
 
 	// Purge icons
 	'ACP_PAGES_PURGE_ICONS'				=> 'Purger les icônes',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purger les icônes du cache des pages',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Lorsque vous ajoutez des icônes au lien de la page personnalisée, vous devez purger le cache des icônes pour voir les nouveaux icônes apparaître. Placez des icônes personnalisés nommés <samp>pages_route.gif</samp>, où <samp>route</samp> est le chemin de la page dans les dossiers <samp>styles/*/theme/images/</samp> de phpBB.',
+	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purger les icônes du cache des pages :',
+	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Lorsque vous ajoutez  une icône au lien de la page personnalisée, vous devez purger le cache des icônes pour voir apparaître ce nouvel icône.<br /> Placez le dans le dossier <samp>styles/*/theme/images/</samp> de phpBB et nommez le <samp>pages_route.gif</samp>, où <samp>route</samp> correspond au chemin de la page.',
 
 	// Messages shown to user
-	'ACP_PAGES_DELETE_CONFIRM'			=> 'Êtes-vous certain que vous souhaitez supprimer cette page ?',
-	'ACP_PAGES_DELETE_SUCCESS'			=> 'Page supprimée avec succès.',
-	'ACP_PAGES_DELETE_ERRORED'			=> 'La page n’a pas pu être supprimée.',
-	'ACP_PAGES_ADD_SUCCESS'				=> 'Page ajoutée avec succès.',
-	'ACP_PAGES_EDIT_SUCCESS'			=> 'Page mise à jour avec succès.',
+	'ACP_PAGES_DELETE_CONFIRM'			=> 'Êtes-vous certain de vouloir supprimer cette page ?',
+	'ACP_PAGES_DELETE_SUCCESS'			=> 'La page a été supprimée avec succès.',
+	'ACP_PAGES_DELETE_ERRORED'			=> 'La page n’a pas été supprimée.',
+	'ACP_PAGES_ADD_SUCCESS'				=> 'La page a été ajoutée avec succès.',
+	'ACP_PAGES_EDIT_SUCCESS'			=> 'La page a été mise à jour avec succès.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Paramètres de la page',
@@ -79,22 +79,22 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE'				=> 'Titre de la page',
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Ce champ est obligatoire.',
 	'ACP_PAGES_FORM_DESC'				=> 'Description de la page',
-	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Ceci ne sera affiché que dans la liste des pages dans le PCA.',
+	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Cette description ne sera affichée que dans la rubrique “Gestion des Pages” du PCA.',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Chemin de la page',
-	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Le <strong>chemin</strong> est un identifiant unique utilisé à la fin de l’URL d’une page pour en définir le lien vers cette dernière. Ex. <samp>phpBB/page/<strong>chemin</strong></samp>. Seuls sont autorisés les lettres, chiffres, traits d’union et underscores. Ce champ est obligatoire.',
+	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Le <strong>chemin</strong> est un identifiant unique utilisé à la fin de l’URL d’une page pour en définir le lien vers cette dernière. Exemple : <samp>phpBB/page/<strong>chemin</strong></samp>. Seuls sont autorisés les lettres, chiffres, traits d’union et underscores. Ce champ est obligatoire.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Contenu de la page',
-	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> 'Le contenu peut être créé en faisant usage des BBCodes normaux de phpBB, les smilies et les URL magiques ou bien en activant le mode HTML. Avec le mode HTML, les BBCodes, smilies et URL magiques ne fonctionneront pas, mais vous pouvez utiliser toute syntaxe HTML valide. Veuillez prendre note que ce contenu sera intégré dans un template HTML existant. Ainsi, nul besoin d’insérer les tags DOCTYPE, HTML, BODY ou HEAD. Néanmoins, tous les autres tags de mise en forme, incluant IFRAME, SCRIPT, STYLE, EMBED, VIDEO, etc. peuvent être utilisés.',
+	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> 'Le contenu peut être créé en faisant usage des BBCodes normaux de phpBB, les smilies et les URL magiques ou bien en activant le mode HTML. Avec le mode HTML, les BBCodes, smilies et URL magiques ne fonctionneront pas, mais vous pouvez utiliser toute syntaxe HTML valide. Veuillez prendre note que ce contenu sera intégré dans un template HTML existant. Ainsi, nul besoin d’insérer les tags DOCTYPE, HTML, BODY ou HEAD. Néanmoins, tous les autres tags de mise en forme peuvent être utilisés, incluant IFRAME, SCRIPT, STYLE, EMBED, VIDEO, etc.',
 	'ACP_PAGES_FORM_TEMPLATE'			=> 'Template de la page',
-	'ACP_PAGES_FORM_TEMPLATE_EXPLAIN'	=> 'Des templates de page personnalisés, nommés <samp>pages_*.html</samp> peuvent être ajoutés dans les dossiers <samp>styles/*/template</samp> de phpBB.',
+	'ACP_PAGES_FORM_TEMPLATE_EXPLAIN'	=> 'Les templates des page personnalisées, sont nommés <samp>pages_*.html</samp> et peuvent être ajoutés dans les dossiers <samp>styles/*/template</samp> de phpBB.',
 	'ACP_PAGES_FORM_TEMPLATE_SELECT'	=> 'Sélectionner un template',
 	'ACP_PAGES_FORM_ORDER'				=> 'Ordre de la page',
-	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Les pages seront triées selon ce champ, permettant ainsi d’aider à organiser l’ordre dans lequel vous souhaitez que leurs liens apparaissent. Les nombres les plus petits seront affichés avant les grands nombres.',
+	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Les pages seront triées selon ce champ, permettant ainsi d’organiser l’ordre dans lequel vous souhaitez que leurs liens apparaissent. Les nombres les plus petits seront affichés avant les grands nombres.',
 	'ACP_PAGES_FORM_LINKS'				=> 'Emplacements pour le lien de la page',
-	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Sélectionnez un/plusieurs endroits où le lien de cette page apparaîtra. Utilisez CTRL+CLICK (ou CMD+CLICK sur Mac) pour (dé)sélectionner plus d’un item.',
-	'ACP_PAGES_FORM_DISPLAY'			=> 'Afficher la page',
-	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Si défini sur non, la page ne sera pas accessible. (Note: les administrateurs auront encore accès à la page, leur permettant d’en avoir un aperçu pendant qu’ils la préparent)',
-	'ACP_PAGES_FORM_GUESTS'				=> 'Afficher la page aux invités',
-	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Si défini sur non, seuls les utiliateurs enregistrés pourront accéder à la page.',
+	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Sélectionnez un ou plusieurs emplacements où le lien de cette page apparaîtra. Utilisez CTRL+CLICK (ou CMD + CLICK sur Mac) pour (dé)sélectionner plus d’un item.',
+	'ACP_PAGES_FORM_DISPLAY'			=> 'Afficher la page ',
+	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Si défini sur non, la page ne sera pas accessible aux utilisateurs néanmoins les administrateurs y auront accès, leur permettant d’avoir un aperçu pendant la création.',
+	'ACP_PAGES_FORM_GUESTS'				=> 'Afficher la page aux invités ',
+	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Si défini sur non, seuls les utilisateurs enregistrés pourront accéder à la page.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Lien de la page',
 	'PARSE_HTML'						=> 'Parser le HTML',
 
@@ -105,8 +105,8 @@ $lang = array_merge($lang, array(
 	'NAV_BAR_CRUMBS_AFTER'				=> 'Barre de navigation après le fil d’ariane',
 	'FOOTER_TIMEZONE_BEFORE'			=> 'Pied de page avant le fuseau horaire',
 	'FOOTER_TIMEZONE_AFTER'				=> 'Pied de page après le fuseau horaire',
-	'FOOTER_TEAMS_BEFORE'				=> 'Pied de page avant le lien de l’Equipe',
-	'FOOTER_TEAMS_AFTER'				=> 'Pied de page après le lien de l’Equipe',
-	'QUICK_LINK_MENU_BEFORE'			=> 'En haut du menu "accès rapide"',
-	'QUICK_LINK_MENU_AFTER'				=> 'En bas du menu "accès rapide"',
+	'FOOTER_TEAMS_BEFORE'				=> 'Pied de page avant le lien de l’équipe',
+	'FOOTER_TEAMS_AFTER'				=> 'Pied de page après le lien de l’équipe',
+	'QUICK_LINK_MENU_BEFORE'			=> 'En haut du menu “Accès rapide”',
+	'QUICK_LINK_MENU_AFTER'				=> 'En bas du menu “Accès rapide”',
 ));
