@@ -16,6 +16,18 @@ namespace phpbb\pages\migrations\converter;
 class c1_convert_table extends \phpbb\db\migration\migration
 {
 	/**
+	* Assign migration file dependencies for this migration
+	*
+	* @return array Array of migration files
+	* @static
+	* @access public
+	*/
+	static public function depends_on()
+	{
+		return array('\phpbb\db\migration\data\v310\gold');
+	}
+
+	/**
 	* Skip this migration if a previous pages table does not
 	* exist, or our pages table is already installed
 	*
