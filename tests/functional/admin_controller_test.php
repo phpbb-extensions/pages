@@ -17,8 +17,6 @@ class admin_controller_test extends pages_functional_base
 {
 	/**
 	* Test Pages ACP module appears
-	*
-	* @access public
 	*/
 	public function test_acp_module()
 	{
@@ -40,8 +38,6 @@ class admin_controller_test extends pages_functional_base
 
 	/**
 	* Test Pages ACP Create Page
-	*
-	* @access public
 	*/
 	public function test_acp_create()
 	{

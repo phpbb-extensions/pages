@@ -14,8 +14,6 @@ class page_operator_add_page_test extends page_operator_base
 {
 	/**
 	* Test adding a page
-	*
-	* @access public
 	*/
 	public function test_add_page()
 	{
@@ -52,7 +50,6 @@ class page_operator_add_page_test extends page_operator_base
 	* Test adding a page fails
 	*
 	* @expectedException \phpbb\pages\exception\base
-	* @access public
 	*/
 	public function test_add_page_fails()
 	{

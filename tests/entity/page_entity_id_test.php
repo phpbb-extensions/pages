@@ -19,7 +19,6 @@ class page_entity_id_test extends page_entity_base
 	* Test data for the test_id() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function id_test_data()
 	{
@@ -49,7 +48,6 @@ class page_entity_id_test extends page_entity_base
 	* Test getting id
 	*
 	* @dataProvider id_test_data
-	* @access public
 	*/
 	public function test_id($data, $expected)
 	{

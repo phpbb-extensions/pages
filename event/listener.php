@@ -48,7 +48,6 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\user                    $user               User object
 	* @param string                         $phpbb_root_path    phpbb_root_path
 	* @param string                         $php_ext            phpEx
-	* @return \phpbb\pages\event\listener
 	* @access public
 	*/
 	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, $phpbb_root_path, $php_ext)

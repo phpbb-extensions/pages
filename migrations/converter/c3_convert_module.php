@@ -16,6 +16,18 @@ namespace phpbb\pages\migrations\converter;
 class c3_convert_module extends \phpbb\db\migration\migration
 {
 	/**
+	* Assign migration file dependencies for this migration
+	*
+	* @return array Array of migration files
+	* @static
+	* @access public
+	*/
+	static public function depends_on()
+	{
+		return array('\phpbb\pages\migrations\converter\c1_convert_table');
+	}
+
+	/**
 	* Skip this migration if an ACP_PAGES module does not exist
 	*
 	* @return bool True if table does not exist

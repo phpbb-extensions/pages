@@ -17,8 +17,6 @@ class version_check_test extends pages_functional_base
 {
 	/**
 	* Test extension manager version check
-	*
-	* @access public
 	*/
 	public function test_version_check()
 	{

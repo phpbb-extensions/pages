@@ -16,7 +16,6 @@ class page_operator_delete_page_test extends page_operator_base
 	* Test data for the test_delete_page() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function delete_page_test_data()
 	{
@@ -32,7 +31,6 @@ class page_operator_delete_page_test extends page_operator_base
 	* Test deleting pages
 	*
 	* @dataProvider delete_page_test_data
-	* @access public
 	*/
 	public function test_delete_page($page_id)
 	{
@@ -65,7 +63,6 @@ class page_operator_delete_page_test extends page_operator_base
 	* Test data for the test_delete_page_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function delete_page_fails_data()
 	{
@@ -81,7 +78,6 @@ class page_operator_delete_page_test extends page_operator_base
 	*
 	* @dataProvider delete_page_fails_data
 	* @expectedException \phpbb\pages\exception\base
-	* @access public
 	*/
 	public function test_delete_page_fails($page_id)
 	{

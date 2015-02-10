@@ -38,7 +38,7 @@ class pages_module
 		$this->page_title = $user->lang('ACP_PAGES_MANAGE');
 
 		// Perform any actions submitted by the user
-		switch($action)
+		switch ($action)
 		{
 			case 'add':
 				// Set the page title for our ACP page

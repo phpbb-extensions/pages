@@ -55,7 +55,6 @@ class page implements page_interface
 	* @param \phpbb\db\driver\driver_interface    $db                 Database object
 	* @param \phpbb\event\dispatcher_interface    $phpbb_dispatcher   Event dispatcher
 	* @param string                               $pages_table        Name of the table used to store page data
-	* @return \phpbb\pages\entity\page
 	* @access public
 	*/
 	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table)

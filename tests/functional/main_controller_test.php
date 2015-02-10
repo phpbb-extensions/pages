@@ -17,8 +17,6 @@ class main_controller_test extends pages_functional_base
 {
 	/**
 	* Test Page appears in front end
-	*
-	* @access public
 	*/
 	public function test_display()
 	{

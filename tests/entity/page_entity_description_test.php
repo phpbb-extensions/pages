@@ -19,7 +19,6 @@ class page_entity_description_test extends page_entity_base
 	* Test data for the test_description() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function description_test_data()
 	{
@@ -41,7 +40,6 @@ class page_entity_description_test extends page_entity_base
 	* Test setting description
 	*
 	* @dataProvider description_test_data
-	* @access public
 	*/
 	public function test_description($description, $expected)
 	{
@@ -62,7 +60,6 @@ class page_entity_description_test extends page_entity_base
 	* Test data for the test_description_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function description_fails_test_data()
 	{
@@ -81,7 +78,6 @@ class page_entity_description_test extends page_entity_base
 	*
 	* @dataProvider description_fails_test_data
 	* @expectedException \phpbb\pages\exception\base
-	* @access public
 	*/
 	public function test_description_fails($description)
 	{

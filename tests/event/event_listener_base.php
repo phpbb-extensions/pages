@@ -12,12 +12,10 @@ namespace phpbb\pages\tests\event;
 
 class event_listener_base extends \phpbb_test_case
 {
-	protected $controller_helper, $template, $user, $root_path, $php_ext;
+	protected $auth, $controller_helper, $page_operator, $template, $user, $root_path, $php_ext;
 
 	/**
 	* Setup test environment
-	*
-	* @access public
 	*/
 	public function setUp()
 	{
@@ -32,8 +30,9 @@ class event_listener_base extends \phpbb_test_case
 		$this->php_ext = $phpEx;
 		$this->root_path = $phpbb_root_path;
 		$this->auth = $this->getMock('\phpbb\auth\auth');
-		$this->template = new \phpbb\pages\tests\mock\template();
 		$this->user = new \phpbb\user('\phpbb\datetime');
+		$this->template = $this->getMockBuilder('\phpbb\template\template')
+			->getMock();
 
 		$request = new \phpbb_mock_request();
 		$request->overwrite('SCRIPT_NAME', 'app.php', \phpbb\request\request_interface::SERVER);
@@ -53,13 +52,15 @@ class event_listener_base extends \phpbb_test_case
 			$phpEx,
 			dirname(__FILE__) . '/../../'
 		);
-		$this->page_operator = $this->getMock('\phpbb\pages\tests\mock\page_operator');
+		$this->page_operator = $this->getMockBuilder('\phpbb\pages\operators\page')
+			->disableOriginalConstructor()
+			->getMock();
 	}
 
 	/**
 	* Get the event listener
 	*
-	* @access protected
+	* @return \phpbb\pages\event\listener
 	*/
 	protected function get_listener()
 	{

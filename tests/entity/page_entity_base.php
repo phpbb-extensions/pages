@@ -23,7 +23,6 @@ class page_entity_base extends \phpbb_database_test_case
 	* Define the extensions to be tested
 	*
 	* @return array vendor/name of extension(s) to test
-	* @access static
 	*/
 	static protected function setup_extensions()
 	{
@@ -55,7 +54,6 @@ class page_entity_base extends \phpbb_database_test_case
 	* Get the page entity
 	*
 	* @return \phpbb\pages\entity\page
-	* @access protected
 	*/
 	protected function get_page_entity()
 	{
@@ -66,7 +64,6 @@ class page_entity_base extends \phpbb_database_test_case
 	* Some common data to test from which can be imported
 	*
 	* @return array Data to send to import_data
-	* @access public
 	*/
 	public function get_import_data()
 	{

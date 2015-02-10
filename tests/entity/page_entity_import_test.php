@@ -19,7 +19,6 @@ class page_entity_import_test extends page_entity_base
 	* Test data for the test_import() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function import_test_data()
 	{
@@ -38,7 +37,6 @@ class page_entity_import_test extends page_entity_base
 	* Test importing data
 	*
 	* @dataProvider import_test_data
-	* @access public
 	*/
 	public function test_import($data)
 	{
@@ -74,7 +72,6 @@ class page_entity_import_test extends page_entity_base
 	* Test data for the test_import_fail() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function import_test_fail_data()
 	{
@@ -136,7 +133,6 @@ class page_entity_import_test extends page_entity_base
 	*
 	* @dataProvider import_test_fail_data
 	* @expectedException \phpbb\pages\exception\base
-	* @access public
 	*/
 	public function test_import_fail($data)
 	{

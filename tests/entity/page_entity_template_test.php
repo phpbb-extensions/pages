@@ -19,7 +19,6 @@ class page_entity_template_test extends page_entity_base
 	* Test data for the test_template() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function template_test_data()
 	{
@@ -41,7 +40,6 @@ class page_entity_template_test extends page_entity_base
 	* Test setting template
 	*
 	* @dataProvider template_test_data
-	* @access public
 	*/
 	public function test_template($template, $expected)
 	{
@@ -62,7 +60,6 @@ class page_entity_template_test extends page_entity_base
 	* Test data for the test_template_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function template_fails_test_data()
 	{
@@ -88,7 +85,6 @@ class page_entity_template_test extends page_entity_base
 	*
 	* @dataProvider template_fails_test_data
 	* @expectedException \phpbb\pages\exception\base
-	* @access public
 	*/
 	public function test_template_fails($template)
 	{
