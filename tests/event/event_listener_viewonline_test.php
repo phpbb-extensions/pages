@@ -84,7 +84,7 @@ class event_listener_viewonline_test extends event_listener_base
 				),
 				'$location_url',
 				'$location',
-				'app.' . $phpEx . '/page/test',
+				'phpbb_pages_main_controller#a:1:{s:5:"route";s:4:"test";}',
 				$this->user->lang('PAGES_VIEWONLINE', '$location'),
 			),
 			// test when on_page is app and session_page is for non-existent pages
@@ -113,6 +113,12 @@ class event_listener_viewonline_test extends event_listener_base
 		$this->page_operator->expects($this->any())
 			->method('get_page_routes')
 			->will($this->returnValue(array('test' => $location)));
+
+		$this->controller_helper->expects($this->any())
+			->method('route')
+			->willReturnCallback(function ($route, array $params = array()) {
+				return $route . '#' . serialize($params);
+			});
 
 		$listener = $this->get_listener();
 
