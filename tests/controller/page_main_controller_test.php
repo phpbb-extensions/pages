@@ -10,6 +10,9 @@
 
 namespace phpbb\pages\tests\controller;
 
+require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
+require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php';
+
 class page_main_controller_test extends \phpbb_database_test_case
 {
 	protected $auth;
@@ -52,7 +55,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 	*/
 	public function test_display($status_code, $page_content)
 	{
-		global $cache, $phpbb_dispatcher, $user;
+		global $cache, $phpbb_extension_manager, $phpbb_dispatcher, $user, $phpbb_root_path;
 
 		// Load/Mock classes required by the controller class
 		$db = $this->new_dbal();
@@ -87,6 +90,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 		// Global vars called upon during execution
 		$cache = new \phpbb_mock_cache();
 		$user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
+		$phpbb_extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
 
 		$controller = new \phpbb\pages\controller\main_controller(
 			$this->auth,

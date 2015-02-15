@@ -10,6 +10,9 @@
 
 namespace phpbb\pages\tests\operators;
 
+require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
+require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php';
+
 /**
 * Base pages operator test (helper)
 */
@@ -36,10 +39,13 @@ class page_operator_base extends \phpbb_database_test_case
 	{
 		parent::setUp();
 
-		global $phpbb_dispatcher, $phpbb_root_path;
+		global $config, $phpbb_dispatcher, $phpbb_root_path;
 
 		$this->db = $this->new_dbal();
 		$db = $this->db;
+
+		// Global vars called upon during execution
+		$config = new \phpbb\config\config(array());
 
 		// mock container for the entity service
 		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
