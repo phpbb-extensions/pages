@@ -12,7 +12,7 @@ namespace phpbb\pages\acp;
 
 class pages_info
 {
-	function module()
+	public function module()
 	{
 		return array(
 			'filename'	=> '\phpbb\pages\acp\pages_module',
