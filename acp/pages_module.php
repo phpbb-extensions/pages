@@ -14,7 +14,7 @@ class pages_module
 {
 	public $u_action;
 
-	function main($id, $mode)
+	public function main($id, $mode)
 	{
 		global $cache, $phpbb_container, $request, $user;
 
