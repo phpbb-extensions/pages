@@ -19,7 +19,7 @@ class page_entity_content_test extends page_entity_base
 	{
 		parent::setUp();
 
-		global $cache, $db, $request, $user, $phpbb_path_helper, $phpbb_root_path, $phpEx;
+		global $cache, $db, $request, $user, $phpbb_container, $phpbb_path_helper, $phpbb_root_path, $phpEx;
 
 		$cache = new \phpbb_mock_cache();
 
@@ -38,6 +38,15 @@ class page_entity_content_test extends page_entity_base
 			$phpbb_root_path,
 			$phpEx
 		);
+
+		// Set container options for $template instance created in bbcodes.php:138
+		$phpbb_container = new \phpbb_mock_container_builder();
+		$phpbb_container->set('path_helper', $phpbb_path_helper);
+		$phpbb_container->set('config', new \phpbb\config\config(array()));
+		$phpbb_container->set('user', $user);
+		$phpbb_container->set('ext.manager', new \phpbb_mock_extension_manager($phpbb_root_path));
+		$phpbb_container->set('template.twig.extensions.collection', array());
+		$phpbb_container->setParameter('core.root_path', $phpbb_root_path);
 	}
 
 	/**
