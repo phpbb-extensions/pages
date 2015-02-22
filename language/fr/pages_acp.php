@@ -101,8 +101,8 @@ $lang = array_merge($lang, array(
 	// Page link location names
 	'NAV_BAR_LINKS_BEFORE'				=> 'Barre de navigation avant les liens',
 	'NAV_BAR_LINKS_AFTER'				=> 'Barre de navigation après les liens',
-	'NAV_BAR_CRUMBS_BEFORE'				=> 'Barre de navigation avant le fil d’ariane',
-	'NAV_BAR_CRUMBS_AFTER'				=> 'Barre de navigation après le fil d’ariane',
+	'NAV_BAR_CRUMBS_BEFORE'				=> 'Barre de navigation avant le fil d’Ariane',
+	'NAV_BAR_CRUMBS_AFTER'				=> 'Barre de navigation après le fil d’Ariane',
 	'FOOTER_TIMEZONE_BEFORE'			=> 'Pied de page avant le fuseau horaire',
 	'FOOTER_TIMEZONE_AFTER'				=> 'Pied de page après le fuseau horaire',
 	'FOOTER_TEAMS_BEFORE'				=> 'Pied de page avant le lien de l’équipe',
