@@ -4,16 +4,13 @@ This is the repository for the development of the phpBB Pages Extension.
 
 [![Build Status](https://travis-ci.org/phpbb-extensions/pages.png)](https://travis-ci.org/phpbb-extensions/pages)
 
-## Quick Install
-You can install this on the latest release of phpBB 3.1 by following the steps below:
+## Install
 
-1. [Download the latest release](https://github.com/phpbb-extensions/pages/releases).
-2. Unzip the downloaded release, and change the name of the folder to `pages`.
-3. In the `ext` directory of your phpBB board, create a new directory named `phpbb` (if it does not already exist).
-4. Copy the `pages` directory to `phpBB/ext/phpbb/` (if done correctly, you'll have the main composer JSON file at (your forum root)/ext/phpbb/pages/composer.json).
-5. Navigate in the ACP to `Customise -> Manage extensions`.
-6. Look for `Pages` under the Disabled Extensions list, and click its `Enable` link.
-7. Set up and configure Pages by navigating in the ACP to `Extensions` -> `Pages`.
+1. [Download the latest validated release](https://www.phpbb.com/customise/db/extension/pages/).
+2. Unzip the downloaded release and copy it to the `ext` directory of your phpBB board.
+3. Navigate in the ACP to `Customise -> Manage extensions`.
+4. Look for `Pages` under the Disabled Extensions list, and click its `Enable` link.
+5. Set up and configure Pages by navigating in the ACP to `Extensions` -> `Pages`.
 
 ## Uninstall
 
@@ -26,6 +23,10 @@ You can install this on the latest release of phpBB 3.1 by following the steps b
 * **Important: Only official release versions validated by the phpBB Extensions Team should be installed on a live forum. Pre-release (beta, RC) versions downloaded from this repository are only to be used for testing on offline/development forums and are not officially supported.**
 * Report bugs and other issues to our [Issue Tracker](https://github.com/phpbb-extensions/pages/issues).
 * Support requests should be posted and discussed in the [Pages topic at phpBB.com](https://www.phpbb.com/customise/db/extension/pages/support).
+
+## Translations
+
+* Translations should be posted to the [Pages topic at phpBB.com](https://www.phpbb.com/customise/db/extension/pages/support/topic/130741). We accept pull requests for translation corrections, but we do not accept pull requests for new translations.
 
 ## Customising Pages
 
