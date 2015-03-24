@@ -39,7 +39,12 @@ class page_entity_content_test extends page_entity_base
 			$phpEx
 		);
 
+		// This is needed to set up the s9e text formatter services
+		// This can lead to a test failure if PCRE is old.
+		// TODO: USE this if s9e is added (make sure PCRE is up to date)
+		//$this->get_test_case_helpers()->set_s9e_services();
 		// Set container options for $template instance created in bbcodes.php:138
+		// TODO: REMOVE this if s9e is added
 		$phpbb_container = new \phpbb_mock_container_builder();
 		$phpbb_container->set('path_helper', $phpbb_path_helper);
 		$phpbb_container->set('config', new \phpbb\config\config(array()));

@@ -20,6 +20,11 @@ class page_entity_insert_test extends page_entity_base
 	*/
 	public function test_insert()
 	{
+		// This is needed to set up the s9e text formatter services
+		// This can lead to a test failure if PCRE is old.
+		// TODO: USE this if s9e is added (make sure PCRE is up to date)
+		//$this->get_test_case_helpers()->set_s9e_services();
+
 		$data = array(
 			'page_id'							=> 5,
 			'page_order'						=> 0,
