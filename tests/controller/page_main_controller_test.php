@@ -59,7 +59,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 
 		// Load/Mock classes required by the controller class
 		$db = $this->new_dbal();
-		$config = $this->config = new \phpbb\config\config(array());
+		$config = new \phpbb\config\config(array());
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 		$this->auth = $this->getMock('\phpbb\auth\auth');
 

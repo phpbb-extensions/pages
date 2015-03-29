@@ -544,8 +544,8 @@ class page implements page_interface
 	*/
 	public function set_content($content)
 	{
-		// Override editing time and maximum post characters limits
-		$this->config['edit_time'] = $this->config['max_post_chars'] = 0;
+		// Override maximum post characters limit
+		$this->config['max_post_chars'] = 0;
 
 		// Prepare the text for storage
 		$uid = $bitfield = $flags = '';
