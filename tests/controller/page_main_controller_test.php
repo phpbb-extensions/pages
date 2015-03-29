@@ -55,10 +55,11 @@ class page_main_controller_test extends \phpbb_database_test_case
 	*/
 	public function test_display($status_code, $page_content)
 	{
-		global $cache, $phpbb_extension_manager, $phpbb_dispatcher, $user, $phpbb_root_path;
+		global $cache, $config, $phpbb_extension_manager, $phpbb_dispatcher, $user, $phpbb_root_path;
 
 		// Load/Mock classes required by the controller class
 		$db = $this->new_dbal();
+		$config = $this->config = new \phpbb\config\config(array());
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 		$this->auth = $this->getMock('\phpbb\auth\auth');
 
@@ -66,8 +67,8 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.pages.entity')
-			->will($this->returnCallback(function() use ($db, $phpbb_dispatcher) {
-				return new \phpbb\pages\entity\page($db, $phpbb_dispatcher, 'phpbb_pages');
+			->will($this->returnCallback(function() use ($db, $config, $phpbb_dispatcher) {
+				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages');
 			}))
 		;
 
