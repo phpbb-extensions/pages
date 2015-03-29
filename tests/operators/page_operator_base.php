@@ -45,7 +45,7 @@ class page_operator_base extends \phpbb_database_test_case
 		$db = $this->db;
 
 		// Global vars called upon during execution
-		$config = new \phpbb\config\config(array());
+		$config = $this->config = new \phpbb\config\config(array());
 
 		// mock container for the entity service
 		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
@@ -54,8 +54,8 @@ class page_operator_base extends \phpbb_database_test_case
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.pages.entity')
-			->will($this->returnCallback(function() use ($db, $phpbb_dispatcher) {
-				return new \phpbb\pages\entity\page($db, $phpbb_dispatcher, 'phpbb_pages');
+			->will($this->returnCallback(function() use ($db, $config, $phpbb_dispatcher) {
+				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages');
 			}))
 		;
 		$this->extension_manager = new \phpbb_mock_extension_manager(

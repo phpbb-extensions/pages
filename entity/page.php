@@ -39,6 +39,9 @@ class page implements page_interface
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
 	/** @var \phpbb\event\dispatcher_interface */
 	protected $phpbb_dispatcher;
 
@@ -57,9 +60,10 @@ class page implements page_interface
 	* @param string                               $pages_table        Name of the table used to store page data
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table)
 	{
 		$this->db = $db;
+		$this->config = $config;
 		$this->dispatcher = $phpbb_dispatcher;
 		$this->pages_table = $pages_table;
 	}
@@ -540,6 +544,9 @@ class page implements page_interface
 	*/
 	public function set_content($content)
 	{
+		// Override maximum post characters limit
+		$this->config['max_post_chars'] = 0;
+
 		// Prepare the text for storage
 		$uid = $bitfield = $flags = '';
 		generate_text_for_storage($content, $uid, $bitfield, $flags, $this->content_bbcode_enabled(), $this->content_magic_url_enabled(), $this->content_smilies_enabled());
