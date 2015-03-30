@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Extension Builder" description="Builds an extension.zip from a git repository" default="all">
+<project name="Pages Extension Builder" description="Builds an extension.zip from a git repository" default="all">
 	<property name="vendor-name" value="phpbb" />
 	<property name="extension-name" value="pages" />
 	<!--

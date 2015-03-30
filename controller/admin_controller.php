@@ -225,7 +225,8 @@ class admin_controller implements admin_interface
 		if ($submit)
 		{
 			// Test if the form is valid
-			if (!check_form_key('add_edit_page'))
+			// Use -1 to allow unlimited time to submit form
+			if (!check_form_key('add_edit_page', -1))
 			{
 				$errors[] = $this->user->lang('FORM_INVALID');
 			}

@@ -43,6 +43,7 @@ services:
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
             - @dbal.conn
+            - @config
             - @dispatcher
             - %phpbb.pages.tables.pages%
 
