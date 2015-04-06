@@ -18,7 +18,7 @@ class page_operator_add_page_test extends page_operator_base
 	public function test_add_page()
 	{
 		// Setup the entity class
-		$entity = new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages');
+		$entity = $this->get_page_entity();
 
 		// Fill the entity with basic data
 		$entity
@@ -54,7 +54,7 @@ class page_operator_add_page_test extends page_operator_base
 	public function test_add_page_fails()
 	{
 		// Setup the entity class
-		$entity = new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages');
+		$entity = $this->get_page_entity();
 
 		// Load an existing page data
 		$entity->load(1);
@@ -63,6 +63,6 @@ class page_operator_add_page_test extends page_operator_base
 		$operator = $this->get_page_operator();
 
 		// Attempt to add the existing the page data
-		$result = $operator->add_page($entity);
+		$operator->add_page($entity);
 	}
 }
