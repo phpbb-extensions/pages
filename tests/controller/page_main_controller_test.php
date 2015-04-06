@@ -65,13 +65,14 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$config = new \phpbb\config\config(array());
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 		$this->auth = $this->getMock('\phpbb\auth\auth');
+		$text_formatter_utils = new \phpbb\textformatter\s9e\utils();
 
 		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.pages.entity')
-			->will($this->returnCallback(function() use ($db, $config, $phpbb_dispatcher) {
-				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages');
+			->will($this->returnCallback(function() use ($db, $config, $phpbb_dispatcher, $text_formatter_utils) {
+				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils);
 			}))
 		;
 

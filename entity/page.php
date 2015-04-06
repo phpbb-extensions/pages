@@ -45,6 +45,9 @@ class page implements page_interface
 	/** @var \phpbb\event\dispatcher_interface */
 	protected $phpbb_dispatcher;
 
+	/** @var \phpbb\textformatter\s9e\utils */
+	protected $text_formatter_utils;
+
 	/**
 	* The database table the page data is stored in
 	*
@@ -55,18 +58,20 @@ class page implements page_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\db\driver\driver_interface    $db                 Database object
-	* @param \phpbb\config\config                 $config             Config object
-	* @param \phpbb\event\dispatcher_interface    $phpbb_dispatcher   Event dispatcher
-	* @param string                               $pages_table        Name of the table used to store page data
+	* @param \phpbb\db\driver\driver_interface   $db                    Database object
+	* @param \phpbb\config\config                $config                Config object
+	* @param \phpbb\event\dispatcher_interface   $phpbb_dispatcher      Event dispatcher
+	* @param string                              $pages_table           Name of the table used to store page data
+	* @param \phpbb\textformatter\s9e\utils      $text_formatter_utils  Text manipulation utilities
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table, \phpbb\textformatter\s9e\utils $text_formatter_utils = null)
 	{
 		$this->db = $db;
 		$this->config = $config;
 		$this->dispatcher = $phpbb_dispatcher;
 		$this->pages_table = $pages_table;
+		$this->text_formatter_utils = $text_formatter_utils;
 	}
 
 	/**
@@ -513,9 +518,10 @@ class page implements page_interface
 		{
 			// This is required by s9e text formatter to
 			// remove extra xml formatting from the content.
-			// TODO: Do not use a global for this
-			global $phpbb_container;
-			$content = $phpbb_container->get('text_formatter.utils')->unparse($content);
+			if ($this->text_formatter_utils !== null)
+			{
+				$content = $this->text_formatter_utils->unparse($content);
+			}
 
 			$content = htmlspecialchars_decode($content, ENT_COMPAT);
 		}

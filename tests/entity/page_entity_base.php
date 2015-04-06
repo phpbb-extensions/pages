@@ -46,6 +46,7 @@ class page_entity_base extends \phpbb_database_test_case
 		global $config, $phpbb_dispatcher;
 		$config = $this->config = new \phpbb\config\config(array());
 		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
+		$this->text_formatter_utils = new \phpbb\textformatter\s9e\utils();
 	}
 
 	/**
@@ -55,7 +56,7 @@ class page_entity_base extends \phpbb_database_test_case
 	*/
 	protected function get_page_entity()
 	{
-		return new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages');
+		return new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages', $this->text_formatter_utils);
 	}
 
 	/**
