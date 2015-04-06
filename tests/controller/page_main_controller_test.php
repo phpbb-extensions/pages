@@ -44,7 +44,10 @@ class page_main_controller_test extends \phpbb_database_test_case
 	public function display_data()
 	{
 		return array(
-			array(200, 'pages_default.html'),
+			array('page_1', 200, 'pages_default.html', 2), // normal viewable page by member
+			array('page_4', 200, 'pages_default.html', 2), // disabled page, member sees page missing message
+			array('page_4', 200, 'pages_default.html', 1), // disabled page, guests sees page missing message
+			array('page_foo', 200, 'pages_default.html', 2), // non-existent page, loads page missing message
 		);
 	}
 
@@ -53,7 +56,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 	*
 	* @dataProvider display_data
 	*/
-	public function test_display($status_code, $page_content)
+	public function test_display($route, $status_code, $page_content, $user_id)
 	{
 		global $cache, $config, $phpbb_extension_manager, $phpbb_dispatcher, $user, $phpbb_root_path;
 
@@ -77,6 +80,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 		;
 
 		$this->user = new \phpbb\user('\phpbb\datetime');
+		$this->user->data['user_id'] = $user_id;
 
 		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
@@ -101,7 +105,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 			$this->user
 		);
 
-		$response = $controller->display('page_1');
+		$response = $controller->display($route);
 		$this->assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
 		$this->assertEquals($status_code, $response->getStatusCode());
 		$this->assertEquals($page_content, $response->getContent());
