@@ -512,9 +512,9 @@ class page implements page_interface
 		{
 			// This is required by s9e text formatter to
 			// remove extra xml formatting from the content.
-			// TODO: USE this if s9e is added
-			//global $phpbb_container;
-			//$content = $phpbb_container->get('text_formatter.utils')->unparse($content);
+			// TODO: Do not use a global for this
+			global $phpbb_container;
+			$content = $phpbb_container->get('text_formatter.utils')->unparse($content);
 
 			$content = htmlspecialchars_decode($content, ENT_COMPAT);
 		}
