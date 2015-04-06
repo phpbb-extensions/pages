@@ -79,4 +79,14 @@ class page_operator_base extends \phpbb_database_test_case
 	{
 		return new \phpbb\pages\operators\page($this->cache, $this->container, $this->db, $this->extension_manager, 'phpbb_pages', 'phpbb_pages_links', 'phpbb_pages_pages_links');
 	}
+
+	/**
+	* Get the page entity
+	*
+	* @return \phpbb\pages\entity\page
+	*/
+	protected function get_page_entity()
+	{
+		return new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages');
+	}
 }
