@@ -17,18 +17,14 @@ class event_listener_viewonline_test extends event_listener_base
 	*/
 	public function get_user_instance()
 	{
-		// Must do this for testing with the user class
-		global $config;
-		$config['default_lang'] = 'en';
-
-		// Must mock extension manager for the user class
-		global $phpbb_extension_manager, $phpbb_root_path;
-		$phpbb_extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
+		global $phpbb_root_path, $phpEx;
 
 		// Get instance of phpbb\user (dataProvider is called before setUp(), so this must be done here)
-		$this->user = new \phpbb\user('\phpbb\datetime');
-
-		$this->user->add_lang_ext('phpbb/pages', 'pages_common');
+		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$lang_loader->set_extension_manager(new \phpbb_mock_extension_manager($phpbb_root_path));
+		$lang = new \phpbb\language\language($lang_loader);
+		$lang->add_lang('pages_common', 'phpbb/pages');
+		$this->user = new \phpbb\user($lang, '\phpbb\datetime');
 	}
 
 	public function setUp()

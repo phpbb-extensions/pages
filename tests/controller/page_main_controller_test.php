@@ -58,7 +58,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 	*/
 	public function test_display($route, $status_code, $page_content, $user_id)
 	{
-		global $cache, $config, $phpbb_extension_manager, $phpbb_dispatcher, $user, $phpbb_root_path;
+		global $cache, $config, $phpbb_extension_manager, $phpbb_dispatcher, $user, $phpbb_root_path, $phpEx;
 
 		// Load/Mock classes required by the controller class
 		$db = $this->new_dbal();
@@ -80,7 +80,9 @@ class page_main_controller_test extends \phpbb_database_test_case
 			->getMock()
 		;
 
-		$this->user = new \phpbb\user('\phpbb\datetime');
+		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$lang = new \phpbb\language\language($lang_loader);
+		$this->user = new \phpbb\user($lang, '\phpbb\datetime');
 		$this->user->data['user_id'] = $user_id;
 
 		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
@@ -95,7 +97,10 @@ class page_main_controller_test extends \phpbb_database_test_case
 
 		// Global vars called upon during execution
 		$cache = new \phpbb_mock_cache();
-		$user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
+		$user = $this->getMock('\phpbb\user', array(), array(
+			new \phpbb\language\language(new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx)),
+			'\phpbb\datetime'
+		));
 		$phpbb_extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
 
 		$controller = new \phpbb\pages\controller\main_controller(

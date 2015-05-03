@@ -41,7 +41,9 @@ class show_page_links_test extends \phpbb_database_test_case
 		$cache = new \phpbb_mock_cache();
 		$template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock();
-		$user = new \phpbb\user('\phpbb\datetime');
+		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$lang = new \phpbb\language\language($lang_loader);
+		$user = new \phpbb\user($lang, '\phpbb\datetime');
 		$ext_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()

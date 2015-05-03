@@ -19,7 +19,7 @@ class page_entity_content_test extends page_entity_base
 	{
 		parent::setUp();
 
-		global $cache, $db, $request, $user, $phpbb_container, $phpbb_path_helper, $phpbb_root_path, $phpEx;
+		global $cache, $db, $request, $user, $phpbb_path_helper, $phpbb_root_path, $phpEx;
 
 		$cache = new \phpbb_mock_cache();
 
