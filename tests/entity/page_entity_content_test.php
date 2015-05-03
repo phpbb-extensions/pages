@@ -33,7 +33,7 @@ class page_entity_content_test extends page_entity_base
 
 		$phpbb_path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request($request),
-			new \phpbb\filesystem(),
+			new \phpbb\filesystem\filesystem(),
 			$this->getMock('\phpbb\request\request'),
 			$phpbb_root_path,
 			$phpEx
