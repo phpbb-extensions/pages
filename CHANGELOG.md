@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.3 - 2015-05-20
+
+- Removed edit time limitations when creating pages
+- Removed maximum character limitations when creating pages
+- Minor coding improvements
+- Added Arabic language pack
+- Added Croatian language pack
+- Added German (casual) language pack
+- Added German (formal) language pack
+- Added Italian language pack
+- Added Polish language pack
+
 ## 1.0.2 - 2015-01-04
 
 - Fixed some very minor coding issues
