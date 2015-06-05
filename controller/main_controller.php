@@ -11,7 +11,7 @@
 namespace phpbb\pages\controller;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use \phpbb\exception\http_exception;
+use phpbb\exception\http_exception;
 
 /**
 * Main controller
@@ -68,20 +68,23 @@ class main_controller implements main_interface
 		// Load the page data to display
 		$page = $this->load_page_data($route);
 
+		// Set the page title
+		$page_title = $page->get_title();
+
 		// Assign the page data to template variables
 		$this->template->assign_vars(array(
-			'PAGE_TITLE'	=> $page->get_title(),
+			'PAGE_TITLE'	=> $page_title,
 			'PAGE_CONTENT'	=> $page->get_content_for_display(),
 		));
 
 		// Create breadcrumbs
 		$this->template->assign_block_vars('navlinks', array(
-			'FORUM_NAME'	=> $page->get_title(),
+			'FORUM_NAME'	=> $page_title,
 			'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $route)),
 		));
 
 		// Send all data to the template file
-		return $this->helper->render($page->get_template(), $page->get_title());
+		return $this->helper->render($page->get_template(), $page_title);
 	}
 
 	/**
