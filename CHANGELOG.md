@@ -2,6 +2,7 @@
 
 ## 1.0.3 - 2015-05-20
 
+- Inaccessible pages will corectly send 404 status codes
 - Removed edit time limitations when creating pages
 - Removed maximum character limitations when creating pages
 - Minor coding improvements
@@ -11,6 +12,7 @@
 - Added German (formal) language pack
 - Added Italian language pack
 - Added Polish language pack
+- Require phpBB 3.1.3
 
 ## 1.0.2 - 2015-01-04
 
