@@ -11,6 +11,7 @@
 namespace phpbb\pages\controller;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use phpbb\exception\http_exception;
 
 /**
 * Main controller
@@ -56,6 +57,7 @@ class main_controller implements main_interface
 	*
 	* @param string $route The route name for a page
 	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	* @throws http_exception
 	* @access public
 	*/
 	public function display($route)
@@ -64,38 +66,33 @@ class main_controller implements main_interface
 		$this->user->add_lang_ext('phpbb/pages', 'pages_controller');
 
 		// Load the page data to display
-		$display = $this->load_page_data($route);
+		$page = $this->load_page_data($route);
 
-		// Set the page title to use
-		$page_title = ($display) ? $display->get_title() : $this->user->lang('INFORMATION');
+		// Set the page title
+		$page_title = $page->get_title();
 
 		// Assign the page data to template variables
 		$this->template->assign_vars(array(
 			'PAGE_TITLE'	=> $page_title,
-			'PAGE_CONTENT'	=> ($display) ? $display->get_content_for_display() : $this->user->lang('PAGE_NOT_AVAILABLE', $route),
+			'PAGE_CONTENT'	=> $page->get_content_for_display(),
 		));
 
 		// Create breadcrumbs
-		if ($display)
-		{
-			$this->template->assign_block_vars('navlinks', array(
-				'FORUM_NAME'	=> $page_title,
-				'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $route)),
-			));
-		}
-
-		// Set the page template to use
-		$page_template = ($display) ? $display->get_template() : 'pages_default.html';
+		$this->template->assign_block_vars('navlinks', array(
+			'FORUM_NAME'	=> $page_title,
+			'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $route)),
+		));
 
 		// Send all data to the template file
-		return $this->helper->render($page_template, $page_title);
+		return $this->helper->render($page->get_template(), $page_title);
 	}
 
 	/**
 	* Load the page data
 	*
 	* @param string $route The route name for a page
-	* @return object $entity The entity object, or false if page can't be displayed
+	* @return object $entity The entity object
+	* @throws http_exception
 	* @access public
 	*/
 	protected function load_page_data($route)
@@ -110,19 +107,19 @@ class main_controller implements main_interface
 		}
 		catch (\phpbb\pages\exception\base $e)
 		{
-			return false;
+			throw new http_exception(404, 'PAGE_NOT_AVAILABLE', array($route));
 		}
 
-		// Return false if page display to guests is disabled
+		// Throw 404 error if page display to guests is disabled
 		if ($this->user->data['user_id'] == ANONYMOUS && !$entity->get_page_display_to_guests())
 		{
-			return false;
+			throw new http_exception(404, 'PAGE_NOT_AVAILABLE', array($route));
 		}
 
-		// Return false if page display is disabled and user is not an admin
+		// Throw 404 error if page display is disabled and user is not an admin
 		if (!$this->auth->acl_get('a_') && !$entity->get_page_display())
 		{
-			return false;
+			throw new http_exception(404, 'PAGE_NOT_AVAILABLE', array($route));
 		}
 
 		return $entity;

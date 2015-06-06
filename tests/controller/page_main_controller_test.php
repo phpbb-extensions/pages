@@ -36,20 +36,9 @@ class page_main_controller_test extends \phpbb_database_test_case
 		return $this->createXMLDataSet(dirname(__FILE__) . '/../entity/fixtures/page.xml');
 	}
 
-	/**
-	* Test data for the test_display() function
-	*
-	* @return array Array of test data
-	*/
-	public function display_data()
+	public function setUp()
 	{
-		return array(
-			array('page_1', 200, 'pages_default.html', 2), // normal viewable page by member
-			array('page_4', 200, 'pages_default.html', 2), // disabled page, member sees page missing message
-			array('page_4', 200, 'pages_default.html', 1), // disabled page, guests sees page missing message
-			array('page_foo', 200, 'pages_default.html', 2), // non-existent page, loads page missing message
-		);
-	}
+		parent::setUp();
 
 	/**
 	* Test controller display
@@ -83,7 +72,6 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
 		$lang = new \phpbb\language\language($lang_loader);
 		$this->user = new \phpbb\user($lang, '\phpbb\datetime');
-		$this->user->data['user_id'] = $user_id;
 
 		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
@@ -102,18 +90,82 @@ class page_main_controller_test extends \phpbb_database_test_case
 			'\phpbb\datetime'
 		));
 		$phpbb_extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
+	}
 
-		$controller = new \phpbb\pages\controller\main_controller(
+	public function get_controller()
+	{
+		return  new \phpbb\pages\controller\main_controller(
 			$this->auth,
 			$this->container,
 			$this->controller_helper,
 			$this->template,
 			$this->user
 		);
+	}
+
+	/**
+	* Test data for the test_display() function
+	*
+	* @return array Array of test data
+	*/
+	public function display_data()
+	{
+		return array(
+			array('page_1', 200, 'pages_default.html', 2), // normal viewable page by member
+		);
+	}
+
+	/**
+	* Test controller display
+	*
+	* @dataProvider display_data
+	*/
+	public function test_display($route, $status_code, $page_content, $user_id)
+	{
+		$this->user->data['user_id'] = $user_id;
+
+		$controller = $this->get_controller();
 
 		$response = $controller->display($route);
 		$this->assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
 		$this->assertEquals($status_code, $response->getStatusCode());
 		$this->assertEquals($page_content, $response->getContent());
+	}
+
+	/**
+	 * Test data for the test_display_fails() function
+	 *
+	 * @return array Array of test data
+	 */
+	public function display_fails_data()
+	{
+		return array(
+			array('page_4', 404, 'PAGE_NOT_AVAILABLE', 2), // disabled page, member sees page missing message
+			array('page_4', 404, 'PAGE_NOT_AVAILABLE', 1), // disabled page, guests sees page missing message
+			array('page_foo', 404, 'PAGE_NOT_AVAILABLE', 2), // non-existent page, loads page missing message
+		);
+	}
+
+	/**
+	 * Test controller display throws 404 exceptions
+	 *
+	 * @dataProvider display_fails_data
+	 */
+	public function test_display_fails($route, $status_code, $page_content, $user_id)
+	{
+		$this->user->data['user_id'] = $user_id;
+
+		$controller = $this->get_controller();
+
+		try
+		{
+			$controller->display($route);
+			$this->fail('The expected \phpbb\exception\http_exception was not thrown');
+		}
+		catch (\phpbb\exception\http_exception $exception)
+		{
+			$this->assertEquals($status_code, $exception->getStatusCode());
+			$this->assertEquals($page_content, $exception->getMessage());
+		}
 	}
 }
