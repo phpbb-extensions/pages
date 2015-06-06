@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.3 - 2015-05-20
+## 1.0.3 - 2015-06-05
 
 - Inaccessible pages will corectly send 404 status codes
 - Removed edit time limitations when creating pages
