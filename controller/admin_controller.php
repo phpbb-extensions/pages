@@ -345,7 +345,7 @@ class admin_controller implements admin_interface
 			'U_BACK'			=> $this->u_action,
 		));
 
-		// Assigning custom bbcodes
+		// Build custom bbcodes array
 		include_once($this->root_path . 'includes/functions_display.' . $this->php_ext);
 
 		display_custom_bbcodes();
