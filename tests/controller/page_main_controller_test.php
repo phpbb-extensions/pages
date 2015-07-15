@@ -40,13 +40,6 @@ class page_main_controller_test extends \phpbb_database_test_case
 	{
 		parent::setUp();
 
-	/**
-	* Test controller display
-	*
-	* @dataProvider display_data
-	*/
-	public function test_display($route, $status_code, $page_content, $user_id)
-	{
 		global $cache, $config, $phpbb_extension_manager, $phpbb_dispatcher, $user, $phpbb_root_path, $phpEx;
 
 		// Load/Mock classes required by the controller class
