@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.3 - 2015-06-14
+
+- Inaccessible pages will corectly send 404 status codes
+- Removed edit time limitations when creating pages
+- Removed maximum character limitations when creating pages
+- Fixed an issue that would display unwanted XML characters in phpBB 3.2 environments
+- Minor coding improvements
+- Added Arabic language pack
+- Added Croatian language pack
+- Added German (casual) language pack
+- Added German (formal) language pack
+- Added Italian language pack
+- Added Polish language pack
+- Require phpBB 3.1.3
+
 ## 1.0.2 - 2015-01-04
 
 - Fixed some very minor coding issues
