@@ -53,7 +53,7 @@ class page_entity_route_test extends page_entity_base
 		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Assert that the route matches what's expected
-		$this->assertSame($expected, $entity->get_route($route));
+		$this->assertSame($expected, $entity->get_route());
 	}
 
 	/**
@@ -167,7 +167,7 @@ class page_entity_route_test extends page_entity_base
 		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Assert that the route matches what's expected
-		$this->assertSame($expected, $entity->get_route($route));
+		$this->assertSame($expected, $entity->get_route());
 	}
 
 	/**

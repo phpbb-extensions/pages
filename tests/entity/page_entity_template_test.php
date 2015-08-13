@@ -53,7 +53,7 @@ class page_entity_template_test extends page_entity_base
 		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Assert that the template matches what's expected
-		$this->assertSame($expected, $entity->get_template($template));
+		$this->assertSame($expected, $entity->get_template());
 	}
 
 	/**
