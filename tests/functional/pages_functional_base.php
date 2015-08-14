@@ -67,7 +67,7 @@ class pages_functional_base extends \phpbb_functional_test_case
 			'page_guest_display'=> true,
 		), $additional_form_data);
 
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\pages\acp\pages_module&mode=manage&action=add&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&action=add&sid={$this->sid}");
 		$this->assertContainsLang('ACP_PAGES_CREATE_PAGE', $crawler->text());
 
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();

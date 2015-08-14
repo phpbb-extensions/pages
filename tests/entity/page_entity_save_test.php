@@ -74,31 +74,16 @@ class page_entity_save_test extends page_entity_base
 	}
 
 	/**
-	* Test data for the test_save_fails() function
-	*
-	* @return array Array of test data
-	*/
-	public function save_fails_test_data()
-	{
-		return array(
-			// id to search
-			array(0),
-			array(100),
-		);
-	}
-
-	/**
 	* Test saving to (non-existant) pages from the database
 	*
-	* @dataProvider save_fails_test_data
 	* @expectedException \phpbb\pages\exception\out_of_bounds
 	*/
-	public function test_save_fails($id)
+	public function test_save_fails()
 	{
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 
-		// Save the entity
-		$entity->save($id);
+		// Save the entity with no rule ID set
+		$entity->save();
 	}
 }

@@ -28,7 +28,23 @@ class page_operator_base extends \phpbb_database_test_case
 		return array('phpbb/pages');
 	}
 
-	protected $container, $db, $extension_manager;
+	/** @var \phpbb_mock_cache */
+	protected $cache;
+
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
+	protected $container;
+
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+
+	/** @var \phpbb_mock_event_dispatcher */
+	protected $dispatcher;
+
+	/** @var \phpbb_mock_extension_manager */
+	protected $extension_manager;
 
 	public function getDataSet()
 	{

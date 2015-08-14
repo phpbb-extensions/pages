@@ -15,10 +15,19 @@ require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php
 
 class page_main_controller_test extends \phpbb_database_test_case
 {
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\auth\auth */
 	protected $auth;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
 	protected $container;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\controller\helper */
 	protected $controller_helper;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\template\template */
 	protected $template;
+
+	/** @var \phpbb\user */
 	protected $user;
 
 	/**
