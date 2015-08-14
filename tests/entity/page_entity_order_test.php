@@ -49,7 +49,7 @@ class page_entity_order_test extends page_entity_base
 		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Assert that the order matches what's expected
-		$this->assertSame($expected, $entity->get_order($order));
+		$this->assertSame($expected, $entity->get_order());
 	}
 
 	/**

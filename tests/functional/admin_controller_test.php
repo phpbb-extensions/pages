@@ -24,7 +24,7 @@ class admin_controller_test extends pages_functional_base
 		$this->admin_login();
 
 		// Load Pages ACP page
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\pages\acp\pages_module&mode=manage&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
 
 		// Assert Pages module appears in sidebar
 		$this->assertContainsLang('ACP_PAGES', $crawler->filter('.menu-block')->text());
@@ -45,7 +45,7 @@ class admin_controller_test extends pages_functional_base
 		$this->admin_login();
 
 		// Load Pages ACP page
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\pages\acp\pages_module&mode=manage&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
 
 		// Jump to the create page
 		$form = $crawler->selectButton($this->lang('ACP_PAGES_CREATE_PAGE'))->form();
@@ -62,7 +62,7 @@ class admin_controller_test extends pages_functional_base
 		$this->create_page('Functional Test Page', 'This is a functional test page');
 
 		// Confirm new page appears in Pages list
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\pages\acp\pages_module&mode=manage&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
 		$this->assertContains('Functional Test Page', $crawler->text());
 	}
 }

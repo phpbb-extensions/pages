@@ -29,8 +29,14 @@ class page_entity_base extends \phpbb_database_test_case
 		return array('phpbb/pages');
 	}
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
+
+	/** @var \phpbb_mock_event_dispatcher */
+	protected $dispatcher;
 
 	public function getDataSet()
 	{

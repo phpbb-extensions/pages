@@ -12,6 +12,9 @@ namespace phpbb\pages\tests\system;
 
 class exception_test extends \phpbb_test_case
 {
+	/** @var \phpbb\user */
+	protected $user;
+
 	/**
 	* Get an instance of phpbb\user
 	*/
