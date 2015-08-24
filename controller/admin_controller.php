@@ -383,7 +383,7 @@ class admin_controller implements admin_interface
 		{
 			$json_response = new \phpbb\json_response;
 			$json_response->send(array(
-				'MESSAGE_TITLE'	=> $this->user->lang['INFORMATION'],
+				'MESSAGE_TITLE'	=> $this->user->lang('INFORMATION'),
 				'MESSAGE_TEXT'	=> $this->user->lang('ACP_PAGES_DELETE_SUCCESS'),
 				'REFRESH_DATA'	=> array(
 					'time'	=> 3
