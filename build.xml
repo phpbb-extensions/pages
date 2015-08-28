@@ -77,8 +77,14 @@
 			<property name="dir" value="${package-directory}" />
 		</phingcall>
 
+		<!-- Try setting the package version property from composer.json -->
+		<exec dir="${package-directory}"
+			  command='php -r "\$j = json_decode(file_get_contents(\"composer.json\")); echo (isset(\$j->version) ? \$j->version : \"${version}\");"'
+			  checkreturn="true"
+			  outputProperty='package-version' />
+
 		<phingcall target="wrap-package">
-			<property name="destination-filename" value="${build-directory}/upload/${vendor-name}_${extension-name}-${version}" />
+			<property name="destination-filename" value="${build-directory}/upload/${vendor-name}_${extension-name}_${package-version}" />
 		</phingcall>
 	</target>
 
