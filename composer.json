@@ -49,7 +49,7 @@
 	"extra": {
 		"display-name": "Pages",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.2.*@dev,<3.3.*@dev"
+			"phpbb/phpbb": ">=3.2.*@dev,<3.3.0@dev"
 		},
 		"version-check": {
 			"host": "www.phpbb.com",

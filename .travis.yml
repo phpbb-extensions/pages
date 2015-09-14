@@ -1,3 +1,6 @@
+# Opt into fully virtualized infrastructure
+sudo: required
+
 language: php
 
 matrix:
