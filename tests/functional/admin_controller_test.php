@@ -16,13 +16,20 @@ namespace phpbb\pages\tests\functional;
 class admin_controller_test extends pages_functional_base
 {
 	/**
+	* Test setup
+	*/
+	public function setUp()
+	{
+		parent::setUp();
+		$this->login();
+		$this->admin_login();
+	}
+
+	/**
 	* Test Pages ACP module appears
 	*/
 	public function test_acp_module()
 	{
-		$this->login();
-		$this->admin_login();
-
 		// Load Pages ACP page
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
 
@@ -41,9 +48,6 @@ class admin_controller_test extends pages_functional_base
 	*/
 	public function test_acp_create()
 	{
-		$this->login();
-		$this->admin_login();
-
 		// Load Pages ACP page
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
 
@@ -59,10 +63,31 @@ class admin_controller_test extends pages_functional_base
 		$this->assertContainsLang('EXCEPTION_FIELD_MISSING', $crawler->text());
 
 		// Create page
-		$this->create_page('Functional Test Page', 'This is a functional test page');
+		$page_title = 'Functional Test Page';
+		$this->create_page($page_title, 'This is a functional test page');
 
 		// Confirm new page appears in Pages list
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
 		$this->assertContains('Functional Test Page', $crawler->text());
+
+		// Confirm the log entry has been added correctly
+		$crawler = self::request('GET', "adm/index.php?i=acp_logs&mode=admin&sid={$this->sid}");
+		$this->assertContains(strip_tags(html_entity_decode($this->lang('ACP_PAGES_ADDED_LOG', $page_title), ENT_COMPAT, 'UTF-8')), $crawler->text());
+	}
+
+	/**
+	* Test Pages ACP manage permission
+	*/
+	public function test_pages_acp_permissions()
+	{
+		$this->add_lang_ext('phpbb/pages', 'permissions_pages');
+		$crawler = self::request('GET', "adm/index.php?i=acp_permissions&mode=setting_group_global&sid={$this->sid}");
+		$form = $crawler->selectButton('submit')->form();
+
+		// Select Administrative permissions option
+		$form->get('type')->setValue('a_');
+		$crawler = self::submit($form);
+
+		$this->assertContainsLang('ACL_A_PAGES', $crawler->text());
 	}
 }
