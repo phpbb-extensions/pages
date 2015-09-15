@@ -72,7 +72,7 @@ class admin_controller_test extends pages_functional_base
 
 		// Confirm the log entry has been added correctly
 		$crawler = self::request('GET', "adm/index.php?i=acp_logs&mode=admin&sid={$this->sid}");
-		$this->assertContains(strip_tags(html_entity_decode($this->lang('ACP_PAGES_ADDED_LOG', $page_title), ENT_COMPAT, 'UTF-8')), $crawler->text());
+		$this->assertContains(strip_tags($this->lang('ACP_PAGES_ADDED_LOG', $page_title)), $crawler->text());
 	}
 
 	/**
