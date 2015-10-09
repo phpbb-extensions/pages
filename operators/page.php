@@ -141,13 +141,16 @@ class page implements page_interface
 		$routes = array();
 
 		// Load all page routes and titles
-		$sql = 'SELECT page_route, page_title
+		$sql = 'SELECT page_id, page_route, page_title
 			FROM ' . $this->pages_table;
 		$result = $this->db->sql_query($sql);
 
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$routes[$row['page_route']] = $row['page_title'];
+			$routes[$row['page_id']] = array(
+				'route' => $row['page_route'],
+				'title' => $row['page_title'],
+			);
 		}
 		$this->db->sql_freeresult($result);
 

@@ -58,3 +58,11 @@ services:
             - %phpbb.pages.tables.pages%
             - %phpbb.pages.tables.pages_links%
             - %phpbb.pages.tables.pages_pages_links%
+
+    phpbb.pages.routing.loader:
+        class: phpbb\pages\routing\page_loader
+        arguments:
+            - @dbal.conn
+            - %phpbb.pages.tables.pages%
+        tags:
+            - { name: routing.loader }
