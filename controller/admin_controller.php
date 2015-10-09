@@ -17,6 +17,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 */
 class admin_controller implements admin_interface
 {
+	/** @var \phpbb\cache\driver\driver_interface */
+	protected $cache;
+
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
@@ -53,6 +56,7 @@ class admin_controller implements admin_interface
 	/**
 	* Constructor
 	*
+	* @param \phpbb\cache\driver\driver_interface $cache                    Cache driver interface
 	* @param \phpbb\controller\helper             $helper           Controller helper object
 	* @param \phpbb\log\log                       $log              The phpBB log system
 	* @param \phpbb\pages\operators\page          $page_operator    Pages operator object
@@ -65,8 +69,9 @@ class admin_controller implements admin_interface
 	* @param string                               $php_ext          phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
+	public function __construct(\phpbb\cache\driver\driver_interface $cache, \phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
 	{
+		$this->cache = $cache;
 		$this->helper = $helper;
 		$this->log = $log;
 		$this->page_operator = $page_operator;
@@ -276,8 +281,8 @@ class admin_controller implements admin_interface
 					// Log the action
 					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_EDITED_LOG', time(), array($entity->get_title()));
 
-					// Show user confirmation of the saved page and provide link back to the previous screen
-					trigger_error($this->user->lang('ACP_PAGES_EDIT_SUCCESS') . adm_back_link($this->u_action));
+					// The result message to use
+					$message = 'ACP_PAGES_EDIT_SUCCESS';
 				}
 				else
 				{
@@ -291,9 +296,15 @@ class admin_controller implements admin_interface
 					// Log the action
 					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_ADDED_LOG', time(), array($entity->get_title()));
 
-					// Show user confirmation of the added page and provide link back to the previous screen
-					trigger_error($this->user->lang('ACP_PAGES_ADD_SUCCESS') . adm_back_link($this->u_action));
+					// The result message to use
+					$message = 'ACP_PAGES_ADD_SUCCESS';
 				}
+
+				// Purge the cache to refresh route collections
+				$this->cache->purge();
+
+				// Show user confirmation provide link back to the previous screen
+				trigger_error($this->user->lang($message) . adm_back_link($this->u_action));
 			}
 		}
 

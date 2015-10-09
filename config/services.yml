@@ -5,6 +5,7 @@ services:
     phpbb.pages.admin.controller:
         class: phpbb\pages\controller\admin_controller
         arguments:
+            - @cache.driver
             - @controller.helper
             - @log
             - @phpbb.pages.operator
