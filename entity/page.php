@@ -358,8 +358,8 @@ class page implements page_interface
 			throw new \phpbb\pages\exception\unexpected_value(array('route', 'FIELD_MISSING'));
 		}
 
-		// Route should not contain any special characters
-		if (!preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/i', $route))
+		// Route should not contain any unexpected special characters
+		if (!preg_match('/^[^!"#$%&*\'()+,.\\\\:;<=>?@\\[\\]^`{|}~ ]*$/i', $route))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('route', 'ILLEGAL_CHARACTERS'));
 		}
