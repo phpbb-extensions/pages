@@ -33,11 +33,15 @@ class page_entity_content_test extends page_entity_base
 
 		$phpbb_path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request($request),
-			new \phpbb\filesystem(),
+			new \phpbb\filesystem\filesystem(),
 			$this->getMock('\phpbb\request\request'),
 			$phpbb_root_path,
 			$phpEx
 		);
+
+		// This is needed to set up the s9e text formatter services
+		// This can lead to a test failure if PCRE is old.
+		$this->get_test_case_helpers()->set_s9e_services();
 	}
 
 	/**
