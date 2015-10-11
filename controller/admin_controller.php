@@ -303,7 +303,7 @@ class admin_controller implements admin_interface
 				// Purge the cache to refresh route collections
 				$this->cache->purge();
 
-				// Show user confirmation provide link back to the previous screen
+				// Show user confirmation of the page and provide link back to the previous screen
 				trigger_error($this->user->lang($message) . adm_back_link($this->u_action));
 			}
 		}

@@ -63,7 +63,7 @@ class event_listener_viewonline_test extends event_listener_base
 					1 => 'app',
 				),
 				array(
-					'session_page' => 'app.' . $phpEx . '/faq'
+					'session_page' => 'app.' . $phpEx . '/help/faq'
 				),
 				'$location_url',
 				'$location',

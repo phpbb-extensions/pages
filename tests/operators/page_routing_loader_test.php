@@ -72,28 +72,28 @@ class page_routing_loader_test extends \phpbb_database_test_case
 	public function page_loader_data()
 	{
 		return array(
-			array('phpbb_page_dynamic_route_1', '/page_1'),
-			array('phpbb_page_dynamic_route_2', '/page_2'),
-			array('phpbb_page_dynamic_route_3', '/page_3'),
-			array('phpbb_page_dynamic_route_4', '/page_4'),
+			array(1, '/page_1'),
+			array(2, '/page_2'),
+			array(3, '/page_3'),
+			array(4, '/page_4'),
 		);
 	}
 
 	/**
 	 * @dataProvider page_loader_data
 	 *
-	 * @param string $route_name
-	 * @param string $expected_path
+	 * @param int    $id       Id of a Page
+	 * @param string $expected Expected route of a Page
 	 */
-	public function test_page_loader($route_name, $expected_path)
+	public function test_page_loader($id, $expected)
 	{
 		// Get a route instance
-		$route = $this->collection->get($route_name);
+		$route = $this->collection->get('phpbb_page_dynamic_route_' . $id);
 
 		// Assert the roue is an instance of Route
 		$this->assertInstanceOf('Symfony\Component\Routing\Route', $route, 'A route instance could not be made.');
 
 		// Assert the route contains the expected path
-		$this->assertSame($expected_path, $route->getPath());
+		$this->assertSame($expected, $route->getPath());
 	}
 }
