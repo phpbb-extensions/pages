@@ -112,7 +112,7 @@ class admin_controller implements admin_interface
 
 				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;page_id=" . $entity->get_id(),
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;page_id=" . $entity->get_id(),
-				'U_PAGES_ROUTE'		=> $this->helper->route('phpbb_page_dynamic_route_' . $entity->get_id()),
+				'U_PAGES_ROUTE'		=> $this->helper->route('phpbb_pages_dynamic_route_' . $entity->get_id()),
 			));
 		}
 
@@ -163,7 +163,7 @@ class admin_controller implements admin_interface
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_EDIT_PAGE'	=> true,
-			'U_VIEW_PAGE'	=> $this->helper->route('phpbb_page_dynamic_route_' . $entity->get_id()),
+			'U_VIEW_PAGE'	=> $this->helper->route('phpbb_pages_dynamic_route_' . $entity->get_id()),
 			'U_ACTION'		=> "{$this->u_action}&amp;page_id={$page_id}&amp;action=edit",
 		));
 	}

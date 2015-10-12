@@ -59,7 +59,7 @@ class page_loader extends Loader
 			$route = new Route('/' . $row['page_route']);
 			$route->setDefault('_controller', 'phpbb.pages.controller:display');
 			$route->setDefault('route', $row['page_route']);
-			$collection->add('phpbb_page_dynamic_route_' . $row['page_id'], $route);
+			$collection->add('phpbb_pages_dynamic_route_' . $row['page_id'], $route);
 		}
 		$this->db->sql_freeresult();
 
@@ -73,6 +73,6 @@ class page_loader extends Loader
 	 */
 	public function supports($resource, $type = null)
 	{
-		return $type === 'pages_extension';
+		return $type === 'phpbb_pages_route';
 	}
 }

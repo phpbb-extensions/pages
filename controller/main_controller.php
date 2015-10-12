@@ -80,7 +80,7 @@ class main_controller implements main_interface
 		// Create breadcrumbs
 		$this->template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $page_title,
-			'U_VIEW_FORUM'	=> $this->helper->route('phpbb_page_dynamic_route_' . $page->get_id()),
+			'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_dynamic_route_' . $page->get_id()),
 		));
 
 		// Send all data to the template file

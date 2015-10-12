@@ -88,7 +88,7 @@ class page_routing_loader_test extends \phpbb_database_test_case
 	public function test_page_loader($id, $expected)
 	{
 		// Get a route instance
-		$route = $this->collection->get('phpbb_page_dynamic_route_' . $id);
+		$route = $this->collection->get('phpbb_pages_dynamic_route_' . $id);
 
 		// Assert the roue is an instance of Route
 		$this->assertInstanceOf('Symfony\Component\Routing\Route', $route, 'A route instance could not be made.');

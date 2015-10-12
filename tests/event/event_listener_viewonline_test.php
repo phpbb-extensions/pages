@@ -80,7 +80,7 @@ class event_listener_viewonline_test extends event_listener_base
 				),
 				'$location_url',
 				'$location',
-				'phpbb_page_dynamic_route_1#a:0:{}',
+				'phpbb_pages_dynamic_route_1#a:0:{}',
 				$this->user->lang('PAGES_VIEWONLINE', '$location'),
 			),
 			// test when on_page is app and session_page is for non-existent pages
