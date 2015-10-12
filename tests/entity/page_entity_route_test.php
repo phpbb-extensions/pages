@@ -27,7 +27,6 @@ class page_entity_route_test extends page_entity_base
 			array('foo', 'foo'),
 			array('foø-bar', 'foø-bar'),
 			array('foó-bar', 'foó-bar'),
-			array('foo/bar', 'foo/bar'),
 
 			// Maximum length
 			array(
@@ -75,6 +74,7 @@ class page_entity_route_test extends page_entity_base
 			array('foo#bar'),
 			array('foo&bar'),
 			array('foo$bar'),
+			array('foo/bar'),
 			array('foo@bar'),
 			array('foo=bar'),
 			array('foo+bar'),

@@ -359,7 +359,7 @@ class page implements page_interface
 		}
 
 		// Route should not contain any unexpected special characters
-		if (!preg_match('/^[^!"#$%&*\'()+,.\\\\:;<=>?@\\[\\]^`{|}~ ]*$/i', $route))
+		if (!preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\\[\\]^`{|}~ ]*$/i', $route))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('route', 'ILLEGAL_CHARACTERS'));
 		}
