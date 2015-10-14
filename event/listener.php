@@ -126,7 +126,7 @@ class listener implements EventSubscriberInterface
 
 			// Assign template var data
 			$this->template->assign_block_vars($row['page_link_event_name'] . '_links', array(
-				'U_LINK_URL' => $this->helper->route('phpbb_pages_main_controller', array('route' => $row['page_route'])),
+				'U_LINK_URL' => $this->helper->route('phpbb_pages_dynamic_route_' . $row['page_id']),
 				'LINK_ROUTE' => $row['page_route'],
 				'LINK_TITLE' => $row['page_title'],
 				'ICON_LINK' => $custom_icon,
@@ -152,15 +152,15 @@ class listener implements EventSubscriberInterface
 			$this->user->add_lang_ext('phpbb/pages', 'pages_common');
 
 			// Load our page routes and titles
-			$routes = $this->page_operator->get_page_routes();
+			$page_routes = $this->page_operator->get_page_routes();
 
 			// If any of our pages are being viewed, update the event vars with our routes and titles
-			foreach ($routes as $route => $page_title)
+			foreach ($page_routes as $page_id => $page_data)
 			{
-				if ($event['row']['session_page'] == 'app.' . $this->php_ext . '/page/' . $route)
+				if ($event['row']['session_page'] == 'app.' . $this->php_ext . DIRECTORY_SEPARATOR . $page_data['route'])
 				{
-					$event['location'] = $this->user->lang('PAGES_VIEWONLINE', $page_title);
-					$event['location_url'] = $this->helper->route('phpbb_pages_main_controller', array('route' => $route));
+					$event['location'] = $this->user->lang('PAGES_VIEWONLINE', $page_data['title']);
+					$event['location_url'] = $this->helper->route('phpbb_pages_dynamic_route_' . $page_id);
 					break;
 				}
 			}
