@@ -23,6 +23,9 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
+	/** @var \phpbb\language\language */
+	protected $lang;
+
 	/** @var \phpbb\pages\operators\page */
 	protected $page_operator;
 
@@ -41,19 +44,21 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\auth\auth               $auth               Authentication object
-	* @param \phpbb\controller\helper       $helper             Controller helper object
-	* @param \phpbb\pages\operators\page    $page_operator      Pages operator object
-	* @param \phpbb\template\template       $template           Template object
-	* @param \phpbb\user                    $user               User object
-	* @param string                         $phpbb_root_path    phpbb_root_path
-	* @param string                         $php_ext            phpEx
+	* @param \phpbb\auth\auth            $auth            Authentication object
+	* @param \phpbb\controller\helper    $helper          Controller helper object
+	* @param \phpbb\language\language    $lang            Language object
+	* @param \phpbb\pages\operators\page $page_operator   Pages operator object
+	* @param \phpbb\template\template    $template        Template object
+	* @param \phpbb\user                 $user            User object
+	* @param string                      $phpbb_root_path phpbb_root_path
+	* @param string                      $php_ext         phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, $phpbb_root_path, $php_ext)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, $phpbb_root_path, $php_ext)
 	{
 		$this->auth = $auth;
 		$this->helper = $helper;
+		$this->lang = $lang;
 		$this->page_operator = $page_operator;
 		$this->template = $template;
 		$this->user = $user;
@@ -149,7 +154,7 @@ class listener implements EventSubscriberInterface
 		if ($event['on_page'][1] == 'app')
 		{
 			// Load our language file
-			$this->user->add_lang_ext('phpbb/pages', 'pages_common');
+			$this->lang->add_lang('pages_common', 'phpbb/pages');
 
 			// Load our page routes and titles
 			$page_routes = $this->page_operator->get_page_routes();
@@ -159,7 +164,7 @@ class listener implements EventSubscriberInterface
 			{
 				if ($event['row']['session_page'] == 'app.' . $this->php_ext . DIRECTORY_SEPARATOR . $page_data['route'])
 				{
-					$event['location'] = $this->user->lang('PAGES_VIEWONLINE', $page_data['title']);
+					$event['location'] = $this->lang->lang('PAGES_VIEWONLINE', $page_data['title']);
 					$event['location_url'] = $this->helper->route('phpbb_pages_dynamic_route_' . $page_id);
 					break;
 				}
