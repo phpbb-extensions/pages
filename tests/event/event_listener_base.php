@@ -12,7 +12,29 @@ namespace phpbb\pages\tests\event;
 
 class event_listener_base extends \phpbb_test_case
 {
-	protected $auth, $controller_helper, $page_operator, $template, $user, $root_path, $php_ext;
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\auth\auth */
+	protected $auth;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\controller\helper */
+	protected $controller_helper;
+
+	/** @var \phpbb\language\language */
+	protected $lang;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\pages\operators\page */
+	protected $page_operator;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\template\template */
+	protected $template;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var string */
+	protected $root_path;
+
+	/** @var string */
+	protected $php_ext;
 
 	/**
 	* Setup test environment
@@ -28,8 +50,8 @@ class event_listener_base extends \phpbb_test_case
 		$this->root_path = $phpbb_root_path;
 		$this->auth = $this->getMock('\phpbb\auth\auth');
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
-		$lang = new \phpbb\language\language($lang_loader);
-		$this->user = new \phpbb\user($lang, '\phpbb\datetime');
+		$this->lang = new \phpbb\language\language($lang_loader);
+		$this->user = new \phpbb\user($this->lang, '\phpbb\datetime');
 		$this->template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock();
 		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
@@ -50,6 +72,7 @@ class event_listener_base extends \phpbb_test_case
 		return new \phpbb\pages\event\listener(
 			$this->auth,
 			$this->controller_helper,
+			$this->lang,
 			$this->page_operator,
 			$this->template,
 			$this->user,

@@ -12,29 +12,28 @@ namespace phpbb\pages\tests\system;
 
 class exception_test extends \phpbb_test_case
 {
-	/** @var \phpbb\user */
-	protected $user;
+	/** @var \phpbb\language\language */
+	protected $lang;
 
 	/**
-	* Get an instance of phpbb\user
+	* Get an instance of \phpbb\language\language
 	*/
-	public function get_user_instance()
+	public function get_language_instance()
 	{
 		global $phpbb_root_path, $phpEx;
 
-		// Get instance of phpbb\user (dataProvider is called before setUp(), so this must be done here)
+		// Get instance of \phpbb\language\language (dataProvider is called before setUp(), so this must be done here)
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
 		$lang_loader->set_extension_manager(new \phpbb_mock_extension_manager($phpbb_root_path));
-		$lang = new \phpbb\language\language($lang_loader);
-		$lang->add_lang('exceptions', 'phpbb/pages');
-		$this->user = new \phpbb\user($lang, '\phpbb\datetime');
+		$this->lang = new \phpbb\language\language($lang_loader);
+		$this->lang->add_lang('exceptions', 'phpbb/pages');
 	}
 
 	public function setUp()
 	{
 		parent::setUp();
 
-		$this->get_user_instance();
+		$this->get_language_instance();
 	}
 
 	/**
@@ -44,33 +43,33 @@ class exception_test extends \phpbb_test_case
 	*/
 	public function exceptions_test_data()
 	{
-		$this->get_user_instance();
+		$this->get_language_instance();
 
 		return array(
 			array(
 				'base',
 				'EXCEPTION_FIELD_MISSING',
-				$this->user->lang('EXCEPTION_FIELD_MISSING'),
+				$this->lang->lang('EXCEPTION_FIELD_MISSING'),
 			),
 			array(
 				'base',
 				array('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
-				$this->user->lang('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
+				$this->lang->lang('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
 			),
 			array(
 				'invalid_argument',
 				array('{foo}', 'FIELD_MISSING'),
-				$this->user->lang('EXCEPTION_INVALID_ARGUMENT', '{foo}', $this->user->lang('EXCEPTION_FIELD_MISSING')),
+				$this->lang->lang('EXCEPTION_INVALID_ARGUMENT', '{foo}', $this->lang->lang('EXCEPTION_FIELD_MISSING')),
 			),
 			array(
 				'out_of_bounds',
 				'{foo}',
-				$this->user->lang('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
+				$this->lang->lang('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
 			),
 			array(
 				'unexpected_value',
 				array('{foo}', 'TOO_LONG'),
-				$this->user->lang('EXCEPTION_UNEXPECTED_VALUE', '{foo}', $this->user->lang('EXCEPTION_TOO_LONG')),
+				$this->lang->lang('EXCEPTION_UNEXPECTED_VALUE', '{foo}', $this->lang->lang('EXCEPTION_TOO_LONG')),
 			),
 		);
 	}
@@ -90,7 +89,7 @@ class exception_test extends \phpbb_test_case
 		}
 		catch (\phpbb\pages\exception\base $e)
 		{
-			$this->assertEquals($expected, $e->get_message($this->user));
+			$this->assertEquals($expected, $e->get_message($this->lang));
 		}
 	}
 
@@ -99,6 +98,6 @@ class exception_test extends \phpbb_test_case
 	*/
 	public function test_exceptions_lang()
 	{
-		$this->assertEquals('Required field missing', $this->user->lang('EXCEPTION_FIELD_MISSING'));
+		$this->assertEquals('Required field missing', $this->lang->lang('EXCEPTION_FIELD_MISSING'));
 	}
 }

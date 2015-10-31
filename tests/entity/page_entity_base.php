@@ -38,6 +38,9 @@ class page_entity_base extends \phpbb_database_test_case
 	/** @var \phpbb_mock_event_dispatcher */
 	protected $dispatcher;
 
+	/** @var \phpbb\textformatter\s9e\utils */
+	protected $text_formatter_utils;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/page.xml');

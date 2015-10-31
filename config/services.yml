@@ -7,6 +7,7 @@ services:
         arguments:
             - @cache.driver
             - @controller.helper
+            - @language
             - @log
             - @phpbb.pages.operator
             - @request
@@ -23,6 +24,7 @@ services:
             - @auth
             - @service_container
             - @controller.helper
+            - @language
             - @template
             - @user
 
@@ -31,6 +33,7 @@ services:
         arguments:
             - @auth
             - @controller.helper
+            - @language
             - @phpbb.pages.operator
             - @template
             - @user

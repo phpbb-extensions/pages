@@ -24,6 +24,9 @@ class page_main_controller_test extends \phpbb_database_test_case
 	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\controller\helper */
 	protected $controller_helper;
 
+	/** @var \phpbb\language\language */
+	protected $lang;
+
 	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\template\template */
 	protected $template;
 
@@ -72,8 +75,8 @@ class page_main_controller_test extends \phpbb_database_test_case
 		;
 
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
-		$lang = new \phpbb\language\language($lang_loader);
-		$this->user = new \phpbb\user($lang, '\phpbb\datetime');
+		$this->lang = new \phpbb\language\language($lang_loader);
+		$this->user = new \phpbb\user($this->lang, '\phpbb\datetime');
 
 		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
@@ -100,6 +103,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 			$this->auth,
 			$this->container,
 			$this->controller_helper,
+			$this->lang,
 			$this->template,
 			$this->user
 		);

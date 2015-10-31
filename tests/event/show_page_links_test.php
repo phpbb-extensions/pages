@@ -59,6 +59,7 @@ class show_page_links_test extends \phpbb_database_test_case
 		$listener = new \phpbb\pages\event\listener(
 			$auth,
 			$controller_helper,
+			$lang,
 			new \phpbb\pages\operators\page(
 				$cache,
 				$phpbb_container,

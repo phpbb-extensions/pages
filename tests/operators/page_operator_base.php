@@ -46,6 +46,9 @@ class page_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb_mock_extension_manager */
 	protected $extension_manager;
 
+	/** @var \phpbb\textformatter\s9e\utils */
+	protected $text_formatter_utils;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/page.xml');

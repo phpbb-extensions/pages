@@ -55,21 +55,21 @@ class base extends \Exception
 	/**
 	* Basic message translation for our exceptions
 	*
-	* @param \phpbb\user $user
+	* @param \phpbb\language\language $lang
 	* @return string
 	* @access public
 	*/
-	public function get_message(\phpbb\user $user)
+	public function get_message(\phpbb\language\language $lang)
 	{
 		// Make sure our language file has been loaded
-		$this->add_lang($user);
+		$this->add_lang($lang);
 
 		if (is_array($this->message_full))
 		{
-			return call_user_func_array(array($user, 'lang'), $this->message_full);
+			return call_user_func_array(array($lang, 'lang'), $this->message_full);
 		}
 
-		return $user->lang($this->message_full);
+		return $lang->lang($this->message_full);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class base extends \Exception
 	*
 	* Goes through each element of the array and tries to translate them
 	*
-	* @param \phpbb\user $user
+	* @param \phpbb\language\language $lang
 	* @param string|array $message_portions The message portions to translate
 	* @param string|null $parent_message Send a string to translate all of the
 	*     portions with the parent message (typically used to format a string
@@ -85,10 +85,10 @@ class base extends \Exception
 	* @return array|string Array if $parent_message === null else a string
 	* @access protected
 	*/
-	protected function translate_portions(\phpbb\user $user, $message_portions, $parent_message = null)
+	protected function translate_portions(\phpbb\language\language $lang, $message_portions, $parent_message = null)
 	{
 		// Make sure our language file has been loaded
-		$this->add_lang($user);
+		$this->add_lang($lang);
 
 		// Ensure we have an array
 		if (!is_array($message_portions))
@@ -100,7 +100,7 @@ class base extends \Exception
 		foreach ($message_portions as &$message)
 		{
 			// Attempt to translate each portion
-			$translated_message = $user->lang('EXCEPTION_' . $message);
+			$translated_message = $lang->lang('EXCEPTION_' . $message);
 
 			// Check if translating did anything
 			if ($translated_message !== 'EXCEPTION_' . $message)
@@ -118,7 +118,7 @@ class base extends \Exception
 			array_unshift($message_portions, (string) $parent_message);
 
 			// We return a string
-			return call_user_func_array(array($user, 'lang'), $message_portions);
+			return call_user_func_array(array($lang, 'lang'), $message_portions);
 		}
 
 		// We return an array
@@ -128,11 +128,11 @@ class base extends \Exception
 	/**
 	* Add our language file
 	*
-	* @param \phpbb\user $user
+	* @param \phpbb\language\language $lang
 	* @return null
 	* @access public
 	*/
-	public function add_lang(\phpbb\user $user)
+	public function add_lang(\phpbb\language\language $lang)
 	{
 		static $is_loaded = false;
 
@@ -143,7 +143,7 @@ class base extends \Exception
 		}
 
 		// Add our language file
-		$user->add_lang_ext('phpbb/pages', 'exceptions');
+		$lang->add_lang('exceptions', 'phpbb/pages');
 
 		// So the language file is only loaded once
 		$is_loaded = true;
