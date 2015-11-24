@@ -63,7 +63,7 @@ $lang = array_merge($lang, array(
 	// Purge icons
 	'ACP_PAGES_PURGE_ICONS'				=> 'Lösche Icons',
 	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Löscht den Icon Cache',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Wenn du selbstdefinierte Link-Icons hinzufügst musst du unter Umständen den Icon Cache löschen um neue Icons zu sehen. Place custom icons named <samp>pages_route.gif</samp>, where <samp>route</samp> is the Page’s route name, in phpBB’s <samp>styles/*/theme/images/</samp> folders.',
+	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Wenn du selbstdefinierte Link-Icons hinzufügst musst du unter Umständen den Icon Cache löschen um neue Icons zu sehen. Lade benutzerdefinierte Icons mit dem Namen <samp>pages_route.gif</samp> nach <samp>styles/*/theme/images/</samp> hoch, wobei <samp>route</samp> der Name der URL route ist.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Bist du sicher, dass du diese Seite löschen willst?',
