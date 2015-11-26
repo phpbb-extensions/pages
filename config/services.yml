@@ -50,7 +50,7 @@ services:
             - @config
             - @dispatcher
             - %phpbb.pages.tables.pages%
-            - @?text_formatter.utils # optional to allow bc with phpBB 3.1
+            - @text_formatter.utils
 
     phpbb.pages.operator:
         class: phpbb\pages\operators\page

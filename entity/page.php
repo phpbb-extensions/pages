@@ -65,7 +65,7 @@ class page implements page_interface
 	* @param \phpbb\textformatter\s9e\utils      $text_formatter_utils  Text manipulation utilities
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table, \phpbb\textformatter\s9e\utils $text_formatter_utils = null)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table, \phpbb\textformatter\s9e\utils $text_formatter_utils)
 	{
 		$this->db = $db;
 		$this->config = $config;
@@ -518,10 +518,7 @@ class page implements page_interface
 		{
 			// This is required by s9e text formatter to
 			// remove extra xml formatting from the content.
-			if ($this->text_formatter_utils !== null)
-			{
-				$content = $this->text_formatter_utils->unparse($content);
-			}
+			$content = $this->text_formatter_utils->unparse($content);
 
 			$content = htmlspecialchars_decode($content, ENT_COMPAT);
 		}
