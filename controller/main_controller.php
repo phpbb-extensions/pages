@@ -93,7 +93,7 @@ class main_controller implements main_interface
 	* @param string $route The route name for a page
 	* @return object $entity The entity object
 	* @throws http_exception
-	* @access public
+	* @access protected
 	*/
 	protected function load_page_data($route)
 	{
