@@ -69,6 +69,7 @@ class page_entity_save_test extends page_entity_base
 		$result = $entity->load($id);
 
 		// Assert expected matches actual
+		$this->assertEquals($expected['page_id'], $result->get_id());
 		$this->assertEquals($expected['page_route'], $result->get_route());
 		$this->assertEquals($expected['page_title'], $result->get_title());
 	}
