@@ -43,7 +43,7 @@ class page implements page_interface
 	protected $config;
 
 	/** @var \phpbb\event\dispatcher_interface */
-	protected $phpbb_dispatcher;
+	protected $dispatcher;
 
 	/** @var \phpbb\textformatter\s9e\utils */
 	protected $text_formatter_utils;
@@ -231,8 +231,13 @@ class page implements page_interface
 			throw new \phpbb\pages\exception\out_of_bounds('page_id');
 		}
 
+		// Copy the data array, filtering out the page_id identifier
+		// so we do not attempt to update the row's identity column.
+		$sql_array = array_diff_key($this->data, array('page_id' => null));
+
+		// Update the page data in the database
 		$sql = 'UPDATE ' . $this->pages_table . '
-			SET ' . $this->db->sql_build_array('UPDATE', $this->data) . '
+			SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . '
 			WHERE page_id = ' . $this->get_id();
 		$this->db->sql_query($sql);
 
