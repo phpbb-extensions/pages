@@ -43,7 +43,7 @@ class page implements page_interface
 	protected $config;
 
 	/** @var \phpbb\event\dispatcher_interface */
-	protected $phpbb_dispatcher;
+	protected $dispatcher;
 
 	/** @var \phpbb\textformatter\s9e\utils */
 	protected $text_formatter_utils;
