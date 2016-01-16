@@ -231,18 +231,15 @@ class page implements page_interface
 			throw new \phpbb\pages\exception\out_of_bounds('page_id');
 		}
 
-		// Store the id & remove it from the data array (MSSQL does not like updating identity columns)
-		$page_id = $this->get_id();
-		unset($this->data['page_id']);
+		// Copy the data array, filtering out the page_id identifier
+		// so we do not attempt to update the row's identity column.
+		$sql_array = array_diff_key($this->data, array('page_id' => null));
 
 		// Update the page data in the database
 		$sql = 'UPDATE ' . $this->pages_table . '
-			SET ' . $this->db->sql_build_array('UPDATE', $this->data) . '
-			WHERE page_id = ' . $page_id;
+			SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . '
+			WHERE page_id = ' . $this->get_id();
 		$this->db->sql_query($sql);
-
-		// Restore the id to the data array
-		$this->data['page_id'] = $page_id;
 
 		return $this;
 	}
