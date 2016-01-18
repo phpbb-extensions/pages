@@ -5,36 +5,36 @@ services:
     phpbb.pages.admin.controller:
         class: phpbb\pages\controller\admin_controller
         arguments:
-            - @controller.helper
-            - @log
-            - @phpbb.pages.operator
-            - @request
-            - @template
-            - @user
-            - @service_container
-            - @dispatcher
-            - %core.root_path%
-            - %core.php_ext%
+            - '@controller.helper'
+            - '@log'
+            - '@phpbb.pages.operator'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@service_container'
+            - '@dispatcher'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     phpbb.pages.controller:
         class: phpbb\pages\controller\main_controller
         arguments:
-            - @auth
-            - @service_container
-            - @controller.helper
-            - @template
-            - @user
+            - '@auth'
+            - '@service_container'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
 
     phpbb.pages.listener:
         class: phpbb\pages\event\listener
         arguments:
-            - @auth
-            - @controller.helper
-            - @phpbb.pages.operator
-            - @template
-            - @user
-            - %core.root_path%
-            - %core.php_ext%
+            - '@auth'
+            - '@controller.helper'
+            - '@phpbb.pages.operator'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
         tags:
             - { name: event.listener }
 
@@ -42,19 +42,19 @@ services:
         class: phpbb\pages\entity\page
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
-            - @dbal.conn
-            - @config
-            - @dispatcher
-            - %phpbb.pages.tables.pages%
-            - @?text_formatter.utils # optional to allow bc with phpBB 3.1
+            - '@dbal.conn'
+            - '@config'
+            - '@dispatcher'
+            - '%phpbb.pages.tables.pages%'
+            - '@?text_formatter.utils' # optional to allow bc with phpBB 3.1
 
     phpbb.pages.operator:
         class: phpbb\pages\operators\page
         arguments:
-            - @cache.driver
-            - @service_container
-            - @dbal.conn
-            - @ext.manager
-            - %phpbb.pages.tables.pages%
-            - %phpbb.pages.tables.pages_links%
-            - %phpbb.pages.tables.pages_pages_links%
+            - '@cache.driver'
+            - '@service_container'
+            - '@dbal.conn'
+            - '@ext.manager'
+            - '%phpbb.pages.tables.pages%'
+            - '%phpbb.pages.tables.pages_links%'
+            - '%phpbb.pages.tables.pages_pages_links%'
