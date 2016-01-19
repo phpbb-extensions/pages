@@ -1,4 +1,4 @@
 parameters:
-    phpbb.pages.tables.pages: %core.table_prefix%pages
-    phpbb.pages.tables.pages_links: %core.table_prefix%pages_links
-    phpbb.pages.tables.pages_pages_links: %core.table_prefix%pages_pages_links
+    phpbb.pages.tables.pages: '%core.table_prefix%pages'
+    phpbb.pages.tables.pages_links: '%core.table_prefix%pages_links'
+    phpbb.pages.tables.pages_pages_links: '%core.table_prefix%pages_pages_links'
