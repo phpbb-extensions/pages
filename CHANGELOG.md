@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.4 - 2016-01-17
+
+- Added a feature where route names are auto-suggested based on the page title
+- Fixed an issue that prevented pages from being updated on MSSQL systems
+- Fixed some minor coding and language issues
+- Added Brazilian Portuguese language pack
+- Added Czech language pack
+- Added Mandarin Chinese (Simplified Script) language pack
+- Added Russian language pack
+
 ## 1.0.3 - 2015-06-14
 
 - Inaccessible pages will corectly send 404 status codes
