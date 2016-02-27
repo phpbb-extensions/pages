@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_MANAGE_EXPLAIN'			=> 'Von dieser Seite aus können Sie selbstdefiniert statische Seiten hinzufügen, verwalten und löschen.',
 	'ACP_PAGES_CREATE_PAGE'				=> 'Erstelle Seite',
 	'ACP_PAGES_CREATE_PAGE_EXPLAIN'		=> 'Mit dem Formular unten können Sie neue selbstdefinierte statische Seiten für Ihr Forum anlegen.',
-	'ACP_PAGES_EDIT_PAGE'				=> 'Bestbeite Seite',
+	'ACP_PAGES_EDIT_PAGE'				=> 'Bearbeite Seite',
 	'ACP_PAGES_EDIT_PAGE_EXPLAIN'		=> 'Mit dem Formular unten können Sie eine bestehende selbstdefinierte statische Seite aktualisieren.',
 
 	// Display pages list
