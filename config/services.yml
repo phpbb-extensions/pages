@@ -44,7 +44,7 @@ services:
 
     phpbb.pages.entity:
         class: phpbb\pages\entity\page
-        scope: prototype # scope MUST be prototype for this to work!
+        shared: false # service MUST not be shared for this to work!
         arguments:
             - '@dbal.conn'
             - '@config'
