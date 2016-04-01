@@ -10,9 +10,6 @@
 
 namespace phpbb\pages\tests\operators;
 
-require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
-require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php';
-
 /**
 * Base pages operator test (helper)
 */
