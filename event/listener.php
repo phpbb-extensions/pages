@@ -115,7 +115,7 @@ class listener implements EventSubscriberInterface
 
 			// Assign any available custom icons for the current link in the user's style
 			$custom_icon = '';
-			foreach (array_keys($pages_icons) as $icon_path)
+			foreach ($pages_icons as $icon_path => $ext_name)
 			{
 				if (strpos($icon_path, $this->user->style['style_path'] . '/theme/images/pages_' . $row['page_route'] . '.gif') !== false)
 				{
