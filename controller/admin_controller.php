@@ -42,10 +42,10 @@ class admin_controller implements admin_interface
 	protected $user;
 
 	/** @var ContainerInterface */
-	protected $phpbb_container;
+	protected $container;
 
 	/** @var \phpbb\event\dispatcher_interface */
-	protected $phpbb_dispatcher;
+	protected $dispatcher;
 
 	/** @var string phpBB root path */
 	protected $root_path;
