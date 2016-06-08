@@ -74,7 +74,7 @@ class page implements page_interface
 		// Load all page data from the database
 		$sql = 'SELECT *
 			FROM ' . $this->pages_table . '
-			ORDER BY page_order ASC, page_id ASC';
+			ORDER BY page_title ASC, page_order ASC, page_id ASC';
 		$result = $this->db->sql_query($sql);
 
 		while ($row = $this->db->sql_fetchrow($result))
