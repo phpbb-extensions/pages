@@ -24,7 +24,7 @@ class show_page_links_test extends \phpbb_database_test_case
 
 	public function getDataSet()
 	{
-		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/page.xml');
+		return $this->createXMLDataSet(__DIR__ . '/fixtures/page.xml');
 	}
 
 	/**

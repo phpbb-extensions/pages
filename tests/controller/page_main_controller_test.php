@@ -10,8 +10,8 @@
 
 namespace phpbb\pages\tests\controller;
 
-require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
-require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php';
+require_once __DIR__ . '/../../../../../includes/functions.php';
+require_once __DIR__ . '/../../../../../includes/functions_content.php';
 
 class page_main_controller_test extends \phpbb_database_test_case
 {
@@ -42,7 +42,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 
 	public function getDataSet()
 	{
-		return $this->createXMLDataSet(dirname(__FILE__) . '/../entity/fixtures/page.xml');
+		return $this->createXMLDataSet(__DIR__ . '/../entity/fixtures/page.xml');
 	}
 
 	public function setUp()
