@@ -217,7 +217,7 @@ class page implements page_interface
 	* @return array Array of page link location data for the specified pages, or all pages
 	* @access public
 	*/
-	public function get_page_links(array $page_ids = array())
+	public function get_page_links($page_ids = array())
 	{
 		$sql_array = array(
 			'SELECT'		=> 'ppl.*, pl.page_link_location, pl.page_link_event_name, p.page_route, p.page_title, p.page_display, p.page_display_to_guests',
