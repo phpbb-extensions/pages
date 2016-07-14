@@ -108,7 +108,7 @@ class listener implements EventSubscriberInterface
 		foreach ($rowset as $row)
 		{
 			// Skip page if it should not be displayed (admins always have access to a page)
-			if ((!$row['page_display'] && !$this->auth->acl_get('a_')) || (!$row['page_display_to_guests'] && $this->user->data['user_id'] == ANONYMOUS))
+			if ((!$row['page_display_to_guests'] && $this->user->data['user_id'] == ANONYMOUS) || (!$row['page_display'] && !$this->auth->acl_get('a_')))
 			{
 				continue;
 			}
@@ -146,7 +146,7 @@ class listener implements EventSubscriberInterface
 	public function viewonline_page($event)
 	{
 		// Are any users on app.php?
-		if ($event['on_page'][1] == 'app')
+		if ($event['on_page'][1] === 'app')
 		{
 			// Load our language file
 			$this->user->add_lang_ext('phpbb/pages', 'pages_common');

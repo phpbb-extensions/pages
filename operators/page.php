@@ -237,7 +237,7 @@ class page implements page_interface
 		);
 
 		// Cache the SQL query for 1 hour if page_ids is empty
-		$cache_ttl = (empty($page_ids)) ? 3600 : 0;
+		$cache_ttl = empty($page_ids) ? 3600 : 0;
 
 		$sql = $this->db->sql_build_query('SELECT', $sql_array);
 		$result = $this->db->sql_query($sql, $cache_ttl);

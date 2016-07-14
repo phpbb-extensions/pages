@@ -206,10 +206,10 @@ class admin_controller implements admin_interface
 		// If page edit use data stored in the entity
 		// If page add use default values
 		$content_parse_options = array(
-			'bbcode'	=> ($submit) ? $data['bbcode'] : (($entity->get_id()) ? $entity->content_bbcode_enabled() : 1),
-			'magic_url'	=> ($submit) ? $data['magic_url'] : (($entity->get_id()) ? $entity->content_magic_url_enabled() : 1),
-			'smilies'	=> ($submit) ? $data['smilies'] : (($entity->get_id()) ? $entity->content_smilies_enabled() : 1),
-			'html'		=> ($submit) ? $data['html'] : (($entity->get_id()) ? $entity->content_html_enabled() : 0),
+			'bbcode'	=> $submit ? $data['bbcode'] : ($entity->get_id() ? $entity->content_bbcode_enabled() : 1),
+			'magic_url'	=> $submit ? $data['magic_url'] : ($entity->get_id() ? $entity->content_magic_url_enabled() : 1),
+			'smilies'	=> $submit ? $data['smilies'] : ($entity->get_id() ? $entity->content_smilies_enabled() : 1),
+			'html'		=> $submit ? $data['html'] : ($entity->get_id() ? $entity->content_html_enabled() : 0),
 		);
 
 		// Set the content parse options in the entity
@@ -250,7 +250,7 @@ class admin_controller implements admin_interface
 				try
 				{
 					// Calling the $entity_function on the entity and passing it $page_data
-					call_user_func_array(array($entity, $entity_function), array($page_data));
+					$entity->$entity_function($page_data);
 				}
 				catch (\phpbb\pages\exception\base $e)
 				{
@@ -313,8 +313,8 @@ class admin_controller implements admin_interface
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
-			'S_ERROR'			=> (sizeof($errors)) ? true : false,
-			'ERROR_MSG'			=> (sizeof($errors)) ? implode('<br />', $errors) : '',
+			'S_ERROR'			=> (bool) sizeof($errors),
+			'ERROR_MSG'			=> sizeof($errors) ? implode('<br />', $errors) : '',
 
 			'PAGES_TITLE'		=> $entity->get_title(),
 			'PAGES_ROUTE'		=> $entity->get_route(),

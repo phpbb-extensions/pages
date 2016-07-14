@@ -161,6 +161,6 @@ class base extends \Exception
 	*/
 	public function __toString()
 	{
-		return (is_array($this->message_full)) ? var_export($this->message_full, true) : (string) $this->message_full;
+		return is_array($this->message_full) ? (string) var_export($this->message_full, true) : (string) $this->message_full;
 	}
 }
