@@ -77,7 +77,7 @@ interface page_interface
 	* @return array Array of page link location data for the specified pages, or all pages
 	* @access public
 	*/
-	public function get_page_links($page_ids = array());
+	public function get_page_links(array $page_ids = array());
 
 	/**
 	* Insert page link location data for a page
