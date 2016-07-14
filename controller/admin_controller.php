@@ -166,7 +166,7 @@ class admin_controller implements admin_interface
 	/**
 	* Process page data to be added or edited
 	*
-	* @param object $entity The page entity object
+	* @param \phpbb\pages\entity\page_interface $entity The page entity object
 	* @return null
 	* @access protected
 	*/
@@ -282,7 +282,6 @@ class admin_controller implements admin_interface
 				else
 				{
 					// Add the new page entity to the database
-					/* @var $entity \phpbb\pages\entity\page */
 					$entity = $this->page_operator->add_page($entity);
 
 					// Save the page link location data (now that we can access the new id)

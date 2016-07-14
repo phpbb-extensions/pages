@@ -91,8 +91,8 @@ class page implements page_interface
 	/**
 	* Add a page
 	*
-	* @param object $entity Page entity with new data to insert
-	* @return page_interface Added page entity
+	* @param \phpbb\pages\entity\page_interface $entity Page entity with new data to insert
+	* @return \phpbb\pages\entity\page_interface Added page entity
 	* @access public
 	*/
 	public function add_page($entity)
