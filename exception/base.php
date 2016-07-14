@@ -35,17 +35,18 @@ class base extends \Exception
 	*/
 	public function __construct($message = null, $code = 0, \Exception $previous = null)
 	{
-		// We're slightly changing the way exceptions work
-		// Tools, such as xdebug, expect the message to be a string, so to prevent errors
-		// with those tools, we store our full message in message_full and only a string in message
+		parent::__construct();
+
+		$this->message = $message;
+
 		if (is_array($message))
 		{
 			$this->message = (string) $message[0];
 		}
-		else
-		{
-			$this->message = $message;
-		}
+
+		// We're slightly changing the way exceptions work
+		// Tools, such as xdebug, expect the message to be a string, so to prevent errors
+		// with those tools, we store our full message in message_full and only a string in message
 		$this->message_full = $message;
 
 		$this->code = $code;
