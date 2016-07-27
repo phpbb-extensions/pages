@@ -252,7 +252,7 @@ class page implements page_interface
 	*/
 	public function get_id()
 	{
-		return (isset($this->data['page_id'])) ? (int) $this->data['page_id'] : 0;
+		return isset($this->data['page_id']) ? (int) $this->data['page_id'] : 0;
 	}
 
 	/**
@@ -263,7 +263,7 @@ class page implements page_interface
 	*/
 	public function get_title()
 	{
-		return (isset($this->data['page_title'])) ? (string) $this->data['page_title'] : '';
+		return isset($this->data['page_title']) ? (string) $this->data['page_title'] : '';
 	}
 
 	/**
@@ -305,7 +305,7 @@ class page implements page_interface
 	*/
 	public function get_description()
 	{
-		return (isset($this->data['page_description'])) ? (string) $this->data['page_description'] : '';
+		return isset($this->data['page_description']) ? (string) $this->data['page_description'] : '';
 	}
 
 	/**
@@ -341,7 +341,7 @@ class page implements page_interface
 	*/
 	public function get_route()
 	{
-		return (isset($this->data['page_route'])) ? (string) $this->data['page_route'] : '';
+		return isset($this->data['page_route']) ? (string) $this->data['page_route'] : '';
 	}
 
 	/**
@@ -364,7 +364,7 @@ class page implements page_interface
 		}
 
 		// Route should not contain any special characters
-		if (!preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/i', $route))
+		if (!preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/', $route))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('route', 'ILLEGAL_CHARACTERS'));
 		}
@@ -406,7 +406,7 @@ class page implements page_interface
 	*/
 	public function get_order()
 	{
-		return (isset($this->data['page_order'])) ? (int) $this->data['page_order'] : 0;
+		return isset($this->data['page_order']) ? (int) $this->data['page_order'] : 0;
 	}
 
 	/**
@@ -490,9 +490,9 @@ class page implements page_interface
 	public function get_content_for_edit()
 	{
 		// Use defaults if these haven't been set yet
-		$content = (isset($this->data['page_content'])) ? $this->data['page_content'] : '';
-		$uid = (isset($this->data['page_content_bbcode_uid'])) ? $this->data['page_content_bbcode_uid'] : '';
-		$options = (isset($this->data['page_content_bbcode_options'])) ? (int) $this->data['page_content_bbcode_options'] : 0;
+		$content = isset($this->data['page_content']) ? $this->data['page_content'] : '';
+		$uid = isset($this->data['page_content_bbcode_uid']) ? $this->data['page_content_bbcode_uid'] : '';
+		$options = isset($this->data['page_content_bbcode_options']) ? (int) $this->data['page_content_bbcode_options'] : 0;
 
 		// Generate for edit
 		$content_data = generate_text_for_edit($content, $uid, $options);
@@ -510,10 +510,10 @@ class page implements page_interface
 	public function get_content_for_display($censor_text = true)
 	{
 		// If these haven't been set yet; use defaults
-		$content = (isset($this->data['page_content'])) ? $this->data['page_content'] : '';
-		$uid = (isset($this->data['page_content_bbcode_uid'])) ? $this->data['page_content_bbcode_uid'] : '';
-		$bitfield = (isset($this->data['page_content_bbcode_bitfield'])) ? $this->data['page_content_bbcode_bitfield'] : '';
-		$options = (isset($this->data['page_content_bbcode_options'])) ? (int) $this->data['page_content_bbcode_options'] : 0;
+		$content = isset($this->data['page_content']) ? $this->data['page_content'] : '';
+		$uid = isset($this->data['page_content_bbcode_uid']) ? $this->data['page_content_bbcode_uid'] : '';
+		$bitfield = isset($this->data['page_content_bbcode_bitfield']) ? $this->data['page_content_bbcode_bitfield'] : '';
+		$options = isset($this->data['page_content_bbcode_options']) ? (int) $this->data['page_content_bbcode_options'] : 0;
 
 		$content_html_enabled = $this->content_html_enabled();
 		$route = $this->get_route();
@@ -703,7 +703,7 @@ class page implements page_interface
 	*/
 	public function content_html_enabled()
 	{
-		return (isset($this->data['page_content_allow_html'])) ? (bool) $this->data['page_content_allow_html'] : false;
+		return isset($this->data['page_content_allow_html']) ? (bool) $this->data['page_content_allow_html'] : false;
 	}
 
 	/**
@@ -748,7 +748,7 @@ class page implements page_interface
 	*/
 	public function get_page_display()
 	{
-		return (isset($this->data['page_display'])) ? (bool) $this->data['page_display'] : false;
+		return isset($this->data['page_display']) ? (bool) $this->data['page_display'] : false;
 	}
 
 	/**
@@ -777,7 +777,7 @@ class page implements page_interface
 	*/
 	public function get_page_display_to_guests()
 	{
-		return (isset($this->data['page_display_to_guests'])) ? (bool) $this->data['page_display_to_guests'] : false;
+		return isset($this->data['page_display_to_guests']) ? (bool) $this->data['page_display_to_guests'] : false;
 	}
 
 	/**
@@ -810,7 +810,7 @@ class page implements page_interface
 	protected function set_content_option($option_value, $negate = false, $reparse_content = true)
 	{
 		// Set page_content_bbcode_options to 0 if it does not yet exist
-		$this->data['page_content_bbcode_options'] = (isset($this->data['page_content_bbcode_options'])) ? $this->data['page_content_bbcode_options'] : 0;
+		$this->data['page_content_bbcode_options'] = isset($this->data['page_content_bbcode_options']) ? $this->data['page_content_bbcode_options'] : 0;
 
 		// If we're setting the option and the option is not already set
 		if (!$negate && !($this->data['page_content_bbcode_options'] & $option_value))

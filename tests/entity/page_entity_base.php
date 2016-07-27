@@ -10,9 +10,9 @@
 
 namespace phpbb\pages\tests\entity;
 
-require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
-require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php';
-require_once dirname(__FILE__) . '/../../../../../includes/utf/utf_tools.php';
+require_once __DIR__ . '/../../../../../includes/functions.php';
+require_once __DIR__ . '/../../../../../includes/functions_content.php';
+require_once __DIR__ . '/../../../../../includes/utf/utf_tools.php';
 
 /**
 * Base page entity test (helper)
@@ -40,7 +40,7 @@ class page_entity_base extends \phpbb_database_test_case
 
 	public function getDataSet()
 	{
-		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/page.xml');
+		return $this->createXMLDataSet(__DIR__ . '/fixtures/page.xml');
 	}
 
 	public function setUp()
