@@ -215,7 +215,7 @@ class admin_controller implements admin_interface
 		// Set the content parse options in the entity
 		foreach ($content_parse_options as $function => $enabled)
 		{
-			call_user_func(array($entity, ($enabled ? 'content_enable_' : 'content_disable_') . $function));
+			$entity->{($enabled ? 'content_enable_' : 'content_disable_') . $function}();
 		}
 
 		// Purge temporary variable
