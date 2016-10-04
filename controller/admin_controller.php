@@ -82,7 +82,7 @@ class admin_controller implements admin_interface
 	/**
 	* Display the pages
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function display_pages()
@@ -121,7 +121,7 @@ class admin_controller implements admin_interface
 	/**
 	* Add a page
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function add_page()
@@ -143,7 +143,7 @@ class admin_controller implements admin_interface
 	* Edit a page
 	*
 	* @param int $page_id The page identifier to edit
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function edit_page($page_id)
@@ -167,7 +167,7 @@ class admin_controller implements admin_interface
 	* Process page data to be added or edited
 	*
 	* @param \phpbb\pages\entity\page_interface $entity The page entity object
-	* @return null
+	* @return void
 	* @access protected
 	*/
 	protected function add_edit_page_data($entity)
@@ -354,7 +354,7 @@ class admin_controller implements admin_interface
 	* Delete a page
 	*
 	* @param int $page_id The page identifier to delete
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function delete_page($page_id)
@@ -395,7 +395,7 @@ class admin_controller implements admin_interface
 	* Set page url
 	*
 	* @param string $u_action Custom form action
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function set_page_url($u_action)
@@ -407,7 +407,7 @@ class admin_controller implements admin_interface
 	* Set template var options for page template select menus
 	*
 	* @param string	$current Name of the template currently stored in the database
-	* @return null
+	* @return void
 	* @access protected
 	*/
 	protected function create_page_template_options($current)
@@ -438,7 +438,7 @@ class admin_controller implements admin_interface
 	*
 	* @param int $page_id Page identifier
 	* @param array $current Currently selected link locations (from the form data)
-	* @return null
+	* @return void
 	* @access protected
 	*/
 	protected function create_page_link_options($page_id = 0, $current = array())

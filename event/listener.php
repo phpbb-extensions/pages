@@ -81,7 +81,7 @@ class listener implements EventSubscriberInterface
 	* Add administrative permissions to manage Pages
 	*
 	* @param \phpbb\event\data $event The event object
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function add_permission($event)
@@ -94,7 +94,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Display links to pages in the specified page link locations
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function show_page_links()
@@ -140,7 +140,7 @@ class listener implements EventSubscriberInterface
 	* Show users as viewing Pages on Who Is Online page
 	*
 	* @param \phpbb\event\data $event The event object
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function viewonline_page($event)

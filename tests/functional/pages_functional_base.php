@@ -47,7 +47,7 @@ class pages_functional_base extends \phpbb_functional_test_case
 	* @param string $page_title
 	* @param string $page_content
 	* @param array $additional_form_data Additional form data to be sent
-	* @return null
+	* @return string
 	*/
 	public function create_page($page_title, $page_content, $additional_form_data = array())
 	{

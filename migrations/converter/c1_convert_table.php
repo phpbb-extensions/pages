@@ -55,7 +55,7 @@ class c1_convert_table extends \phpbb\db\migration\migration
 	/**
 	* Rename the previous pages table
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function rename_pages_table()
