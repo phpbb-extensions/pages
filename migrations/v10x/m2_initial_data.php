@@ -43,7 +43,7 @@ class m2_initial_data extends \phpbb\db\migration\migration
 	/**
 	* Add pages link locations to the database
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function add_page_link_location_data()

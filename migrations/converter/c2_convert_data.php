@@ -57,7 +57,7 @@ class c2_convert_data extends \phpbb\db\migration\migration
 	/**
 	* Custom function to convert and add Pages MOD data
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function convert_pages_data()

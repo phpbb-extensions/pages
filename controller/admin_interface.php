@@ -20,7 +20,7 @@ interface admin_interface
 	/**
 	* Display the pages
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function display_pages();
@@ -28,7 +28,7 @@ interface admin_interface
 	/**
 	* Add a page
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function add_page();
@@ -37,7 +37,7 @@ interface admin_interface
 	* Edit a page
 	*
 	* @param int $page_id The page identifier to edit
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function edit_page($page_id);
@@ -46,7 +46,7 @@ interface admin_interface
 	* Delete a page
 	*
 	* @param int $page_id The page identifier to delete
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function delete_page($page_id);
@@ -55,7 +55,7 @@ interface admin_interface
 	* Set page url
 	*
 	* @param string $u_action Custom form action
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function set_page_url($u_action);

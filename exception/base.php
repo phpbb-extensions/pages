@@ -130,7 +130,7 @@ class base extends \Exception
 	* Add our language file
 	*
 	* @param \phpbb\language\language $lang
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function add_lang(\phpbb\language\language $lang)

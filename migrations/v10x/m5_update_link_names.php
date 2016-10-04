@@ -43,7 +43,7 @@ class m5_update_link_names extends \phpbb\db\migration\migration
 	/**
 	* Update link location names in the database
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function update_page_link_location_data()

@@ -155,7 +155,7 @@ class page_entity_route_test extends page_entity_base
 		$entity = $this->get_page_entity();
 
 		// Load the page from the db if it exists
-		if (!is_null($id))
+		if (null !== $id)
 		{
 			$entity->load($id);
 		}
@@ -198,7 +198,7 @@ class page_entity_route_test extends page_entity_base
 		$entity = $this->get_page_entity();
 
 		// Load the page from the db if it exists
-		if (!is_null($id))
+		if (null !== $id)
 		{
 			$entity->load($id);
 		}
