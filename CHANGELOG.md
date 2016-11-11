@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5 - 2016-11-10
+
+- Fix the Brazilian Portuguese language (renamed from pt-br to pt_br)
+- Minor code and HTML improvements
+- Added German language pack
+
 ## 1.0.4 - 2016-01-17
 
 - Added a feature where route names are auto-suggested based on the page title
