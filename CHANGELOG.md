@@ -3,6 +3,7 @@
 ## 1.0.5 - 2016-11-10
 
 - Fix the Brazilian Portuguese language (renamed from pt-br to pt_br)
+- Fix posted images to fit within the page area and not overflow
 - Minor code and HTML improvements
 - Added German language pack
 
