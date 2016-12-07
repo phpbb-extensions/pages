@@ -79,7 +79,7 @@ services:
         tags:
             - { name: text_reparser.plugin }
 
-    cron.task.text_reparser.phpbb_pages_text:
+    cron.task.phpbb.pages.text_reparser:
         class: phpbb\cron\task\text_reparser\reparser
         arguments:
             - '@config'
@@ -88,7 +88,7 @@ services:
             - '@text_reparser.manager'
             - '@text_reparser_collection'
         calls:
-            - [set_name, [cron.task.text_reparser.phpbb_pages_text]]
+            - [set_name, [cron.task.phpbb.pages.text_reparser]]
             - [set_reparser, [text_reparser.phpbb_pages_text]]
         tags:
             - { name: cron.task }
