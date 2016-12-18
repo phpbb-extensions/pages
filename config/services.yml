@@ -71,11 +71,13 @@ services:
         tags:
             - { name: routing.loader }
 
-    text_reparser.phpbb_pages_text:
+    phpbb.pages.text_reparser.page_text:
         class: phpbb\pages\textreparser\plugins\pages_text
         arguments:
             - '@dbal.conn'
             - '%phpbb.pages.tables.pages%'
+        calls:
+            - [set_name, [phpbb_pages_text]]
         tags:
             - { name: text_reparser.plugin }
 
@@ -89,6 +91,6 @@ services:
             - '@text_reparser_collection'
         calls:
             - [set_name, [cron.task.text_reparser.phpbb_pages]]
-            - [set_reparser, [text_reparser.phpbb_pages_text]]
+            - [set_reparser, [phpbb.pages.text_reparser.page_text]]
         tags:
             - { name: cron.task }
