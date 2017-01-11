@@ -1,3 +1,9 @@
+# Dynamic routing for Pages 2.0.x
+phpbb_pages_dynamic_controller:
+    resource: phpbb_pages_new_controller # can be any name, it is not used, but must be present
+    type: phpbb_pages_route
+
+# Legacy routing from Pages 1.0.x, for backwards compatibility
 phpbb_pages_main_controller:
     path: /page/{route}
     defaults: { _controller: phpbb.pages.controller:display }

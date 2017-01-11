@@ -27,6 +27,9 @@ class main_controller implements main_interface
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
+	/** @var \phpbb\language\language */
+	protected $lang;
+
 	/** @var \phpbb\template\template */
 	protected $template;
 
@@ -36,18 +39,20 @@ class main_controller implements main_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\auth\auth            $auth         Authentication object
-	* @param ContainerInterface          $container    Service container interface
-	* @param \phpbb\controller\helper    $helper       Controller helper object
-	* @param \phpbb\template\template    $template     Template object
-	* @param \phpbb\user                 $user         User object
+	* @param \phpbb\auth\auth         $auth      Authentication object
+	* @param ContainerInterface       $container Service container interface
+	* @param \phpbb\controller\helper $helper    Controller helper object
+	* @param \phpbb\language\language $lang      Language object
+	* @param \phpbb\template\template $template  Template object
+	* @param \phpbb\user              $user      User object
 	* @access public
 	*/
-	public function __construct(\phpbb\auth\auth $auth, ContainerInterface $container, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\auth\auth $auth, ContainerInterface $container, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->auth = $auth;
 		$this->container = $container;
 		$this->helper = $helper;
+		$this->lang = $lang;
 		$this->template = $template;
 		$this->user = $user;
 	}
@@ -63,7 +68,7 @@ class main_controller implements main_interface
 	public function display($route)
 	{
 		// Add the pages controller language file
-		$this->user->add_lang_ext('phpbb/pages', 'pages_controller');
+		$this->lang->add_lang('pages_controller', 'phpbb/pages');
 
 		// Load the page data to display
 		$page = $this->load_page_data($route);
@@ -80,7 +85,7 @@ class main_controller implements main_interface
 		// Create breadcrumbs
 		$this->template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $page_title,
-			'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $route)),
+			'U_VIEW_FORUM'	=> $this->helper->route('phpbb_pages_dynamic_route_' . $page->get_id()),
 		));
 
 		// Send all data to the template file

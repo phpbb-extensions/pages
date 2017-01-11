@@ -17,6 +17,10 @@ class page_operator_add_page_test extends page_operator_base
 	*/
 	public function test_add_page()
 	{
+		// This is needed to set up the s9e text formatter services
+		// This can lead to a test failure if PCRE is old.
+		$this->get_test_case_helpers()->set_s9e_services();
+
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 

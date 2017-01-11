@@ -13,29 +13,24 @@ namespace phpbb\pages\tests\event;
 class event_listener_viewonline_test extends event_listener_base
 {
 	/**
-	* Get an instance of phpbb\user
+	* Get an instance of \phpbb\language\language
 	*/
-	public function get_user_instance()
+	public function get_language_instance()
 	{
-		// Must do this for testing with the user class
-		global $config;
-		$config['default_lang'] = 'en';
+		global $phpbb_root_path, $phpEx;
 
-		// Must mock extension manager for the user class
-		global $phpbb_extension_manager, $phpbb_root_path;
-		$phpbb_extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
-
-		// Get instance of phpbb\user (dataProvider is called before setUp(), so this must be done here)
-		$this->user = new \phpbb\user('\phpbb\datetime');
-
-		$this->user->add_lang_ext('phpbb/pages', 'pages_common');
+		// Get instance of \phpbb\language\language (dataProvider is called before setUp(), so this must be done here)
+		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$lang_loader->set_extension_manager(new \phpbb_mock_extension_manager($phpbb_root_path));
+		$this->lang = new \phpbb\language\language($lang_loader);
+		$this->lang->add_lang('pages_common', 'phpbb/pages');
 	}
 
 	public function setUp()
 	{
 		parent::setUp();
 
-		$this->get_user_instance();
+		$this->get_language_instance();
 	}
 
 	/**
@@ -47,7 +42,7 @@ class event_listener_viewonline_test extends event_listener_base
 	{
 		global $phpEx;
 
-		$this->get_user_instance();
+		$this->get_language_instance();
 
 		return array(
 			// test when on_page is index
@@ -67,7 +62,7 @@ class event_listener_viewonline_test extends event_listener_base
 					1 => 'app',
 				),
 				array(
-					'session_page' => 'app.' . $phpEx . '/foobar'
+					'session_page' => 'app.' . $phpEx . '/help/faq'
 				),
 				'$location_url',
 				'$location',
@@ -80,12 +75,12 @@ class event_listener_viewonline_test extends event_listener_base
 					1 => 'app',
 				),
 				array(
-					'session_page' => 'app.' . $phpEx . '/page/test'
+					'session_page' => 'app.' . $phpEx . '/test'
 				),
 				'$location_url',
 				'$location',
-				'phpbb_pages_main_controller#a:1:{s:5:"route";s:4:"test";}',
-				$this->user->lang('PAGES_VIEWONLINE', '$location'),
+				'phpbb_pages_dynamic_route_1#a:0:{}',
+				$this->lang->lang('PAGES_VIEWONLINE', '$location'),
 			),
 			// test when on_page is app and session_page is for non-existent pages
 			array(
@@ -93,7 +88,7 @@ class event_listener_viewonline_test extends event_listener_base
 					1 => 'app',
 				),
 				array(
-					'session_page' => 'app.' . $phpEx . '/page/foobar'
+					'session_page' => 'app.' . $phpEx . '/foobar'
 				),
 				'$location_url',
 				'$location',
@@ -112,7 +107,9 @@ class event_listener_viewonline_test extends event_listener_base
 	{
 		$this->page_operator->expects($this->any())
 			->method('get_page_routes')
-			->will($this->returnValue(array('test' => $location)));
+			->will($this->returnValue(array(
+				1 => array('route' => 'test', 'title' => $location)
+			)));
 
 		$this->controller_helper->expects($this->any())
 			->method('route')

@@ -16,8 +16,10 @@ namespace phpbb\pages\tests\functional;
 class main_controller_test extends pages_functional_base
 {
 	/**
-	* Test Page appears in front end
-	*/
+	 * Test Page appears in front end
+	 *
+	 * @return string $route
+	 */
 	public function test_display()
 	{
 		$this->login();
@@ -27,7 +29,7 @@ class main_controller_test extends pages_functional_base
 		$route = $this->create_page('Front End Test Page', 'This is a functional test page for the front end');
 
 		// Load the page
-		$crawler = self::request('GET', "app.php/page/{$route}?sid={$this->sid}");
+		$crawler = self::request('GET', "app.php/{$route}?sid={$this->sid}");
 
 		// Assert the expected page exists
 		$this->assertContains('Front End Test Page', $crawler->filter('#page-body')->text());
@@ -44,11 +46,28 @@ class main_controller_test extends pages_functional_base
 			if (strpos($subcrawler->text(), 'Front End Test Page') !== false)
 			{
 				$this->assertContains($route, $subcrawler->filter('a')->attr('href'));
-				return;
+				return $route;
 			}
 		}
 
 		// If we did not find the page link, we fail
 		$this->fail('The page link could not be found in the navbar');
+
+		return null;
+	}
+
+	/**
+	 * Test Page appears when using legacy /page/route URL paths
+	 *
+	 * @param string $route
+	 * @depends test_display
+	 */
+	public function test_display_legacy($route)
+	{
+		// Load the page
+		$crawler = self::request('GET', "app.php/page/{$route}?sid={$this->sid}");
+
+		// Assert the expected page exists
+		$this->assertContains('Front End Test Page', $crawler->filter('#page-body')->text());
 	}
 }

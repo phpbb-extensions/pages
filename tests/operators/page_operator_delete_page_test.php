@@ -46,7 +46,7 @@ class page_operator_delete_page_test extends page_operator_base
 		try
 		{
 			// Setup the entity class
-			$entity = new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages');
+			$entity = new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages', $this->text_formatter_utils);
 
 			$deleted = $entity->load($page_id);
 		}

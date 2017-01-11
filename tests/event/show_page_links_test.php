@@ -41,7 +41,9 @@ class show_page_links_test extends \phpbb_database_test_case
 		$cache = new \phpbb_mock_cache();
 		$template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock();
-		$user = new \phpbb\user('\phpbb\datetime');
+		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$lang = new \phpbb\language\language($lang_loader);
+		$user = new \phpbb\user($lang, '\phpbb\datetime');
 		$ext_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
@@ -57,6 +59,7 @@ class show_page_links_test extends \phpbb_database_test_case
 		$listener = new \phpbb\pages\event\listener(
 			$auth,
 			$controller_helper,
+			$lang,
 			new \phpbb\pages\operators\page(
 				$cache,
 				$phpbb_container,
@@ -77,13 +80,13 @@ class show_page_links_test extends \phpbb_database_test_case
 			->method('assign_block_vars')
 			->withConsecutive(
 				array('overall_header_navigation_prepend_links', array(
-					'U_LINK_URL' => 'phpbb_pages_main_controller#a:1:{s:5:"route";s:6:"page_1";}',
+					'U_LINK_URL' => 'phpbb_pages_dynamic_route_1#a:0:{}',
 					'LINK_ROUTE' => 'page_1',
 					'LINK_TITLE' => 'title_1',
 					'ICON_LINK' => '',
 				)),
 				array('overall_header_navigation_append_links', array(
-					'U_LINK_URL' => 'phpbb_pages_main_controller#a:1:{s:5:"route";s:6:"page_2";}',
+					'U_LINK_URL' => 'phpbb_pages_dynamic_route_2#a:0:{}',
 					'LINK_ROUTE' => 'page_2',
 					'LINK_TITLE' => 'title_2',
 					'ICON_LINK' => '',

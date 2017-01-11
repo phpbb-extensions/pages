@@ -5,7 +5,9 @@ services:
     phpbb.pages.admin.controller:
         class: phpbb\pages\controller\admin_controller
         arguments:
+            - '@cache.driver'
             - '@controller.helper'
+            - '@language'
             - '@log'
             - '@phpbb.pages.operator'
             - '@request'
@@ -22,6 +24,7 @@ services:
             - '@auth'
             - '@service_container'
             - '@controller.helper'
+            - '@language'
             - '@template'
             - '@user'
 
@@ -30,6 +33,7 @@ services:
         arguments:
             - '@auth'
             - '@controller.helper'
+            - '@language'
             - '@phpbb.pages.operator'
             - '@template'
             - '@user'
@@ -40,13 +44,13 @@ services:
 
     phpbb.pages.entity:
         class: phpbb\pages\entity\page
-        scope: prototype # scope MUST be prototype for this to work!
+        shared: false # service MUST not be shared for this to work!
         arguments:
             - '@dbal.conn'
             - '@config'
             - '@dispatcher'
             - '%phpbb.pages.tables.pages%'
-            - '@?text_formatter.utils' # optional to allow bc with phpBB 3.1
+            - '@text_formatter.utils'
 
     phpbb.pages.operator:
         class: phpbb\pages\operators\page
@@ -58,3 +62,35 @@ services:
             - '%phpbb.pages.tables.pages%'
             - '%phpbb.pages.tables.pages_links%'
             - '%phpbb.pages.tables.pages_pages_links%'
+
+    phpbb.pages.routing.loader:
+        class: phpbb\pages\routing\page_loader
+        arguments:
+            - '@dbal.conn'
+            - '%phpbb.pages.tables.pages%'
+        tags:
+            - { name: routing.loader }
+
+    phpbb.pages.text_reparser.page_text:
+        class: phpbb\pages\textreparser\plugins\pages_text
+        arguments:
+            - '@dbal.conn'
+            - '%phpbb.pages.tables.pages%'
+        calls:
+            - [set_name, [phpbb_pages_text]]
+        tags:
+            - { name: text_reparser.plugin }
+
+    phpbb.pages.cron.task.text_reparser:
+        class: phpbb\cron\task\text_reparser\reparser
+        arguments:
+            - '@config'
+            - '@config_text'
+            - '@text_reparser.lock'
+            - '@text_reparser.manager'
+            - '@text_reparser_collection'
+        calls:
+            - [set_name, [cron.task.text_reparser.phpbb_pages]]
+            - [set_reparser, [phpbb.pages.text_reparser.page_text]]
+        tags:
+            - { name: cron.task }

@@ -16,10 +16,13 @@ class pages_module
 
 	public function main($id, $mode)
 	{
-		global $cache, $phpbb_container, $request, $user;
+		global $cache, $phpbb_container, $request;
+
+		/** @var \phpbb\language\language $lang */
+		$lang = $phpbb_container->get('language');
 
 		// Add the pages ACP lang file
-		$user->add_lang_ext('phpbb/pages', 'pages_acp');
+		$lang->add_lang('pages_acp', 'phpbb/pages');
 
 		// Get an instance of the admin controller
 		$admin_controller = $phpbb_container->get('phpbb.pages.admin.controller');
@@ -35,14 +38,14 @@ class pages_module
 		$this->tpl_name = 'manage_pages';
 
 		// Set the page title for our ACP page
-		$this->page_title = $user->lang('ACP_PAGES_MANAGE');
+		$this->page_title = $lang->lang('ACP_PAGES_MANAGE');
 
 		// Perform any actions submitted by the user
 		switch ($action)
 		{
 			case 'add':
 				// Set the page title for our ACP page
-				$this->page_title = $user->lang('ACP_PAGES_CREATE_PAGE');
+				$this->page_title = $lang->lang('ACP_PAGES_CREATE_PAGE');
 
 				// Load the add page handle in the admin controller
 				$admin_controller->add_page();
@@ -53,7 +56,7 @@ class pages_module
 
 			case 'edit':
 				// Set the page title for our ACP page
-				$this->page_title = $user->lang('ACP_PAGES_EDIT_PAGE');
+				$this->page_title = $lang->lang('ACP_PAGES_EDIT_PAGE');
 
 				// Load the edit page handle in the admin controller
 				$admin_controller->edit_page($page_id);
@@ -72,7 +75,7 @@ class pages_module
 				else
 				{
 					// Request confirmation from the user to delete the page
-					confirm_box(false, $user->lang('ACP_PAGES_DELETE_CONFIRM'), build_hidden_fields(array(
+					confirm_box(false, $lang->lang('ACP_PAGES_DELETE_CONFIRM'), build_hidden_fields(array(
 						'page_id'	=> $page_id,
 						'mode'		=> $mode,
 						'action'	=> $action,

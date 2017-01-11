@@ -17,8 +17,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 */
 class admin_controller implements admin_interface
 {
+	/** @var \phpbb\cache\driver\driver_interface */
+	protected $cache;
+
 	/** @var \phpbb\controller\helper */
 	protected $helper;
+
+	/** @var \phpbb\language\language */
+	protected $lang;
 
 	/** @var \phpbb\log\log */
 	protected $log;
@@ -53,7 +59,9 @@ class admin_controller implements admin_interface
 	/**
 	* Constructor
 	*
+	* @param \phpbb\cache\driver\driver_interface $cache            Cache driver interface
 	* @param \phpbb\controller\helper             $helper           Controller helper object
+	* @param \phpbb\language\language             $lang             Language object
 	* @param \phpbb\log\log                       $log              The phpBB log system
 	* @param \phpbb\pages\operators\page          $page_operator    Pages operator object
 	* @param \phpbb\request\request               $request          Request object
@@ -65,9 +73,11 @@ class admin_controller implements admin_interface
 	* @param string                               $php_ext          phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
+	public function __construct(\phpbb\cache\driver\driver_interface $cache, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
 	{
+		$this->cache = $cache;
 		$this->helper = $helper;
+		$this->lang = $lang;
 		$this->log = $log;
 		$this->page_operator = $page_operator;
 		$this->request = $request;
@@ -107,7 +117,7 @@ class admin_controller implements admin_interface
 
 				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;page_id=" . $entity->get_id(),
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;page_id=" . $entity->get_id(),
-				'U_PAGES_ROUTE'		=> $this->helper->route('phpbb_pages_main_controller', array('route' => $entity->get_route())),
+				'U_PAGES_ROUTE'		=> $this->helper->route('phpbb_pages_dynamic_route_' . $entity->get_id()),
 			));
 		}
 
@@ -158,7 +168,7 @@ class admin_controller implements admin_interface
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_EDIT_PAGE'	=> true,
-			'U_VIEW_PAGE'	=> $this->helper->route('phpbb_pages_main_controller', array('route' => $entity->get_route())),
+			'U_VIEW_PAGE'	=> $this->helper->route('phpbb_pages_dynamic_route_' . $entity->get_id()),
 			'U_ACTION'		=> "{$this->u_action}&amp;page_id={$page_id}&amp;action=edit",
 		));
 	}
@@ -179,7 +189,7 @@ class admin_controller implements admin_interface
 		$submit = $this->request->is_set_post('submit');
 
 		// Load posting language file for the BBCode editor
-		$this->user->add_lang('posting');
+		$this->lang->add_lang('posting');
 
 		// Add form key for form validation checks
 		add_form_key('add_edit_page');
@@ -228,7 +238,7 @@ class admin_controller implements admin_interface
 			// Use -1 to allow unlimited time to submit form
 			if (!check_form_key('add_edit_page', -1))
 			{
-				$errors[] = $this->user->lang('FORM_INVALID');
+				$errors[] = $this->lang->lang('FORM_INVALID');
 			}
 
 			// Map the form's page data fields to setters
@@ -255,7 +265,7 @@ class admin_controller implements admin_interface
 				catch (\phpbb\pages\exception\base $e)
 				{
 					// Catch exceptions and add them to errors array
-					$errors[] = $e->get_message($this->user);
+					$errors[] = $e->get_message($this->lang);
 				}
 			}
 
@@ -276,8 +286,8 @@ class admin_controller implements admin_interface
 					// Log the action
 					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_EDITED_LOG', time(), array($entity->get_title()));
 
-					// Show user confirmation of the saved page and provide link back to the previous screen
-					trigger_error($this->user->lang('ACP_PAGES_EDIT_SUCCESS') . adm_back_link($this->u_action));
+					// The result message to use
+					$message = 'ACP_PAGES_EDIT_SUCCESS';
 				}
 				else
 				{
@@ -290,9 +300,15 @@ class admin_controller implements admin_interface
 					// Log the action
 					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_ADDED_LOG', time(), array($entity->get_title()));
 
-					// Show user confirmation of the added page and provide link back to the previous screen
-					trigger_error($this->user->lang('ACP_PAGES_ADD_SUCCESS') . adm_back_link($this->u_action));
+					// The result message to use
+					$message = 'ACP_PAGES_ADD_SUCCESS';
 				}
+
+				// Purge the cache to refresh route collections
+				$this->cache->purge();
+
+				// Show user confirmation of the page and provide link back to the previous screen
+				trigger_error($this->lang->lang($message) . adm_back_link($this->u_action));
 			}
 		}
 
@@ -329,11 +345,11 @@ class admin_controller implements admin_interface
 			'S_PARSE_MAGIC_URL_CHECKED'	=> $entity->content_magic_url_enabled(),
 			'S_PARSE_HTML_CHECKED'		=> $entity->content_html_enabled(),
 
-			'BBCODE_STATUS'		=> $this->user->lang('BBCODE_IS_ON', '<a href="' . append_sid("{$this->root_path}faq.{$this->php_ext}", 'mode=bbcode') . '">', '</a>'),
-			'SMILIES_STATUS'	=> $this->user->lang('SMILIES_ARE_ON'),
-			'IMG_STATUS'		=> $this->user->lang('IMAGES_ARE_ON'),
-			'FLASH_STATUS'		=> $this->user->lang('FLASH_IS_ON'),
-			'URL_STATUS'		=> $this->user->lang('URL_IS_ON'),
+			'BBCODE_STATUS'		=> $this->lang->lang('BBCODE_IS_ON', '<a href="' . $this->helper->route('phpbb_help_bbcode_controller') . '">', '</a>'),
+			'SMILIES_STATUS'	=> $this->lang->lang('SMILIES_ARE_ON'),
+			'IMG_STATUS'		=> $this->lang->lang('IMAGES_ARE_ON'),
+			'FLASH_STATUS'		=> $this->lang->lang('FLASH_IS_ON'),
+			'URL_STATUS'		=> $this->lang->lang('URL_IS_ON'),
 
 			'S_BBCODE_ALLOWED'	=> true,
 			'S_SMILIES_ALLOWED'	=> true,
@@ -371,7 +387,7 @@ class admin_controller implements admin_interface
 		catch (\phpbb\pages\exception\base $e)
 		{
 			// Display an error message if delete failed
-			trigger_error($this->user->lang('ACP_PAGES_DELETE_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($this->lang->lang('ACP_PAGES_DELETE_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		// Log the action
@@ -382,8 +398,8 @@ class admin_controller implements admin_interface
 		{
 			$json_response = new \phpbb\json_response;
 			$json_response->send(array(
-				'MESSAGE_TITLE'	=> $this->user->lang('INFORMATION'),
-				'MESSAGE_TEXT'	=> $this->user->lang('ACP_PAGES_DELETE_SUCCESS'),
+				'MESSAGE_TITLE'	=> $this->lang->lang('INFORMATION'),
+				'MESSAGE_TEXT'	=> $this->lang->lang('ACP_PAGES_DELETE_SUCCESS'),
 				'REFRESH_DATA'	=> array(
 					'time'	=> 3
 				)
@@ -462,7 +478,7 @@ class admin_controller implements admin_interface
 		{
 			$this->template->assign_block_vars('page_link_options', array(
 				'VALUE'			=> $link['page_link_id'],
-				'LABEL'			=> $this->user->lang($link['page_link_location']),
+				'LABEL'			=> $this->lang->lang($link['page_link_location']),
 				'S_SELECTED'	=> in_array($link['page_link_id'], $current),
 			));
 		}

@@ -31,7 +31,7 @@ class viewonline_test extends pages_functional_base
 		$route = $this->create_page($page_title, $page_content);
 
 		// Send the admin to the test page
-		$crawler = self::request('GET', "app.php/page/{$route}?sid={$this->sid}");
+		$crawler = self::request('GET', "app.php/{$route}?sid={$this->sid}");
 		$this->assertContains($page_title, $crawler->filter('h2')->text());
 
 		return $page_title;
