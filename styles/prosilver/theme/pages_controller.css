@@ -21,3 +21,10 @@
 .pages-content h4 { font-size: 1em }
 .pages-content h5 { font-size: .83em }
 .pages-content h6 { font-size: .75em }
+
+.pages-content img.postimage {
+	max-width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
