@@ -274,7 +274,7 @@ class page implements page_interface
 			);
 		}
 
-		if (sizeof($sql_ary))
+		if (count($sql_ary))
 		{
 			// Insert the new page link data for this page
 			$this->db->sql_multi_insert($this->pages_pages_links_table, $sql_ary);
