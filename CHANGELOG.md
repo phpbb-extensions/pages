@@ -1,13 +1,23 @@
 # Changelog
 
-## 1.0.5 - 2016-11-10
+## Vesion 2.x (for phpBB 3.2)
+
+### 2.0.0 - 2017-01-16
+
+- Updated for phpBB 3.2 (continue using the 1.x branch for phpBB 3.1.x)
+- New minimum requirements: phpBB 3.2.0 and PHP 5.4
+- New dynamic routing has allowed us to remove the `/page/` requirement from page URLs. This means your pages can be accessed directly: `forum.com/pagename` (the old method still works as well: `forum.com/page/pagename`)
+
+## Version 1.x (for phpBB 3.1)
+
+### 1.0.5 - 2016-11-10
 
 - Fix the Brazilian Portuguese language (renamed from pt-br to pt_br)
 - Fix posted images to fit within the page area and not overflow
 - Minor code and HTML improvements
 - Added German language pack
 
-## 1.0.4 - 2016-01-17
+### 1.0.4 - 2016-01-17
 
 - Added a feature where route names are auto-suggested based on the page title
 - Fixed an issue that prevented pages from being updated on MSSQL systems
@@ -17,7 +27,7 @@
 - Added Mandarin Chinese (Simplified Script) language pack
 - Added Russian language pack
 
-## 1.0.3 - 2015-06-14
+### 1.0.3 - 2015-06-14
 
 - Inaccessible pages will corectly send 404 status codes
 - Removed edit time limitations when creating pages
@@ -32,12 +42,12 @@
 - Added Polish language pack
 - Require phpBB 3.1.3
 
-## 1.0.2 - 2015-01-04
+### 1.0.2 - 2015-01-04
 
 - Fixed some very minor coding issues
 - Switched to Titania hosted version checking
 
-## 1.0.1 - 2014-11-28
+### 1.0.1 - 2014-11-28
 
 - Make Page URL Route explanation easier to understand
 - Renamed Pages template events with vendor and extension names prefixes.
@@ -51,6 +61,6 @@
 - Added Spanish language pack
 - Added Swedish language pack
 
-## 1.0.0 - 2014-10-23
+### 1.0.0 - 2014-10-23
 
 - First release
