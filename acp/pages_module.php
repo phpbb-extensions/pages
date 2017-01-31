@@ -12,6 +12,8 @@ namespace phpbb\pages\acp;
 
 class pages_module
 {
+	public $page_title;
+	public $tpl_name;
 	public $u_action;
 
 	public function main($id, $mode)
