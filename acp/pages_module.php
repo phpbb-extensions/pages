@@ -18,10 +18,16 @@ class pages_module
 
 	public function main($id, $mode)
 	{
-		global $cache, $phpbb_container, $request;
+		global $phpbb_container;
+
+		/** @var \phpbb\cache\driver\driver_interface */
+		$cache = $phpbb_container->get('cache.driver');
 
 		/** @var \phpbb\language\language $lang */
 		$lang = $phpbb_container->get('language');
+
+		/** @var \phpbb\request\request $request */
+		$request = $phpbb_container->get('request');
 
 		// Add the pages ACP lang file
 		$lang->add_lang('pages_acp', 'phpbb/pages');
