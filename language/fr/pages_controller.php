@@ -39,5 +39,5 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'PAGE_NOT_AVAILABLE'		=> 'La page « %s » n’est pas disponible.',
+	'PAGE_NOT_AVAILABLE'		=> 'La page « %s » n’est pas disponible.',
 ));
