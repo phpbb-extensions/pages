@@ -20,6 +20,8 @@ class version_check_test extends pages_functional_base
 	*/
 	public function test_version_check()
 	{
+		$this->markTestSkipped('The 1.0.x branch version check is not currently supported.');
+
 		// Log in to the ACP
 		$this->login();
 		$this->admin_login();
