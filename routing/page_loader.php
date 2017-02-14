@@ -53,7 +53,9 @@ class page_loader extends Loader
 	{
 		$collection = new RouteCollection();
 
-		$result = $this->db->sql_query('SELECT page_id, page_route FROM ' . $this->pages_table);
+		$sql = 'SELECT page_id, page_route 
+			FROM ' . $this->pages_table;
+		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$route = new Route('/' . $row['page_route']);
