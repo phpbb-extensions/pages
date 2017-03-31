@@ -38,5 +38,5 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'PAGE_NOT_AVAILABLE'		=> 'The requested page “%s” is not available.',
+	'PAGE_NOT_AVAILABLE'		=> 'The requested page “%s” is not available, because either the page is disabled or does not exist; or you need to register or login; or you don\'t have the permissions to see this private page.  If you believe this is an error, contact the Admin.',
 ));
