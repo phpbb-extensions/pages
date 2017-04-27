@@ -1,5 +1,5 @@
 .icon-pages {
-	background: url("./images/icon_pages.gif") no-repeat 0 50%;
+	background: url('./images/icon_pages.gif') no-repeat 0 50%;
 }
 
 li.breadcrumbs.icon-pages span:first-child > a {
@@ -12,6 +12,6 @@ li.breadcrumbs.icon-pages span:first-child > a {
 }
 
 .rtl li.breadcrumbs.icon-pages span:first-child > a {
-	padding-left: 0;
 	padding-right: 19px;
+	padding-left: 0;
 }
