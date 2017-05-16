@@ -117,11 +117,6 @@ class page_entity_import_test extends page_entity_base
 
 		// Too long
 		$data[] = array_merge($import_data[1], array(
-			'page_template'	=> str_repeat('a', 256),
-		));
-
-		// Too long
-		$data[] = array_merge($import_data[1], array(
 			'page_icon_font'	=> str_repeat('a', 256),
 		));
 
