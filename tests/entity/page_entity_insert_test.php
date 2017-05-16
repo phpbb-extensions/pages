@@ -27,13 +27,14 @@ class page_entity_insert_test extends page_entity_base
 		$data = array(
 			'page_id'							=> 5,
 			'page_order'						=> 0,
-			'page_route'						=> 'inserted_route',
-			'page_title'						=> 'inserted_title',
-			'page_description'					=> 'inserted_description',
-			'page_content'						=> 'inserted_content',
+			'page_route'						=> 'inserted-route',
+			'page_title'						=> 'inserted-title',
+			'page_description'					=> 'inserted-description',
+			'page_content'						=> 'inserted-content',
 			'page_content_allow_html'			=> 0,
 			'page_display'						=> 1,
 			'page_display_to_guests'			=> 0,
+			'page_icon_font'					=> 'inserted-icon'
 		);
 
 		// Setup the entity class
@@ -48,6 +49,7 @@ class page_entity_insert_test extends page_entity_base
 			->set_order($data['page_order'])
 			->set_page_display($data['page_display'])
 			->set_page_display_to_guests($data['page_display_to_guests'])
+			->set_icon_font($data['page_icon_font'])
 			->insert()
 		;
 
@@ -73,6 +75,7 @@ class page_entity_insert_test extends page_entity_base
 			'page_content'				=> 'get_content_for_edit',
 			'page_display'				=> 'get_page_display',
 			'page_display_to_guests'	=> 'get_page_display_to_guests',
+			'page_icon_font'			=> 'get_icon_font',
 		);
 
 		// Go through each field in the data and make sure the function returns

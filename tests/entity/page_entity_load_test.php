@@ -35,6 +35,7 @@ class page_entity_load_test extends page_entity_base
 					'page_content' => 'message_1',
 					'page_display' => 1,
 					'page_display_to_guests' => 1,
+					'page_icon_font' => 'foo',
 				),
 			),
 			array(
@@ -48,6 +49,7 @@ class page_entity_load_test extends page_entity_base
 					'page_content' => 'message_2',
 					'page_display' => 1,
 					'page_display_to_guests' => 1,
+					'page_icon_font' => '',
 				),
 			),
 			array(
@@ -61,6 +63,7 @@ class page_entity_load_test extends page_entity_base
 					'page_content' => 'message_3',
 					'page_display' => 1,
 					'page_display_to_guests' => 0,
+					'page_icon_font' => '',
 				),
 			),
 			array(
@@ -74,6 +77,7 @@ class page_entity_load_test extends page_entity_base
 					'page_content' => 'message_4',
 					'page_display' => 0,
 					'page_display_to_guests' => 0,
+					'page_icon_font' => '',
 				),
 			),
 		);
@@ -105,6 +109,7 @@ class page_entity_load_test extends page_entity_base
 			'page_content'				=> 'get_content_for_edit',
 			'page_display'				=> 'get_page_display',
 			'page_display_to_guests'	=> 'get_page_display_to_guests',
+			'page_icon_font'			=> 'get_icon_font',
 		);
 
 		// Go through each field in the data and make sure the function returns

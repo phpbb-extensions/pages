@@ -46,6 +46,9 @@ class page_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb\textformatter\s9e\utils */
 	protected $text_formatter_utils;
 
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\user */
+	protected $user;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(__DIR__ . '/fixtures/page.xml');
@@ -67,7 +70,6 @@ class page_operator_base extends \phpbb_database_test_case
 		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
 		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
 		$text_formatter_utils = $this->text_formatter_utils = new \phpbb\textformatter\s9e\utils();
-		$this->cache = new \phpbb_mock_cache();
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.pages.entity')
@@ -75,6 +77,10 @@ class page_operator_base extends \phpbb_database_test_case
 				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils);
 			}))
 		;
+		$this->cache = new \phpbb_mock_cache();
+		$this->user = $this->getMockBuilder('\phpbb\user')
+			->disableOriginalConstructor()
+			->getMock();
 		$this->extension_manager = new \phpbb_mock_extension_manager(
 			$phpbb_root_path,
 			array(
@@ -94,7 +100,16 @@ class page_operator_base extends \phpbb_database_test_case
 	*/
 	protected function get_page_operator()
 	{
-		return new \phpbb\pages\operators\page($this->cache, $this->container, $this->db, $this->extension_manager, 'phpbb_pages', 'phpbb_pages_links', 'phpbb_pages_pages_links');
+		return new \phpbb\pages\operators\page(
+			$this->cache,
+			$this->container,
+			$this->db,
+			$this->extension_manager,
+			$this->user,
+			'phpbb_pages',
+			'phpbb_pages_links',
+			'phpbb_pages_pages_links'
+		);
 	}
 
 	/**
@@ -104,6 +119,12 @@ class page_operator_base extends \phpbb_database_test_case
 	*/
 	protected function get_page_entity()
 	{
-		return new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages', $this->text_formatter_utils);
+		return new \phpbb\pages\entity\page(
+			$this->db,
+			$this->config,
+			$this->dispatcher,
+			'phpbb_pages',
+			$this->text_formatter_utils
+		);
 	}
 }
