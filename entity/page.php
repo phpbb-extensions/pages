@@ -32,7 +32,7 @@ class page implements page_interface
 	*	page_display
 	*	page_display_to_guests
 	*	page_template
-	*   page_icon_font
+	*	page_icon_font
 	* @access protected
 	*/
 	protected $data;
@@ -508,7 +508,7 @@ class page implements page_interface
 		$name = (string) $name;
 
 		// Validate icon font name
-		if ($name !== '' && !preg_match('/^[a-z0-9-]+$/', $name))
+		if ($name !== '' && !preg_match('/^[a-z]+[a-z0-9-]+$/', $name))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('icon_font', 'ILLEGAL_CHARACTERS'));
 		}
