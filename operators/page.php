@@ -29,6 +29,9 @@ class page implements page_interface
 	/** @var \phpbb\extension\manager */
 	protected $extension_manager;
 
+	/** @var \phpbb\user */
+	protected $user;
+
 	/** @var string */
 	protected $pages_table;
 
@@ -45,17 +48,19 @@ class page implements page_interface
 	* @param ContainerInterface                   $container                Service container interface
 	* @param \phpbb\db\driver\driver_interface    $db                       Database connection
 	* @param \phpbb\extension\manager             $extension_manager        Extension manager object
+	* @param \phpbb\user                          $user                     User object
 	* @param string                               $pages_table              Table name
 	* @param string                               $pages_links_table        Table name
 	* @param string                               $pages_pages_links_table  Table name
 	* @access public
 	*/
-	public function __construct(\phpbb\cache\driver\driver_interface $cache, ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, $pages_table, $pages_links_table, $pages_pages_links_table)
+	public function __construct(\phpbb\cache\driver\driver_interface $cache, ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, \phpbb\user $user, $pages_table, $pages_links_table, $pages_pages_links_table)
 	{
 		$this->cache = $cache;
 		$this->container = $container;
 		$this->db = $db;
 		$this->extension_manager = $extension_manager;
+		$this->user = $user;
 		$this->pages_table = $pages_table;
 		$this->pages_links_table = $pages_links_table;
 		$this->pages_pages_links_table = $pages_pages_links_table;
@@ -179,6 +184,37 @@ class page implements page_interface
 	}
 
 	/**
+	* Get a custom page link icon (pages_*.gif)
+	* Added by the user to the core style/theme/images directories
+	*
+	* @param string $name The page name (uses the route name)
+	* @return string The icon name
+	* @access public
+	*/
+	public function get_page_icon($name)
+	{
+		static $icons;
+
+		// We only need to load the icons once
+		if ($icons === null)
+		{
+			$icons = $this->get_page_icons();
+		}
+
+		$icon = '';
+		foreach ($icons as $icon_path => $ext_name)
+		{
+			if (strpos($icon_path, $this->user->style['style_path'] . '/theme/images/pages_' . $name . '.gif') !== false)
+			{
+				$icon = 'pages_' . $name . '.gif';
+				break;
+			}
+		}
+
+		return $icon;
+	}
+
+	/**
 	* Get custom page templates (pages_*.html)
 	* Added by the user to the core style/template directores
 	*
@@ -223,7 +259,7 @@ class page implements page_interface
 	public function get_page_links($page_ids = array())
 	{
 		$sql_array = array(
-			'SELECT'		=> 'ppl.*, pl.page_link_location, pl.page_link_event_name, p.page_route, p.page_title, p.page_display, p.page_display_to_guests',
+			'SELECT'		=> 'ppl.*, pl.page_link_location, pl.page_link_event_name, p.page_route, p.page_title, p.page_icon_font, p.page_display, p.page_display_to_guests',
 			'FROM'			=> array($this->pages_pages_links_table => 'ppl'),
 			'LEFT_JOIN'		=> array(
 				array(

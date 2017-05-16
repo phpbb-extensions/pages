@@ -62,6 +62,16 @@ interface page_interface
 	public function get_page_icons();
 
 	/**
+	* Get a custom page link icon (pages_*.gif)
+	* Added by the user to the core style/theme/images directories
+	*
+	* @param string $name The page name (uses the route name)
+	* @return string The icon name
+	* @access public
+	*/
+	public function get_page_icon($name);
+
+	/**
 	* Get custom page templates (pages_*.html)
 	* Added by the user to the core style/template directores
 	*
