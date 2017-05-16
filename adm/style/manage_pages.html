@@ -1,3 +1,4 @@
+<!-- INCLUDECSS ./../assets/css/font-awesome.min.css -->
 <!-- INCLUDE overall_header.html -->
 
 <a id="maincontent"></a>
@@ -99,6 +100,10 @@
 						<option value="{page_link_options.VALUE}"<!-- IF page_link_options.S_SELECTED --> selected="selected"<!-- ENDIF -->>{page_link_options.LABEL}</option>
 					<!-- END page_link_options -->
 				</select></dd>
+			</dl>
+			<dl>
+				<dt><label for="page_icon_font">{L_ACP_PAGES_FORM_ICON_FONT}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_ICON_FONT_EXPLAIN}</span></dt>
+				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{PAGES_ICON_FONT}" /><i style="font:16px FontAwesome;margin:0 6px;" class="fa-{PAGES_ICON_FONT}"></i></dd>
 			</dl>
 			<dl>
 				<dt><label for="page_display">{L_ACP_PAGES_FORM_DISPLAY}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_DISPLAY_EXPLAIN}</span></dt>

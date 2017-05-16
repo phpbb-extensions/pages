@@ -32,6 +32,7 @@ class page implements page_interface
 	*	page_display
 	*	page_display_to_guests
 	*	page_template
+	*   page_icon_font
 	* @access protected
 	*/
 	protected $data;
@@ -133,6 +134,7 @@ class page implements page_interface
 			'page_display'					=> 'set_page_display', // call set_page_display()
 			'page_display_to_guests'		=> 'set_page_display_to_guests', // call set_page_display_to_guests()
 			'page_template'					=> 'set_template', // call set_template()
+			'page_icon_font'				=> 'set_icon_font', // call set_icon_font()
 
 			// We do not pass to set_content() as generate_text_for_storage would run twice
 			'page_content'					=> 'string',
@@ -477,6 +479,48 @@ class page implements page_interface
 
 		// Set the title on our data array
 		$this->data['page_template'] = $template;
+
+		return $this;
+	}
+
+	/**
+	* Get page icon font name
+	*
+	* @return string page icon font name
+	* @access public
+	*/
+	public function get_icon_font()
+	{
+		return isset($this->data['page_icon_font']) ? (string) $this->data['page_icon_font'] : '';
+	}
+
+	/**
+	* Set page icon font name
+	*
+	* @param string $name icon font name
+	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	* @throws \phpbb\pages\exception\unexpected_value
+	*/
+	public function set_icon_font($name)
+	{
+		// Enforce a string
+		$name = (string) $name;
+
+		// Validate icon font name
+		if ($name !== '' && !preg_match('/^[a-z0-9-]+$/', $name))
+		{
+			throw new \phpbb\pages\exception\unexpected_value(array('icon_font', 'ILLEGAL_CHARACTERS'));
+		}
+
+		// We limit the icon font name length to 255 characters
+		if (truncate_string($name, 255) !== $name)
+		{
+			throw new \phpbb\pages\exception\unexpected_value(array('icon_font', 'TOO_LONG'));
+		}
+
+		// Set the title on our data array
+		$this->data['page_icon_font'] = $name;
 
 		return $this;
 	}
