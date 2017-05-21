@@ -101,6 +101,10 @@
 				</select></dd>
 			</dl>
 			<dl>
+				<dt><label for="page_icon_font">{L_ACP_PAGES_FORM_ICON_FONT}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_ICON_FONT_EXPLAIN}</span></dt>
+				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{PAGES_ICON_FONT}" placeholder="files-o" /><i style="font:16px FontAwesome;margin:0 6px;" class="fa-{PAGES_ICON_FONT}"></i></dd>
+			</dl>
+			<dl>
 				<dt><label for="page_display">{L_ACP_PAGES_FORM_DISPLAY}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_DISPLAY_EXPLAIN}</span></dt>
 				<dd><label><input type="radio" class="radio" id="page_display" name="page_display" value="1"<!-- IF S_PAGES_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 					<label><input type="radio" class="radio" name="page_display" value="0"<!-- IF not S_PAGES_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>

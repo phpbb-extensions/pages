@@ -164,6 +164,24 @@ interface page_interface
 	public function set_template($template);
 
 	/**
+	* Get page icon font name
+	*
+	* @return string page icon font name
+	* @access public
+	*/
+	public function get_icon_font();
+
+	/**
+	* Set page icon font name
+	*
+	* @param string $name icon font name
+	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	* @throws \phpbb\pages\exception\unexpected_value
+	*/
+	public function set_icon_font($name);
+
+	/**
 	* Get content for edit
 	*
 	* @return string

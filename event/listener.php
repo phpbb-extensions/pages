@@ -107,9 +107,6 @@ class listener implements EventSubscriberInterface
 		// Get all page link data
 		$rowset = $this->page_operator->get_page_links();
 
-		// Get custom page link icons
-		$pages_icons = $this->page_operator->get_page_icons();
-
 		foreach ($rowset as $row)
 		{
 			// Skip page if it should not be displayed (admins always have access to a page)
@@ -118,23 +115,13 @@ class listener implements EventSubscriberInterface
 				continue;
 			}
 
-			// Assign any available custom icons for the current link in the user's style
-			$custom_icon = '';
-			foreach ($pages_icons as $icon_path => $ext_name)
-			{
-				if (strpos($icon_path, $this->user->style['style_path'] . '/theme/images/pages_' . $row['page_route'] . '.gif') !== false)
-				{
-					$custom_icon = 'pages_' . $row['page_route'] . '.gif';
-					break;
-				}
-			}
-
 			// Assign template var data
 			$this->template->assign_block_vars($row['page_link_event_name'] . '_links', array(
 				'U_LINK_URL' => $this->helper->route('phpbb_pages_dynamic_route_' . $row['page_id']),
 				'LINK_ROUTE' => $row['page_route'],
 				'LINK_TITLE' => $row['page_title'],
-				'ICON_LINK' => $custom_icon,
+				'ICON_FONT'  => $row['page_icon_font'],
+				'ICON_LINK'  => !$row['page_icon_font'] ? $this->page_operator->get_page_icon($row['page_route']) : '',
 			));
 
 			$this->template->assign_var('S_' . strtoupper($row['page_link_event_name']), true);

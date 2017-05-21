@@ -207,6 +207,7 @@ class admin_controller implements admin_interface
 			'page_template'				=> $this->request->variable('page_template', ''),
 			'page_links'				=> $this->request->variable('page_links', array(0)),
 			'page_order'				=> $this->request->variable('page_order', 0),
+			'page_icon_font'			=> $this->request->variable('page_icon_font', ''),
 			'page_display'				=> $this->request->variable('page_display', 0),
 			'page_display_to_guests'	=> $this->request->variable('page_guest_display', 0),
 		);
@@ -249,6 +250,7 @@ class admin_controller implements admin_interface
 				'set_content'					=> $data['page_content'],
 				'set_template'					=> $data['page_template'],
 				'set_order'						=> $data['page_order'],
+				'set_icon_font'					=> $data['page_icon_font'],
 				'set_page_display'				=> $data['page_display'],
 				'set_page_display_to_guests'	=> $data['page_display_to_guests'],
 
@@ -336,6 +338,7 @@ class admin_controller implements admin_interface
 			'PAGES_CONTENT'		=> $entity->get_content_for_edit(),
 			'PAGES_DESCRIPTION'	=> $entity->get_description(),
 			'PAGES_ORDER'		=> $entity->get_order(),
+			'PAGES_ICON_FONT'	=> $entity->get_icon_font(),
 
 			'S_PAGES_DISPLAY'			=> $entity->get_page_display(),
 			'S_PAGES_GUEST_DISPLAY'		=> $entity->get_page_display_to_guests(),

@@ -8,6 +8,7 @@
 		<column>page_content</column>
 		<column>page_display</column>
 		<column>page_display_to_guests</column>
+		<column>page_icon_font</column>
 		<row>
 			<value>1</value>
 			<value>1</value>
@@ -16,6 +17,7 @@
 			<value>message_1</value>
 			<value>1</value>
 			<value>1</value>
+			<value>icon-1</value>
 		</row>
 		<row>
 			<value>2</value>
@@ -25,6 +27,7 @@
 			<value>message_2</value>
 			<value>1</value>
 			<value>1</value>
+			<value></value>
 		</row>
 	</table>
 	<table name="phpbb_pages_links">

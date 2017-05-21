@@ -1,7 +1,9 @@
 <!-- IF S_OVERALL_HEADER_NAVIGATION_APPEND -->
 	<!-- BEGIN overall_header_navigation_append_links -->
-		<li class="small-icon icon-pages icon-page-{overall_header_navigation_append_links.LINK_ROUTE} no-bulletin"<!-- IF overall_header_navigation_append_links.ICON_LINK --> style="background-image:url('{T_THEME_PATH}/images/{overall_header_navigation_append_links.ICON_LINK}');"<!-- ENDIF -->>
-			<a href="{overall_header_navigation_append_links.U_LINK_URL}" title="{overall_header_navigation_append_links.LINK_TITLE}" role="menuitem">{overall_header_navigation_append_links.LINK_TITLE}</a>
+		<li <!-- IF not overall_header_navigation_append_links.ICON_FONT -->class="small-icon icon-pages icon-page-{overall_header_navigation_append_links.LINK_ROUTE} no-bulletin"<!-- IF overall_header_navigation_append_links.ICON_LINK --> style="background-image:url('{T_THEME_PATH}/images/{overall_header_navigation_append_links.ICON_LINK}');"<!-- ENDIF --><!-- ENDIF -->>
+			<a href="{overall_header_navigation_append_links.U_LINK_URL}" title="{overall_header_navigation_append_links.LINK_TITLE}" role="menuitem">
+				<!-- IF overall_header_navigation_append_links.ICON_FONT --><i class="icon fa-{overall_header_navigation_append_links.ICON_FONT} fa-fw" aria-hidden="true"></i><!-- ENDIF --><span>{overall_header_navigation_append_links.LINK_TITLE}</span>
+			</a>
 		</li>
 	<!-- END overall_header_navigation_append_links -->
 <!-- ENDIF -->
