@@ -137,6 +137,7 @@ class admin_controller implements admin_interface
 	public function add_page()
 	{
 		// Initiate a page entity
+		/* @var $entity \phpbb\pages\entity\page */
 		$entity = $this->container->get('phpbb.pages.entity');
 
 		// Process the new page

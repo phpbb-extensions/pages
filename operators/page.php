@@ -98,6 +98,7 @@ class page implements page_interface
 	*
 	* @param \phpbb\pages\entity\page_interface $entity Page entity with new data to insert
 	* @return \phpbb\pages\entity\page_interface Added page entity
+	* @throws \phpbb\pages\exception\out_of_bounds
 	* @access public
 	*/
 	public function add_page($entity)
@@ -164,8 +165,8 @@ class page implements page_interface
 	}
 
 	/**
-	* Get custom page link icons (pages_*.gif)
-	* Added by the user to the core style/theme/images directores
+	* Get all custom page link icons (pages_*.gif)
+	* Added by the user to the core style/theme/images directories
 	*
 	* @return array Array of icon image paths
 	* @access public

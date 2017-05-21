@@ -119,6 +119,7 @@ class listener implements EventSubscriberInterface
 				'ICON_LINK'  => !$row['page_icon_font'] ? $this->page_operator->get_page_icon($row['page_route']) : '',
 			));
 
+			// Set a boolean switch to enable the chosen template event
 			$this->template->assign_var('S_' . strtoupper($row['page_link_event_name']), true);
 		}
 	}
