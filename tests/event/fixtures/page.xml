@@ -29,6 +29,16 @@
 			<value>1</value>
 			<value></value>
 		</row>
+		<row>
+			<value>3</value>
+			<value>3</value>
+			<value>page_3</value>
+			<value>title_3</value>
+			<value>message_3</value>
+			<value>0</value>
+			<value>0</value>
+			<value></value>
+		</row>
 	</table>
 	<table name="phpbb_pages_links">
 		<column>page_link_id</column>
@@ -44,6 +54,11 @@
 			<value>NAV_BAR_LINKS_AFTER</value>
 			<value>overall_header_navigation_append</value>
 		</row>
+		<row>
+			<value>3</value>
+			<value>NAV_BAR_LINKS_AFTER</value>
+			<value>overall_header_navigation_append</value>
+		</row>
 	</table>
 	<table name="phpbb_pages_pages_links">
 		<column>page_id</column>
@@ -55,6 +70,10 @@
 		<row>
 			<value>2</value>
 			<value>2</value>
+		</row>
+		<row>
+			<value>3</value>
+			<value>3</value>
 		</row>
 	</table>
 </dataset>
