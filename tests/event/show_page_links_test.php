@@ -72,7 +72,6 @@ class show_page_links_test extends \phpbb_database_test_case
 			),
 			$template,
 			$user,
-			$phpbb_root_path,
 			$phpEx
 		);
 

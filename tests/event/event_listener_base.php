@@ -31,9 +31,6 @@ class event_listener_base extends \phpbb_test_case
 	protected $user;
 
 	/** @var string */
-	protected $root_path;
-
-	/** @var string */
 	protected $php_ext;
 
 	/**
@@ -47,7 +44,6 @@ class event_listener_base extends \phpbb_test_case
 
 		// Load/Mock classes required by the event listener class
 		$this->php_ext = $phpEx;
-		$this->root_path = $phpbb_root_path;
 		$this->auth = $this->getMock('\phpbb\auth\auth');
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
 		$this->lang = new \phpbb\language\language($lang_loader);
@@ -76,7 +72,6 @@ class event_listener_base extends \phpbb_test_case
 			$this->page_operator,
 			$this->template,
 			$this->user,
-			$this->root_path,
 			$this->php_ext
 		);
 	}
