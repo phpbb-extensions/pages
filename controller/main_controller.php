@@ -103,6 +103,7 @@ class main_controller implements main_interface
 	protected function load_page_data($route)
 	{
 		// Initiate the page entity
+		/* @var $entity \phpbb\pages\entity\page */
 		$entity = $this->container->get('phpbb.pages.entity');
 
 		// Load the requested page by route

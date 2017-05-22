@@ -35,9 +35,6 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var string phpbb_root_path */
-	protected $phpbb_root_path;
-
 	/** @var string phpEx */
 	protected $php_ext;
 
@@ -50,11 +47,10 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\pages\operators\page $page_operator   Pages operator object
 	* @param \phpbb\template\template    $template        Template object
 	* @param \phpbb\user                 $user            User object
-	* @param string                      $phpbb_root_path phpbb_root_path
 	* @param string                      $php_ext         phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, $phpbb_root_path, $php_ext)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
 		$this->auth = $auth;
 		$this->helper = $helper;
@@ -62,7 +58,6 @@ class listener implements EventSubscriberInterface
 		$this->page_operator = $page_operator;
 		$this->template = $template;
 		$this->user = $user;
-		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
 	}
 
@@ -124,6 +119,7 @@ class listener implements EventSubscriberInterface
 				'ICON_LINK'  => !$row['page_icon_font'] ? $this->page_operator->get_page_icon($row['page_route']) : '',
 			));
 
+			// Set a boolean switch to enable the chosen template event
 			$this->template->assign_var('S_' . strtoupper($row['page_link_event_name']), true);
 		}
 	}
@@ -149,7 +145,7 @@ class listener implements EventSubscriberInterface
 			// If any of our pages are being viewed, update the event vars with our routes and titles
 			foreach ($page_routes as $page_id => $page_data)
 			{
-				if ($event['row']['session_page'] == 'app.' . $this->php_ext . DIRECTORY_SEPARATOR . $page_data['route'])
+				if ($event['row']['session_page'] === 'app.' . $this->php_ext . DIRECTORY_SEPARATOR . $page_data['route'])
 				{
 					$event['location'] = $this->lang->lang('PAGES_VIEWONLINE', $page_data['title']);
 					$event['location_url'] = $this->helper->route('phpbb_pages_dynamic_route_' . $page_id);

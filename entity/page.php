@@ -282,13 +282,13 @@ class page implements page_interface
 		$title = (string) $title;
 
 		// Title is a required field
-		if ($title == '')
+		if ($title === '')
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('title', 'FIELD_MISSING'));
 		}
 
 		// We limit the title length to 200 characters
-		if (truncate_string($title, 200) != $title)
+		if (truncate_string($title, 200) !== $title)
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}
@@ -324,7 +324,7 @@ class page implements page_interface
 		$description = (string) $description;
 
 		// We limit the title length to 255 characters
-		if (truncate_string($description, 255) != $description)
+		if (truncate_string($description, 255) !== $description)
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('description', 'TOO_LONG'));
 		}
@@ -360,7 +360,7 @@ class page implements page_interface
 		$route = (string) $route;
 
 		// Route is a required field
-		if ($route == '')
+		if ($route === '')
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('route', 'FIELD_MISSING'));
 		}
@@ -372,13 +372,13 @@ class page implements page_interface
 		}
 
 		// We limit the route length to 100 characters
-		if (truncate_string($route, 100) != $route)
+		if (truncate_string($route, 100) !== $route)
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('route', 'TOO_LONG'));
 		}
 
 		// Routes must be unique
-		if (!$this->get_id() || ($this->get_id() && $this->get_route() !== '' && $this->get_route() != $route))
+		if (!$this->get_id() || ($this->get_id() && $this->get_route() !== '' && $this->get_route() !== $route))
 		{
 			$sql = 'SELECT 1
 				FROM ' . $this->pages_table . "
@@ -466,13 +466,13 @@ class page implements page_interface
 
 		// Template name should follow pages_*.html naming convention
 		// and contain only letters, numbers, hyphens and underscores
-		if ($template != '' && !preg_match('/^pages_[A-Za-z0-9-_]+\.html$/', $template))
+		if ($template !== '' && !preg_match('/^pages_[A-Za-z0-9-_]+\.html$/', $template))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('template', 'ILLEGAL_CHARACTERS'));
 		}
 
 		// We limit the template name length to 255 characters
-		if (truncate_string($template, 255) != $template)
+		if (truncate_string($template, 255) !== $template)
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('template', 'TOO_LONG'));
 		}
