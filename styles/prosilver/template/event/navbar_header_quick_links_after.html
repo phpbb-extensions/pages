@@ -1,9 +1,9 @@
-<!-- IF S_NAVBAR_HEADER_QUICK_LINKS_AFTER -->
-	<!-- BEGIN navbar_header_quick_links_after_links -->
-		<li <!-- IF not navbar_header_quick_links_after_links.ICON_FONT -->class="small-icon icon-pages icon-page-{navbar_header_quick_links_after_links.LINK_ROUTE}"<!-- IF navbar_header_quick_links_after_links.ICON_LINK --> style="background-image: url('{T_THEME_PATH}/images/{navbar_header_quick_links_after_links.ICON_LINK}');"<!-- ENDIF --><!-- ENDIF -->>
-			<a href="{navbar_header_quick_links_after_links.U_LINK_URL}" role="menuitem">
-				<!-- IF navbar_header_quick_links_after_links.ICON_FONT --><i class="icon fa-{navbar_header_quick_links_after_links.ICON_FONT} fa-fw" aria-hidden="true"></i><!-- ENDIF --><span>{navbar_header_quick_links_after_links.LINK_TITLE}</span>
+{% if S_NAVBAR_HEADER_QUICK_LINKS_AFTER %}
+	{% for link in navbar_header_quick_links_after_links %}
+		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }}"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% endif %}>
+			<a href="{{ link.U_LINK_URL }}" role="menuitem">
+				{% if link.ICON_FONT %}<i class="icon fa-{{ link.ICON_FONT }} fa-fw" aria-hidden="true"></i><{% endif %}<span>{{ link.LINK_TITLE }}</span>
 			</a>
 		</li>
-	<!-- END navbar_header_quick_links_after_links -->
-<!-- ENDIF -->
+	{% endfor %}
+{% endif %}

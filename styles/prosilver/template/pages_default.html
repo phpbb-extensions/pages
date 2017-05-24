@@ -2,29 +2,30 @@
 # Here are some example usages:
 #
 # local files relative to this template file (when stored inside phpBB's style directories):
-# <!-- INCLUDEJS script.js -->
-# <!-- INCLUDECSS style.css -->
-#
-# hosted on external sites:
-# <!-- INCLUDEJS http://code.jquery.com/jquery-migrate-1.2.1.min.js -->
-# <!-- INCLUDECSS https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css -->
+# {% INCLUDEJS 'script.js' %}
+# {% INCLUDECSS 'style.css' %}
 #
 # local files stored inside the Pages extension:
-# <!-- INCLUDEJS @phpbb_pages/script.js -->
-# <!-- INCLUDECSS @phpbb_pages/style.css -->
+# {% INCLUDEJS '@phpbb_pages/script.js' %}
+# {% INCLUDECSS '@phpbb_pages/style.cs's %}
+#
+# hosted on external sites:
+# {% INCLUDEJS 'http://code.jquery.com/jquery-migrate-1.2.1.min.js' %}
+# {% INCLUDECSS 'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' %}
 #
 #}
-<!-- INCLUDECSS @phpbb_pages/pages_controller.css -->
-<!-- INCLUDE overall_header.html -->
+
+{% INCLUDECSS '@phpbb_pages/pages_controller.css' %}
+{% include 'overall_header.html' %}
 
 <div class="panel">
 	<div class="inner">
-		<h2 class="pages-title">{PAGE_TITLE}</h2>
+		<h2 class="pages-title">{{ PAGE_TITLE }}</h2>
 		<div class="content pages-content">
-			{PAGE_CONTENT}
+			{{ PAGE_CONTENT }}
 		</div>
-		<!-- EVENT phpbb_pages_after_page_content -->
+		{% EVENT phpbb_pages_after_page_content %}
 	</div>
 </div>
 
-<!-- INCLUDE overall_footer.html -->
+{% include 'overall_footer.html' %}
