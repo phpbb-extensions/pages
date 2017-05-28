@@ -1,10 +1,10 @@
 {# Note: we must use the before code so the link will appear in the expected location #}
-<!-- IF S_OVERALL_FOOTER_TEAMLINK_BEFORE -->
-	<!-- BEGIN overall_footer_teamlink_before_links -->
-		<li <!-- IF not overall_footer_teamlink_before_links.ICON_FONT -->class="small-icon icon-pages icon-page-{overall_footer_teamlink_before_links.LINK_ROUTE} rightside"<!-- IF overall_footer_teamlink_before_links.ICON_LINK --> style="background-image: url('{T_THEME_PATH}/images/{overall_footer_teamlink_before_links.ICON_LINK}');"<!-- ENDIF --><!-- ELSE -->class="rightside"<!-- ENDIF -->>
-			<a href="{overall_footer_teamlink_before_links.U_LINK_URL}" role="menuitem">
-				<!-- IF overall_footer_teamlink_before_links.ICON_FONT --><i class="icon fa-{overall_footer_teamlink_before_links.ICON_FONT} fa-fw" aria-hidden="true"></i><!-- ENDIF --><span>{overall_footer_teamlink_before_links.LINK_TITLE}</span>
+{% if S_OVERALL_FOOTER_TEAMLINK_BEFORE %}
+	{% for link in overall_footer_teamlink_before_links %}
+		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }} rightside"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="rightside"{% endif %}>
+			<a href="{{ link.U_LINK_URL }}" role="menuitem">
+				{% if link.ICON_FONT %}<i class="icon fa-{{ link.ICON_FONT }} fa-fw" aria-hidden="true"></i>{% endif %}<span>{{ link.LINK_TITLE }}</span>
 			</a>
 		</li>
-	<!-- END overall_footer_teamlink_before_links -->
-<!-- ENDIF -->
+	{% endfor %}
+{% endif %}

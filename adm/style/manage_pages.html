@@ -1,10 +1,10 @@
-<!-- INCLUDE overall_header.html -->
+{% include 'overall_header.html' %}
 
 <a id="maincontent"></a>
 
-<!-- IF S_ADD_PAGE or S_EDIT_PAGE -->
+{% if S_ADD_PAGE or S_EDIT_PAGE %}
 
-	<!-- INCLUDEJS @phpbb_pages/scripts.js -->
+	{% INCLUDEJS '@phpbb_pages/scripts.js' %}
 
 	<script>
 		var form_name = 'add_edit_page';
@@ -14,126 +14,126 @@
 		var imageTag = false;
 	</script>
 
-	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<a href="{{ U_BACK }}" style="float: {{ S_CONTENT_FLOW_END }};">&laquo; {{ lang('BACK') }}</a>
 
-	<!-- IF S_ADD_PAGE -->
-		<h1>{L_ACP_PAGES_CREATE_PAGE}</h1>
+	{% if S_ADD_PAGE %}
+		<h1>{{ lang('ACP_PAGES_CREATE_PAGE') }}</h1>
 
-		<p>{L_ACP_PAGES_CREATE_PAGE_EXPLAIN}</p>
-	<!-- ELSE -->
-		<h1>{L_ACP_PAGES_EDIT_PAGE} :: {PAGES_TITLE}</h1>
+		<p>{{ lang('ACP_PAGES_CREATE_PAGE_EXPLAIN') }}</p>
+	{% else %}
+		<h1>{{ lang('ACP_PAGES_EDIT_PAGE') }} :: {{ PAGES_TITLE }}</h1>
 
-		<p>{L_ACP_PAGES_EDIT_PAGE_EXPLAIN}</p>
-	<!-- ENDIF -->
+		<p>{{ lang('ACP_PAGES_EDIT_PAGE_EXPLAIN') }}</p>
+	{% endif %}
 
-	<!-- IF S_ERROR -->
+	{% if S_ERROR %}
 		<div class="errorbox">
-			<h3>{L_WARNING}</h3>
-			<p>{ERROR_MSG}</p>
+			<h3>{{ lang('WARNING') }}</h3>
+			<p>{{ ERROR_MSG }}</p>
 		</div>
-	<!-- ENDIF -->
+	{% endif %}
 
-	<form id="add_edit_page" method="post" action="{U_ACTION}">
+	<form id="add_edit_page" method="post" action="{{ U_ACTION }}">
 		<fieldset>
-			<legend>{L_ACP_PAGES_SETTINGS}</legend>
-			<!-- IF S_EDIT_PAGE -->
+			<legend>{{ lang('ACP_PAGES_SETTINGS') }}</legend>
+			{% if S_EDIT_PAGE %}
 				<dl>
-					<dt><label>{L_ACP_PAGES_FORM_VIEW_PAGE}{L_COLON}</label></dt>
-					<dd><a href="{U_VIEW_PAGE}">{L_ACP_PAGES_VIEW}</a></dd>
+					<dt><label>{{ lang('ACP_PAGES_FORM_VIEW_PAGE') ~ lang('COLON') }}</label></dt>
+					<dd><a href="{{ U_VIEW_PAGE }}">{{ lang('ACP_PAGES_VIEW') }}</a></dd>
 				</dl>
-			<!-- ENDIF -->
+			{% endif %}
 			<dl>
-				<dt><label for="page_title">{L_ACP_PAGES_FORM_TITLE}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_TITLE_EXPLAIN}</span></dt>
-				<dd><input class="text medium" type="text" id="page_title" name="page_title" value="{PAGES_TITLE}" maxlength="200" /></dd>
+				<dt><label for="page_title">{{ lang('ACP_PAGES_FORM_TITLE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_TITLE_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="page_title" name="page_title" value="{{ PAGES_TITLE }}" maxlength="200" /></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_description">{L_ACP_PAGES_FORM_DESC}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_DESC_EXPLAIN}</span></dt>
-				<dd><input class="text medium" type="text" id="page_description" name="page_description" value="{PAGES_DESCRIPTION}" maxlength="255" /></dd>
+				<dt><label for="page_description">{{ lang('ACP_PAGES_FORM_DESC') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_DESC_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="page_description" name="page_description" value="{{ PAGES_DESCRIPTION }}" maxlength="255" /></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_route">{L_ACP_PAGES_FORM_ROUTE}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_ROUTE_EXPLAIN}</span></dt>
-				<dd><input class="text medium" type="text" id="page_route" name="page_route" value="{PAGES_ROUTE}" maxlength="200" /></dd>
+				<dt><label for="page_route">{{ lang('ACP_PAGES_FORM_ROUTE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ROUTE_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="page_route" name="page_route" value="{{ PAGES_ROUTE }}" maxlength="200" /></dd>
 			</dl>
 		</fieldset>
 		<fieldset>
-			<legend>{L_ACP_PAGES_FORM_CONTENT}</legend>
-			<!-- IF S_REPLACE_PAGES_EDITOR -->
-				<!-- EVENT phpbb_pages_acp_before_editor -->
-			<!-- ELSE -->
-				<p>{L_ACP_PAGES_FORM_CONTENT_EXPLAIN}</p>
-				<!-- INCLUDE acp_posting_buttons.html -->
+			<legend>{{ lang('ACP_PAGES_FORM_CONTENT') }}</legend>
+			{% if S_REPLACE_PAGES_EDITOR %}
+				{% EVENT phpbb_pages_acp_before_editor %}
+			{% else %}
+				<p>{{ lang('ACP_PAGES_FORM_CONTENT_EXPLAIN') }}</p>
+				{% include 'acp_posting_buttons.html' %}
 				<dl class="responsive-columns">
 					<dt style="width: 90px;" id="color_palette_placeholder" data-orientation="v" data-height="12" data-width="15" data-bbcode="true"></dt>
-					<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px;">
-						<textarea name="page_content" rows="25" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{PAGES_CONTENT}</textarea>
+					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px;">
+						<textarea name="page_content" rows="25" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{{ PAGES_CONTENT }}</textarea>
 					</dd>
-					<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px; margin-top: 5px;">
-						<label><input type="checkbox" class="radio html-off" name="parse_bbcode"<!-- IF S_PARSE_BBCODE_CHECKED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_BBCODE}</label>
-						<label><input type="checkbox" class="radio html-off" name="parse_smilies"<!-- IF S_PARSE_SMILIES_CHECKED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_SMILIES}</label>
-						<label><input type="checkbox" class="radio html-off" name="parse_magic_url"<!-- IF S_PARSE_MAGIC_URL_CHECKED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_URLS}</label>
-						<label><input type="checkbox" class="radio html-on" name="parse_html"<!-- IF S_PARSE_HTML_CHECKED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_HTML}</label>
+					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 5px;">
+						<label><input type="checkbox" class="radio html-off" name="parse_bbcode"{% if S_PARSE_BBCODE_CHECKED %} checked="checked"<{% endif %} /> {{ lang('PARSE_BBCODE') }}</label>
+						<label><input type="checkbox" class="radio html-off" name="parse_smilies"<{% if S_PARSE_SMILIES_CHECKED %} checked="checked"<{% endif %} /> {{ lang('PARSE_SMILIES') }}</label>
+						<label><input type="checkbox" class="radio html-off" name="parse_magic_url"<{% if S_PARSE_MAGIC_URL_CHECKED %} checked="checked"<{% endif %} /> {{ lang('PARSE_URLS') }}</label>
+						<label><input type="checkbox" class="radio html-on" name="parse_html"{% if S_PARSE_HTML_CHECKED %} checked="checked"<{% endif %} /> {{ lang('PARSE_HTML') }}</label>
 					</dd>
-					<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px; margin-top: 10px;"><strong>{L_OPTIONS}{L_COLON} </strong>{BBCODE_STATUS} :: {IMG_STATUS} :: {FLASH_STATUS} :: {URL_STATUS} :: {SMILIES_STATUS}</dd>
+					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ FLASH_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
 				</dl>
-			<!-- ENDIF -->
+			{% endif %}
 		</fieldset>
 		<fieldset>
-			<legend>{L_ACP_PAGES_OPTIONS}</legend>
+			<legend>{{ lang('ACP_PAGES_OPTIONS') }}</legend>
 			<dl>
-				<dt><label for="page_template">{L_ACP_PAGES_FORM_TEMPLATE}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_TEMPLATE_EXPLAIN}</span></dt>
+				<dt><label for="page_template">{{ lang('ACP_PAGES_FORM_TEMPLATE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_TEMPLATE_EXPLAIN') }}</span></dt>
 				<dd><select name="page_template" id="page_template">
-					<option value="">{L_ACP_PAGES_FORM_TEMPLATE_SELECT}</option>
-					<!-- BEGIN page_template_options -->
-						<option value="{page_template_options.VALUE}"<!-- IF page_template_options.S_SELECTED --> selected="selected"<!-- ENDIF -->>{page_template_options.VALUE}</option>
-					<!-- END page_template_options -->
+					<option value="">{{ lang('ACP_PAGES_FORM_TEMPLATE_SELECT') }}</option>
+					{% for option in page_template_options %}
+						<option value="{{ option.VALUE }}"{% if option.S_SELECTED %} selected="selected"{% endif %}>{{ option.VALUE }}</option>
+					{% endfor %}
 				</select></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_order">{L_ACP_PAGES_FORM_ORDER}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_ORDER_EXPLAIN}</span></dt>
-				<dd><input type="number" id="page_order" min="0" max="999999" name="page_order" value="{PAGES_ORDER}" /></dd>
+				<dt><label for="page_order">{{ lang('ACP_PAGES_FORM_ORDER') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ORDER_EXPLAIN') }}</span></dt>
+				<dd><input type="number" id="page_order" min="0" max="999999" name="page_order" value="{{ PAGES_ORDER }}" /></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_links">{L_ACP_PAGES_FORM_LINKS}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_LINKS_EXPLAIN}</span></dt>
+				<dt><label for="page_links">{{ lang('ACP_PAGES_FORM_LINKS') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_LINKS_EXPLAIN') }}</span></dt>
 				<dd><select name="page_links[]" id="page_links" size="10" multiple="multiple">
-					<!-- BEGIN page_link_options -->
-						<option value="{page_link_options.VALUE}"<!-- IF page_link_options.S_SELECTED --> selected="selected"<!-- ENDIF -->>{page_link_options.LABEL}</option>
-					<!-- END page_link_options -->
+					{% for option in page_link_options %}
+						<option value="{{ option.VALUE }}"{% if option.S_SELECTED %} selected="selected"{% endif %}>{{ option.LABEL }}</option>
+					{% endfor %}
 				</select></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_icon_font">{L_ACP_PAGES_FORM_ICON_FONT}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_ICON_FONT_EXPLAIN}</span></dt>
-				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{PAGES_ICON_FONT}" placeholder="files-o" /><i style="font:16px FontAwesome;margin:0 6px;" class="fa-{PAGES_ICON_FONT}"></i></dd>
+				<dt><label for="page_icon_font">{{ lang('ACP_PAGES_FORM_ICON_FONT') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ICON_FONT_EXPLAIN') }}</span></dt>
+				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{{ PAGES_ICON_FONT }}" placeholder="files-o" /><i style="font:16px FontAwesome;margin:0 6px;" class="fa-{{ PAGES_ICON_FONT }}"></i></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_display">{L_ACP_PAGES_FORM_DISPLAY}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_DISPLAY_EXPLAIN}</span></dt>
-				<dd><label><input type="radio" class="radio" id="page_display" name="page_display" value="1"<!-- IF S_PAGES_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-					<label><input type="radio" class="radio" name="page_display" value="0"<!-- IF not S_PAGES_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+				<dt><label for="page_display">{{ lang('ACP_PAGES_FORM_DISPLAY') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_DISPLAY_EXPLAIN') }}</span></dt>
+				<dd><label><input type="radio" class="radio" id="page_display" name="page_display" value="1"{% if S_PAGES_DISPLAY %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+					<label><input type="radio" class="radio" name="page_display" value="0"{% if not S_PAGES_DISPLAY %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_guest_display">{L_ACP_PAGES_FORM_GUESTS}{L_COLON}</label><br /><span>{L_ACP_PAGES_FORM_GUESTS_EXPLAIN}</span></dt>
-				<dd><label><input type="radio" class="radio" id="page_guest_display" name="page_guest_display" value="1"<!-- IF S_PAGES_GUEST_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-					<label><input type="radio" class="radio" name="page_guest_display" value="0"<!-- IF not S_PAGES_GUEST_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+				<dt><label for="page_guest_display">{{ lang('ACP_PAGES_FORM_GUESTS') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_GUESTS_EXPLAIN') }}</span></dt>
+				<dd><label><input type="radio" class="radio" id="page_guest_display" name="page_guest_display" value="1"<{% if S_PAGES_GUEST_DISPLAY %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+					<label><input type="radio" class="radio" name="page_guest_display" value="0"{% if not S_PAGES_GUEST_DISPLAY %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
 			</dl>
 		</fieldset>
 		<fieldset class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
-			{S_FORM_TOKEN}
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+			{{ S_FORM_TOKEN }}
 		</fieldset>
 	</form>
 
-<!-- ELSE -->
+{% else %}
 
-	<h1>{L_ACP_PAGES_MANAGE}</h1>
+	<h1>{{ lang('ACP_PAGES_MANAGE') }}</h1>
 
-	<p>{L_ACP_PAGES_MANAGE_EXPLAIN}</p>
+	<p>{{ lang('ACP_PAGES_MANAGE_EXPLAIN') }}</p>
 
-	<form id="pages_purge_icons" method="post" action="{U_ACTION}">
+	<form id="pages_purge_icons" method="post" action="{{ U_ACTION }}">
 		<fieldset>
-			<legend>{L_GENERAL_OPTIONS}</legend>
+			<legend>{{ lang('GENERAL_OPTIONS') }}</legend>
 			<dl>
-				<dt><label for="action_purge_icon_cache">{L_ACP_PAGES_PURGE_ICONS_LABEL}</label><br /><span>{L_ACP_PAGES_PURGE_ICONS_EXPLAIN}</span></dt>
-				<dd><input class="button2" type="submit" id="action_purge_icon_cache" name="action_purge_icon_cache" value="{L_ACP_PAGES_PURGE_ICONS}" /></dd>
+				<dt><label for="action_purge_icon_cache">{{ lang('ACP_PAGES_PURGE_ICONS_LABEL') }}</label><br /><span>{{ lang('ACP_PAGES_PURGE_ICONS_EXPLAIN') }}</span></dt>
+				<dd><input class="button2" type="submit" id="action_purge_icon_cache" name="action_purge_icon_cache" value="{{ lang('ACP_PAGES_PURGE_ICONS') }}" /></dd>
 			</dl>
 			<input type="hidden" name="action" value="purge_icons" />
 		</fieldset>
@@ -142,52 +142,52 @@
 	<table class="table1 zebra-table fixed-width-table">
 		<thead>
 			<tr>
-				<th style="width: 15%;">{L_ACP_PAGES_TITLE}</th>
-				<th style="width: 15%;">{L_ACP_PAGES_DESCRIPTION}</th>
-				<th style="width: 10%;">{L_ACP_PAGES_ROUTE}</th>
-				<th style="width: 15%;">{L_ACP_PAGES_TEMPLATE}</th>
-				<th style="width: 10%;">{L_ACP_PAGES_ORDER}</th>
-				<th style="width: 15%;">{L_ACP_PAGES_STATUS}</th>
-				<th style="width: 10%;">{L_ACP_PAGES_LINK}</th>
-				<th style="width: 10%;">{L_ACTION}</th>
+				<th style="width: 15%;">{{ lang('ACP_PAGES_TITLE') }}</th>
+				<th style="width: 15%;">{{ lang('ACP_PAGES_DESCRIPTION') }}</th>
+				<th style="width: 10%;">{{ lang('ACP_PAGES_ROUTE') }}</th>
+				<th style="width: 15%;">{{ lang('ACP_PAGES_TEMPLATE') }}</th>
+				<th style="width: 10%;">{{ lang('ACP_PAGES_ORDER') }}</th>
+				<th style="width: 15%;">{{ lang('ACP_PAGES_STATUS') }}</th>
+				<th style="width: 10%;">{{ lang('ACP_PAGES_LINK') }}</th>
+				<th style="width: 10%;">{{ lang('ACTION') }}</th>
 			</tr>
 		</thead>
 		<tbody>
-			<!-- BEGIN pages -->
+			{% for page in pages %}
 				<tr>
-					<td><strong>{pages.PAGES_TITLE}</strong></td>
-					<td>{pages.PAGES_DESCRIPTION}</td>
-					<td>{pages.PAGES_ROUTE}</td>
-					<td>{pages.PAGES_TEMPLATE}</td>
-					<td>{pages.PAGES_ORDER}</td>
+					<td><strong>{{ page.PAGES_TITLE }}</strong></td>
+					<td>{{ page.PAGES_DESCRIPTION }}</td>
+					<td>{{ page.PAGES_ROUTE }}</td>
+					<td>{{ page.PAGES_TEMPLATE }}</td>
+					<td>{{ page.PAGES_ORDER }}</td>
 					<td>
-						<!-- IF pages.S_PAGES_DISPLAY and pages.S_PAGES_GUEST_DISPLAY -->
-							{L_ACP_PAGES_PUBLISHED}
-						<!-- ELSEIF pages.S_PAGES_DISPLAY -->
-							{L_ACP_PAGES_PUBLISHED_NO_GUEST}
-						<!-- ELSE -->
-							{L_ACP_PAGES_PRIVATE}
-						<!-- ENDIF -->
+						{% if page.S_PAGES_DISPLAY and page.S_PAGES_GUEST_DISPLAY %}
+							{{ lang('ACP_PAGES_PUBLISHED') }}
+						{% elseif page.S_PAGES_DISPLAY %}
+							{{ lang('ACP_PAGES_PUBLISHED_NO_GUEST') }}
+						{% else %}
+							{{ lang('ACP_PAGES_PRIVATE') }}
+						{% endif %}
 					</td>
-					<td><a href="{pages.U_PAGES_ROUTE}">{L_ACP_PAGES_VIEW}</a></td>
-					<td><a href="{pages.U_EDIT}">{ICON_EDIT}</a> <a href="{pages.U_DELETE}" data-ajax="row_delete">{ICON_DELETE}</a></td>
+					<td><a href="{{ page.U_PAGES_ROUTE }}">{{ lang('ACP_PAGES_VIEW') }}</a></td>
+					<td><a href="{{ page.U_EDIT }}">{{ ICON_EDIT }}</a> <a href="{{ page.U_DELETE }}" data-ajax="row_delete">{{ ICON_DELETE }}</a></td>
 				</tr>
-			<!-- BEGINELSE -->
+			{% else %}
 				<tr>
-					<td colspan="8" style="text-align: center;">{L_ACP_PAGES_EMPTY}</td>
+					<td colspan="8" style="text-align: center;">{{ lang('ACP_PAGES_EMPTY') }}</td>
 				</tr>
-			<!-- END pages -->
+			{% endfor %}
 		</tbody>
 	</table>
 
-	<form id="pages_add_page" method="post" action="{U_ACTION}">
+	<form id="pages_add_page" method="post" action="{{ U_ACTION }}">
 		<fieldset class="quick">
-			<input class="button2" type="submit" name="addpage" value="{L_ACP_PAGES_CREATE_PAGE}" />
+			<input class="button2" type="submit" name="addpage" value="{{ lang('ACP_PAGES_CREATE_PAGE') }}" />
 			<input type="hidden" name="action" value="add" />
-			{S_FORM_TOKEN}
+			{{ S_FORM_TOKEN }}
 		</fieldset>
 	</form>
 
-<!-- ENDIF -->
+{% endif %}
 
-<!-- INCLUDE overall_footer.html -->
+{% include 'overall_footer.html' %}

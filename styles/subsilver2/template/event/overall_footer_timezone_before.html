@@ -1,8 +1,8 @@
 {# Note: we must use the after code so the link will appear in the expected location #}
-<!-- IF S_OVERALL_FOOTER_TIMEZONE_AFTER -->
-	<!-- BEGIN overall_footer_timezone_after_links -->
+{% if S_OVERALL_FOOTER_TIMEZONE_AFTER %}
+	{% for link in overall_footer_timezone_after_links %}
 		<p class="datetime">
-			&nbsp;<strong>&#187;</strong>&nbsp;<a href="{overall_footer_timezone_after_links.U_LINK_URL}">{overall_footer_timezone_after_links.LINK_TITLE}</a>
+			&nbsp;<strong>&#187;</strong>&nbsp;<a href="{{ link.U_LINK_URL }}">{{ link.LINK_TITLE }}</a>
 		</p>
-	<!-- END overall_footer_timezone_after_links -->
-<!-- ENDIF -->
+	{% endfor %}
+{% endif %}
