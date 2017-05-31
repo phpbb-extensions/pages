@@ -1,6 +1,14 @@
 # Changelog
 
-## Vesion 2.x (for phpBB 3.2)
+## Version 2.x (for phpBB 3.2)
+
+### 2.0.1 - 2017-05-28
+
+- Added support for using Font Awesome icons with page links.
+- Updated all templates to now use Twig syntax.
+- Fixed some minor coding and language issues.
+- Added Croatian (formal) language pack
+- Added Slovak language pack
 
 ### 2.0.0 - 2017-01-16
 
