@@ -91,6 +91,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Stranice će biti poredane u skladu s ovim poljem, što pomaže kod organizacije redoslijeda prikaza linkova stranica.<br />“Niži” brojevi imaju prednost pred “višim” brojevima.',
 	'ACP_PAGES_FORM_LINKS'				=> 'Lokacije linkova stranice',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Izaberi jednu odnosno odaberi više lokacija na kojima će link na stranicu biti prikazan.<br />Za o(do)značavanje više od jedne stavke, koristi CTRL+KLIK (CMD+KLIK na Macu).',
+	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Prikaži stranicu',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Ukoliko je onemogućeno, stranica će biti nedostupna [svima osim administratori(ca)ma koji/e će joj (i dalje) moći pristupati i uređivati ju].',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Prikaži stranicu gostima',

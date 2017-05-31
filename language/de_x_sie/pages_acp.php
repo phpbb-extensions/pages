@@ -90,6 +90,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Seiten werden nach der Angabe in diesem Feld sortiert, was hilft die Reihenfolge festzulegen in der Seiten erscheinen. Kleinere Zahlen haben Vorrang vor Höheren.',
 	'ACP_PAGES_FORM_LINKS'				=> 'Seiten Link Orte',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Wählen Sie einen oder mehre Orte an dem der Link zu der Seite erscheinen soll. Benutzen Sie  Strg+CLICK (bzw. CMD+CLICK auf Mac) um Einträge anzuwählen/abzuwählen.',
+	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Seite anzeigen',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Wenn auf nein gesetzt wird die Seite nicht aufrufbar sein. (Hinweis: Admins werden dennoch in der Lage sein die Seite zu sehen, was die Erstellung erleichtern soll.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Seite sichtbar für Gäste',

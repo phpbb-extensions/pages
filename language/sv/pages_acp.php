@@ -91,6 +91,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Sidorna kommer att sorteras enligt detta fält. Detta kan vara till hjälp för att organisera ordningsföljden av länkarna. Lägre nummer har högre prioritet.',
 	'ACP_PAGES_FORM_LINKS'				=> 'Sidlänkens placering',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Välj en eller flera placeringar för länken till sidan. Använd CTRL+CLICK (eller CMD+CLICK på en Mac) för att välja/välja bort fler än en instans.',
+	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Visa sidan',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Om inställningen är Nej så kommer sidan ej att vara tillgänglig. (Notera: administratörer kan fortfarande komma åt sidan, så de kan förhandsgranska sidorna medan de skapas.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Visa sidan för gäster',
