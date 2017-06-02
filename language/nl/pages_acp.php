@@ -91,6 +91,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Pagina‘s zullen gesorteerd worden volgens dit veld, welke kan helpen om de volgorde te organiseren waarin hun links voorkomen. Lagere nummers hebben voorrang over hogere nummers.',
 	'ACP_PAGES_FORM_LINKS'				=> 'Paginalink-locaties',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Selecteer één of meerdere locaties waar de link naar deze pagina kan voorkomen. Gebruik CTRL+KLIK (of CMD+KLIK bij Mac) om meer dan één item te selecteren/deselecteren.',
+	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Pagina weergeven',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Wanneer dit ingesteld is op nee, dan zal de pagina niet toegankelijk zijn. (Notitie: Admins hebben nog steeds toegang tot de pagina, zodat ze de pagina kunnen bekijken tijdens de ontwikkeling ervan.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Pagina weergeven aan gasten',

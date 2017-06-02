@@ -2,7 +2,7 @@
 /**
 *
 * Pages extension for the phpBB Forum Software package.
-* Croatian translation by Ančica Sečan (http://ancica.sunceko.net)
+* Croatian translation by Ančica Sečan Matijaščić (http://ancica.sunceko.net)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -41,11 +41,11 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_PAGES_MANAGE'					=> 'Upravljanje stranicama',
-	'ACP_PAGES_MANAGE_EXPLAIN'			=> 'Ovdje možeš dodavati/uređivati/izbrisati prilagođene statične stranice.',
-	'ACP_PAGES_CREATE_PAGE'				=> 'Dodaj stranicu',
-	'ACP_PAGES_CREATE_PAGE_EXPLAIN'		=> 'Korištenjem donje forme možeš dodati novu prilagođenu statičnu stranicu.',
-	'ACP_PAGES_EDIT_PAGE'				=> 'Uredi stranicu',
-	'ACP_PAGES_EDIT_PAGE_EXPLAIN'		=> 'Korištenjem donje forme možeš urediti novu prilagođenu statičnu stranicu.',
+	'ACP_PAGES_MANAGE_EXPLAIN'			=> 'Ovdje možete dodavati/uređivati/izbrisati prilagođene statične stranice.',
+	'ACP_PAGES_CREATE_PAGE'				=> 'Dodajte stranicu',
+	'ACP_PAGES_CREATE_PAGE_EXPLAIN'		=> 'Korištenjem donje forme možete dodati novu prilagođenu statičnu stranicu.',
+	'ACP_PAGES_EDIT_PAGE'				=> 'Uredite stranicu',
+	'ACP_PAGES_EDIT_PAGE_EXPLAIN'		=> 'Korištenjem donje forme možete urediti novu prilagođenu statičnu stranicu.',
 
 	// Display pages list
 	'ACP_PAGES_TITLE'					=> 'Naslov',
@@ -54,7 +54,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_TEMPLATE'				=> 'Predložak',
 	'ACP_PAGES_ORDER'					=> 'Redanje',
 	'ACP_PAGES_LINK'					=> 'Link',
-	'ACP_PAGES_VIEW'					=> 'Pogledaj stranicu',
+	'ACP_PAGES_VIEW'					=> 'Pogledajte stranicu',
 	'ACP_PAGES_STATUS'					=> 'Status',
 	'ACP_PAGES_PUBLISHED'				=> 'Objavljeno (svi)',
 	'ACP_PAGES_PUBLISHED_NO_GUEST'		=> 'Objavljeno (samo korisnici/e)',
@@ -62,16 +62,16 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Nije pronađena niti jedna stranica.',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Isprazni ikone',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Isprazni priručnu memoriju ikona stranica',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Prilikom dodavanja ikona linkova prilagođenih stranica, (a) kako bi nove ikone postale vidljive, ponekad treba isprazniti priručnu memoriju ikona stranica.<br />Prilagođene ikone, nazvane npr. <samp>pages_route.gif</samp>, (a) gdje je <samp>route</samp> <em>usmjerno</em> ime stranice, pohrani u <samp>styles/*/theme/images/</samp> mape phpBBa.',
+	'ACP_PAGES_PURGE_ICONS'				=> 'Ispraznite ikone',
+	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Ispraznite priručnu memoriju ikona stranica',
+	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Prilikom dodavanja ikona linkova prilagođenih stranica, (a) kako bi nove ikone postale vidljive, ponekad treba isprazniti priručnu memoriju ikona stranica.<br />Prilagođene ikone, nazvane npr. <samp>pages_route.gif</samp>, (a) gdje je <samp>route</samp> <em>usmjerno</em> ime stranice, pohranite u <samp>styles/*/theme/images/</samp> mape phpBBa.',
 
 	// Messages shown to user
-	'ACP_PAGES_DELETE_CONFIRM'			=> 'Jesi li siguran/na da želiš izbrisati stranicu?',
-	'ACP_PAGES_DELETE_SUCCESS'			=> 'Stranice je izbrisana.',
+	'ACP_PAGES_DELETE_CONFIRM'			=> 'Jeste li siguran/na da želite izbrisati stranicu?',
+	'ACP_PAGES_DELETE_SUCCESS'			=> 'Stranica je izbrisana.',
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Stranicu nije bilo moguće izbrisati.',
-	'ACP_PAGES_ADD_SUCCESS'				=> 'Stranice je dodana.',
-	'ACP_PAGES_EDIT_SUCCESS'			=> 'Stranice je ažurirana.',
+	'ACP_PAGES_ADD_SUCCESS'				=> 'Stranica je dodana.',
+	'ACP_PAGES_EDIT_SUCCESS'			=> 'Stranica je ažurirana.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Postavke stranice',
@@ -81,24 +81,24 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_DESC'				=> 'Opis stranice',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Bit će prikazan samo na popisu stranica u AF.',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Usmjerna putanja stranice',
-	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>Route</strong> je unikatni identifikator koji se koristi na kraju URLa stranice (a) za definiranje linka (do) stranice, npr. <samp>http://www.phpbb.com/<strong>route</strong></samp>.<br />Dopuštena su samo slova, brojevi, minusnice i podvlaknice.<br />Polje je obvezno.',
+	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>Route</strong> je unikatni identifikator koji se koristi na kraju URLa stranice (a) za definiranje linka (do) stranice, npr. <samp>http://www.phpBB/<strong>route</strong></samp>.<br />Dopuštena su samo slova, brojevi, minusnice i podvlaknice.<br />Polje je obvezno.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Sadržaj stranice',
-	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> 'Sadržaj može biti dodan korištenjem uobičajenih phpBB BBKodova, smajlića i “magičnih” linkova odnosno omogućavanjem HTML moda.<br />U HTML modu, BBKodovi, smajlići i “magični” linkovi neće raditi, ali si slobodan/na koristiti bilo koju ispravnu HTML sintaksu.<br />Sadržaj će biti dodan postojećem HTML predlošku, stoga, nemoj uključivati DOCTYPE, HTML, BODY i(li) HEAD tagove (dok) HTML tagove za uređivanje, uključujuć’ IFRAME, SCRIPT, STYLE, EMBED, VIDEO itd., možeš koristiti.',
+	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> 'Sadržaj može biti dodan korištenjem uobičajenih phpBB BBKodova, smajlića i “magičnih” linkova odnosno omogućavanjem HTML moda.<br />U HTML modu, BBKodovi, smajlići i “magični” linkovi neće raditi, ali ste slobodan/na koristiti bilo koju ispravnu HTML sintaksu.<br />Sadržaj će biti dodan postojećem HTML predlošku, stoga, nemojte uključivati DOCTYPE, HTML, BODY i(li) HEAD tagove (dok) HTML tagove za uređivanje, uključujuć’ IFRAME, SCRIPT, STYLE, EMBED, VIDEO itd., možete koristiti.',
 	'ACP_PAGES_FORM_TEMPLATE'			=> 'Predložak stranice',
 	'ACP_PAGES_FORM_TEMPLATE_EXPLAIN'	=> 'Predlošci prilagođenih stranica nazvani <samp>pages_*.html</samp> mogu biti dodani u <samp>styles/*/template</samp> mape phpBBa.',
-	'ACP_PAGES_FORM_TEMPLATE_SELECT'	=> 'Izaberi predložak',
+	'ACP_PAGES_FORM_TEMPLATE_SELECT'	=> 'Izaberite predložak',
 	'ACP_PAGES_FORM_ORDER'				=> 'Poredak stranica',
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Stranice će biti poredane u skladu s ovim poljem, što pomaže kod organizacije redoslijeda prikaza linkova stranica.<br />“Niži” brojevi imaju prednost pred “višim” brojevima.',
 	'ACP_PAGES_FORM_LINKS'				=> 'Lokacije linkova stranice',
-	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Izaberi jednu odnosno odaberi više lokacija na kojima će link na stranicu biti prikazan.<br />Za o(do)značavanje više od jedne stavke, koristi CTRL+KLIK (CMD+KLIK na Macu).',
+	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Izaberite jednu odnosno odaberite više lokacija na kojima će link na stranicu biti prikazan.<br />Za o(do)značavanje više od jedne stavke, koristite CTRL+KLIK (CMD+KLIK na Macu).',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
 	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
-	'ACP_PAGES_FORM_DISPLAY'			=> 'Prikaži stranicu',
+	'ACP_PAGES_FORM_DISPLAY'			=> 'Prikažite stranicu',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Ukoliko je onemogućeno, stranica će biti nedostupna [svima osim administratori(ca)ma koji/e će joj (i dalje) moći pristupati i uređivati ju].',
-	'ACP_PAGES_FORM_GUESTS'				=> 'Prikaži stranicu gostima',
+	'ACP_PAGES_FORM_GUESTS'				=> 'Prikažite stranicu gostima',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Ukoliko je onemogućeno, stranica će biti vidljiva samo registriranim korisnicima/ama.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Link stranice',
-	'PARSE_HTML'						=> 'Parsiraj HTML',
+	'PARSE_HTML'						=> 'Parsirajte HTML',
 
 	// Page link location names
 	'NAV_BAR_LINKS_BEFORE'				=> 'Navigacija ispred Linkova',

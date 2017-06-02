@@ -91,6 +91,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Le pagine verranno ordinate in base a questo campo, che può aiutare ad organizzare l´ordine in cui appaiono loro collegamenti. I numeri più bassi hanno la precedenza su numeri più alti.',
 	'ACP_PAGES_FORM_LINKS'				=> 'Posizione link alla pagina',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Selezionare uno o più luoghi in cui il link a questa pagina putrà apparire. Utilizzare Ctrl + clic (o CMD + clic su Mac) per selezionare/deselezionare più di una voce.',
+	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Visualizza pagina',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Se impostato su no, la pagina non sarà accessibile. (Nota: Gli amministratori saranno ancora in grado di accedere alla pagina, permettendo loro di visualizzare in anteprima privatamente la pagina mentre lo sviluppo è ancora in essere.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Permetti visualizzazione pagina agli ospiti',
