@@ -44,4 +44,18 @@ class m8_font_icons extends \phpbb\db\migration\migration
 			),
 		);
 	}
+
+	/**
+	 * (@inheritdoc)
+	 */
+	public function revert_schema()
+	{
+		return array(
+			'drop_columns'	=> array(
+				$this->table_prefix . 'pages'	=> array(
+					'page_icon_font',
+				),
+			),
+		);
+	}
 }
