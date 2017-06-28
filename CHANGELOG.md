@@ -4,7 +4,7 @@
 
 ### 2.0.2 - 2017-06-28
 
-- Fixed an HTML output error in the "Nav Bar After Links" page link location.
+- Fixed an HTML output error in the "Quick Links Menu Bottom" page link location.
 - Fixed a migration issue.
 
 ### 2.0.1 - 2017-05-28
