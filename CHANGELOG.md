@@ -2,6 +2,11 @@
 
 ## Version 2.x (for phpBB 3.2)
 
+### 2.0.2 - 2017-06-28
+
+- Fixed an HTML output error in the "Quick Links Menu Bottom" page link location.
+- Fixed a migration issue.
+
 ### 2.0.1 - 2017-05-28
 
 - Added support for using Font Awesome icons with page links.

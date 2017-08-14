@@ -2,7 +2,7 @@
 /**
 *
 * Pages extension for the phpBB Forum Software package.
-* @简体中文语言　David Yin <http://www.g2soft.net/>
+* @简体中文语言　David Yin <https://www.phpbbchinese.com/>
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
