@@ -2,7 +2,7 @@
 /**
 *
 * Pages extension for the phpBB Forum Software package.
-* @Traduzido por: http://phpbbportugal.com - segundo as normas do Acordo Ortográfico
+* @Traduzido por: http://phpbbportugal.com - segundo as normas do Acordo Ortográfico, null2 and update by eunaumtenhoid (c) 2017 [ver 2.0.2] (https://github.com/phpBBTraducoes)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -39,5 +39,5 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'PAGES_VIEWONLINE'		=> 'Vendo %s',
+	'PAGES_VIEWONLINE'		=> 'Visualizando %s',
 ));

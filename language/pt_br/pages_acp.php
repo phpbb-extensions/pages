@@ -2,7 +2,7 @@
 /**
 *
 * Pages extension for the phpBB Forum Software package.
-* @Traduzido por: http://phpbbportugal.com - segundo as normas do Acordo Ortográfico
+* @Traduzido por: http://phpbbportugal.com - segundo as normas do Acordo Ortográfico, null2 and update by eunaumtenhoid (c) 2017 [ver 2.0.2] (https://github.com/phpBBTraducoes)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -91,8 +91,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'As páginas serão ordenadas de acordo com esta ordem, que pode ajudar a organizar a ordem em que os links aparecem. Os números mais baixos tem precedência sobre os números mais altos.',
 	'ACP_PAGES_FORM_LINKS'				=> 'Localizações do link da página',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Selecione um ou mais locais onde serão visíveis links para esta página. Use CTRL+CLICK (ou CMD+CLICK no Mac) para selecionar/desselecionar mais do que um item.',
-	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT'			=> 'Link do ícone da página',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Digite o nome de um ícone de <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> para usar com o link da página. Deixe este campo em branco para usar ícones de imagem CSS/GIF tradicionais das páginas.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Mostrar página',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Se definido como Não, a página não será visível. (Nota: Administradores podem acessar a página, o que lhes permite pré-visualizá-la enquanto estão desenvolvendo-a.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Mostrar página aos visitantes',
