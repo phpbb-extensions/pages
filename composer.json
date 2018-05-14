@@ -3,9 +3,9 @@
 	"type": "phpbb-extension",
 	"description": "An extension which allows you to add static pages to your phpBB forum",
 	"homepage": "https://www.phpbb.com",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"keywords": ["phpbb", "extension", "static", "pages"],
-	"license": "GPL-2.0",
+	"license": "GPL-2.0-only",
 	"authors": [
 		{
 			"name": "Marc Alexander",

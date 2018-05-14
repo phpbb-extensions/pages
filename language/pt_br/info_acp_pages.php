@@ -2,7 +2,7 @@
 /**
 *
 * Pages extension for the phpBB Forum Software package.
-* @Traduzido por: http://phpbbportugal.com - segundo as normas do Acordo Ortográfico
+* @Traduzido por: http://phpbbportugal.com - segundo as normas do Acordo Ortográfico, null2 and update by eunaumtenhoid (c) 2017 [ver 2.0.2] (https://github.com/phpBBTraducoes)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -40,11 +40,11 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	// ACP modules
-	'ACP_PAGES'				=> 'Páginas Personalizadas',
-	'ACP_PAGES_MANAGE'		=> 'Gerenciar Páginas',
+	'ACP_PAGES'				=> 'Páginas',
+	'ACP_PAGES_MANAGE'		=> 'Gerenciar páginas',
 
 	// Logs
 	'ACP_PAGES_ADDED_LOG'	=> '<strong>Página adicionada</strong><br />» %s',
-	'ACP_PAGES_EDITED_LOG'	=> '<strong>Página Editada</strong><br />» %s',
-	'ACP_PAGES_DELETED_LOG'	=> '<strong>Página apagada</strong><br />» %s',
+	'ACP_PAGES_EDITED_LOG'	=> '<strong>Página editada</strong><br />» %s',
+	'ACP_PAGES_DELETED_LOG'	=> '<strong>Página deletada</strong><br />» %s',
 ));
