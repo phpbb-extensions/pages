@@ -24,8 +24,6 @@ class page_operator_get_page_templates_test extends page_operator_base
 				array(
 					'ext/phpbb/pages/styles/prosilver/template/pages_blank.html' => 'phpbb/pages',
 					'ext/phpbb/pages/styles/prosilver/template/pages_default.html' => 'phpbb/pages',
-					'ext/phpbb/pages/styles/subsilver2/template/pages_blank.html' => 'phpbb/pages',
-					'ext/phpbb/pages/styles/subsilver2/template/pages_default.html' => 'phpbb/pages',
 				),
 			),
 		);
