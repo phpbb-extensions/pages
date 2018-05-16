@@ -1,6 +1,0 @@
-{# Note: we are using the append code so the link will appear in a fashion consistent with prosilver #}
-{% if S_OVERALL_HEADER_NAVIGATION_APPEND %}
-	{% for link in overall_header_navigation_append_links %}
-		<a href="{{ link.U_LINK_URL }}"><img src="{% if link.ICON_LINK %}{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}{% else %}{{ T_THEME_PATH }}/images/icon_mini_message.gif{% endif %}" width="12" height="13" alt="*" /> {{ link.LINK_TITLE }}</a>&nbsp; &nbsp;
-	{% endfor %}
-{% endif %}

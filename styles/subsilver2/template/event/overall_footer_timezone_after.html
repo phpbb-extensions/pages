@@ -1,8 +1,0 @@
-{# Note: we must use the before code so the link will appear in the expected location #}
-{% if S_OVERALL_FOOTER_TIMEZONE_BEFORE %}
-	{% for link in overall_footer_timezone_before_links %}
-		<p class="datetime">
-			<a href="{{ link.U_LINK_URL }}">{{ link.LINK_TITLE }}</a>&nbsp;<strong>&#187;</strong>&nbsp;
-		</p>
-	{% endfor %}
-{% endif %}
