@@ -55,10 +55,14 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$db = $this->new_dbal();
 		$config = new \phpbb\config\config(array());
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
-		$this->auth = $this->getMock('\phpbb\auth\auth');
+		$this->auth = $this->getMockBuilder('\phpbb\auth\auth')
+			->disableOriginalConstructor()
+			->getMock();
 		$text_formatter_utils = new \phpbb\textformatter\s9e\utils();
 
-		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
+		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
+			->disableOriginalConstructor()
+			->getMock();
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.pages.entity')
@@ -87,10 +91,12 @@ class page_main_controller_test extends \phpbb_database_test_case
 
 		// Global vars called upon during execution
 		$cache = new \phpbb_mock_cache();
-		$user = $this->getMock('\phpbb\user', array(), array(
-			new \phpbb\language\language(new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx)),
-			'\phpbb\datetime'
-		));
+		$user = $this->getMockBuilder('\phpbb\user')
+			->setConstructorArgs(array(
+				new \phpbb\language\language(new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx)),
+				'\phpbb\datetime'
+			))
+			->getMock();
 		$phpbb_extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
 	}
 

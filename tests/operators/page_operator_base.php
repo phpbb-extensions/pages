@@ -67,7 +67,9 @@ class page_operator_base extends \phpbb_database_test_case
 		$config = $this->config = new \phpbb\config\config(array());
 
 		// mock container for the entity service
-		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
+		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
+			->disableOriginalConstructor()
+			->getMock();
 		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
 		$text_formatter_utils = $this->text_formatter_utils = new \phpbb\textformatter\s9e\utils();
 		$this->container->expects($this->any())
