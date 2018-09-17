@@ -37,7 +37,9 @@ class show_page_links_test extends \phpbb_database_test_case
 		$db = $this->new_dbal();
 
 		// Load/Mock classes required by the event listener class
-		$auth = $this->getMock('\phpbb\auth\auth');
+		$auth = $this->getMockBuilder('\phpbb\auth\auth')
+			->disableOriginalConstructor()
+			->getMock();
 		$cache = new \phpbb_mock_cache();
 		$template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock();
@@ -53,7 +55,9 @@ class show_page_links_test extends \phpbb_database_test_case
 			->willReturnCallback(function ($route, array $params = array()) {
 				return $route . '#' . serialize($params);
 			});
-		$phpbb_container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+		$phpbb_container = $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerInterface')
+			->disableOriginalConstructor()
+			->getMock();
 
 		// Set up the listener
 		$listener = new \phpbb\pages\event\listener(

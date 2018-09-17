@@ -44,7 +44,9 @@ class event_listener_base extends \phpbb_test_case
 
 		// Load/Mock classes required by the event listener class
 		$this->php_ext = $phpEx;
-		$this->auth = $this->getMock('\phpbb\auth\auth');
+		$this->auth = $this->getMockBuilder('\phpbb\auth\auth')
+			->disableOriginalConstructor()
+			->getMock();
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
 		$this->lang = new \phpbb\language\language($lang_loader);
 		$this->user = new \phpbb\user($this->lang, '\phpbb\datetime');
