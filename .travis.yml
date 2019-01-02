@@ -1,8 +1,5 @@
-# Opt into fully virtualized infrastructure
-sudo: required
-dist: precise
-
 language: php
+sudo: required
 
 matrix:
   include:
@@ -26,13 +23,12 @@ matrix:
       env: DB=mysqli
     - php: 7.1
       env: DB=mysqli
-    - php: nightly
+    - php: 7.2
       env: DB=mysqli
-    - php: hhvm
+    - php: nightly
       env: DB=mysqli
   allow_failures:
     - php: nightly
-    - php: hhvm
   fast_finish: true
 
 env:
