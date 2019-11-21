@@ -35,7 +35,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 	*
 	* @return array vendor/name of extension(s) to test
 	*/
-	static protected function setup_extensions()
+	protected static function setup_extensions()
 	{
 		return array('phpbb/pages');
 	}
@@ -45,7 +45,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 		return $this->createXMLDataSet(__DIR__ . '/../entity/fixtures/page.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 
@@ -63,12 +63,12 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
 			->disableOriginalConstructor()
 			->getMock();
-		$this->container->expects($this->any())
+		$this->container
 			->method('get')
 			->with('phpbb.pages.entity')
-			->will($this->returnCallback(function() use ($db, $config, $phpbb_dispatcher, $text_formatter_utils) {
+			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils) {
 				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils);
-			}))
+			})
 		;
 
 		$this->template = $this->getMockBuilder('\phpbb\template\template')
@@ -82,7 +82,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();
-		$this->controller_helper->expects($this->any())
+		$this->controller_helper->expects($this->atMost(1))
 			->method('render')
 			->willReturnCallback(function ($template_file, $page_title = '', $status_code = 200, $display_online_list = false) {
 				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);

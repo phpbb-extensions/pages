@@ -105,13 +105,13 @@ class event_listener_viewonline_test extends event_listener_base
 	*/
 	public function test_viewonline_page($on_page, $row, $location_url, $location, $expected_location_url, $expected_location)
 	{
-		$this->page_operator->expects($this->any())
+		$this->page_operator->expects($this->atMost(1))
 			->method('get_page_routes')
-			->will($this->returnValue(array(
+			->willReturn(array(
 				1 => array('route' => 'test', 'title' => $location)
-			)));
+			));
 
-		$this->controller_helper->expects($this->any())
+		$this->controller_helper->expects($this->atMost(1))
 			->method('route')
 			->willReturnCallback(function ($route, array $params = array()) {
 				return $route . '#' . serialize($params);

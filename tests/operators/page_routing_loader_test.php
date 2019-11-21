@@ -17,7 +17,7 @@ class page_routing_loader_test extends \phpbb_database_test_case
 	*
 	* @return array vendor/name of extension(s) to test
 	*/
-	static protected function setup_extensions()
+	protected static function setup_extensions()
 	{
 		return array('phpbb/pages');
 	}
@@ -36,7 +36,7 @@ class page_routing_loader_test extends \phpbb_database_test_case
 		return $this->createXMLDataSet(__DIR__ . '/fixtures/page.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 
