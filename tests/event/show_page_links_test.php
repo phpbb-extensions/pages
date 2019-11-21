@@ -17,7 +17,7 @@ class show_page_links_test extends \phpbb_database_test_case
 	*
 	* @return array vendor/name of extension(s) to test
 	*/
-	static protected function setup_extensions()
+	protected static function setup_extensions()
 	{
 		return array('phpbb/pages');
 	}
@@ -50,7 +50,7 @@ class show_page_links_test extends \phpbb_database_test_case
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();
-		$controller_helper->expects($this->any())
+		$controller_helper->expects($this->exactly(2))
 			->method('route')
 			->willReturnCallback(function ($route, array $params = array()) {
 				return $route . '#' . serialize($params);

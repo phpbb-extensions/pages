@@ -20,7 +20,7 @@ class page_operator_base extends \phpbb_database_test_case
 	*
 	* @return array vendor/name of extension(s) to test
 	*/
-	static protected function setup_extensions()
+	protected static function setup_extensions()
 	{
 		return array('phpbb/pages');
 	}
@@ -54,7 +54,7 @@ class page_operator_base extends \phpbb_database_test_case
 		return $this->createXMLDataSet(__DIR__ . '/fixtures/page.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 
@@ -72,12 +72,12 @@ class page_operator_base extends \phpbb_database_test_case
 			->getMock();
 		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
 		$text_formatter_utils = $this->text_formatter_utils = new \phpbb\textformatter\s9e\utils();
-		$this->container->expects($this->any())
+		$this->container
 			->method('get')
 			->with('phpbb.pages.entity')
-			->will($this->returnCallback(function() use ($db, $config, $phpbb_dispatcher, $text_formatter_utils) {
+			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils) {
 				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils);
-			}))
+			})
 		;
 		$this->cache = new \phpbb_mock_cache();
 		$this->user = $this->getMockBuilder('\phpbb\user')

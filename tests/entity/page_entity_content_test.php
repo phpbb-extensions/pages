@@ -15,7 +15,7 @@ namespace phpbb\pages\tests\entity;
 */
 class page_entity_content_test extends page_entity_base
 {
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 
@@ -87,10 +87,10 @@ class page_entity_content_test extends page_entity_base
 		while (!$enable_bbcode || !$enable_magic_url || !$enable_smilies || !$censor_text)
 		{
 			// We're using bitwise operation to figure out what option is set at each iteration
-			$enable_bbcode = ($i & 1) ? true : false;
-			$enable_magic_url = ($i & 2) ? true : false;
-			$enable_smilies = ($i & 4) ? true : false;
-			$censor_text = ($i & 8) ? true : false;
+			$enable_bbcode = (bool) ($i & 1);
+			$enable_magic_url = (bool) ($i & 2);
+			$enable_smilies = (bool) ($i & 4);
+			$censor_text = (bool) ($i & 8);
 
 			// Enable/disable bbcodes/smilies/magic url based on the options
 			// The content is automatically reparsed once the option is set

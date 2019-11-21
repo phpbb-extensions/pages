@@ -18,7 +18,7 @@ class admin_controller_test extends pages_functional_base
 	/**
 	* Test setup
 	*/
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 		$this->login();
