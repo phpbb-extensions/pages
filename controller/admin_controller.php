@@ -129,11 +129,12 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	* Add a page
-	*
-	* @return void
-	* @access public
-	*/
+	 * Add a page
+	 *
+	 * @return void
+	 * @access public
+	 * @throws \phpbb\pages\exception\out_of_bounds
+	 */
 	public function add_page()
 	{
 		// Initiate a page entity
@@ -151,12 +152,13 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	* Edit a page
-	*
-	* @param int $page_id The page identifier to edit
-	* @return void
-	* @access public
-	*/
+	 * Edit a page
+	 *
+	 * @param int $page_id The page identifier to edit
+	 * @return void
+	 * @access public
+	 * @throws \phpbb\pages\exception\out_of_bounds
+	 */
 	public function edit_page($page_id)
 	{
 		// Initiate and load the page entity
@@ -175,12 +177,13 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	* Process page data to be added or edited
-	*
-	* @param \phpbb\pages\entity\page_interface $entity The page entity object
-	* @return void
-	* @access protected
-	*/
+	 * Process page data to be added or edited
+	 *
+	 * @param \phpbb\pages\entity\page_interface $entity The page entity object
+	 * @return void
+	 * @access protected
+	 * @throws \phpbb\pages\exception\out_of_bounds
+	 */
 	protected function add_edit_page_data($entity)
 	{
 		// Create an array to collect errors that will be output to the user

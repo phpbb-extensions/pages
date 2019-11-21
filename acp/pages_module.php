@@ -16,6 +16,13 @@ class pages_module
 	public $tpl_name;
 	public $u_action;
 
+	/**
+	 * Main ACP module
+	 *
+	 * @param int $id
+	 * @param string $mode
+	 * @throws \Exception
+	 */
 	public function main($id, $mode)
 	{
 		global $phpbb_container;
