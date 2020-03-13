@@ -37,6 +37,7 @@ class page_operator_add_page_test extends page_operator_base
 			->set_order(5)
 			->set_page_display(1)
 			->set_page_display_to_guests(1)
+			->set_page_title_switch(0)
 			->set_icon_font('icon-added')
 		;
 

@@ -34,6 +34,7 @@ class page_entity_insert_test extends page_entity_base
 			'page_content_allow_html'			=> 0,
 			'page_display'						=> 1,
 			'page_display_to_guests'			=> 0,
+			'page_title_switch'					=> 0,
 			'page_icon_font'					=> 'inserted-icon'
 		);
 
@@ -49,6 +50,7 @@ class page_entity_insert_test extends page_entity_base
 			->set_order($data['page_order'])
 			->set_page_display($data['page_display'])
 			->set_page_display_to_guests($data['page_display_to_guests'])
+			->set_page_title_switch($data['page_title_switch'])
 			->set_icon_font($data['page_icon_font'])
 			->insert()
 		;
@@ -75,6 +77,7 @@ class page_entity_insert_test extends page_entity_base
 			'page_content'				=> 'get_content_for_edit',
 			'page_display'				=> 'get_page_display',
 			'page_display_to_guests'	=> 'get_page_display_to_guests',
+			'page_title_switch'			=> 'get_page_title_switch',
 			'page_icon_font'			=> 'get_icon_font',
 		);
 

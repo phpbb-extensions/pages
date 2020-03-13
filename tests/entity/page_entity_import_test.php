@@ -58,6 +58,7 @@ class page_entity_import_test extends page_entity_base
 			'page_description'			=> 'get_description',
 			'page_display'				=> 'get_page_display',
 			'page_display_to_guests'	=> 'get_page_display_to_guests',
+			'page_title_switch'			=> 'get_page_title_switch',
 			'page_icon_font'			=> 'get_icon_font',
 		);
 
