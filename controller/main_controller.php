@@ -80,6 +80,7 @@ class main_controller implements main_interface
 		$this->template->assign_vars(array(
 			'PAGE_TITLE'	=> $page_title,
 			'PAGE_CONTENT'	=> $page->get_content_for_display(),
+			'S_VIEWTOPIC'	=> $page->get_page_title_switch(), // true will trick page title into showing page name before site name
 		));
 
 		// Create breadcrumbs

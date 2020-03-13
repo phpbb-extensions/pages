@@ -345,4 +345,21 @@ interface page_interface
 	* @access public
 	*/
 	public function set_page_display_to_guests($option);
+
+	/**
+	 * Get page title switch setting
+	 *
+	 * @return bool Switch the way the page title is displayed (site name first instead of page name first)
+	 * @access public
+	 */
+	public function get_page_title_switch();
+
+	/**
+	 * Set page title switch setting
+	 *
+	 * @param bool $option Page title switch setting
+	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 */
+	public function set_page_title_switch($option);
 }

@@ -31,6 +31,7 @@ class page implements page_interface
 	*	page_content_allow_html
 	*	page_display
 	*	page_display_to_guests
+	*   page_title_switch
 	*	page_template
 	*	page_icon_font
 	* @access protected
@@ -133,6 +134,7 @@ class page implements page_interface
 			'page_route'					=> 'set_route', // call set_route()
 			'page_display'					=> 'set_page_display', // call set_page_display()
 			'page_display_to_guests'		=> 'set_page_display_to_guests', // call set_page_display_to_guests()
+			'page_title_switch'				=> 'set_page_title_switch', // call set_page_title_switch()
 			'page_template'					=> 'set_template', // call set_template()
 			'page_icon_font'				=> 'set_icon_font', // call set_icon_font()
 
@@ -835,6 +837,35 @@ class page implements page_interface
 
 		// Set the route on our data array
 		$this->data['page_display_to_guests'] = $option;
+
+		return $this;
+	}
+
+	/**
+	 * Get page title switch setting
+	 *
+	 * @return bool Switch the way the page title is displayed (site name first instead of page name first)
+	 * @access public
+	 */
+	public function get_page_title_switch()
+	{
+		return isset($this->data['page_title_switch']) ? (bool) $this->data['page_title_switch'] : false;
+	}
+
+	/**
+	 * Set page title switch setting
+	 *
+	 * @param bool $option Page title switch setting
+	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 */
+	public function set_page_title_switch($option)
+	{
+		// Enforce boolean
+		$option = (bool) $option;
+
+		// Set the route on our data array
+		$this->data['page_title_switch'] = $option;
 
 		return $this;
 	}

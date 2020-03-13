@@ -114,6 +114,11 @@
 				<dd><label><input type="radio" class="radio" id="page_guest_display" name="page_guest_display" value="1"{% if S_PAGES_GUEST_DISPLAY %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
 					<label><input type="radio" class="radio" name="page_guest_display" value="0"{% if not S_PAGES_GUEST_DISPLAY %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
 			</dl>
+			<dl>
+				<dt><label for="page_title_switch">{{ lang('ACP_PAGES_TITLE_SWITCH') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_TITLE_SWITCH_EXPLAIN') }}</span></dt>
+				<dd><label><input type="radio" class="radio" id="page_title_switch" name="page_title_switch" value="1"{% if S_PAGES_TITLE_SWITCH %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+					<label><input type="radio" class="radio" name="page_title_switch" value="0"{% if not S_PAGES_TITLE_SWITCH %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
+			</dl>
 		</fieldset>
 		<fieldset class="submit-buttons">
 			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
