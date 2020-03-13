@@ -31,7 +31,7 @@ class page implements page_interface
 	*	page_content_allow_html
 	*	page_display
 	*	page_display_to_guests
-	*   page_title_switch
+	*	page_title_switch
 	*	page_template
 	*	page_icon_font
 	* @access protected
