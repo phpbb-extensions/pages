@@ -92,7 +92,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Umístění odkazů na stránku',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Vyberte jednu či více umístění, kde bude zobrazen odkaz na tuto stránkue. Pro označení/odznačení více položek použijte CTRL+CLICK (nebo CMD+CLICK na Macu).',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Zobrazit stránku',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Pokud je hodnota nastavena na Ne, stránka nebude dostupná. (Poznámka: Administrátoři budou mít ke stránce přístup i nadále, což umožňuje zobrazit soukromý náhled stránky během jejího vývoje.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Zobrazovat stránku návštěvníkům',

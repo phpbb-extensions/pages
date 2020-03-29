@@ -92,7 +92,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> '单页链接位置',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> '选择一个或者多个位置，用于显示页面链接，使用 CTRL+CLICK （或者 Mac 的 CMD+CLICK ） 来选择多个项目。 ',
 	'ACP_PAGES_FORM_ICON_FONT'			=> '单页链接图标',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> '输入一个 <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> 图标的名字，用于单页链接。留空则使用单页传统的 CSS/GIF 图标。',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> '输入一个 <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> 图标的名字，用于单页链接。留空则使用单页传统的 CSS/GIF 图标。',
 	'ACP_PAGES_FORM_DISPLAY'			=> '显示单页',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> '若设置为否，单页将无法访问。 （注：管理员总是能够访问单页，可以预览页面内容。）',
 	'ACP_PAGES_FORM_GUESTS'				=> '游客可访问单页。',
