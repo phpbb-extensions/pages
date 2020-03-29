@@ -31,6 +31,7 @@ class page_operator_get_pages_test extends page_operator_base
 						'page_content' => 'message_1',
 						'page_display' => 1,
 						'page_display_to_guests' => 1,
+						'page_title_switch' => 0,
 						'page_icon_font' => 'foo-1',
 					),
 					array(
@@ -42,6 +43,7 @@ class page_operator_get_pages_test extends page_operator_base
 						'page_content' => 'message_2',
 						'page_display' => 1,
 						'page_display_to_guests' => 1,
+						'page_title_switch' => 0,
 						'page_icon_font' => '',
 					),
 					array(
@@ -53,6 +55,7 @@ class page_operator_get_pages_test extends page_operator_base
 						'page_content' => 'message_3',
 						'page_display' => 1,
 						'page_display_to_guests' => 0,
+						'page_title_switch' => 0,
 						'page_icon_font' => '',
 					),
 					array(
@@ -64,6 +67,7 @@ class page_operator_get_pages_test extends page_operator_base
 						'page_content' => 'message_4',
 						'page_display' => 0,
 						'page_display_to_guests' => 0,
+						'page_title_switch' => 0,
 						'page_icon_font' => '',
 					),
 				),
@@ -94,6 +98,7 @@ class page_operator_get_pages_test extends page_operator_base
 			'page_content'				=> 'get_content_for_edit',
 			'page_display'				=> 'get_page_display',
 			'page_display_to_guests'	=> 'get_page_display_to_guests',
+			'page_title_switch'			=> 'get_page_title_switch',
 			'page_icon_font'			=> 'get_icon_font',
 		);
 

@@ -13,6 +13,7 @@
 		<column>page_content_allow_html</column>
 		<column>page_display</column>
 		<column>page_display_to_guests</column>
+		<column>page_title_switch</column>
 		<column>page_template</column>
 		<column>page_icon_font</column>
 		<row>
@@ -28,6 +29,7 @@
 			<value>0</value>
 			<value>1</value>
 			<value>1</value>
+			<value>0</value>
 			<value>pages_default.html</value>
 			<value>foo-1</value>
 		</row>
@@ -44,6 +46,7 @@
 			<value>0</value>
 			<value>1</value>
 			<value>1</value>
+			<value>0</value>
 			<value>pages_default.html</value>
 			<value></value>
 		</row>
@@ -60,6 +63,7 @@
 			<value>0</value>
 			<value>1</value>
 			<value>0</value>
+			<value>0</value>
 			<value>pages_default.html</value>
 			<value></value>
 		</row>
@@ -74,6 +78,7 @@
 			<value></value>
 			<value>0</value>
 			<value>1</value>
+			<value>0</value>
 			<value>0</value>
 			<value>0</value>
 			<value>pages_default.html</value>
