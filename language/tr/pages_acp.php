@@ -92,7 +92,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Sayfa bağlantı yerleri',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Bu sayfaya görünebilir bağlantı verilecek bir ya da daha fazla yer seçin. Birden fazla öge seçmek için CTRL+TIKLA (ya da Mac’te CMD+TIKLA) mouse/klavye kombinasyonunu kullanın.',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Sayfayı göster',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Eğer hayır olarak ayarlarsanız, sayfa erişilebiir olmayacaktır. (Not: Yöneticiler, sayfayı geliştirmeye devam ederken önizleme yapabilmeleri için özel olarak sayfaya erişebileceklerdir.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Sayfayı misafirlere göster',

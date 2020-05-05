@@ -91,7 +91,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Page link locations',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Select one or more locations where the link to this page can appear. Use CTRL+CLICK (or CMD+CLICK on Mac) to select/deselect more than one item.',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Display page',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'If set to no, the page will not be accessible. (Note: Admins will still be able to access the page, allowing them to privately preview the page while developing it.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Display page to guests',

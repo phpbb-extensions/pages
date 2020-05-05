@@ -25,7 +25,7 @@ $(function() {
 	$('#page_icon_font').on('keyup blur', function() {
 		var input = $(this).val();
 		var $icon = $(this).next('i');
-		$icon.attr('class', 'fa-' + input);
+		$icon.attr('class', 'icon fa-' + input);
 	});
 
 });
