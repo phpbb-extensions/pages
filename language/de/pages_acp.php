@@ -91,7 +91,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Seiten Link Orte',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Wähle einen oder mehre Orte an dem der Link zu der Seite erscheinen soll. Benutze Strg+CLICK (bzw. CMD+CLICK auf Mac) um Einträge anzuwählen/abzuwählen.',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Seite anzeigen',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Wenn auf nein gesetzt wird die Seite nicht aufrufbar sein. (Hinweis: Admins werden dennoch in der Lage sein die Seite zu sehen, was die Erstellung erleichtern soll.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Seite sichtbar für Gäste',

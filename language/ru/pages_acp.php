@@ -91,7 +91,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Размещение ссылки на страницу',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Выберите место для размещения ссылки на данную страницу. Используйте CTRL+CLICK (или CMD+CLICK в Mac) для выделения нескольких пунктов',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Значок ссылки страницы',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Введите имя значка <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> для отображения рядом со ссылкой на данную страницу. Оставьте поле пустым для использования в качестве значка обычных изображений CSS/GIF.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Введите имя значка <strong><a href="%s" target="_blank">Font Awesome</a></strong> для отображения рядом со ссылкой на данную страницу. Оставьте поле пустым для использования в качестве значка обычных изображений CSS/GIF.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Показывать страницу',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Если выберите Нет, то страница не будет показываться (Администраторы будут иметь доступ к этой странице.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Показывать страницу гостям',

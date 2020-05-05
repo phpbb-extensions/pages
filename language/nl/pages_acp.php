@@ -92,7 +92,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Paginalink-locaties',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Selecteer één of meerdere locaties waar de link naar deze pagina kan voorkomen. Gebruik CTRL+KLIK (of CMD+KLIK bij Mac) om meer dan één item te selecteren/deselecteren.',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Pagina weergeven',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Wanneer dit ingesteld is op nee, dan zal de pagina niet toegankelijk zijn. (Notitie: Admins hebben nog steeds toegang tot de pagina, zodat ze de pagina kunnen bekijken tijdens de ontwikkeling ervan.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Pagina weergeven aan gasten',
