@@ -92,7 +92,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Ubicación del enlace de la página',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Seleccionar una o más ubicaciones donde puede aparecer el enlace a esta página. Use CTRL+CLICK (o CMD+CLICK en Mac) para seleccionar/anular selección de más de un artículo.',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Icono del enlace de página',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Introduzca el nombre de un icono <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> para usarlo con el enlace de la página. Deje este campo en blanco para utilizar los iconos de imagen tradicionales CSS/GIF de Páginas.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Introduzca el nombre de un icono <strong><a href="%s" target="_blank">Font Awesome</a></strong> para usarlo con el enlace de la página. Deje este campo en blanco para utilizar los iconos de imagen tradicionales CSS/GIF de Páginas.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Mostrar página',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Si se establece en no, la página no será accesible. (Nota: Los Administradores todavía serán capaces de acceder a la página, lo que les permite una vista previa de la página de forma privada mientras se desarrolla.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Mostrar página a invitados',
