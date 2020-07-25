@@ -368,7 +368,6 @@ class admin_controller implements admin_interface
 			'S_BBCODE_FLASH'	=> true,
 			'S_LINKS_ALLOWED'	=> true,
 
-			'U_FONTAWESOME_ICONS'	=> 'https://fontawesome.com/' . (phpbb_version_compare(PHPBB_VERSION, '3.3.0', '>') ? 'icons?d=gallery&m=free' : 'v4.7.0/icons/'),
 			'U_BACK'				=> $this->u_action,
 		));
 
