@@ -98,6 +98,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS'				=> 'Prikažite stranicu gostima',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Ukoliko je onemogućeno, stranica će biti vidljiva samo registriranim korisnicima/ama.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Link stranice',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
 	'PARSE_HTML'						=> 'Parsirajte HTML',
 
 	// Page link location names

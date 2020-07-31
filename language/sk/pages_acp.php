@@ -94,6 +94,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS'				=> 'Zobrazovať stránku návštevníkom',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Pokiaľ je hodnota nastavená na Nie, stránka bude dostupná len registrovaným členom.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Odkaz na stránku',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
 	'PARSE_HTML'						=> 'Spracovávať HTML',
 	// Page link location names
 	'NAV_BAR_LINKS_BEFORE'				=> 'Navigačný panel pred odkazmi',

@@ -2,6 +2,12 @@
 
 ## Version 2.x (for phpBB 3.2)
 
+## 2.0.4 - 2020-03-29
+
+- New option to display page's titles before the site name in browser windows.
+- Fixed links to FontAwesome's web site.
+- Removed Subsilver2 style and support.
+
 ### 2.0.3 - 2018-03-14
 
 - Fixed HTML syntax errors in the ACP pages.

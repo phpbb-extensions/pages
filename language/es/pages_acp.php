@@ -98,6 +98,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS'				=> 'Mostrar página a invitados',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Si se establece en no, sólo los usuarios registrados podrán acceder a la página.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Enlace de la página',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
 	'PARSE_HTML'						=> 'Reconocer HTML',
 
 	// Page link location names
