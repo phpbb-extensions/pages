@@ -58,6 +58,6 @@ class page_entity_id_test extends page_entity_base
 		$entity->import($data);
 
 		// Assert that the id matches what is expected
-		$this->assertEquals($expected, $entity->get_id());
+		self::assertEquals($expected, $entity->get_id());
 	}
 }

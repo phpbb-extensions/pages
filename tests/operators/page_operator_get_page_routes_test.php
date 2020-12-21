@@ -44,6 +44,6 @@ class page_operator_get_page_routes_test extends page_operator_base
 		// Grab the route data as an array
 		$routes = $operator->get_page_routes();
 
-		$this->assertEquals($expected, $routes);
+		self::assertEquals($expected, $routes);
 	}
 }

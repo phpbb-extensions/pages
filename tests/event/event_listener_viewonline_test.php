@@ -26,7 +26,7 @@ class event_listener_viewonline_test extends event_listener_base
 		$this->lang->add_lang('pages_common', 'phpbb/pages');
 	}
 
-	public function setUp()
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -105,13 +105,13 @@ class event_listener_viewonline_test extends event_listener_base
 	*/
 	public function test_viewonline_page($on_page, $row, $location_url, $location, $expected_location_url, $expected_location)
 	{
-		$this->page_operator->expects($this->atMost(1))
+		$this->page_operator->expects(self::atMost(1))
 			->method('get_page_routes')
 			->willReturn(array(
 				1 => array('route' => 'test', 'title' => $location)
 			));
 
-		$this->controller_helper->expects($this->atMost(1))
+		$this->controller_helper->expects(self::atMost(1))
 			->method('route')
 			->willReturnCallback(function ($route, array $params = array()) {
 				return $route . '#' . serialize($params);
@@ -129,11 +129,11 @@ class event_listener_viewonline_test extends event_listener_base
 		$event_data_after = $event->get_data_filtered($event_data);
 		foreach ($event_data as $expected)
 		{
-			$this->assertArrayHasKey($expected, $event_data_after);
+			self::assertArrayHasKey($expected, $event_data_after);
 		}
 		extract($event_data_after);
 
-		$this->assertEquals($expected_location_url, $location_url);
-		$this->assertEquals($expected_location, $location);
+		self::assertEquals($expected_location_url, $location_url);
+		self::assertEquals($expected_location, $location);
 	}
 }

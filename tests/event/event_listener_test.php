@@ -18,7 +18,7 @@ class event_listener_test extends event_listener_base
 	public function test_construct()
 	{
 		$listener = $this->get_listener();
-		$this->assertInstanceOf('\Symfony\Component\EventDispatcher\EventSubscriberInterface', $listener);
+		self::assertInstanceOf('\Symfony\Component\EventDispatcher\EventSubscriberInterface', $listener);
 	}
 
 	/**
@@ -26,7 +26,7 @@ class event_listener_test extends event_listener_base
 	*/
 	public function test_getSubscribedEvents()
 	{
-		$this->assertEquals(array(
+		self::assertEquals(array(
 			'core.page_header',
 			'core.permissions',
 			'core.viewonline_overwrite_location',

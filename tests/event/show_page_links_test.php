@@ -50,7 +50,7 @@ class show_page_links_test extends \phpbb_database_test_case
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();
-		$controller_helper->expects($this->exactly(2))
+		$controller_helper->expects(self::exactly(2))
 			->method('route')
 			->willReturnCallback(function ($route, array $params = array()) {
 				return $route . '#' . serialize($params);
@@ -80,7 +80,7 @@ class show_page_links_test extends \phpbb_database_test_case
 		);
 
 		// Test the template values
-		$template->expects($this->exactly(2))
+		$template->expects(self::exactly(2))
 			->method('assign_block_vars')
 			->withConsecutive(
 				array('overall_header_navigation_prepend_links', array(
@@ -98,7 +98,7 @@ class show_page_links_test extends \phpbb_database_test_case
 					'ICON_LINK'  => '',
 				))
 			);
-		$template->expects($this->exactly(2))
+		$template->expects(self::exactly(2))
 			->method('assign_var')
 			->withConsecutive(
 				array('S_OVERALL_HEADER_NAVIGATION_PREPEND', true),

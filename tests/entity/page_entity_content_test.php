@@ -15,7 +15,7 @@ namespace phpbb\pages\tests\entity;
 */
 class page_entity_content_test extends page_entity_base
 {
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -77,7 +77,7 @@ class page_entity_content_test extends page_entity_base
 		$result = $entity->set_content($content);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// We start with all options set to false
 		$enable_bbcode = $enable_magic_url = $enable_smilies = $censor_text = false;
@@ -124,9 +124,9 @@ class page_entity_content_test extends page_entity_base
 			// Get what we're expecting from
 			$test = $this->content_test_helper($content, $enable_bbcode, $enable_magic_url, $enable_smilies, $censor_text);
 
-			$this->assertSame($test['edit'], $entity->get_content_for_edit());
+			self::assertSame($test['edit'], $entity->get_content_for_edit());
 
-			$this->assertSame($test['display'], $entity->get_content_for_display($censor_text));
+			self::assertSame($test['display'], $entity->get_content_for_display($censor_text));
 
 			// Increment the options
 			$i++;
@@ -201,12 +201,12 @@ class page_entity_content_test extends page_entity_base
 		$result = $entity->set_content($encoded_content);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Assert that the content for edit matches the original encoded content
-		$this->assertSame($encoded_content, $entity->get_content_for_edit());
+		self::assertSame($encoded_content, $entity->get_content_for_edit());
 
 		// Assert that the content for display matches HTML decoded content
-		$this->assertSame($content, $entity->get_content_for_display());
+		self::assertSame($content, $entity->get_content_for_display());
 	}
 }

@@ -25,7 +25,7 @@ class pages_functional_base extends \phpbb_functional_test_case
 		return array('phpbb/pages');
 	}
 
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -74,7 +74,7 @@ class pages_functional_base extends \phpbb_functional_test_case
 
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
 		$crawler = self::submit($form, $form_data);
-		$this->assertGreaterThan(0, $crawler->filter('.successbox')->count());
+		self::assertGreaterThan(0, $crawler->filter('.successbox')->count());
 		$this->assertContainsLang('ACP_PAGES_ADD_SUCCESS', $crawler->text());
 
 		return $form_data['page_route'];

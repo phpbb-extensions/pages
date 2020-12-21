@@ -50,10 +50,10 @@ class page_entity_template_test extends page_entity_base
 		$result = $entity->set_template($template);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Assert that the template matches what's expected
-		$this->assertSame($expected, $entity->get_template());
+		self::assertSame($expected, $entity->get_template());
 	}
 
 	/**
@@ -84,10 +84,11 @@ class page_entity_template_test extends page_entity_base
 	* Test setting invalid data on the template which should throw an exception
 	*
 	* @dataProvider template_fails_test_data
-	* @expectedException \phpbb\pages\exception\base
 	*/
 	public function test_template_fails($template)
 	{
+		$this->expectException(\phpbb\pages\exception\base::class);
+
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 

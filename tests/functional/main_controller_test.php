@@ -35,15 +35,15 @@ class main_controller_test extends pages_functional_base
 		$crawler = self::request('GET', "app.php/{$route}?sid={$this->sid}");
 
 		// Assert the expected page exists
-		$this->assertContains($page_title, $crawler->filter('#page-body')->text());
-		$this->assertContains($page_content, $crawler->filter('#page-body')->text());
+		self::assertStringContainsString($page_title, $crawler->filter('#page-body')->text());
+		self::assertStringContainsString($page_content, $crawler->filter('#page-body')->text());
 
 		// Assert the page title switch is working
-		$this->assertContains("$page_title - yourdomain.com", $crawler->filter('title')->text());
+		self::assertStringContainsString("$page_title - yourdomain.com", $crawler->filter('title')->text());
 
 		// Assert the page's link appears
 		$page_links = $crawler->filter('#nav-main > li.icon-pages')->count();
-		$this->assertGreaterThan(0, $page_links, 'No navbar page links found');
+		self::assertGreaterThan(0, $page_links, 'No navbar page links found');
 
 		// Assert the page's link is using the correct route
 		for ($i = 0; $i < $page_links; $i++)
@@ -51,13 +51,13 @@ class main_controller_test extends pages_functional_base
 			$subcrawler = $crawler->filter('#nav-main > li.icon-pages')->eq($i);
 			if (strpos($subcrawler->text(), $page_title) !== false)
 			{
-				$this->assertContains($route, $subcrawler->filter('a')->attr('href'));
+				self::assertStringContainsString($route, $subcrawler->filter('a')->attr('href'));
 				return $route;
 			}
 		}
 
 		// If we did not find the page link, we fail
-		$this->fail('The page link could not be found in the navbar');
+		self::fail('The page link could not be found in the navbar');
 
 		return null;
 	}
@@ -74,6 +74,6 @@ class main_controller_test extends pages_functional_base
 		$crawler = self::request('GET', "app.php/page/{$route}?sid={$this->sid}");
 
 		// Assert the expected page exists
-		$this->assertContains('Front End Test Page', $crawler->filter('#page-body')->text());
+		self::assertStringContainsString('Front End Test Page', $crawler->filter('#page-body')->text());
 	}
 }

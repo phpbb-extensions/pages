@@ -47,7 +47,7 @@ class page_entity_import_test extends page_entity_base
 		$result = $entity->import($data);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Map the fields to the getters
 		$map = array(
@@ -66,7 +66,7 @@ class page_entity_import_test extends page_entity_base
 		// what we saved
 		foreach ($map as $field => $function)
 		{
-			$this->assertEquals($data[$field], $entity->$function());
+			self::assertEquals($data[$field], $entity->$function());
 		}
 	}
 
@@ -145,10 +145,11 @@ class page_entity_import_test extends page_entity_base
 	* Test importing data which will cause exceptions
 	*
 	* @dataProvider import_test_fail_data
-	* @expectedException \phpbb\pages\exception\base
 	*/
 	public function test_import_fail($data)
 	{
+		$this->expectException(\phpbb\pages\exception\base::class);
+
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 

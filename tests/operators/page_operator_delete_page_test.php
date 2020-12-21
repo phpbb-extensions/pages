@@ -40,7 +40,7 @@ class page_operator_delete_page_test extends page_operator_base
 		$result = $operator->delete_page($page_id);
 
 		// Assert the delete operation returned true
-		$this->assertTrue($result);
+		self::assertTrue($result);
 
 		// Try to load the deleted page
 		try
@@ -56,7 +56,7 @@ class page_operator_delete_page_test extends page_operator_base
 			$deleted = true;
 		}
 
-		$this->assertTrue($deleted);
+		self::assertTrue($deleted);
 	}
 
 	/**
@@ -77,10 +77,11 @@ class page_operator_delete_page_test extends page_operator_base
 	* Test deleting non-existent pages which should throw an exception
 	*
 	* @dataProvider delete_page_fails_data
-	* @expectedException \phpbb\pages\exception\base
 	*/
 	public function test_delete_page_fails($page_id)
 	{
+		$this->expectException(\phpbb\pages\exception\base::class);
+
 		// Setup the operator class
 		$operator = $this->get_page_operator();
 

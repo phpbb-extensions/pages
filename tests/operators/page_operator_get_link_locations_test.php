@@ -48,6 +48,6 @@ class page_operator_get_link_locations_test extends page_operator_base
 		// Grab the route data as an array
 		$link_locations = $operator->get_link_locations();
 
-		$this->assertEquals($expected, $link_locations);
+		self::assertEquals($expected, $link_locations);
 	}
 }

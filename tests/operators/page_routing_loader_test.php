@@ -36,7 +36,7 @@ class page_routing_loader_test extends \phpbb_database_test_case
 		return $this->createXMLDataSet(__DIR__ . '/fixtures/page.xml');
 	}
 
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -59,7 +59,7 @@ class page_routing_loader_test extends \phpbb_database_test_case
 		$collection = $this->loader->load('phpbb_pages_new_controller', 'pages_extension');
 
 		// Assert the collection is an instance of RouteCollection
-		$this->assertInstanceOf('Symfony\Component\Routing\RouteCollection', $collection, 'A route collection instance could not be made.');
+		self::assertInstanceOf('Symfony\Component\Routing\RouteCollection', $collection, 'A route collection instance could not be made.');
 
 		return $collection;
 	}
@@ -91,9 +91,9 @@ class page_routing_loader_test extends \phpbb_database_test_case
 		$route = $this->collection->get('phpbb_pages_dynamic_route_' . $id);
 
 		// Assert the roue is an instance of Route
-		$this->assertInstanceOf('Symfony\Component\Routing\Route', $route, 'A route instance could not be made.');
+		self::assertInstanceOf('Symfony\Component\Routing\Route', $route, 'A route instance could not be made.');
 
 		// Assert the route contains the expected path
-		$this->assertSame($expected, $route->getPath());
+		self::assertSame($expected, $route->getPath());
 	}
 }

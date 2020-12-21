@@ -46,10 +46,10 @@ class page_entity_order_test extends page_entity_base
 		$result = $entity->set_order($order);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Assert that the order matches what's expected
-		$this->assertSame($expected, $entity->get_order());
+		self::assertSame($expected, $entity->get_order());
 	}
 
 	/**
@@ -70,10 +70,11 @@ class page_entity_order_test extends page_entity_base
 	* Test setting invalid data on the order which should throw an exception
 	*
 	* @dataProvider order_fails_test_data
-	* @expectedException \phpbb\pages\exception\base
 	*/
 	public function test_order_fails($order)
 	{
+		$this->expectException(\phpbb\pages\exception\base::class);
+
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 

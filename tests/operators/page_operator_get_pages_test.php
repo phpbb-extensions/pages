@@ -110,7 +110,7 @@ class page_operator_get_pages_test extends page_operator_base
 			// what we saved
 			foreach ($map as $field => $function)
 			{
-				$this->assertEquals($expected[$i][$field], $entity->$function());
+				self::assertEquals($expected[$i][$field], $entity->$function());
 			}
 
 			$i++;

@@ -44,10 +44,10 @@ class page_operator_get_page_templates_test extends page_operator_base
 
 		foreach ($expected as $key => $ext)
 		{
-			$this->assertArrayHasKey($key, $templates);
-			$this->assertEquals($templates[$key], $ext);
+			self::assertArrayHasKey($key, $templates);
+			self::assertEquals($templates[$key], $ext);
 		}
 
-		$this->assertEquals($expected, $templates);
+		self::assertEquals($expected, $templates);
 	}
 }

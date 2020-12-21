@@ -30,7 +30,7 @@ class version_check_test extends pages_functional_base
 		$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&action=details&ext_name=phpbb%2Fpages&sid=' . $this->sid);
 
 		// Assert extension is up to date
-		$this->assertGreaterThan(0, $crawler->filter('.successbox')->count());
-		$this->assertContains($this->lang('UP_TO_DATE', 'Pages'), $crawler->text());
+		self::assertGreaterThan(0, $crawler->filter('.successbox')->count());
+		self::assertStringContainsString($this->lang('UP_TO_DATE', 'Pages'), $crawler->text());
 	}
 }
