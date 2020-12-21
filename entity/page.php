@@ -624,12 +624,12 @@ class page implements page_interface
 	/**
 	* Check if bbcode is enabled on the content
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function content_bbcode_enabled()
 	{
-		return ($this->data['page_content_bbcode_options'] & OPTION_FLAG_BBCODE);
+		return isset($this->data['page_content_bbcode_options']) ? $this->data['page_content_bbcode_options'] & OPTION_FLAG_BBCODE : 0;
 	}
 
 	/**
@@ -663,12 +663,12 @@ class page implements page_interface
 	/**
 	* Check if magic_url is enabled on the content
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function content_magic_url_enabled()
 	{
-		return ($this->data['page_content_bbcode_options'] & OPTION_FLAG_LINKS);
+		return isset($this->data['page_content_bbcode_options']) ? $this->data['page_content_bbcode_options'] & OPTION_FLAG_LINKS : 0;
 	}
 
 	/**
@@ -702,12 +702,12 @@ class page implements page_interface
 	/**
 	* Check if smilies are enabled on the content
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function content_smilies_enabled()
 	{
-		return ($this->data['page_content_bbcode_options'] & OPTION_FLAG_SMILIES);
+		return isset($this->data['page_content_bbcode_options']) ? $this->data['page_content_bbcode_options'] & OPTION_FLAG_SMILIES : 0;
 	}
 
 	/**
