@@ -2,7 +2,7 @@
 
 This is the repository for the development of the phpBB Pages Extension.
 
-[![Build Status](https://travis-ci.org/phpbb-extensions/pages.svg)](https://travis-ci.org/phpbb-extensions/pages)
+[![Build Status](https://github.com/phpbb-extensions/pages/workflows/Tests/badge.svg)](https://github.com/phpbb-extensions/pages/actions)
 
 ## Install
 
