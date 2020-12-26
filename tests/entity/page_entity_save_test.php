@@ -56,7 +56,7 @@ class page_entity_save_test extends page_entity_base
 		$result = $entity->load($id);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Set some new data
 		$entity
@@ -69,18 +69,18 @@ class page_entity_save_test extends page_entity_base
 		$result = $entity->load($id);
 
 		// Assert expected matches actual
-		$this->assertEquals($expected['page_id'], $result->get_id());
-		$this->assertEquals($expected['page_route'], $result->get_route());
-		$this->assertEquals($expected['page_title'], $result->get_title());
+		self::assertEquals($expected['page_id'], $result->get_id());
+		self::assertEquals($expected['page_route'], $result->get_route());
+		self::assertEquals($expected['page_title'], $result->get_title());
 	}
 
 	/**
-	* Test saving to (non-existant) pages from the database
-	*
-	* @expectedException \phpbb\pages\exception\out_of_bounds
+	* Test saving to (non-existent) pages from the database
 	*/
 	public function test_save_fails()
 	{
+		$this->expectException(\phpbb\pages\exception\out_of_bounds::class);
+
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 

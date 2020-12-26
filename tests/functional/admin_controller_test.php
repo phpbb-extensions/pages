@@ -18,7 +18,7 @@ class admin_controller_test extends pages_functional_base
 	/**
 	* Test setup
 	*/
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 		$this->login();
@@ -59,7 +59,7 @@ class admin_controller_test extends pages_functional_base
 		// Confirm error when submitting without required field data
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
 		$crawler = self::submit($form);
-		$this->assertGreaterThan(0, $crawler->filter('.errorbox')->count());
+		self::assertGreaterThan(0, $crawler->filter('.errorbox')->count());
 		$this->assertContainsLang('EXCEPTION_FIELD_MISSING', $crawler->text());
 
 		// Create page
@@ -68,11 +68,11 @@ class admin_controller_test extends pages_functional_base
 
 		// Confirm new page appears in Pages list
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
-		$this->assertContains('Functional Test Page', $crawler->text());
+		self::assertStringContainsString('Functional Test Page', $crawler->text());
 
 		// Confirm the log entry has been added correctly
 		$crawler = self::request('GET', "adm/index.php?i=acp_logs&mode=admin&sid={$this->sid}");
-		$this->assertContains(strip_tags($this->lang('ACP_PAGES_ADDED_LOG', $page_title)), $crawler->text());
+		self::assertStringContainsString(strip_tags($this->lang('ACP_PAGES_ADDED_LOG', $page_title)), $crawler->text());
 	}
 
 	/**

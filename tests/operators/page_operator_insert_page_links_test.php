@@ -50,7 +50,7 @@ class page_operator_insert_page_links_test extends page_operator_base
 		}
 
 		// Assert the page link data was inserted
-		$this->assertEquals($data, $page_link_ids);
+		self::assertEquals($data, $page_link_ids);
 	}
 
 	/**
@@ -72,10 +72,11 @@ class page_operator_insert_page_links_test extends page_operator_base
 	* Test inserting page links fails
 	*
 	* @dataProvider insert_page_links_fails_test_data
-	* @expectedException \phpbb\pages\exception\base
 	*/
 	public function test_insert_page_links_fails($page_id, $data)
 	{
+		$this->expectException(\phpbb\pages\exception\base::class);
+
 		// Setup the operator class
 		$operator = $this->get_page_operator();
 

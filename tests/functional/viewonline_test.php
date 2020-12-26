@@ -32,7 +32,7 @@ class viewonline_test extends pages_functional_base
 
 		// Send the admin to the test page
 		$crawler = self::request('GET', "app.php/{$route}?sid={$this->sid}");
-		$this->assertContains($page_title, $crawler->filter('h2')->text());
+		self::assertStringContainsString($page_title, $crawler->filter('h2')->text());
 
 		return $page_title;
 	}
@@ -53,10 +53,10 @@ class viewonline_test extends pages_functional_base
 		$crawler = self::request('GET', "viewonline.php?sid={$this->sid}");
 
 		// Is admin still viewing the test page
-		$this->assertContains('admin', $crawler->filter('#page-body table.table1')->text());
+		self::assertStringContainsString('admin', $crawler->filter('#page-body table.table1')->text());
 
 		$session_entries = $crawler->filter('#page-body table.table1 tr')->count();
-		$this->assertGreaterThanOrEqual(3, $session_entries, 'Too few session entries found');
+		self::assertGreaterThanOrEqual(3, $session_entries, 'Too few session entries found');
 
 		// Check each entry in the viewonline table
 		// Skip the first row (header)
@@ -66,12 +66,12 @@ class viewonline_test extends pages_functional_base
 			$subcrawler = $crawler->filter('#page-body table.table1 tr')->eq($i);
 			if (strpos($subcrawler->filter('td')->text(), 'admin') !== false)
 			{
-				$this->assertContains($this->lang('PAGES_VIEWONLINE', $page_title), $subcrawler->filter('td.info')->text());
+				self::assertStringContainsString($this->lang('PAGES_VIEWONLINE', $page_title), $subcrawler->filter('td.info')->text());
 				return;
 			}
 		}
 
 		// If we did not find the admin, we fail
-		$this->fail('User "admin" was not found on viewonline page.');
+		self::fail('User "admin" was not found on viewonline page.');
 	}
 }

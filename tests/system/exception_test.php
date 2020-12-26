@@ -29,7 +29,7 @@ class exception_test extends \phpbb_test_case
 		$this->lang->add_lang('exceptions', 'phpbb/pages');
 	}
 
-	public function setUp()
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -89,7 +89,7 @@ class exception_test extends \phpbb_test_case
 		}
 		catch (\phpbb\pages\exception\base $e)
 		{
-			$this->assertEquals($expected, $e->get_message($this->lang));
+			self::assertEquals($expected, $e->get_message($this->lang));
 		}
 	}
 
@@ -98,6 +98,6 @@ class exception_test extends \phpbb_test_case
 	*/
 	public function test_exceptions_lang()
 	{
-		$this->assertEquals('Required field missing', $this->lang->lang('EXCEPTION_FIELD_MISSING'));
+		self::assertEquals('Required field missing', $this->lang->lang('EXCEPTION_FIELD_MISSING'));
 	}
 }

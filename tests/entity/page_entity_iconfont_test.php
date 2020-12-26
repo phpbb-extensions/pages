@@ -48,10 +48,10 @@ class page_entity_iconfont_test extends page_entity_base
 		$result = $entity->set_icon_font($input);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Assert that the input matches what's expected
-		$this->assertSame($expected, $entity->get_icon_font());
+		self::assertSame($expected, $entity->get_icon_font());
 	}
 
 	/**
@@ -78,10 +78,11 @@ class page_entity_iconfont_test extends page_entity_base
 	* Test setting invalid icon font which should throw an exception
 	*
 	* @dataProvider icon_font_fails_test_data
-	* @expectedException \phpbb\pages\exception\base
 	*/
 	public function test_icon_font_fails($input)
 	{
+		$this->expectException(\phpbb\pages\exception\base::class);
+
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 

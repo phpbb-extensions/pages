@@ -101,7 +101,7 @@ class page_entity_load_test extends page_entity_base
 		$result = $entity->load($id, $route);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Map the fields to the getters
 		$map = array(
@@ -121,7 +121,7 @@ class page_entity_load_test extends page_entity_base
 		// what we saved
 		foreach ($map as $field => $function)
 		{
-			$this->assertEquals($data[$field], $entity->$function());
+			self::assertEquals($data[$field], $entity->$function());
 		}
 	}
 
@@ -143,10 +143,11 @@ class page_entity_load_test extends page_entity_base
 	* Test loading (non-existant) pages from the database
 	*
 	* @dataProvider load_fails_test_data
-	* @expectedException \phpbb\pages\exception\out_of_bounds
 	*/
 	public function test_load_fails($id)
 	{
+		$this->expectException(\phpbb\pages\exception\out_of_bounds::class);
+
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 

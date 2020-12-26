@@ -56,16 +56,16 @@ class page_entity_insert_test extends page_entity_base
 		;
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Assert that the new page_id was created
-		$this->assertEquals($data['page_id'], $result->get_id());
+		self::assertEquals($data['page_id'], $result->get_id());
 
 		// Reload the inserted data from the db
 		$result = $entity->load($result->get_id());
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\pages\entity\page', $result);
+		self::assertInstanceOf('\phpbb\pages\entity\page', $result);
 
 		// Map the fields to the getters
 		$map = array(
@@ -85,18 +85,18 @@ class page_entity_insert_test extends page_entity_base
 		// what we saved
 		foreach ($map as $field => $function)
 		{
-			$this->assertEquals($data[$field], $entity->$function());
+			self::assertEquals($data[$field], $entity->$function());
 		}
 	}
 
 	/**
 	* Try inserting a page that already exists into the database
 	* Entities with an existing page_id will fail to insert
-	*
-	* @expectedException \phpbb\pages\exception\out_of_bounds
 	*/
 	public function test_insert_fails()
 	{
+		$this->expectException(\phpbb\pages\exception\out_of_bounds::class);
+
 		// Load some import test data
 		$import_data = $this->get_import_data();
 

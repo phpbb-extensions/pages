@@ -45,7 +45,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 		return $this->createXMLDataSet(__DIR__ . '/../entity/fixtures/page.xml');
 	}
 
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -82,7 +82,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();
-		$this->controller_helper->expects($this->atMost(1))
+		$this->controller_helper->expects(self::atMost(1))
 			->method('render')
 			->willReturnCallback(function ($template_file, $page_title = '', $status_code = 200, $display_online_list = false) {
 				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
@@ -136,9 +136,9 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$controller = $this->get_controller();
 
 		$response = $controller->display($route);
-		$this->assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
-		$this->assertEquals($status_code, $response->getStatusCode());
-		$this->assertEquals($page_content, $response->getContent());
+		self::assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
+		self::assertEquals($status_code, $response->getStatusCode());
+		self::assertEquals($page_content, $response->getContent());
 	}
 
 	/**
@@ -169,12 +169,12 @@ class page_main_controller_test extends \phpbb_database_test_case
 		try
 		{
 			$controller->display($route);
-			$this->fail('The expected \phpbb\exception\http_exception was not thrown');
+			self::fail('The expected \phpbb\exception\http_exception was not thrown');
 		}
 		catch (\phpbb\exception\http_exception $exception)
 		{
-			$this->assertEquals($status_code, $exception->getStatusCode());
-			$this->assertEquals($page_content, $exception->getMessage());
+			self::assertEquals($status_code, $exception->getStatusCode());
+			self::assertEquals($page_content, $exception->getMessage());
 		}
 	}
 }

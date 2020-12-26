@@ -117,7 +117,7 @@ class page_operator_get_page_links_test extends page_operator_base
 		// Grab the page link data as an array
 		$result = $operator->get_page_links($page_ids);
 
-		$this->assertEquals($expected, $result);
+		self::assertEquals($expected, $result);
 	}
 
 	/**
@@ -145,6 +145,6 @@ class page_operator_get_page_links_test extends page_operator_base
 		// Grab the page link data as an array
 		$result = $operator->get_page_links($page_ids);
 
-		$this->assertEquals($expected, $result);
+		self::assertEquals($expected, $result);
 	}
 }

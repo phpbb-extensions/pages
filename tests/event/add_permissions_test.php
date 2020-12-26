@@ -53,6 +53,6 @@ class add_permissions_test extends event_listener_base
 
 		$listener->add_permission($data);
 
-		$this->assertSame($data['permissions'], $expected);
+		self::assertSame($data['permissions'], $expected);
 	}
 }
