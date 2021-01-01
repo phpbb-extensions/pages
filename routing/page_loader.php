@@ -29,8 +29,8 @@ class page_loader extends Loader
 	/**
 	 * Constructor
 	 *
-	 * @param \phpbb\db\driver\driver_interface    $db          Database connection
-	 * @param string                               $pages_table Table name
+	 * @param driver_interface $db          Database connection
+	 * @param string           $pages_table Table name
 	 * @access public
 	 */
 	public function __construct(driver_interface $db, $pages_table)
@@ -53,7 +53,7 @@ class page_loader extends Loader
 	{
 		$collection = new RouteCollection();
 
-		$sql = 'SELECT page_id, page_route 
+		$sql = 'SELECT page_id, page_route
 			FROM ' . $this->pages_table;
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
