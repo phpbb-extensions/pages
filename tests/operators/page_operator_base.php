@@ -31,7 +31,7 @@ class page_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
 	protected $container;
 
 	/** @var \phpbb\db\driver\driver_interface */
@@ -46,7 +46,7 @@ class page_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb\textformatter\s9e\utils */
 	protected $text_formatter_utils;
 
-	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\user */
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\user */
 	protected $user;
 
 	public function getDataSet()

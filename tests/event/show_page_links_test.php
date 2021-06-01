@@ -106,8 +106,8 @@ class show_page_links_test extends \phpbb_database_test_case
 				array('S_OVERALL_HEADER_NAVIGATION_APPEND', true)
 			);
 
-		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
+		$dispatcher = new \phpbb\event\dispatcher();
 		$dispatcher->addListener('core.page_header', array($listener, 'show_page_links'));
-		$dispatcher->dispatch('core.page_header');
+		$dispatcher->trigger_event('core.page_header');
 	}
 }
