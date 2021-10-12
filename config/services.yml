@@ -85,7 +85,6 @@ services:
         class: phpbb\cron\task\text_reparser\reparser
         arguments:
             - '@config'
-            - '@config_text'
             - '@text_reparser.lock'
             - '@text_reparser.manager'
             - '@text_reparser_collection'
