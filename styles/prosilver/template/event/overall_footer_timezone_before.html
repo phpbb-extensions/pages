@@ -1,9 +1,9 @@
 {# Note: we must use the after code so the link will appear in the expected location #}
 {% if S_OVERALL_FOOTER_TIMEZONE_AFTER %}
 	{% for link in overall_footer_timezone_after_links %}
-		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ overall_footer_timezone_before_links.LINK_ROUTE }} rightside"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="rightside"{% endif %}>
+		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ overall_footer_timezone_before_links.LINK_ROUTE }} rightside in-menu"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="rightside in-menu"{% endif %}>
 			<a href="{{ link.U_LINK_URL }}" role="menuitem">
-				{% if link.ICON_FONT %}<i class="icon fa-{{ link.ICON_FONT }} fa-fw" aria-hidden="true"></i>{% endif %}<span>{{ link.LINK_TITLE }}</span>
+				{% if link.ICON_FONT %}{{ Icon('iconify', 'fa:' ~ link.ICON_FONT, link.LINK_TITLE, false) }}{% endif %}
 			</a>
 		</li>
 	{% endfor %}

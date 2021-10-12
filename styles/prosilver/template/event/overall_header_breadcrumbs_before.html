@@ -3,7 +3,7 @@
 		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }} breadcrumbs"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="breadcrumbs"{% endif %}>
 			<span class="crumb">
 				<a href="{{ link.U_LINK_URL }}">
-					{% if link.ICON_FONT %}<i class="icon fa-{{ link.ICON_FONT }} fa-fw" aria-hidden="true"></i>{% endif %}<span>{{ link.LINK_TITLE }}</span>
+					{% if link.ICON_FONT %}{{ Icon('iconify', 'fa:' ~ link.ICON_FONT, link.LINK_TITLE, false) }}{% endif %}
 				</a>
 			</span>
 		</li>
