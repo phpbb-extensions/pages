@@ -63,9 +63,9 @@ class pages_functional_base extends \phpbb_functional_test_case
 			'page_template'		=> 'pages_default.html',
 			'page_order'		=> 0,
 			'page_links'		=> array(2),
-			'page_display'		=> true,
-			'page_guest_display'=> true,
-			'page_title_switch'	=> false,
+			'page_display'		=> 1,
+			'page_guest_display'=> 1,
+			'page_title_switch'	=> 0,
 			'page_icon_font'	=> '',
 		), $additional_form_data);
 

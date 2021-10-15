@@ -29,7 +29,7 @@ class main_controller_test extends pages_functional_base
 		$page_content = 'This is a functional test page for the front end';
 
 		// Create a page
-		$route = $this->create_page($page_title, $page_content, ['page_title_switch' => true]);
+		$route = $this->create_page($page_title, $page_content, ['page_title_switch' => 1]);
 
 		// Load the page
 		$crawler = self::request('GET', "app.php/{$route}?sid={$this->sid}");
