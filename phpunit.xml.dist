@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit backupGlobals="true"
-         backupStaticAttributes="true"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         verbose="true"
-         bootstrap="../../../../tests/bootstrap.php"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+		 backupGlobals="true"
+		 backupStaticAttributes="false"
+		 colors="true"
+		 convertErrorsToExceptions="true"
+		 convertNoticesToExceptions="true"
+		 convertWarningsToExceptions="true"
+		 processIsolation="false"
+		 stopOnFailure="false"
+		 cacheResult="false"
+		 bootstrap="../../../../tests/bootstrap.php"
 >
+	<coverage>
+		<include>
+			<directory suffix=".php">./</directory>
+		</include>
+		<exclude>
+			<directory suffix=".php">./language/</directory>
+			<directory suffix=".php">./migrations/</directory>
+			<directory suffix=".php">./tests/</directory>
+		</exclude>
+	</coverage>
 	<testsuites>
 		<testsuite name="Extension Test Suite">
 			<directory suffix="_test.php">./tests</directory>
@@ -20,15 +31,4 @@
 			<directory suffix="_test.php">./tests/functional/</directory>
 		</testsuite>
 	</testsuites>
-
-	<filter>
-		<whitelist processUncoveredFilesFromWhitelist="true">
-			<directory suffix=".php">./</directory>
-			<exclude>
-				<directory suffix=".php">./language/</directory>
-				<directory suffix=".php">./migrations/</directory>
-				<directory suffix=".php">./tests/</directory>
-			</exclude>
-		</whitelist>
-	</filter>
 </phpunit>
