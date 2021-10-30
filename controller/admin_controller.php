@@ -114,7 +114,6 @@ class admin_controller implements admin_interface
 
 				'S_PAGES_DISPLAY'		=> $entity->get_page_display(),
 				'S_PAGES_GUEST_DISPLAY'	=> $entity->get_page_display_to_guests(),
-				'S_PAGES_TITLE_SWITCH'	=> $entity->get_page_title_switch(),
 
 				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;page_id=" . $entity->get_id(),
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;page_id=" . $entity->get_id(),
@@ -368,7 +367,7 @@ class admin_controller implements admin_interface
 			'S_BBCODE_FLASH'	=> true,
 			'S_LINKS_ALLOWED'	=> true,
 
-			'U_BACK'				=> $this->u_action,
+			'U_BACK'			=> $this->u_action,
 		));
 
 		// Build custom bbcodes array
