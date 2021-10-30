@@ -1,11 +1,13 @@
 {% if S_OVERALL_HEADER_BREADCRUMBS_AFTER %}
 	{% for link in overall_header_breadcrumbs_after_links %}
 		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }} breadcrumbs"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="breadcrumbs"{% endif %}>
+			{% apply spaceless %}
 			<span class="crumb">
 				<a href="{{ link.U_LINK_URL }}">
 					{% if link.ICON_FONT %}<i class="icon fa-{{ link.ICON_FONT }} fa-fw" aria-hidden="true"></i>{% endif %}<span>{{ link.LINK_TITLE }}</span>
 				</a>
 			</span>
+			{% endapply %}
 		</li>
 	{% endfor %}
 {% endif %}
