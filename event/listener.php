@@ -115,6 +115,7 @@ class listener implements EventSubscriberInterface
 				'U_LINK_URL' => $this->helper->route('phpbb_pages_dynamic_route_' . $row['page_id']),
 				'LINK_ROUTE' => $row['page_route'],
 				'LINK_TITLE' => $row['page_title'],
+				'LINK_DESC'  => $row['page_description'] && $row['page_description_display'] ? $row['page_description'] : '',
 				'ICON_FONT'  => $row['page_icon_font'],
 				'ICON_LINK'  => !$row['page_icon_font'] ? $this->page_operator->get_page_icon($row['page_route']) : '',
 			));

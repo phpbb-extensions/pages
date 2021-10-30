@@ -16,26 +16,27 @@ namespace phpbb\pages\entity;
 class page implements page_interface
 {
 	/**
-	* Data for this entity
-	*
-	* @var array
-	*	page_id
-	*	page_title
-	*	page_description
-	*	page_route
-	*	page_order
-	*	page_content
-	*	page_content_bbcode_uid
-	*	page_content_bbcode_bitfield
-	*	page_content_bbcode_options
-	*	page_content_allow_html
-	*	page_display
-	*	page_display_to_guests
-	*	page_title_switch
-	*	page_template
-	*	page_icon_font
-	* @access protected
-	*/
+	 * Data for this entity
+	 *
+	 * @var array
+	 *    page_id
+	 *    page_title
+	 *    page_description
+	 *    page_description_display
+	 *    page_route
+	 *    page_order
+	 *    page_content
+	 *    page_content_bbcode_uid
+	 *    page_content_bbcode_bitfield
+	 *    page_content_bbcode_options
+	 *    page_content_allow_html
+	 *    page_display
+	 *    page_display_to_guests
+	 *    page_title_switch
+	 *    page_template
+	 *    page_icon_font
+	 * @access protected
+	 */
 	protected $data;
 
 	/** @var \phpbb\db\driver\driver_interface */
@@ -131,6 +132,7 @@ class page implements page_interface
 			'page_order'					=> 'set_order', // call set_order()
 			'page_title'					=> 'set_title', // call set_title()
 			'page_description'				=> 'set_description', // call set_description()
+			'page_description_display'		=> 'set_description_display', // call set_description_display()
 			'page_route'					=> 'set_route', // call set_route()
 			'page_display'					=> 'set_page_display', // call set_page_display()
 			'page_display_to_guests'		=> 'set_page_display_to_guests', // call set_page_display_to_guests()
@@ -333,6 +335,35 @@ class page implements page_interface
 
 		// Set the title on our data array
 		$this->data['page_description'] = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Get description display setting
+	 *
+	 * @return bool display description
+	 * @access public
+	 */
+	public function get_description_display()
+	{
+		return isset($this->data['page_description_display']) && $this->data['page_description_display'];
+	}
+
+	/**
+	 * Set description display setting
+	 *
+	 * @param bool $option Description display setting
+	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 */
+	public function set_description_display($option)
+	{
+		// Enforce boolean
+		$option = (bool) $option;
+
+		// Set the page description display on our data array
+		$this->data['page_description_display'] = $option;
 
 		return $this;
 	}

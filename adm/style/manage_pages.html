@@ -48,7 +48,8 @@
 			</dl>
 			<dl>
 				<dt><label for="page_description">{{ lang('ACP_PAGES_FORM_DESC') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_DESC_EXPLAIN') }}</span></dt>
-				<dd><input class="text medium" type="text" id="page_description" name="page_description" value="{{ PAGES_DESCRIPTION }}" maxlength="255" /></dd>
+				<dd><input class="text medium" type="text" id="page_description" name="page_description" value="{{ PAGES_DESCRIPTION }}" maxlength="255" />
+					<input type="checkbox" class="radio" name="page_description_display"{% if S_PAGES_DESC_DISPLAY %} checked="checked"{% endif %} /> {{ lang('ACP_PAGES_FORM_DESC_DISPLAY') }}</dd>
 			</dl>
 			<dl>
 				<dt><label for="page_route">{{ lang('ACP_PAGES_FORM_ROUTE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ROUTE_EXPLAIN') }}</span></dt>
