@@ -4,6 +4,7 @@
 		<column>page_id</column>
 		<column>page_order</column>
 		<column>page_description</column>
+		<column>page_description_display</column>
 		<column>page_route</column>
 		<column>page_title</column>
 		<column>page_content</column>
@@ -20,6 +21,7 @@
 			<value>1</value>
 			<value>1</value>
 			<value>description_1</value>
+			<value>0</value>
 			<value>page_1</value>
 			<value>title_1</value>
 			<value>message_1</value>
@@ -37,6 +39,7 @@
 			<value>2</value>
 			<value>2</value>
 			<value>description_2</value>
+			<value>0</value>
 			<value>page_2</value>
 			<value>title_2</value>
 			<value>message_2</value>
@@ -54,6 +57,7 @@
 			<value>3</value>
 			<value>3</value>
 			<value>description_3</value>
+			<value>0</value>
 			<value>page_3</value>
 			<value>title_3</value>
 			<value>message_3</value>
@@ -71,6 +75,7 @@
 			<value>4</value>
 			<value>4</value>
 			<value>description_4</value>
+			<value>0</value>
 			<value>page_4</value>
 			<value>title_4</value>
 			<value>message_4</value>

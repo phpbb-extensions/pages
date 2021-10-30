@@ -27,9 +27,14 @@ class main_controller_test extends pages_functional_base
 
 		$page_title = 'Front End Test Page';
 		$page_content = 'This is a functional test page for the front end';
+		$page_description = 'Functional test page description';
 
 		// Create a page
-		$route = $this->create_page($page_title, $page_content, ['page_title_switch' => true]);
+		$route = $this->create_page($page_title, $page_content, [
+			'page_title_switch' => true,
+			'page_description'	=> $page_description,
+			'page_description_display' => true,
+		]);
 
 		// Load the page
 		$crawler = self::request('GET', "app.php/{$route}?sid={$this->sid}");
@@ -45,13 +50,14 @@ class main_controller_test extends pages_functional_base
 		$page_links = $crawler->filter('#nav-main > li.icon-pages')->count();
 		self::assertGreaterThan(0, $page_links, 'No navbar page links found');
 
-		// Assert the page's link is using the correct route
+		// Assert the page's link is using the correct href route and title
 		for ($i = 0; $i < $page_links; $i++)
 		{
 			$subcrawler = $crawler->filter('#nav-main > li.icon-pages')->eq($i);
 			if (strpos($subcrawler->text(), $page_title) !== false)
 			{
 				self::assertStringContainsString($route, $subcrawler->filter('a')->attr('href'));
+				self::assertStringContainsString($page_description, $subcrawler->filter('a')->attr('title'));
 				return $route;
 			}
 		}

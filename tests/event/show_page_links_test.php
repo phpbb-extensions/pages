@@ -88,6 +88,7 @@ class show_page_links_test extends \phpbb_database_test_case
 					'U_LINK_URL' => 'phpbb_pages_dynamic_route_1#a:0:{}',
 					'LINK_ROUTE' => 'page_1',
 					'LINK_TITLE' => 'title_1',
+					'LINK_DESC'  => '',
 					'ICON_FONT'  => 'icon-1',
 					'ICON_LINK'  => '',
 				)),
@@ -95,6 +96,7 @@ class show_page_links_test extends \phpbb_database_test_case
 					'U_LINK_URL' => 'phpbb_pages_dynamic_route_2#a:0:{}',
 					'LINK_ROUTE' => 'page_2',
 					'LINK_TITLE' => 'title_2',
+					'LINK_DESC'  => '',
 					'ICON_FONT'  => '',
 					'ICON_LINK'  => '',
 				))
