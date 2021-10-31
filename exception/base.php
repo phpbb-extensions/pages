@@ -24,15 +24,15 @@ class base extends \Exception
 	protected $previous;
 
 	/**
-	* Constructor
-	*
-	* Different from normal exceptions in that we do not enforce $message to be a string.
-	*
-	* @param string|array $message
-	* @param int $code
-	* @param \Exception $previous
-	* @access public
-	*/
+	 * Constructor
+	 *
+	 * Different from normal exceptions in that we do not enforce $message to be a string.
+	 *
+	 * @param string|array|null $message
+	 * @param int               $code
+	 * @param \Exception|null   $previous
+	 * @access public
+	 */
 	public function __construct($message = null, $code = 0, \Exception $previous = null)
 	{
 		parent::__construct();

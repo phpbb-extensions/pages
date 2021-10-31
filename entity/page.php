@@ -746,7 +746,7 @@ class page implements page_interface
 	*/
 	public function content_html_enabled()
 	{
-		return isset($this->data['page_content_allow_html']) ? (bool) $this->data['page_content_allow_html'] : false;
+		return isset($this->data['page_content_allow_html']) && $this->data['page_content_allow_html'];
 	}
 
 	/**
@@ -791,7 +791,7 @@ class page implements page_interface
 	*/
 	public function get_page_display()
 	{
-		return isset($this->data['page_display']) ? (bool) $this->data['page_display'] : false;
+		return isset($this->data['page_display']) && $this->data['page_display'];
 	}
 
 	/**
@@ -820,7 +820,7 @@ class page implements page_interface
 	*/
 	public function get_page_display_to_guests()
 	{
-		return isset($this->data['page_display_to_guests']) ? (bool) $this->data['page_display_to_guests'] : false;
+		return isset($this->data['page_display_to_guests']) && $this->data['page_display_to_guests'];
 	}
 
 	/**
@@ -849,7 +849,7 @@ class page implements page_interface
 	 */
 	public function get_page_title_switch()
 	{
-		return isset($this->data['page_title_switch']) ? (bool) $this->data['page_title_switch'] : false;
+		return isset($this->data['page_title_switch']) && $this->data['page_title_switch'];
 	}
 
 	/**
