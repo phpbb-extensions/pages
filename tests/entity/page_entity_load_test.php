@@ -64,7 +64,7 @@ class page_entity_load_test extends page_entity_base
 					'page_route' => 'page_3',
 					'page_title' => 'title_3',
 					'page_description' => 'description_3',
-					'page_description_display' => 0,
+					'page_description_display' => 1,
 					'page_content' => 'message_3',
 					'page_display' => 1,
 					'page_display_to_guests' => 0,

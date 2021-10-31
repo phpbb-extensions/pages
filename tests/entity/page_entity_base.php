@@ -114,7 +114,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_route'						=> 'route3',
 				'page_title'						=> '3 Title',
 				'page_description'					=> '3 Description',
-				'page_description_display'			=> 0,
+				'page_description_display'			=> 1,
 				'page_content'						=> '[quote=EXreaction]Another [i:2ebzz8aw]test[/i:2ebzz8aw]!<!-- m --><a class="postlink" href="http://google.com">http://google.com</a><!-- m -->[/quote]',
 				'page_content_bbcode_uid'			=> '2ebzz8aw',
 				'page_content_bbcode_bitfield'		=> 'IA==',
