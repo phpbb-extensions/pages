@@ -5,7 +5,7 @@
 $(function() {
 
 	$.fn.toggleBoxes = function(target) {
-		$(this).on('click', function () {
+		$(this).on('click', function() {
 			if ($(this).is(':checked')) {
 				$(target).prop('checked', false);
 			}
