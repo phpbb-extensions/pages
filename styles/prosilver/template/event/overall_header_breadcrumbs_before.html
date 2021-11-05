@@ -1,11 +1,7 @@
 {% if S_OVERALL_HEADER_BREADCRUMBS_BEFORE %}
 	{% for link in overall_header_breadcrumbs_before_links %}
-		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }} breadcrumbs"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="breadcrumbs"{% endif %}>
-			<span class="crumb">
-				<a href="{{ link.U_LINK_URL }}">
-					{% if link.ICON_FONT %}<i class="icon fa-{{ link.ICON_FONT }} fa-fw" aria-hidden="true"></i>{% endif %}<span>{{ link.LINK_TITLE }}</span>
-				</a>
-			</span>
+		<li data-skip-responsive {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }} breadcrumbs"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="breadcrumbs"{% endif %} itemscope itemtype="https://schema.org/BreadcrumbList">
+			<span class="crumb" {{ MICRODATA }}><a itemprop="item" href="{{ link.U_LINK_URL }}" title="{{ link.LINK_DESC }}">{% if link.ICON_FONT %}<i class="icon fa-{{ link.ICON_FONT }} fa-fw" aria-hidden="true"></i>{% endif %}<span itemprop="name">{{ link.LINK_TITLE }}</span></a><meta itemprop="position" content="0" /></span>
 		</li>
 	{% endfor %}
 {% endif %}

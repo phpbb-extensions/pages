@@ -33,6 +33,7 @@ class page_operator_add_page_test extends page_operator_base
 			->set_title('title_added')
 			->set_route('route_added')
 			->set_description('description_added')
+			->set_description_display(0)
 			->set_content('message_added')
 			->set_order(5)
 			->set_page_display(1)

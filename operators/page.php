@@ -260,7 +260,7 @@ class page implements page_interface
 	public function get_page_links($page_ids = array())
 	{
 		$sql_array = array(
-			'SELECT'		=> 'ppl.*, pl.page_link_location, pl.page_link_event_name, p.page_route, p.page_title, p.page_icon_font, p.page_display, p.page_display_to_guests',
+			'SELECT'		=> 'ppl.*, pl.page_link_location, pl.page_link_event_name, p.page_route, p.page_title, p.page_icon_font, p.page_display, p.page_display_to_guests, p.page_description, p.page_description_display',
 			'FROM'			=> array($this->pages_pages_links_table => 'ppl'),
 			'LEFT_JOIN'		=> array(
 				array(

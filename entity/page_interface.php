@@ -110,6 +110,23 @@ interface page_interface
 	public function set_description($description);
 
 	/**
+	 * Get description display setting
+	 *
+	 * @return bool display description
+	 * @access public
+	 */
+	public function get_description_display();
+
+	/**
+	 * Set description display setting
+	 *
+	 * @param bool $option Description display setting
+	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 */
+	public function set_description_display($option);
+
+	/**
 	* Get route
 	*
 	* @return string route

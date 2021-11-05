@@ -56,6 +56,7 @@ class pages_functional_base extends \phpbb_functional_test_case
 			'page_content'		=> $page_content,
 			'page_route'		=> 'fn_' . time(),
 			'page_description'	=> '',
+			'page_description_display'	=> false,
 			'parse_bbcode'		=> true,
 			'parse_smilies'		=> true,
 			'parse_magic_url'	=> true,
