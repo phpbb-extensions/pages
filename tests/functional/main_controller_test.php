@@ -33,7 +33,7 @@ class main_controller_test extends pages_functional_base
 		$route = $this->create_page($page_title, $page_content, [
 			'page_title_switch' => 1,
 			'page_description'	=> $page_description,
-			'page_description_display' => 1,
+			'page_description_display' => "on",
 		]);
 
 		// Load the page
