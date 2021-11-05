@@ -39,7 +39,7 @@
 			{% if S_EDIT_PAGE %}
 				<dl>
 					<dt><label>{{ lang('ACP_PAGES_FORM_VIEW_PAGE') ~ lang('COLON') }}</label></dt>
-					<dd><a href="{{ U_VIEW_PAGE }}">{{ lang('ACP_PAGES_VIEW') }}</a></dd>
+					<dd><a href="{{ U_VIEW_PAGE }}">{{ lang('ACP_PAGES_VIEW') }} <i class="icon fa-external-link-square fa-fw" aria-hidden="true"></i></a></dd>
 				</dl>
 			{% endif %}
 			<dl>
@@ -48,7 +48,8 @@
 			</dl>
 			<dl>
 				<dt><label for="page_description">{{ lang('ACP_PAGES_FORM_DESC') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_DESC_EXPLAIN') }}</span></dt>
-				<dd><input class="text medium" type="text" id="page_description" name="page_description" value="{{ PAGES_DESCRIPTION }}" maxlength="255" /></dd>
+				<dd><input class="text medium" type="text" id="page_description" name="page_description" value="{{ PAGES_DESCRIPTION }}" maxlength="255" />
+					<input type="checkbox" class="radio" name="page_description_display"{% if S_PAGES_DESC_DISPLAY %} checked="checked"{% endif %} /> {{ lang('ACP_PAGES_FORM_DESC_DISPLAY') }}</dd>
 			</dl>
 			<dl>
 				<dt><label for="page_route">{{ lang('ACP_PAGES_FORM_ROUTE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ROUTE_EXPLAIN') }}</span></dt>
@@ -65,7 +66,7 @@
 				<dl class="responsive-columns">
 					<dt style="width: 90px;" id="color_palette_placeholder" data-orientation="v" data-color-palette="v" data-height="12" data-width="15" data-bbcode="true"></dt>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px;">
-						<textarea name="page_content" rows="25" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{{ PAGES_CONTENT }}</textarea>
+						<textarea name="page_content" rows="25" cols="60" style="width: 95%;" data-bbcode="true">{{ PAGES_CONTENT }}</textarea>
 					</dd>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 5px;">
 						<label><input type="checkbox" class="radio html-off" name="parse_bbcode"{% if S_PARSE_BBCODE_CHECKED %} checked="checked"{% endif %} /> {{ lang('PARSE_BBCODE') }}</label>
@@ -75,6 +76,13 @@
 					</dd>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ FLASH_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
 				</dl>
+				<script>
+					const textarea = document.querySelector("textarea[name='page_content']");
+					textarea.addEventListener("select", (e) => storeCaret(e.target));
+					textarea.addEventListener("click", (e) => storeCaret(e.target));
+					textarea.addEventListener("keyup", (e) => storeCaret(e.target));
+					textarea.addEventListener("focus", () => initInsertions());
+				</script>
 			{% endif %}
 		</fieldset>
 		<fieldset>

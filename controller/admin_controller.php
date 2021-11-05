@@ -114,7 +114,6 @@ class admin_controller implements admin_interface
 
 				'S_PAGES_DISPLAY'		=> $entity->get_page_display(),
 				'S_PAGES_GUEST_DISPLAY'	=> $entity->get_page_display_to_guests(),
-				'S_PAGES_TITLE_SWITCH'	=> $entity->get_page_title_switch(),
 
 				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;page_id=" . $entity->get_id(),
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;page_id=" . $entity->get_id(),
@@ -204,6 +203,7 @@ class admin_controller implements admin_interface
 			'page_title'				=> $this->request->variable('page_title', '', true),
 			'page_route'				=> $this->request->variable('page_route', ''),
 			'page_description'			=> $this->request->variable('page_description', '', true),
+			'page_description_display'	=> $this->request->variable('page_description_display', false),
 			'page_content'				=> $this->request->variable('page_content', '', true),
 			'bbcode'					=> $this->request->variable('parse_bbcode', false),
 			'magic_url'					=> $this->request->variable('parse_magic_url', false),
@@ -253,6 +253,7 @@ class admin_controller implements admin_interface
 				'set_title'						=> $data['page_title'],
 				'set_route'						=> $data['page_route'],
 				'set_description'				=> $data['page_description'],
+				'set_description_display'		=> $data['page_description_display'],
 				'set_content'					=> $data['page_content'],
 				'set_template'					=> $data['page_template'],
 				'set_order'						=> $data['page_order'],
@@ -350,6 +351,7 @@ class admin_controller implements admin_interface
 			'S_PAGES_DISPLAY'			=> $entity->get_page_display(),
 			'S_PAGES_GUEST_DISPLAY'		=> $entity->get_page_display_to_guests(),
 			'S_PAGES_TITLE_SWITCH'		=> $entity->get_page_title_switch(),
+			'S_PAGES_DESC_DISPLAY'		=> $entity->get_description_display(),
 
 			'S_PARSE_BBCODE_CHECKED'	=> $entity->content_bbcode_enabled(),
 			'S_PARSE_SMILIES_CHECKED'	=> $entity->content_smilies_enabled(),
@@ -368,7 +370,7 @@ class admin_controller implements admin_interface
 			'S_BBCODE_FLASH'	=> true,
 			'S_LINKS_ALLOWED'	=> true,
 
-			'U_BACK'				=> $this->u_action,
+			'U_BACK'			=> $this->u_action,
 		));
 
 		// Build custom bbcodes array

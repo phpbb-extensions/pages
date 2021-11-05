@@ -9,6 +9,8 @@
 		<column>page_display</column>
 		<column>page_display_to_guests</column>
 		<column>page_icon_font</column>
+		<column>page_description</column>
+		<column>page_description_display</column>
 		<row>
 			<value>1</value>
 			<value>1</value>
@@ -18,6 +20,8 @@
 			<value>1</value>
 			<value>1</value>
 			<value>icon-1</value>
+			<value>description_1</value>
+			<value>0</value>
 		</row>
 		<row>
 			<value>2</value>
@@ -28,6 +32,8 @@
 			<value>1</value>
 			<value>1</value>
 			<value></value>
+			<value>description_2</value>
+			<value>1</value>
 		</row>
 		<row>
 			<value>3</value>
@@ -38,6 +44,8 @@
 			<value>0</value>
 			<value>0</value>
 			<value></value>
+			<value>description_3</value>
+			<value>0</value>
 		</row>
 	</table>
 	<table name="phpbb_pages_links">

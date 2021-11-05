@@ -91,7 +91,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Placeringer af sidens link',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Vælg en eller flere placeringer hvor linket til siden kan vises. Brug CTRL+KLIK (eller CMD+KLIK på Mac) for at vælge/fravælge flere end ét element.',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Ikon til sidens link',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Indtast navnet på et <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a>-ikon, som skal bruges med sidelinket. Lad feltet være tomt, for at bruge Pages’ traditionelle CSS-/GIF-billedikoner.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Indtast navnet på et <strong><a href="%s" target="_blank">Font Awesome</a></strong>-ikon, som skal bruges med sidelinket. Lad feltet være tomt, for at bruge Pages’ traditionelle CSS-/GIF-billedikoner.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Vis side',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Hvis den er sat til nej, kan siden ikke tilgås. (Bemærk: Administratorer kan stadig tilgå siden, så de kan forhåndsvise siden privat mens den udvikles).',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Vis side til gæster',

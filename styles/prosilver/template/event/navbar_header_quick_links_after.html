@@ -1,7 +1,7 @@
 {% if S_NAVBAR_HEADER_QUICK_LINKS_AFTER %}
 	{% for link in navbar_header_quick_links_after_links %}
 		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }}"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% endif %}>
-			<a href="{{ link.U_LINK_URL }}" role="menuitem">
+			<a href="{{ link.U_LINK_URL }}" title="{{ link.LINK_DESC }}" role="menuitem">
 				{% if link.ICON_FONT %}{{ Icon('iconify', 'fa:' ~ link.ICON_FONT, link.LINK_TITLE, false) }}{% else %}<span>{{ link.LINK_TITLE }}</span>{% endif %}
 			</a>
 		</li>

@@ -30,6 +30,7 @@ class page_entity_insert_test extends page_entity_base
 			'page_route'						=> 'inserted-route',
 			'page_title'						=> 'inserted-title',
 			'page_description'					=> 'inserted-description',
+			'page_description_display'			=> 1,
 			'page_content'						=> 'inserted-content',
 			'page_content_allow_html'			=> 0,
 			'page_display'						=> 1,
@@ -46,6 +47,7 @@ class page_entity_insert_test extends page_entity_base
 			->set_route($data['page_route'])
 			->set_title($data['page_title'])
 			->set_description($data['page_description'])
+			->set_description_display($data['page_description_display'])
 			->set_content($data['page_content'])
 			->set_order($data['page_order'])
 			->set_page_display($data['page_display'])
@@ -74,6 +76,7 @@ class page_entity_insert_test extends page_entity_base
 			'page_route'				=> 'get_route',
 			'page_title'				=> 'get_title',
 			'page_description'			=> 'get_description',
+			'page_description_display'	=> 'get_description_display',
 			'page_content'				=> 'get_content_for_edit',
 			'page_display'				=> 'get_page_display',
 			'page_display_to_guests'	=> 'get_page_display_to_guests',
