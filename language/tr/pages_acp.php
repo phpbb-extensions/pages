@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Bu gerekli bir alandır.',
 	'ACP_PAGES_FORM_DESC'				=> 'Sayfa açıklaması',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Bu, sadece YKP’de sayfaların listesinde gösterilecektir.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Sayfa URL yolu',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>yol</strong>, sayfaya bağlantı vermek için belirlenen, sayfanın URL adresinin sonunda kullanılacak benzersiz bir tanımlayıcıdır, ör. <samp>http://www.phpbb.com/<strong>yol</strong></samp>. Sadece harfler, rakamlar, tire ve alt çizgilere izin verilir. Bu zorunlu bir alandır.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Sayfa içeriği',

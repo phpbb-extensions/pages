@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Esto es un campo requerido.',
 	'ACP_PAGES_FORM_DESC'				=> 'Descripción de la página',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Esto solo se mostrará en la lista de páginas del PCA.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Ruta URL de la página',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'La <strong>ruta</strong> es un identificador único utilizado al final de la URL de una página para definir el vínculo a la página, por ejemplo, <samp>http://www.phpbb.com/<strong>route</strong></samp>. Sólo se admiten letras, números, guiones y guiones bajos. Este es un campo obligatorio.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Contenido de la página',

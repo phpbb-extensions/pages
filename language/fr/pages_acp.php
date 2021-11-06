@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Ce champ est obligatoire.',
 	'ACP_PAGES_FORM_DESC'				=> 'Description de la page',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Cette description ne sera affichée que dans la rubrique « Gestion des Pages » du PCA.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Chemin de la page',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Le <strong>chemin</strong> est un identifiant unique utilisé à la fin de l’adresse URL d’une page pour en définir le lien vers cette dernière. Exemple : <samp>http://www.phpbb.com/<strong>route</strong></samp>. Seuls sont autorisés les lettres, chiffres, traits d’union et tirets bas. Ce champ est obligatoire.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Contenu de la page',
