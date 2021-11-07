@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Detta är ett obligatoriskt fält.',
 	'ACP_PAGES_FORM_DESC'				=> 'Sidans beskrivning',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Detta kommer endast att visas i listan över sidor i ACPn.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Sidans URL-nod',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'En <strong>nod</strong> är en unik identifierare som används i sidans URL för att definera länken till sidan, t.ex. <samp>http://www.phpbb.com/<strong>nod</strong></samp>. Endast bokstäver, siffror, bindestreck och understreck är tillåtna. Detta fält måste fyllas i.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Sidans innehåll',

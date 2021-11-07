@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Dit is een vereist veld.',
 	'ACP_PAGES_FORM_DESC'				=> 'Paginabeschrijving',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Dit zal alleen weergegeven worden in de ACP lijst van pagina‘s.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Pagina-URL route',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'De <strong>route</strong> is een unieke identificatie aan het einde van de link van een pagina om de link naar de pagina te definiëren, bijv: <samp>http://www.phpbb.com/<strong>route</strong></samp>. Alleen letters, cijfers, verbindingsteken en underscores zijn toegestaan. Dit is een vereist veld.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Pagina-inhoud',

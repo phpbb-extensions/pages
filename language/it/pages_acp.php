@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Questo è un campo obbligatorio.',
 	'ACP_PAGES_FORM_DESC'				=> 'Descrizione Pagina',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Viene visualizzata solo nell´elenco delle pagine in PCA.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'URL percorso pagina',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Il <strong>percorso</strong> è un identificativo univoco utilizzato alla fine dell´URL di una pagina per definire il link alla pagina, ad esempio, <samp>http://www.phpbb.com/<strong>route</strong></samp>. Sono ammessi solo lettere, numeri, trattini e underscore. Questo è un campo obbligatorio.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Contenuto della pagina',

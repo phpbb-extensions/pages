@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Toto pole je povinné.',
 	'ACP_PAGES_FORM_DESC'				=> 'Popis stránky',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Tato informace bude zobrazena pouze v seznamu stránek v ACP.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'URL adresa stránky',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>Cesta</strong> je unikátní identifikátor používaný na konci URL adresy stránky, který určuje podobu odkazu na stránku – např. <samp>http://www.phpbb.com/<strong>route</strong></samp>. Jsou povolena pouze písmena, čísla, spojovníky a podtržítka. Toto pole je povinné.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Obsah stránky',

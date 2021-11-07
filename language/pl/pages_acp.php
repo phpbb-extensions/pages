@@ -79,6 +79,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'To pole jest wymagane.',
 	'ACP_PAGES_FORM_DESC'				=> 'Opis strony',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'To będzie wyświetlane tylko w panel administracyjnym.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Ścieżka URL strony',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>Ścieżka</strong> jest unikalnym indentyfikatorem strony, który określa link do strony, np. <samp>http://www.phpbb.com/<strong>route</strong></samp>. Dozwolone są tylko litery, cyfry, myślniki i podkreślenia. To pole jest wymagane.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Zawartość strony',
