@@ -58,7 +58,7 @@
 	"extra": {
 		"display-name": "Pages",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.2.0"
+			"phpbb/phpbb": ">=3.3.2"
 		},
 		"version-check": {
 			"host": "www.phpbb.com",
