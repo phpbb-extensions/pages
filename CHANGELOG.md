@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 3.x (for phpBB 3.3 and later)
+
+### 3.0.0 - 2022-06-17
+
+- Dropped support for phpBB 3.2.x (new minimum requirements: phpBB 3.3.2 and PHP 7.1.3).
+- Hovering the mouse over a page link can now show the page's description (if allowed in the page's settings).
+- Use structured data in the breadcrumb links.
+- Fixed installation failures if default phpBB Admin roles no longer exist.
+
 ## Version 2.x (for phpBB 3.2 and later)
 
 ### 2.0.5 - 2021-05-28
