@@ -18,7 +18,7 @@ class m9_page_title_switch extends \phpbb\db\migration\migration
 	/**
 	 * (@inheritdoc)
 	 */
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return array('\phpbb\pages\migrations\v20x\m8_font_icons');
 	}

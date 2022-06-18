@@ -18,7 +18,7 @@ class m8_font_icons extends \phpbb\db\migration\migration
 	/**
 	 * (@inheritdoc)
 	 */
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return array('\phpbb\pages\migrations\v10x\m7_reparser_cron_update');
 	}

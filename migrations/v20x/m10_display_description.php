@@ -18,7 +18,7 @@ class m10_display_description extends \phpbb\db\migration\migration
 	/**
 	 * (@inheritdoc)
 	 */
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return [
 			'\phpbb\pages\migrations\v10x\m1_initial_schema',
