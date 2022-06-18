@@ -22,7 +22,7 @@ class c3_convert_module extends \phpbb\db\migration\container_aware_migration
 	* @static
 	* @access public
 	*/
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return array('\phpbb\pages\migrations\converter\c1_convert_table');
 	}

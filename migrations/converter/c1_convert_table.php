@@ -22,7 +22,7 @@ class c1_convert_table extends \phpbb\db\migration\migration
 	* @static
 	* @access public
 	*/
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return array('\phpbb\db\migration\data\v310\gold');
 	}

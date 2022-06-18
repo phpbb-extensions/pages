@@ -22,7 +22,7 @@ class m2_initial_data extends \phpbb\db\migration\migration
 	* @static
 	* @access public
 	*/
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return array('\phpbb\pages\migrations\v10x\m1_initial_schema');
 	}
