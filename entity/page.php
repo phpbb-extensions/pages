@@ -89,7 +89,7 @@ class page implements page_interface
 	public function load($id = 0, $route = '')
 	{
 		// Load by id if provided, otherwise default to load by page route
-		$sql_where = ($id <> 0) ? 'page_id = ' . (int) $id : "page_route = '" . $this->db->sql_escape($route) . "'";
+		$sql_where = ($id !== 0) ? 'page_id = ' . (int) $id : "page_route = '" . $this->db->sql_escape($route) . "'";
 
 		// Get page from the database
 		$sql = 'SELECT *
@@ -499,7 +499,7 @@ class page implements page_interface
 
 		// Template name should follow pages_*.html naming convention
 		// and contain only letters, numbers, hyphens and underscores
-		if ($template !== '' && !preg_match('/^pages_[A-Za-z0-9-_]+\.html$/', $template))
+		if ($template !== '' && !preg_match('/^pages_[A-Za-z\d\-_]+\.html$/', $template))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('template', 'ILLEGAL_CHARACTERS'));
 		}
@@ -541,7 +541,7 @@ class page implements page_interface
 		$name = (string) $name;
 
 		// Validate icon font name
-		if ($name !== '' && !preg_match('/^[a-z]+[a-z0-9-]+$/', $name))
+		if ($name !== '' && !preg_match('/^[a-z]+[a-z\d\-]+$/', $name))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('icon_font', 'ILLEGAL_CHARACTERS'));
 		}
@@ -567,8 +567,8 @@ class page implements page_interface
 	public function get_content_for_edit()
 	{
 		// Use defaults if these haven't been set yet
-		$content = isset($this->data['page_content']) ? $this->data['page_content'] : '';
-		$uid = isset($this->data['page_content_bbcode_uid']) ? $this->data['page_content_bbcode_uid'] : '';
+		$content = $this->data['page_content'] ?? '';
+		$uid = $this->data['page_content_bbcode_uid'] ?? '';
 		$options = isset($this->data['page_content_bbcode_options']) ? (int) $this->data['page_content_bbcode_options'] : 0;
 
 		// Generate for edit
@@ -587,9 +587,9 @@ class page implements page_interface
 	public function get_content_for_display($censor_text = true)
 	{
 		// If these haven't been set yet; use defaults
-		$content = isset($this->data['page_content']) ? $this->data['page_content'] : '';
-		$uid = isset($this->data['page_content_bbcode_uid']) ? $this->data['page_content_bbcode_uid'] : '';
-		$bitfield = isset($this->data['page_content_bbcode_bitfield']) ? $this->data['page_content_bbcode_bitfield'] : '';
+		$content = $this->data['page_content'] ?? '';
+		$uid = $this->data['page_content_bbcode_uid'] ?? '';
+		$bitfield = $this->data['page_content_bbcode_bitfield'] ?? '';
 		$options = isset($this->data['page_content_bbcode_options']) ? (int) $this->data['page_content_bbcode_options'] : 0;
 
 		$content_html_enabled = $this->content_html_enabled();
@@ -913,7 +913,7 @@ class page implements page_interface
 	protected function set_content_option($option_value, $negate = false, $reparse_content = true)
 	{
 		// Set page_content_bbcode_options to 0 if it does not yet exist
-		$this->data['page_content_bbcode_options'] = isset($this->data['page_content_bbcode_options']) ? $this->data['page_content_bbcode_options'] : 0;
+		$this->data['page_content_bbcode_options'] = $this->data['page_content_bbcode_options'] ?? 0;
 
 		// If we're setting the option and the option is not already set
 		if (!$negate && !($this->data['page_content_bbcode_options'] & $option_value))

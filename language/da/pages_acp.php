@@ -79,6 +79,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Feltet er obligatorisk.',
 	'ACP_PAGES_FORM_DESC'				=> 'Sidens beskrivelse',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Vises kun i ACP-listen med sider.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Sidens URL-rute',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'En renset version af sidens navn, bruges til at bygge sidens URL, f.eks. <samp>http://www.phpbb.com/<strong>din-rute</strong></samp>. Kun bogstaver, tal, bindestreger og underscores er tilladt. Feltet er obligatorisk.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Sidens indhold',

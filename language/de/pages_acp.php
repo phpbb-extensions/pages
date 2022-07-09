@@ -79,6 +79,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Dies ist ein erforderliches Feld.',
 	'ACP_PAGES_FORM_DESC'				=> 'Seiten Beschreibung',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Dies wird nur in der ACP Übersicht der Seiten angezeigt.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Seite URL route',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Die <strong>route</strong> ist eine einzigartige Bezeichnung am Ende der URL der Seite die am Ende des Links zur Seite steht, z.B.: <samp>http://www.phpbb.com/<strong>route</strong></samp>. Es sind nur Buchstaben, Zahlen, Hyphens und Tiefstriche ("_") erlaubt. Dies ist ein erforderliches Feld.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Seiten Inhalt',

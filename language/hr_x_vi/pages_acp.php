@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Polje je obvezno.',
 	'ACP_PAGES_FORM_DESC'				=> 'Opis stranice',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Bit će prikazan samo na popisu stranica u AF.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Usmjerna putanja stranice',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>Route</strong> je unikatni identifikator koji se koristi na kraju URLa stranice (a) za definiranje linka (do) stranice, npr. <samp>http://www.phpBB/<strong>route</strong></samp>.<br />Dopuštena su samo slova, brojevi, minusnice i podvlaknice.<br />Polje je obvezno.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Sadržaj stranice',

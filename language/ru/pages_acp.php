@@ -79,6 +79,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Это обязательное поле.',
 	'ACP_PAGES_FORM_DESC'				=> 'Описание страницы',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Только для отображения в админ.панели в списке страниц.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'URL путь страницы',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Путь, по которому страница будет доступна, например, <samp>http://www.phpbb.com/<strong>route</strong></samp>. Разрешены только буквы и цифры, обязательное поле.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Содержимое страницы',

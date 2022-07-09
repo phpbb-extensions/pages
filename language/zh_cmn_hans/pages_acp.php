@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> '必填项',
 	'ACP_PAGES_FORM_DESC'				=> '单页描述',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> '只显示在ACP的单页列表中。',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> '单页 URL 路径',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '路径 <strong>route</strong> 是唯一的标识，放在单页 URL 的最后，用于表示单页的链接。 例如 <samp>http://www.phpbb.com/<strong>route</strong></samp>。 字母，数字，连字符号和下划线。这是必填项。',
 	'ACP_PAGES_FORM_CONTENT'			=> '单页内容',

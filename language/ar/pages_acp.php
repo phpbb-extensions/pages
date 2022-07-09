@@ -82,6 +82,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'الوصف يظهر فقط في قائمة الصفحات من لوحة التحكم الرئيسية.',
 	'ACP_PAGES_FORM_ROUTE'				=> 'اسم مسار الصفحة ',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'اسم مسار الصفحة الذي يستخدم كرابط للوصول إلى الصفحة. مثال : <samp>http://www.phpbb.com/<strong>route</strong></samp>. المسموح فقط : الحروف , الأرقام , الواصلة ( - ) و ( _ ). يجب تعبئة هذا الحقل.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_CONTENT'			=> 'المحتوى',
 	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> 'تستطيع انشاء المجتوى الذي تريده باستخدام أكواد البي بي ( BBCodes ) والابتسامات والروابط , أو تستطيع بدلاً من ذلك تفعيل الـHTML واستخدام أي تركيبة لغوية صحيحة من بنية الـHTML. اذا استخدمت طريقة الـHTML , فسيتم تعطيل أكواد البي بي ( BBCodes ) والابتسامات والروابط. يُرجى الإنتباه إلى أنه سيتم إضافة هذا المحتوى إلى قالب HTML موجود , ولذلك يجب أن يكون المحتوى بدون العلامات / الأوسام : DOCTYPE , HTML , BODY , HEAD. ويُمكن استخدام بقية الأوسام الأخرى : IFRAME, SCRIPT, STYLE, EMBED, VIDEO وغيرها من الأوسام.',
 	'ACP_PAGES_FORM_TEMPLATE'			=> 'قالب الصفحة ',
