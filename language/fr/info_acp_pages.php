@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -35,10 +35,10 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 //
 // Some characters you may want to copy&paste:
-// ’ » “ ” …
+// ’ « » “ ” …
 //
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// ACP modules
 	'ACP_PAGES'				=> 'Pages',
 	'ACP_PAGES_MANAGE'		=> 'Gestion de Pages',
@@ -47,4 +47,4 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_ADDED_LOG'	=> '<strong>Page ajoutée</strong><br />» %s',
 	'ACP_PAGES_EDITED_LOG'	=> '<strong>Page modifiée</strong><br />» %s',
 	'ACP_PAGES_DELETED_LOG'	=> '<strong>Page supprimée</strong><br />» %s',
-));
+]);
