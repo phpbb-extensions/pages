@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -35,23 +35,23 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 //
 // Some characters you may want to copy&paste:
-// ’ » “ ” …
+// ’ « » “ ” …
 //
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// Manage page
 	'ACP_PAGES_MANAGE'					=> 'Gestion des Pages',
 	'ACP_PAGES_MANAGE_EXPLAIN'			=> 'Depuis cette page vous pouvez ajouter, modifier et supprimer des pages personnalisées.',
 	'ACP_PAGES_CREATE_PAGE'				=> 'Créer une page',
-	'ACP_PAGES_CREATE_PAGE_EXPLAIN'		=> 'Au moyen du formulaire ci-dessous, vous pouvez ajouter une nouvelle page personnalisée pour votre forum.',
+	'ACP_PAGES_CREATE_PAGE_EXPLAIN'		=> 'Au moyen du formulaire ci-dessous, vous pouvez ajouter une nouvelle page personnalisée à votre forum.',
 	'ACP_PAGES_EDIT_PAGE'				=> 'Modifier une page',
-	'ACP_PAGES_EDIT_PAGE_EXPLAIN'		=> 'Au moyen du formulaire ci-dessous, vous pouvez modifier une page personnalisée existante pour votre forum.',
+	'ACP_PAGES_EDIT_PAGE_EXPLAIN'		=> 'Au moyen du formulaire ci-dessous, vous pouvez modifier une page personnalisée existante de votre forum.',
 
 	// Display pages list
 	'ACP_PAGES_TITLE'					=> 'Titre',
 	'ACP_PAGES_DESCRIPTION'				=> 'Description',
 	'ACP_PAGES_ROUTE'					=> 'Chemin',
-	'ACP_PAGES_TEMPLATE'				=> 'Template',
+	'ACP_PAGES_TEMPLATE'				=> 'Modèle',
 	'ACP_PAGES_ORDER'					=> 'Ordre',
 	'ACP_PAGES_LINK'					=> 'Lien',
 	'ACP_PAGES_VIEW'					=> 'Voir la page',
@@ -80,28 +80,28 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Ce champ est obligatoire.',
 	'ACP_PAGES_FORM_DESC'				=> 'Description de la page',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Cette description ne sera affichée que dans la rubrique « Gestion des Pages » du PCA.',
-	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
-	'ACP_PAGES_FORM_ROUTE'				=> 'Chemin de la page',
-	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Le <strong>chemin</strong> est un identifiant unique utilisé à la fin de l’adresse URL d’une page pour en définir le lien vers cette dernière. Exemple : <samp>http://www.phpbb.com/<strong>route</strong></samp>. Seuls sont autorisés les lettres, chiffres, traits d’union et tirets bas. Ce champ est obligatoire.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Utiliser comme titre de lien',
+	'ACP_PAGES_FORM_ROUTE'				=> 'Route de l’URL de la page',
+	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Une version simplifiée du nom de la page, utilisée pour construire l’URL de cette dernière. Exemple : <samp>http://www.phpbb.com/<strong>nom-de-la-page</strong></samp>. Seuls sont autorisés les lettres, chiffres, traits d’union et tirets bas. Ce champ est obligatoire.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Contenu de la page',
-	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> 'Le contenu peut être créé en faisant usage des BBCodes par défaut de phpBB, les smileys et les adresses URL magiques ou bien en activant le mode HTML. Avec le mode HTML, les BBCodes, smileys et adresses URL magiques ne fonctionneront pas, mais vous pouvez utiliser toute syntaxe HTML valide. Veuillez prendre note que ce contenu sera intégré dans un template HTML existant. Ainsi, nul besoin d’insérer les tags DOCTYPE, HTML, BODY ou HEAD. Néanmoins, tous les autres tags de mise en forme peuvent être utilisés, incluant IFRAME, SCRIPT, STYLE, EMBED, VIDEO, etc..',
-	'ACP_PAGES_FORM_TEMPLATE'			=> 'Template de la page',
-	'ACP_PAGES_FORM_TEMPLATE_EXPLAIN'	=> 'Les templates des pages personnalisées, sont nommés <samp>pages_*.html</samp> et peuvent être ajoutés dans les répertoires <samp>./styles/*/template</samp> de phpBB.',
-	'ACP_PAGES_FORM_TEMPLATE_SELECT'	=> 'Sélectionner un template',
+	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> 'Le contenu peut être créé en utilisant les BBCodes, les smileys et les urls magiques de phpBB ou vous pouvez activer le mode HTML. En mode HTML, les BBCodes, les smileys et les urls magiques ne fonctionneront pas, mais vous êtes libre d’utiliser n’importe quelle syntaxe HTML valide. Veuillez noter que ce contenu sera ajouté à un modèle HTML existant, vous ne devez donc pas inclure les balises DOCTYPE, HTML, BODY ou HEAD. Cependant, toutes les autres balises de formatage HTML, y compris IFRAME, SCRIPT, STYLE, EMBED, VIDEO, etc. peuvent être utilisées.',
+	'ACP_PAGES_FORM_TEMPLATE'			=> 'Modèle de la page',
+	'ACP_PAGES_FORM_TEMPLATE_EXPLAIN'	=> 'Les modèles des pages personnalisées, sont nommés <samp>pages_*.html</samp> et peuvent être ajoutés dans les répertoires <samp>./styles/*/template</samp> de phpBB.',
+	'ACP_PAGES_FORM_TEMPLATE_SELECT'	=> 'Sélectionner un modèle',
 	'ACP_PAGES_FORM_ORDER'				=> 'Ordre de la page',
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Les pages seront triées selon ce champ, permettant ainsi d’organiser l’ordre dans lequel vous souhaitez que leurs liens apparaissent. Les plus petits nombres seront affichés avant les plus grands.',
-	'ACP_PAGES_FORM_LINKS'				=> 'Emplacements pour le lien de la page',
+	'ACP_PAGES_FORM_LINKS'				=> 'Emplacements du lien de la page',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Sélectionne un ou plusieurs emplacements où le lien de cette page apparaitra. Utilisez CTRL+CLICK (ou CMD + CLICK sur Mac) pour (dé)sélectionner plus d’un item.',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Icône du lien de la page',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Permet de saisir le nom de l’icône provenant de la police de caractères <strong><a href="%s" target="_blank">Font Awesome</a></strong> qui sera utilisée pour le lien de cette page. Laisser ce champ vide pour utiliser l’image icône par défaut CSS/GIF.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Permet de saisir le nom de l’icône provenant de la police de caractères <strong><a href="%s" target="_blank">Font Awesome</a></strong> qui sera utilisée pour le lien de cette page. Laisser ce champ vide pour utiliser l’icône par défaut CSS/GIF.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Afficher la page',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Si défini sur non, la page ne sera pas accessible aux utilisateurs néanmoins les administrateurs y auront accès, leur permettant d’avoir un aperçu pendant la création.',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Afficher la page aux invités',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Si défini sur non, seuls les utilisateurs enregistrés pourront accéder à la page.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Lien de la page',
-	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
-	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
-	'PARSE_HTML'						=> 'Parser le HTML',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Afficher le titre de la page en premier',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'Par défaut, les navigateurs affichent le titre de cette page après le nom du site <samp style="white-space : nowrap">« Nom du site - Titre de la page »</samp>. En activant cette option, le titre de cette page sera affiché avant le nom du site <samp style="white-space : nowrap">« Titre de la page - Nom du site »</samp>.',
+	'PARSE_HTML'						=> 'Analyser le HTML',
 
 	// Page link location names
 	'NAV_BAR_LINKS_BEFORE'				=> 'Barre de navigation avant les liens',
@@ -114,4 +114,4 @@ $lang = array_merge($lang, array(
 	'FOOTER_TEAMS_AFTER'				=> 'Pied de page après le lien de l’équipe',
 	'QUICK_LINK_MENU_BEFORE'			=> 'En haut du menu « Accès rapide »',
 	'QUICK_LINK_MENU_AFTER'				=> 'En bas du menu « Accès rapide »',
-));
+]);
