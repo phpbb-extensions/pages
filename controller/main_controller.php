@@ -90,6 +90,7 @@ class main_controller implements main_interface
 		));
 
 		// Send all data to the template file
+		// We do not use @phpbb_pages to allow templates from outside the extension
 		return $this->helper->render($page->get_template(), $page_title);
 	}
 
