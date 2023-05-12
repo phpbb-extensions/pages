@@ -481,7 +481,7 @@ class page implements page_interface
 	*/
 	public function get_template()
 	{
-		return (!empty($this->data['page_template'])) ? (string) $this->data['page_template'] : 'pages_default.html';
+		return !empty($this->data['page_template']) ? (string) $this->data['page_template'] : 'pages_default.html';
 	}
 
 	/**
