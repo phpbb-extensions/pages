@@ -39,4 +39,4 @@ Pages can convert/import data from [Static Pages MOD 1.0.3](https://www.phpbb.co
 Note: Pages will keep a backup of the Static Pages MOD data in a database table named `pages_mod_backup`. Pages will never delete or alter this backup table. Pages has not been tested with any other similar MODs.
 
 ## License
-[GNU General Public License v2](http://opensource.org/licenses/GPL-2.0)
+[GNU General Public License v2](https://opensource.org/licenses/GPL-2.0)

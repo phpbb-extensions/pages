@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -35,7 +35,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 //
 // Some characters you may want to copy&paste:
-// ’ » “ ” …
+// ’ « » “ ” …
 //
 
 /*
@@ -48,7 +48,7 @@ if (empty($lang) || !is_array($lang))
 *
 * Translators: Feel free to not translate these language strings
 */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'EXCEPTION_FIELD_MISSING'		=> 'Un champ obligatoire est manquant',
 	'EXCEPTION_INVALID_ARGUMENT'	=> 'Argument spécifié incorrect pour `%1$s`. Motif : %2$s',
 	'EXCEPTION_OUT_OF_BOUNDS'		=> 'Le champ `%1$s` a reçu une donnée incohérente',
@@ -56,4 +56,4 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'La donnée n’était pas unique.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Le champ `%1$s` a reçu une donnée inattendue. Motif : %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'La donnée contenait des caractères interdits.',
-));
+]);
