@@ -93,26 +93,26 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "mariadb:10.1"
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "mariadb:10.2"
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "mariadb:10.3"
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "mariadb:10.4"
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "mariadb:10.5"
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "mysql:5.6"
                       db_alias: "MyISAM Tests"
                       MYISAM: 1
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "mysql:5.6"
-                    - php: '7.1'
-                      db: "mysql:5.7"
                     - php: '7.2'
                       db: "mysql:5.7"
+                      COVERAGE: 1
+                      db_alias: "mysql:5.7 with Coverage"
                     - php: '7.3'
                       db: "mysql:5.7"
                     - php: '7.4'
@@ -173,11 +173,20 @@ jobs:
                   echo "db=$db" >> $GITHUB_OUTPUT
 
             - name: Setup PHP
+              if: ${{ matrix.COVERAGE != 1 }}
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php }}
                   extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, mysqli, sqlite, pdo_sqlite, intl, gd, exif, iconv, sqlsrv, pdo_sqlsrv, ldap
                   coverage: none
+
+            - name: Setup PHP with Coverage
+              if: ${{ matrix.COVERAGE == 1 }}
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, mysqli, sqlite, pdo_sqlite, intl, gd, exif, iconv, sqlsrv, pdo_sqlsrv, ldap
+                  coverage: xdebug
 
             - name: Setup environment for phpBB
               env:
@@ -195,14 +204,36 @@ jobs:
               working-directory: ./phpBB3
 
             - name: Setup PHPUnit files
-              run: mkdir -p phpBB/ext/$EXTNAME/.github && cp .github/phpunit* $_
+              env:
+                  DB: ${{steps.database-type.outputs.db}}
+                  COVERAGE: ${{ matrix.COVERAGE != 1 && '0' || '1' }}
+              run: |
+                  if [ $COVERAGE == '1' ]
+                  then
+                      sed -n '1h;1!H;${;g;s/<\/php>/<\/php>\n\t<filter>\n\t\t<whitelist>\n\t\t\t<directory>..\/<\/directory>\n\t\t\t<exclude>\n\t\t\t\t<directory>..\/tests\/<\/directory>\n\t\t\t\t<directory>..\/language\/<\/directory>\n\t\t\t\t<directory>..\/migrations\/<\/directory>\n\t\t\t<\/exclude>\n\t\t<\/whitelist>\n\t<\/filter>/g;p;}' .github/phpunit-$DB-github.xml &> phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml
+                  else
+                      mkdir -p phpBB/ext/$EXTNAME/.github && cp .github/phpunit* $_
+                  fi
               working-directory: ./phpBB3
 
             - name: Run unit tests
               env:
                   DB: ${{steps.database-type.outputs.db}}
-              run: phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php
+                  COVERAGE: ${{ matrix.COVERAGE != 1 && '0' || '1' }}
+              run: |
+                  if [ $COVERAGE == '1' ]
+                  then
+                      phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php --coverage-clover build/logs/clover.xml
+                  else
+                      phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php
+                  fi
               working-directory: ./phpBB3
+
+            - name: Send code coverage
+              if: ${{ matrix.COVERAGE == 1 }}
+              uses: codecov/codecov-action@v3
+              with:
+                  files: ./phpBB3/build/logs/clover.xml
     # END MySQL and MariaDB Job
 
     # START PostgreSQL Job
@@ -211,18 +242,16 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "postgres:9.5"
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "postgres:9.6"
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "postgres:10"
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "postgres:11"
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "postgres:12"
-                    - php: '7.1'
-                      db: "postgres:13"
                     - php: '7.2'
                       db: "postgres:13"
                     - php: '7.3'
@@ -325,7 +354,7 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php: '7.1'
+                    - php: '7.2'
                       db: "sqlite3"
                     - php: '7.2'
                       db: "mcr.microsoft.com/mssql/server:2017-latest"
