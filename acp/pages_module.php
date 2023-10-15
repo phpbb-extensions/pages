@@ -53,14 +53,14 @@ class pages_module
 		$this->tpl_name = 'manage_pages';
 
 		// Set the page title for our ACP page
-		$this->page_title = $lang->lang('ACP_PAGES_MANAGE');
+		$this->page_title = 'ACP_PAGES_MANAGE';
 
 		// Perform any actions submitted by the user
 		switch ($action)
 		{
 			case 'add':
 				// Set the page title for our ACP page
-				$this->page_title = $lang->lang('ACP_PAGES_CREATE_PAGE');
+				$this->page_title = 'ACP_PAGES_CREATE_PAGE';
 
 				// Load the add page handle in the admin controller
 				$admin_controller->add_page();
@@ -71,7 +71,7 @@ class pages_module
 
 			case 'edit':
 				// Set the page title for our ACP page
-				$this->page_title = $lang->lang('ACP_PAGES_EDIT_PAGE');
+				$this->page_title = 'ACP_PAGES_EDIT_PAGE';
 
 				// Load the edit page handle in the admin controller
 				$admin_controller->edit_page($page_id);
