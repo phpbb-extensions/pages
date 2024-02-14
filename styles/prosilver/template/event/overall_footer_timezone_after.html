@@ -3,7 +3,7 @@
 	{% for link in overall_footer_timezone_before_links %}
 		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }} rightside in-menu"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="rightside in-menu"{% endif %}>
 			<a href="{{ link.U_LINK_URL }}" title="{{ link.LINK_DESC }}" role="menuitem">
-				{% if link.ICON_FONT %}{{ Icon('iconify', 'fa:' ~ link.ICON_FONT, link.LINK_TITLE, false) }}{% else %}<span>{{ link.LINK_TITLE }}</span>{% endif %}
+				{% if link.ICON_FONT %}{{ Icon('font', link.ICON_FONT, link.LINK_TITLE, false) }}{% else %}<span>{{ link.LINK_TITLE }}</span>{% endif %}
 			</a>
 		</li>
 	{% endfor %}
