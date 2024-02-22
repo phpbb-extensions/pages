@@ -3,6 +3,7 @@
 This is the repository for the development of the phpBB Pages Extension.
 
 [![Build Status](https://github.com/phpbb-extensions/pages/workflows/Tests/badge.svg)](https://github.com/phpbb-extensions/pages/actions)
+[![codecov](https://codecov.io/gh/phpbb-extensions/pages/graph/badge.svg?token=rorlx9l6gs)](https://codecov.io/gh/phpbb-extensions/pages)
 
 ## Install
 
