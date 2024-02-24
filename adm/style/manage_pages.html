@@ -39,7 +39,7 @@
 			{% if S_EDIT_PAGE %}
 				<dl>
 					<dt><label>{{ lang('ACP_PAGES_FORM_VIEW_PAGE') ~ lang('COLON') }}</label></dt>
-					<dd><a href="{{ U_VIEW_PAGE }}">{{ lang('ACP_PAGES_VIEW') }} <i class="icon fa-external-link-square fa-fw" aria-hidden="true"></i></a></dd>
+					<dd><a href="{{ U_VIEW_PAGE }}">{{ lang('ACP_PAGES_VIEW') }} {{ Icon('font', 'up-right-from-square', '', true) }}</a></dd>
 				</dl>
 			{% endif %}
 			<dl>
@@ -110,7 +110,7 @@
 			</dl>
 			<dl>
 				<dt><label for="page_icon_font">{{ lang('ACP_PAGES_FORM_ICON_FONT') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ICON_FONT_EXPLAIN', 'https://fontawesome.com/v6/search?o=r&m=free') }}</span></dt>
-				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{{ PAGES_ICON_FONT }}" placeholder="files-o" /> <i style="font-size:14px" class="icon fa-{{ PAGES_ICON_FONT }}"></i></dd>
+				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{{ PAGES_ICON_FONT }}" placeholder="file-lines" /> <i style="font-size:14px" class="icon acp-icon fas fa-{{ PAGES_ICON_FONT }}"></i></dd>
 			</dl>
 			<dl>
 				<dt><label for="page_display">{{ lang('ACP_PAGES_FORM_DISPLAY') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_DISPLAY_EXPLAIN') }}</span></dt>
@@ -182,7 +182,7 @@
 							{{ lang('ACP_PAGES_PRIVATE') }}
 						{% endif %}
 					</td>
-					<td><a href="{{ page.U_PAGES_ROUTE }}">{{ lang('ACP_PAGES_VIEW') }} <i class="icon fa-external-link-square fa-fw" aria-hidden="true"></i></a></td>
+					<td><a href="{{ page.U_PAGES_ROUTE }}">{{ lang('ACP_PAGES_VIEW') }} {{ Icon('font', 'up-right-from-square', '', true) }}</a></td>
 					<td class="actions"><a href="{{ page.U_EDIT }}">{{ ICON_EDIT }}</a> <a href="{{ page.U_DELETE }}" data-ajax="row_delete">{{ ICON_DELETE }}</a></td>
 				</tr>
 			{% else %}
