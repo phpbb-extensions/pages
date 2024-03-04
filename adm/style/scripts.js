@@ -25,7 +25,7 @@ $(function() {
 	$('#page_icon_font').on('keyup blur', function() {
 		var input = $(this).val();
 		var $icon = $(this).next('i');
-		$icon.attr('class', 'icon acp-icon fas fa-' + input);
+		$icon.attr('class', 'o-icon o-icon-font acp-icon fa-' + input);
 	});
 
 });
