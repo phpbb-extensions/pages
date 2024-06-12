@@ -26,12 +26,14 @@ class ext extends \phpbb\extension\base
 	 * the minimum version required by this extension:
 	 *
 	 * Requires phpBB 3.3.2 due to using role_exists check in permission migration.
+	 * Not compatible with phpBB 4.0.0-dev due to using updated classes.
 	 *
 	 * @return bool
 	 * @access public
 	 */
 	public function is_enableable()
 	{
-		return phpbb_version_compare(PHPBB_VERSION, '3.3.2', '>=');
+		return phpbb_version_compare(PHPBB_VERSION, '3.3.2', '>=')
+			&& phpbb_version_compare(PHPBB_VERSION, '4.0.0-dev', '<');
 	}
 }
