@@ -67,12 +67,14 @@ class page implements page_interface
 	}
 
 	/**
-	* Get all pages
-	*
-	* @return array Array of page data entities
-	* @access public
-	*/
-	public function get_pages()
+	 * Get all pages
+	 *
+	 * @param int $limit
+	 * @param int $start
+	 * @return array Array of page data entities
+	 * @access public
+	 */
+	public function get_pages($limit = 0, $start = 0)
 	{
 		$entities = array();
 
@@ -80,7 +82,7 @@ class page implements page_interface
 		$sql = 'SELECT *
 			FROM ' . $this->pages_table . '
 			ORDER BY page_order ASC, page_id ASC';
-		$result = $this->db->sql_query($sql);
+		$result = $this->db->sql_query_limit($sql, $limit, $start);
 
 		while ($row = $this->db->sql_fetchrow($result))
 		{
@@ -365,6 +367,23 @@ class page implements page_interface
 		$this->db->sql_freeresult($result);
 
 		return $rows;
+	}
+
+	/**
+	 * Get the total number of pages
+	 *
+	 * @return int
+	 * @access public
+	 */
+	public function get_total_pages()
+	{
+		$sql = 'SELECT COUNT(*) AS pages
+			FROM ' . $this->pages_table;
+		$result = $this->db->sql_query($sql);
+		$pages = $this->db->sql_fetchfield('pages');
+		$this->db->sql_freeresult($result);
+
+		return (int) $pages;
 	}
 
 	/**
