@@ -19,10 +19,12 @@ class page_operator_get_pages_test extends page_operator_base
 	*/
 	public function get_pages_test_data()
 	{
-		return array(
-			array(
-				array(
-					array(
+		return [
+			[
+				0,
+				0,
+				[
+					[
 						'page_id' => 1,
 						'page_order' => 1,
 						'page_description' => 'description_1',
@@ -34,8 +36,8 @@ class page_operator_get_pages_test extends page_operator_base
 						'page_display_to_guests' => 1,
 						'page_title_switch' => 0,
 						'page_icon_font' => 'foo-1',
-					),
-					array(
+					],
+					[
 						'page_id' => 2,
 						'page_order' => 2,
 						'page_description' => 'description_2',
@@ -47,8 +49,8 @@ class page_operator_get_pages_test extends page_operator_base
 						'page_display_to_guests' => 1,
 						'page_title_switch' => 0,
 						'page_icon_font' => '',
-					),
-					array(
+					],
+					[
 						'page_id' => 3,
 						'page_order' => 3,
 						'page_description' => 'description_3',
@@ -60,8 +62,8 @@ class page_operator_get_pages_test extends page_operator_base
 						'page_display_to_guests' => 0,
 						'page_title_switch' => 0,
 						'page_icon_font' => '',
-					),
-					array(
+					],
+					[
 						'page_id' => 4,
 						'page_order' => 4,
 						'page_description' => 'description_4',
@@ -73,10 +75,29 @@ class page_operator_get_pages_test extends page_operator_base
 						'page_display_to_guests' => 0,
 						'page_title_switch' => 0,
 						'page_icon_font' => '',
-					),
-				),
-			),
-		);
+					],
+				],
+			],
+			[
+				2,
+				1,
+				[
+					[
+						'page_id' => 3,
+						'page_order' => 3,
+						'page_description' => 'description_3',
+						'page_description_display' => 0,
+						'page_route' => 'page_3',
+						'page_title' => 'title_3',
+						'page_content' => 'message_3',
+						'page_display' => 1,
+						'page_display_to_guests' => 0,
+						'page_title_switch' => 0,
+						'page_icon_font' => '',
+					],
+				],
+			],
+		];
 	}
 
 	/**
@@ -84,16 +105,16 @@ class page_operator_get_pages_test extends page_operator_base
 	*
 	* @dataProvider get_pages_test_data
 	*/
-	public function test_get_pages($expected)
+	public function test_get_pages($start, $limit, $expected)
 	{
-		// Setup the operator class
+		// Set up the operator class
 		$operator = $this->get_page_operator();
 
 		// Grab the page data as an array of entities
-		$entities = $operator->get_pages();
+		$entities = $operator->get_pages($limit, $start);
 
 		// Map the fields to the getters
-		$map = array(
+		$map = [
 			'page_id'					=> 'get_id',
 			'page_order' 				=> 'get_order',
 			'page_description'			=> 'get_description',
@@ -105,7 +126,7 @@ class page_operator_get_pages_test extends page_operator_base
 			'page_display_to_guests'	=> 'get_page_display_to_guests',
 			'page_title_switch'			=> 'get_page_title_switch',
 			'page_icon_font'			=> 'get_icon_font',
-		);
+		];
 
 		// Test through each entity in the array of entities
 		$i = 0;

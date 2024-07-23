@@ -152,6 +152,12 @@
 		</fieldset>
 	</form>
 
+	{% if pagination %}
+	<div class="pagination top-pagination">
+		{% include 'pagination.html' %}
+	</div>
+	{% endif %}
+
 	<table class="table1 zebra-table fixed-width-table">
 		<thead>
 			<tr>
@@ -192,6 +198,12 @@
 			{% endfor %}
 		</tbody>
 	</table>
+
+	{% if pagination %}
+	<div class="pagination">
+		{% include 'pagination.html' %}
+	</div>
+	{% endif %}
 
 	<form id="pages_add_page" method="post" action="{{ U_ACTION }}">
 		<fieldset class="quick">

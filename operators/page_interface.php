@@ -13,17 +13,19 @@ namespace phpbb\pages\operators;
 /**
 * Interface for our pages operator
 *
-* This describes all of the methods we'll have for working with a set of pages
+* This describes all the methods we'll have for working with a set of pages
 */
 interface page_interface
 {
 	/**
-	* Get all pages
-	*
-	* @return array Array of page data entities
-	* @access public
-	*/
-	public function get_pages();
+	 * Get all pages
+	 *
+	 * @param int $limit
+	 * @param int $start
+	 * @return array Array of page data entities
+	 * @access public
+	 */
+	public function get_pages($limit = 0, $start = 0);
 
 	/**
 	* Add a page
@@ -108,4 +110,12 @@ interface page_interface
 	* @access public
 	*/
 	public function get_link_locations();
+
+	/**
+	 * Get the total number of pages
+	 *
+	 * @return int
+	 * @access public
+	 */
+	public function get_total_pages();
 }
