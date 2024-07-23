@@ -97,8 +97,14 @@ class admin_controller implements admin_interface
 	*/
 	public function display_pages()
 	{
+		/* @var $pagination \phpbb\pagination */
+		$pagination = $this->container->get('pagination');
+		$start		= $this->request->variable('start', 0);
+		$total		= $this->page_operator->get_total_pages();
+		$limit		= 25;
+
 		// Grab all the pages from the db
-		$entities = $this->page_operator->get_pages();
+		$entities = $this->page_operator->get_pages($limit, $start);
 
 		// Process each page entity for display
 		/* @var $entity \phpbb\pages\entity\page */
@@ -120,6 +126,8 @@ class admin_controller implements admin_interface
 				'U_PAGES_ROUTE'		=> $this->helper->route('phpbb_pages_dynamic_route_' . $entity->get_id()),
 			));
 		}
+
+		$pagination->generate_template_pagination($this->u_action, 'pagination', 'start', $total, $limit, $start);
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
