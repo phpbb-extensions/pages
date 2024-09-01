@@ -110,7 +110,7 @@
 			</dl>
 			<dl>
 				<dt><label for="page_icon_font">{{ lang('ACP_PAGES_FORM_ICON_FONT') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ICON_FONT_EXPLAIN', 'https://fontawesome.com/v6/search?o=r&m=free') }}</span></dt>
-				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{{ PAGES_ICON_FONT }}" placeholder="file-lines" /> {{ Icon('font', PAGES_ICON_FONT, '', true, 'acp-icon') }}</dd>
+				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{{ PAGES_ICON_FONT }}" placeholder="file-lines" /> {{ Icon('font', PAGES_ICON_FONT ? PAGES_ICON_FONT : 'file-lines', '', true, 'acp-icon') }}</dd>
 			</dl>
 			<dl>
 				<dt><label for="page_display">{{ lang('ACP_PAGES_FORM_DISPLAY') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_DISPLAY_EXPLAIN') }}</span></dt>

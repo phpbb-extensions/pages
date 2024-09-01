@@ -43,12 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	// Page Icon Previews
-	const updateClasses = (element, newClass) => {
-
-		const classesToKeep = ['o-icon', 'o-icon-font', 'fa-fw', 'fas', 'acp-icon'];
+	const updateIconClass = (element, newClass) => {
 
 		element.classList.forEach(className => {
-			if (!classesToKeep.includes(className)) {
+			if (className.startsWith('fa-') && className !== 'fa-fw') {
 				element.classList.remove(className);
 			}
 		});
@@ -59,11 +57,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	const pageIconFont = document.getElementById('page_icon_font');
 
 	pageIconFont.addEventListener('keyup', function() {
-		updateClasses(this.nextElementSibling, this.value);
+		updateIconClass(this.nextElementSibling, this.value);
 	});
 
 	pageIconFont.addEventListener('blur', function() {
-		updateClasses(this.nextElementSibling, this.value);
+		updateIconClass(this.nextElementSibling, this.value);
 	});
 
 });
