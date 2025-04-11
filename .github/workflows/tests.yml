@@ -358,7 +358,7 @@ jobs:
 
     # START Other Tests Job (SQLite 3 and mssql)
     other-tests:
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-20.04
         strategy:
             matrix:
                 include:
