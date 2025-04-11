@@ -6,16 +6,18 @@ env:
     IMAGE_ICC: 1         # Run icc profile sniffer on your images? 1 or 0
     EPV: 0               # Run EPV (Extension Pre Validator) on your code? 1 or 0
     EXECUTABLE_FILES: 1  # Run check for executable files? 1 or 0
-    PHPBB_BRANCH: master  # The phpBB branch to run tests on
+    PHPBB_BRANCH: master # The phpBB branch to run tests on
 
 on:
     push:
         branches:        # Run tests when commits are pushed to these branches in your repo
+            - main
             - master
             - develop
             - dev/*
     pull_request:        # Run tests when pull requests are made on these branches in your repo
         branches:
+            - main
             - master
             - develop
             - dev/*
@@ -191,7 +193,7 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php }}
-                  extensions: dom, curl, libxml, mbstring, zip, pcntl, intl, gd, exif, iconv, mysqli, pdo, pdo_mysql, ldap
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, mysqli, sqlite, pdo_sqlite, intl, gd, exif, iconv, sqlsrv, pdo_sqlsrv, ldap
                   coverage: xdebug
 
             - name: Setup environment for phpBB
