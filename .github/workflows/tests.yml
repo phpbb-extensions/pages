@@ -23,4 +23,7 @@ jobs:
             IMAGE_ICC: 1         # Run icc profile sniffer on your images? 1 or 0
             EPV: 0               # Run EPV (Extension Pre Validator) on your code? 1 or 0
             EXECUTABLE_FILES: 1  # Run check for executable files? 1 or 0
+            CODECOV: 1           # Run code coverage via codecov? 1 or 0
             PHPBB_BRANCH: master # The phpBB branch to run tests on
+        secrets:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }} # Do not change this
