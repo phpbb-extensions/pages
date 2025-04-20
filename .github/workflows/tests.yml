@@ -25,3 +25,5 @@ jobs:
             EXECUTABLE_FILES: 1  # Run check for executable files? 1 or 0
             CODECOV: 1           # Run code coverage via codecov? 1 or 0
             PHPBB_BRANCH: 3.3.x  # The phpBB branch to run tests on
+        secrets:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }} # Do not change this
