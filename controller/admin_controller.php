@@ -336,7 +336,7 @@ class admin_controller implements admin_interface
 		* @event phpbb.pages.acp_add_edit_page
 		* @since 1.0.0-RC1
 		*/
-		$this->dispatcher->trigger_event('phpbb.pages.acp_add_edit_page');
+		$this->dispatcher->dispatch('phpbb.pages.acp_add_edit_page');
 
 		// Set template vars for Page Template select menu
 		$this->create_page_template_options($entity->get_template());
