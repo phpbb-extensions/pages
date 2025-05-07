@@ -146,7 +146,7 @@ class listener implements EventSubscriberInterface
 			// If any of our pages are being viewed, update the event vars with our routes and titles
 			foreach ($page_routes as $page_id => $page_data)
 			{
-				if ($event['row']['session_page'] === 'app.' . $this->php_ext . DIRECTORY_SEPARATOR . $page_data['route'])
+				if ($event['row']['session_page'] === 'app.' . $this->php_ext . '/' . $page_data['route'])
 				{
 					$event['location'] = $this->lang->lang('PAGES_VIEWONLINE', $page_data['title']);
 					$event['location_url'] = $this->helper->route('phpbb_pages_dynamic_route_' . $page_id);
