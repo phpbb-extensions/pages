@@ -16,14 +16,10 @@ on:
 
 jobs:
     call-tests:
+        name: Extension tests
         uses: phpbb-extensions/test-framework/.github/workflows/tests.yml@master
         with:
-            EXTNAME: phpbb/pages   # Your extension vendor/package name
-            SNIFF: 1             # Run code sniffer on your code? 1 or 0
-            IMAGE_ICC: 1         # Run icc profile sniffer on your images? 1 or 0
-            EPV: 0               # Run EPV (Extension Pre Validator) on your code? 1 or 0
-            EXECUTABLE_FILES: 1  # Run check for executable files? 1 or 0
+            EXTNAME: phpbb/pages # Your extension vendor/package name
             CODECOV: 1           # Run code coverage via codecov? 1 or 0
-            PHPBB_BRANCH: master # The phpBB branch to run tests on
         secrets:
             CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }} # Do not change this
