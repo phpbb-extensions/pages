@@ -44,7 +44,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_MANAGE'		=> '管理单页',
 
 	// Logs
-	'ACP_PAGES_ADDED_LOG'	=> '<strong>增加了一个单页</strong><br />» %s',
-	'ACP_PAGES_EDITED_LOG'	=> '<strong>修改了一个单页</strong><br />» %s',
-	'ACP_PAGES_DELETED_LOG'	=> '<strong>删除了一个单页</strong><br />» %s',
+	'ACP_PAGES_ADDED_LOG'	=> '<strong>增加了一个单页</strong><br>» %s',
+	'ACP_PAGES_EDITED_LOG'	=> '<strong>修改了一个单页</strong><br>» %s',
+	'ACP_PAGES_DELETED_LOG'	=> '<strong>删除了一个单页</strong><br>» %s',
 ));

@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_MANAGE'		=> 'Управление «Страницами»',
 
 	// Logs
-	'ACP_PAGES_ADDED_LOG'	=> '<strong>Страница добавлена</strong><br />» %s',
-	'ACP_PAGES_EDITED_LOG'	=> '<strong>Страница изменена</strong><br />» %s',
-	'ACP_PAGES_DELETED_LOG'	=> '<strong>Страница удалена</strong><br />» %s',
+	'ACP_PAGES_ADDED_LOG'	=> '<strong>Страница добавлена</strong><br>» %s',
+	'ACP_PAGES_EDITED_LOG'	=> '<strong>Страница изменена</strong><br>» %s',
+	'ACP_PAGES_DELETED_LOG'	=> '<strong>Страница удалена</strong><br>» %s',
 ));

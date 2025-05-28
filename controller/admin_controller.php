@@ -347,7 +347,7 @@ class admin_controller implements admin_interface
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_ERROR'			=> (bool) count($errors),
-			'ERROR_MSG'			=> count($errors) ? implode('<br />', $errors) : '',
+			'ERROR_MSG'			=> count($errors) ? implode('<br>', $errors) : '',
 
 			'PAGES_TITLE'		=> $entity->get_title(),
 			'PAGES_ROUTE'		=> $entity->get_route(),

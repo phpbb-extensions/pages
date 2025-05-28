@@ -172,9 +172,9 @@ class page_entity_content_test extends page_entity_base
 			// sent to set_content()
 			array('This is a test message.'),
 			array('This is a test <b>message</b>.'),
-			array('This is a test <b>message</b><br />This is a new line.'),
-			array('This is a test <b>message</b><br />This is a <a href="#">new line</a>. Føó.'),
-			array('This is a test <b>message</b><br />This has [b]bbcodes[/b] and smilies :) and urls http://www.phpbb.com to test.'),
+			array('This is a test <b>message</b><br>This is a new line.'),
+			array('This is a test <b>message</b><br>This is a <a href="#">new line</a>. Føó.'),
+			array('This is a test <b>message</b><br>This has [b]bbcodes[/b] and smilies :) and urls http://www.phpbb.com to test.'),
 			array('<script>if (window.open && !window.closed) console.log("hello world");</script>'),
 		);
 	}

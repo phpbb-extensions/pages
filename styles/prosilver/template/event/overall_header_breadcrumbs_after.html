@@ -1,7 +1,7 @@
 {% if S_OVERALL_HEADER_BREADCRUMBS_AFTER %}
 	{% for link in overall_header_breadcrumbs_after_links %}
 		<li data-skip-responsive {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }} breadcrumbs"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="breadcrumbs"{% endif %} itemscope itemtype="https://schema.org/BreadcrumbList">
-			<span class="crumb" {{ MICRODATA }}><a itemprop="item" href="{{ link.U_LINK_URL }}" title="{{ link.LINK_DESC }}">{% if link.ICON_FONT %}{{ Icon('font', link.ICON_FONT, link.LINK_TITLE, false) }}{% else %}<span itemprop="name">{{ link.LINK_TITLE }}</span>{% endif %}</a><meta itemprop="position" content="{{ navlink_position }}{% set navlink_position = navlink_position + 1 %}" /></span>
+			<span class="crumb" {{ MICRODATA }}><a itemprop="item" href="{{ link.U_LINK_URL }}" title="{{ link.LINK_DESC }}">{% if link.ICON_FONT %}{{ Icon('font', link.ICON_FONT, link.LINK_TITLE, false) }}{% else %}<span itemprop="name">{{ link.LINK_TITLE }}</span>{% endif %}</a><meta itemprop="position" content="{{ navlink_position }}{% set navlink_position = navlink_position + 1 %}"></span>
 		</li>
 	{% endfor %}
 {% endif %}

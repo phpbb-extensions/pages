@@ -64,7 +64,7 @@ $lang = array_merge($lang, [
 	// Purge icons
 	'ACP_PAGES_PURGE_ICONS'				=> 'Purger les icônes',
 	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purger le cache des icônes des pages',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Lors de l’ajout d’icônes aux liens des pages personnalisées, il est nécessaire de purger le cache des icônes pour les voir apparaitre.<br /> Placer les icônes personnalisées nommées, par exemple : <samp>pages_route.gif</samp>, où <samp>route</samp> correspond au chemin de la page, dans les répertoires <samp>./styles/*/theme/images/</samp> de phpBB.',
+	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Lors de l’ajout d’icônes aux liens des pages personnalisées, il est nécessaire de purger le cache des icônes pour les voir apparaitre.<br> Placer les icônes personnalisées nommées, par exemple : <samp>pages_route.gif</samp>, où <samp>route</samp> correspond au chemin de la page, dans les répertoires <samp>./styles/*/theme/images/</samp> de phpBB.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Êtes-vous sûr de vouloir supprimer cette page ?',

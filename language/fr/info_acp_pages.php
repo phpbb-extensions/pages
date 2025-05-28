@@ -44,7 +44,7 @@ $lang = array_merge($lang, [
 	'ACP_PAGES_MANAGE'		=> 'Gestion de Pages',
 
 	// Logs
-	'ACP_PAGES_ADDED_LOG'	=> '<strong>Page ajoutée</strong><br />» %s',
-	'ACP_PAGES_EDITED_LOG'	=> '<strong>Page modifiée</strong><br />» %s',
-	'ACP_PAGES_DELETED_LOG'	=> '<strong>Page supprimée</strong><br />» %s',
+	'ACP_PAGES_ADDED_LOG'	=> '<strong>Page ajoutée</strong><br>» %s',
+	'ACP_PAGES_EDITED_LOG'	=> '<strong>Page modifiée</strong><br>» %s',
+	'ACP_PAGES_DELETED_LOG'	=> '<strong>Page supprimée</strong><br>» %s',
 ]);

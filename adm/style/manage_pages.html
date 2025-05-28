@@ -43,17 +43,17 @@
 				</dl>
 			{% endif %}
 			<dl>
-				<dt><label for="page_title">{{ lang('ACP_PAGES_FORM_TITLE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_TITLE_EXPLAIN') }}</span></dt>
-				<dd><input class="text medium" type="text" id="page_title" name="page_title" value="{{ PAGES_TITLE }}" maxlength="200" /></dd>
+				<dt><label for="page_title">{{ lang('ACP_PAGES_FORM_TITLE') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_FORM_TITLE_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="page_title" name="page_title" value="{{ PAGES_TITLE }}" maxlength="200"></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_description">{{ lang('ACP_PAGES_FORM_DESC') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_DESC_EXPLAIN') }}</span></dt>
-				<dd><input class="text medium" type="text" id="page_description" name="page_description" value="{{ PAGES_DESCRIPTION }}" maxlength="255" />
-					<input type="checkbox" class="radio" name="page_description_display"{% if S_PAGES_DESC_DISPLAY %} checked="checked"{% endif %} /> {{ lang('ACP_PAGES_FORM_DESC_DISPLAY') }}</dd>
+				<dt><label for="page_description">{{ lang('ACP_PAGES_FORM_DESC') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_FORM_DESC_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="page_description" name="page_description" value="{{ PAGES_DESCRIPTION }}" maxlength="255">
+					<input type="checkbox" class="radio" name="page_description_display"{% if S_PAGES_DESC_DISPLAY %} checked="checked"{% endif %}> {{ lang('ACP_PAGES_FORM_DESC_DISPLAY') }}</dd>
 			</dl>
 			<dl>
-				<dt><label for="page_route">{{ lang('ACP_PAGES_FORM_ROUTE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ROUTE_EXPLAIN') }}</span></dt>
-				<dd><input class="text medium" type="text" id="page_route" name="page_route" value="{{ PAGES_ROUTE }}" maxlength="200" /></dd>
+				<dt><label for="page_route">{{ lang('ACP_PAGES_FORM_ROUTE') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_FORM_ROUTE_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="page_route" name="page_route" value="{{ PAGES_ROUTE }}" maxlength="200"></dd>
 			</dl>
 		</fieldset>
 		<fieldset>
@@ -69,10 +69,10 @@
 						<textarea name="page_content" rows="25" cols="60" style="width: 95%;" data-bbcode="true">{{ PAGES_CONTENT }}</textarea>
 					</dd>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 5px;">
-						<label><input type="checkbox" class="radio html-off" name="parse_bbcode"{% if S_PARSE_BBCODE_CHECKED %} checked="checked"{% endif %} /> {{ lang('PARSE_BBCODE') }}</label>
-						<label><input type="checkbox" class="radio html-off" name="parse_smilies"{% if S_PARSE_SMILIES_CHECKED %} checked="checked"{% endif %} /> {{ lang('PARSE_SMILIES') }}</label>
-						<label><input type="checkbox" class="radio html-off" name="parse_magic_url"{% if S_PARSE_MAGIC_URL_CHECKED %} checked="checked"{% endif %} /> {{ lang('PARSE_URLS') }}</label>
-						<label><input type="checkbox" class="radio html-on" name="parse_html"{% if S_PARSE_HTML_CHECKED %} checked="checked"{% endif %} /> {{ lang('PARSE_HTML') }}</label>
+						<label><input type="checkbox" class="radio html-off" name="parse_bbcode"{% if S_PARSE_BBCODE_CHECKED %} checked="checked"{% endif %}> {{ lang('PARSE_BBCODE') }}</label>
+						<label><input type="checkbox" class="radio html-off" name="parse_smilies"{% if S_PARSE_SMILIES_CHECKED %} checked="checked"{% endif %}> {{ lang('PARSE_SMILIES') }}</label>
+						<label><input type="checkbox" class="radio html-off" name="parse_magic_url"{% if S_PARSE_MAGIC_URL_CHECKED %} checked="checked"{% endif %}> {{ lang('PARSE_URLS') }}</label>
+						<label><input type="checkbox" class="radio html-on" name="parse_html"{% if S_PARSE_HTML_CHECKED %} checked="checked"{% endif %}> {{ lang('PARSE_HTML') }}</label>
 					</dd>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ FLASH_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
 				</dl>
@@ -88,7 +88,7 @@
 		<fieldset>
 			<legend>{{ lang('ACP_PAGES_OPTIONS') }}</legend>
 			<dl>
-				<dt><label for="page_template">{{ lang('ACP_PAGES_FORM_TEMPLATE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_TEMPLATE_EXPLAIN') }}</span></dt>
+				<dt><label for="page_template">{{ lang('ACP_PAGES_FORM_TEMPLATE') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_FORM_TEMPLATE_EXPLAIN') }}</span></dt>
 				<dd><select name="page_template" id="page_template">
 					<option value="">{{ lang('ACP_PAGES_FORM_TEMPLATE_SELECT') }}</option>
 					{% for option in page_template_options %}
@@ -97,11 +97,11 @@
 				</select></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_order">{{ lang('ACP_PAGES_FORM_ORDER') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ORDER_EXPLAIN') }}</span></dt>
-				<dd><input type="number" id="page_order" min="0" max="999999" name="page_order" value="{{ PAGES_ORDER }}" /></dd>
+				<dt><label for="page_order">{{ lang('ACP_PAGES_FORM_ORDER') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_FORM_ORDER_EXPLAIN') }}</span></dt>
+				<dd><input type="number" id="page_order" min="0" max="999999" name="page_order" value="{{ PAGES_ORDER }}"></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_links">{{ lang('ACP_PAGES_FORM_LINKS') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_LINKS_EXPLAIN') }}</span></dt>
+				<dt><label for="page_links">{{ lang('ACP_PAGES_FORM_LINKS') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_FORM_LINKS_EXPLAIN') }}</span></dt>
 				<dd><select name="page_links[]" id="page_links" size="10" multiple="multiple">
 					{% for option in page_link_options %}
 						<option value="{{ option.VALUE }}"{% if option.S_SELECTED %} selected="selected"{% endif %}>{{ option.LABEL }}</option>
@@ -109,28 +109,28 @@
 				</select></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_icon_font">{{ lang('ACP_PAGES_FORM_ICON_FONT') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ICON_FONT_EXPLAIN', 'https://fontawesome.com/v6/search?o=r&m=free') }}</span></dt>
-				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{{ PAGES_ICON_FONT }}" placeholder="file-lines" /> {{ Icon('font', PAGES_ICON_FONT ? PAGES_ICON_FONT : 'file-lines', '', true, 'acp-icon') }}</dd>
+				<dt><label for="page_icon_font">{{ lang('ACP_PAGES_FORM_ICON_FONT') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_FORM_ICON_FONT_EXPLAIN', 'https://fontawesome.com/v6/search?o=r&m=free') }}</span></dt>
+				<dd><input name="page_icon_font" id="page_icon_font" type="text" size="15" maxlength="255" value="{{ PAGES_ICON_FONT }}" placeholder="file-lines"> {{ Icon('font', PAGES_ICON_FONT ? PAGES_ICON_FONT : 'file-lines', '', true, 'acp-icon') }}</dd>
 			</dl>
 			<dl>
-				<dt><label for="page_display">{{ lang('ACP_PAGES_FORM_DISPLAY') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_DISPLAY_EXPLAIN') }}</span></dt>
-				<dd><label><input type="radio" class="radio" id="page_display" name="page_display" value="1"{% if S_PAGES_DISPLAY %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="page_display" value="0"{% if not S_PAGES_DISPLAY %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
+				<dt><label for="page_display">{{ lang('ACP_PAGES_FORM_DISPLAY') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_FORM_DISPLAY_EXPLAIN') }}</span></dt>
+				<dd><label><input type="radio" class="radio" id="page_display" name="page_display" value="1"{% if S_PAGES_DISPLAY %} checked="checked"{% endif %}> {{ lang('YES') }}</label>
+					<label><input type="radio" class="radio" name="page_display" value="0"{% if not S_PAGES_DISPLAY %} checked="checked"{% endif %}> {{ lang('NO') }}</label></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_guest_display">{{ lang('ACP_PAGES_FORM_GUESTS') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_GUESTS_EXPLAIN') }}</span></dt>
-				<dd><label><input type="radio" class="radio" id="page_guest_display" name="page_guest_display" value="1"{% if S_PAGES_GUEST_DISPLAY %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="page_guest_display" value="0"{% if not S_PAGES_GUEST_DISPLAY %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
+				<dt><label for="page_guest_display">{{ lang('ACP_PAGES_FORM_GUESTS') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_FORM_GUESTS_EXPLAIN') }}</span></dt>
+				<dd><label><input type="radio" class="radio" id="page_guest_display" name="page_guest_display" value="1"{% if S_PAGES_GUEST_DISPLAY %} checked="checked"{% endif %}> {{ lang('YES') }}</label>
+					<label><input type="radio" class="radio" name="page_guest_display" value="0"{% if not S_PAGES_GUEST_DISPLAY %} checked="checked"{% endif %}> {{ lang('NO') }}</label></dd>
 			</dl>
 			<dl>
-				<dt><label for="page_title_switch">{{ lang('ACP_PAGES_TITLE_SWITCH') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_TITLE_SWITCH_EXPLAIN') }}</span></dt>
-				<dd><label><input type="radio" class="radio" id="page_title_switch" name="page_title_switch" value="1"{% if S_PAGES_TITLE_SWITCH %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="page_title_switch" value="0"{% if not S_PAGES_TITLE_SWITCH %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
+				<dt><label for="page_title_switch">{{ lang('ACP_PAGES_TITLE_SWITCH') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_PAGES_TITLE_SWITCH_EXPLAIN') }}</span></dt>
+				<dd><label><input type="radio" class="radio" id="page_title_switch" name="page_title_switch" value="1"{% if S_PAGES_TITLE_SWITCH %} checked="checked"{% endif %}> {{ lang('YES') }}</label>
+					<label><input type="radio" class="radio" name="page_title_switch" value="0"{% if not S_PAGES_TITLE_SWITCH %} checked="checked"{% endif %}> {{ lang('NO') }}</label></dd>
 			</dl>
 		</fieldset>
 		<fieldset class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}">
 			{{ S_FORM_TOKEN }}
 		</fieldset>
 	</form>
@@ -145,10 +145,10 @@
 		<fieldset>
 			<legend>{{ lang('GENERAL_OPTIONS') }}</legend>
 			<dl>
-				<dt><label for="action_purge_icon_cache">{{ lang('ACP_PAGES_PURGE_ICONS_LABEL') }}</label><br /><span>{{ lang('ACP_PAGES_PURGE_ICONS_EXPLAIN') }}</span></dt>
-				<dd><input class="button2" type="submit" id="action_purge_icon_cache" name="action_purge_icon_cache" value="{{ lang('ACP_PAGES_PURGE_ICONS') }}" /></dd>
+				<dt><label for="action_purge_icon_cache">{{ lang('ACP_PAGES_PURGE_ICONS_LABEL') }}</label><br><span>{{ lang('ACP_PAGES_PURGE_ICONS_EXPLAIN') }}</span></dt>
+				<dd><input class="button2" type="submit" id="action_purge_icon_cache" name="action_purge_icon_cache" value="{{ lang('ACP_PAGES_PURGE_ICONS') }}"></dd>
 			</dl>
-			<input type="hidden" name="action" value="purge_icons" />
+			<input type="hidden" name="action" value="purge_icons">
 		</fieldset>
 	</form>
 
@@ -207,8 +207,8 @@
 
 	<form id="pages_add_page" method="post" action="{{ U_ACTION }}">
 		<fieldset class="quick">
-			<input class="button2" type="submit" name="addpage" value="{{ lang('ACP_PAGES_CREATE_PAGE') }}" />
-			<input type="hidden" name="action" value="add" />
+			<input class="button2" type="submit" name="addpage" value="{{ lang('ACP_PAGES_CREATE_PAGE') }}">
+			<input type="hidden" name="action" value="add">
 			{{ S_FORM_TOKEN }}
 		</fieldset>
 	</form>

@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_MANAGE'		=> 'Håndter sider',
 
 	// Logs
-	'ACP_PAGES_ADDED_LOG'	=> '<strong>Side tilføjet</strong><br />» %s',
-	'ACP_PAGES_EDITED_LOG'	=> '<strong>Side redigeret</strong><br />» %s',
-	'ACP_PAGES_DELETED_LOG'	=> '<strong>Side slettet</strong><br />» %s',
+	'ACP_PAGES_ADDED_LOG'	=> '<strong>Side tilføjet</strong><br>» %s',
+	'ACP_PAGES_EDITED_LOG'	=> '<strong>Side redigeret</strong><br>» %s',
+	'ACP_PAGES_DELETED_LOG'	=> '<strong>Side slettet</strong><br>» %s',
 ));
