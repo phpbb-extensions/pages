@@ -81,15 +81,13 @@ services:
         tags:
             - { name: text_reparser.plugin }
 
+    phpbb.pages.cron.task.text_reparser.factory:
+        class: phpbb\pages\textreparser\cron_text_reparser_factory
+
     phpbb.pages.cron.task.text_reparser:
         class: phpbb\cron\task\text_reparser\reparser
+        factory: ['@phpbb.pages.cron.task.text_reparser.factory', 'create']
         arguments:
-            - '@config'
-            - '@text_reparser.lock'
-            - '@text_reparser.manager'
-            - '@text_reparser_collection'
-        calls:
-            - [set_name, [cron.task.text_reparser.phpbb_pages]]
-            - [set_reparser, [phpbb.pages.text_reparser.page_text]]
+            - '@service_container'
         tags:
             - { name: cron.task }
