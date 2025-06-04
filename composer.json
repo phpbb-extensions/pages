@@ -3,7 +3,7 @@
 	"type": "phpbb-extension",
 	"description": "An extension which allows you to add static pages to your phpBB forum",
 	"homepage": "https://www.phpbb.com/customise/db/extension/pages/",
-	"version": "3.0.1-dev",
+	"version": "3.0.1",
 	"keywords": ["phpbb", "extension", "static", "pages"],
 	"license": "GPL-2.0-only",
 	"authors": [
