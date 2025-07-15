@@ -81,32 +81,43 @@ class show_page_links_test extends \phpbb_database_test_case
 		);
 
 		// Test the template values
+		$block_expectations = [
+			['overall_header_navigation_prepend_links', array(
+				'U_LINK_URL' => 'phpbb_pages_dynamic_route_1#a:0:{}',
+				'LINK_ROUTE' => 'page_1',
+				'LINK_TITLE' => 'title_1',
+				'LINK_DESC'  => '',
+				'ICON_FONT'  => 'icon-1',
+				'ICON_LINK'  => '',
+			)],
+			['overall_header_navigation_append_links', array(
+				'U_LINK_URL' => 'phpbb_pages_dynamic_route_2#a:0:{}',
+				'LINK_ROUTE' => 'page_2',
+				'LINK_TITLE' => 'title_2',
+				'LINK_DESC'  => 'description_2',
+				'ICON_FONT'  => '',
+				'ICON_LINK'  => '',
+			)]
+		];
 		$template->expects(self::exactly(2))
 			->method('assign_block_vars')
-			->withConsecutive(
-				array('overall_header_navigation_prepend_links', array(
-					'U_LINK_URL' => 'phpbb_pages_dynamic_route_1#a:0:{}',
-					'LINK_ROUTE' => 'page_1',
-					'LINK_TITLE' => 'title_1',
-					'LINK_DESC'  => '',
-					'ICON_FONT'  => 'icon-1',
-					'ICON_LINK'  => '',
-				)),
-				array('overall_header_navigation_append_links', array(
-					'U_LINK_URL' => 'phpbb_pages_dynamic_route_2#a:0:{}',
-					'LINK_ROUTE' => 'page_2',
-					'LINK_TITLE' => 'title_2',
-					'LINK_DESC'  => 'description_2',
-					'ICON_FONT'  => '',
-					'ICON_LINK'  => '',
-				))
-			);
+			->willReturnCallback(function($block, $vars) use (&$block_expectations) {
+				$expectation = array_shift($block_expectations);
+				self::assertEquals($expectation[0], $block);
+				self::assertEquals($expectation[1], $vars);
+			});
+
+		$var_expectations = [
+			'S_OVERALL_HEADER_NAVIGATION_PREPEND',
+			'S_OVERALL_HEADER_NAVIGATION_APPEND'
+		];
 		$template->expects(self::exactly(2))
 			->method('assign_var')
-			->withConsecutive(
-				array('S_OVERALL_HEADER_NAVIGATION_PREPEND', true),
-				array('S_OVERALL_HEADER_NAVIGATION_APPEND', true)
-			);
+			->willReturnCallback(function($var, $value) use (&$var_expectations) {
+				$expected_var = array_shift($var_expectations);
+				self::assertEquals($expected_var, $var);
+				self::assertTrue($value);
+			});
 
 		$dispatcher = new \phpbb\event\dispatcher();
 		$dispatcher->addListener('core.page_header', array($listener, 'show_page_links'));
