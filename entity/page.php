@@ -214,7 +214,7 @@ class page implements page_interface
 		$this->db->sql_query($sql);
 
 		// Set the page_id using the id created by the SQL insert
-		$this->data['page_id'] = (int) $this->db->sql_nextid();
+		$this->data['page_id'] = (int) $this->db->sql_last_inserted_id();
 
 		return $this;
 	}
