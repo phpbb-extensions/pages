@@ -20,7 +20,7 @@ class page_entity_order_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function page_order_test_data()
+	public static function page_order_test_data()
 	{
 		return array(
 			// sent to set_order(), expected from get_order()
@@ -57,7 +57,7 @@ class page_entity_order_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function order_fails_test_data()
+	public static function order_fails_test_data()
 	{
 		return array(
 			array(-1),

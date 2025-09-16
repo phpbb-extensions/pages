@@ -20,9 +20,9 @@ class page_entity_id_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function id_test_data()
+	public static function id_test_data()
 	{
-		$import_data = $this->get_import_data();
+		$import_data = parent::get_import_data();
 
 		return array(
 			array(

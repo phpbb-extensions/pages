@@ -69,7 +69,7 @@ class page_entity_base extends \phpbb_database_test_case
 	*
 	* @return array Data to send to import_data
 	*/
-	public function get_import_data()
+	public static function get_import_data()
 	{
 		return array(
 			1 => array(

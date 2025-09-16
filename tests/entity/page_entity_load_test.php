@@ -20,7 +20,7 @@ class page_entity_load_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function load_test_data()
+	public static function load_test_data()
 	{
 		return array(
 			// id to search, data which should match
@@ -135,7 +135,7 @@ class page_entity_load_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function load_fails_test_data()
+	public static function load_fails_test_data()
 	{
 		return array(
 			// id to search

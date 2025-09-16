@@ -17,7 +17,7 @@ class add_permissions_test extends event_listener_base
 	 *
 	 * @return array
 	 */
-	public function add_permissions_test_data()
+	public static function add_permissions_test_data()
 	{
 		return array(
 			array(

@@ -20,7 +20,7 @@ class page_entity_save_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function save_test_data()
+	public static function save_test_data()
 	{
 		return array(
 			array(

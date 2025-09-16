@@ -45,7 +45,7 @@ class page_entity_content_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function content_test_data()
+	public static function content_test_data()
 	{
 		return array(
 			// sent to set_content()
@@ -166,7 +166,7 @@ class page_entity_content_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function html_content_test_data()
+	public static function html_content_test_data()
 	{
 		return array(
 			// sent to set_content()

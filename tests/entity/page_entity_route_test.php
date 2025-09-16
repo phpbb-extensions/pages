@@ -20,7 +20,7 @@ class page_entity_route_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function route_test_data()
+	public static function route_test_data()
 	{
 		return array(
 			// sent to set_route(), expected from get_route()
@@ -61,7 +61,7 @@ class page_entity_route_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function route_fails_test_data()
+	public static function route_fails_test_data()
 	{
 		return array(
 			// Starts with illegal characters
@@ -135,7 +135,7 @@ class page_entity_route_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function unique_route_test_data()
+	public static function unique_route_test_data()
 	{
 		return array(
 			// id, sent to set_route(), expected from get_route()
@@ -176,7 +176,7 @@ class page_entity_route_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function unique_route_test_fails_data()
+	public static function unique_route_test_fails_data()
 	{
 		return array(
 			// id // sent to set_route()

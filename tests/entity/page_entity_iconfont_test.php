@@ -20,7 +20,7 @@ class page_entity_iconfont_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function icon_font_test_data()
+	public static function icon_font_test_data()
 	{
 		return array(
 			// sent to set_icon_font(), expected from get_icon_font()
@@ -59,7 +59,7 @@ class page_entity_iconfont_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function icon_font_fails_test_data()
+	public static function icon_font_fails_test_data()
 	{
 		return array(
 			// Some invalid icon font names

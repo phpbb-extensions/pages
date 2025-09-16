@@ -17,7 +17,7 @@ class page_operator_delete_page_test extends page_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function delete_page_test_data()
+	public static function delete_page_test_data()
 	{
 		return array(
 			array(1),
@@ -64,7 +64,7 @@ class page_operator_delete_page_test extends page_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function delete_page_fails_data()
+	public static function delete_page_fails_data()
 	{
 		return array(
 			array(''),

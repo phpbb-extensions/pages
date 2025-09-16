@@ -17,7 +17,7 @@ class page_operator_get_page_templates_test extends page_operator_base
 	*
 	* @return array Array of test routes
 	*/
-	public function get_templates_test_data()
+	public static function get_templates_test_data()
 	{
 		return array(
 			array(

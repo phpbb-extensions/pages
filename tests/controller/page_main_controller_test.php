@@ -117,7 +117,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 	*
 	* @return array Array of test data
 	*/
-	public function display_data()
+	public static function display_data()
 	{
 		return array(
 			array('page_1', 200, 'pages_default.html', 2), // normal viewable page by member
@@ -146,7 +146,7 @@ class page_main_controller_test extends \phpbb_database_test_case
 	 *
 	 * @return array Array of test data
 	 */
-	public function display_fails_data()
+	public static function display_fails_data()
 	{
 		return array(
 			array('page_4', 404, 'PAGE_NOT_AVAILABLE', 2), // disabled page, member sees page missing message

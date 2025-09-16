@@ -33,7 +33,7 @@ class base extends \Exception
 	 * @param \Exception|null   $previous
 	 * @access public
 	 */
-	public function __construct($message = null, $code = 0, \Exception $previous = null)
+	public function __construct($message = null, $code = 0, \Exception|null $previous = null)
 	{
 		parent::__construct();
 

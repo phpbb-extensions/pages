@@ -17,7 +17,7 @@ class page_operator_insert_page_links_test extends page_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function insert_page_links_test_data()
+	public static function insert_page_links_test_data()
 	{
 		return array(
 			// page_id, page_link_ids
@@ -58,7 +58,7 @@ class page_operator_insert_page_links_test extends page_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function insert_page_links_fails_test_data()
+	public static function insert_page_links_fails_test_data()
 	{
 		return array(
 			// page_id, page_link_ids

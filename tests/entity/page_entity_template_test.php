@@ -20,7 +20,7 @@ class page_entity_template_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function template_test_data()
+	public static function template_test_data()
 	{
 		return array(
 			// sent to set_template(), expected from get_template()
@@ -61,7 +61,7 @@ class page_entity_template_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function template_fails_test_data()
+	public static function template_fails_test_data()
 	{
 		return array(
 			// Some invalid template names

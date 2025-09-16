@@ -17,7 +17,7 @@ class page_operator_get_pages_test extends page_operator_base
 	*
 	* @return array Array of test page entities
 	*/
-	public function get_pages_test_data()
+	public static function get_pages_test_data()
 	{
 		return [
 			[

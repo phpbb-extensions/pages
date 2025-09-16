@@ -69,7 +69,7 @@ class page_routing_loader_test extends \phpbb_database_test_case
 	 *
 	 * @return array
 	 */
-	public function page_loader_data()
+	public static function page_loader_data()
 	{
 		return array(
 			array(1, '/page_1'),

@@ -15,22 +15,23 @@ class event_listener_viewonline_test extends event_listener_base
 	/**
 	* Get an instance of \phpbb\language\language
 	*/
-	public function get_language_instance()
+	public static function get_language_instance()
 	{
 		global $phpbb_root_path, $phpEx;
 
 		// Get instance of \phpbb\language\language (dataProvider is called before setUp(), so this must be done here)
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
 		$lang_loader->set_extension_manager(new \phpbb_mock_extension_manager($phpbb_root_path));
-		$this->lang = new \phpbb\language\language($lang_loader);
-		$this->lang->add_lang('pages_common', 'phpbb/pages');
+		$lang = new \phpbb\language\language($lang_loader);
+		$lang->add_lang('pages_common', 'phpbb/pages');
+		return $lang;
 	}
 
 	protected function setUp(): void
 	{
 		parent::setUp();
 
-		$this->get_language_instance();
+		$this->lang = self::get_language_instance();
 	}
 
 	/**
@@ -38,11 +39,11 @@ class event_listener_viewonline_test extends event_listener_base
 	*
 	* @return array Array of test data
 	*/
-	public function viewonline_page_data()
+	public static function viewonline_page_data()
 	{
 		global $phpEx;
 
-		$this->get_language_instance();
+		$lang = self::get_language_instance();
 
 		return array(
 			// test when on_page is index
@@ -80,7 +81,7 @@ class event_listener_viewonline_test extends event_listener_base
 				'$location_url',
 				'$location',
 				'phpbb_pages_dynamic_route_1#a:0:{}',
-				$this->lang->lang('PAGES_VIEWONLINE', '$location'),
+				$lang->lang('PAGES_VIEWONLINE', '$location'),
 			),
 			// test when on_page is app and session_page is for non-existent pages
 			array(

@@ -18,22 +18,23 @@ class exception_test extends \phpbb_test_case
 	/**
 	* Get an instance of \phpbb\language\language
 	*/
-	public function get_language_instance()
+	public static function get_language_instance()
 	{
 		global $phpbb_root_path, $phpEx;
 
 		// Get instance of \phpbb\language\language (dataProvider is called before setUp(), so this must be done here)
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
 		$lang_loader->set_extension_manager(new \phpbb_mock_extension_manager($phpbb_root_path));
-		$this->lang = new \phpbb\language\language($lang_loader);
-		$this->lang->add_lang('exceptions', 'phpbb/pages');
+		$lang = new \phpbb\language\language($lang_loader);
+		$lang->add_lang('exceptions', 'phpbb/pages');
+		return $lang;
 	}
 
 	protected function setUp(): void
 	{
 		parent::setUp();
 
-		$this->get_language_instance();
+		$this->lang = self::get_language_instance();
 	}
 
 	/**
@@ -41,35 +42,35 @@ class exception_test extends \phpbb_test_case
 	*
 	* @return array
 	*/
-	public function exceptions_test_data()
+	public static function exceptions_test_data()
 	{
-		$this->get_language_instance();
+		$lang = self::get_language_instance();
 
 		return array(
 			array(
 				'base',
 				'EXCEPTION_FIELD_MISSING',
-				$this->lang->lang('EXCEPTION_FIELD_MISSING'),
+				$lang->lang('EXCEPTION_FIELD_MISSING'),
 			),
 			array(
 				'base',
 				array('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
-				$this->lang->lang('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
+				$lang->lang('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
 			),
 			array(
 				'invalid_argument',
 				array('{foo}', 'FIELD_MISSING'),
-				$this->lang->lang('EXCEPTION_INVALID_ARGUMENT', '{foo}', $this->lang->lang('EXCEPTION_FIELD_MISSING')),
+				$lang->lang('EXCEPTION_INVALID_ARGUMENT', '{foo}', $lang->lang('EXCEPTION_FIELD_MISSING')),
 			),
 			array(
 				'out_of_bounds',
 				'{foo}',
-				$this->lang->lang('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
+				$lang->lang('EXCEPTION_OUT_OF_BOUNDS', '{foo}'),
 			),
 			array(
 				'unexpected_value',
 				array('{foo}', 'TOO_LONG'),
-				$this->lang->lang('EXCEPTION_UNEXPECTED_VALUE', '{foo}', $this->lang->lang('EXCEPTION_TOO_LONG')),
+				$lang->lang('EXCEPTION_UNEXPECTED_VALUE', '{foo}', $lang->lang('EXCEPTION_TOO_LONG')),
 			),
 		);
 	}

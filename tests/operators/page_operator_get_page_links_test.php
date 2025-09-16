@@ -17,7 +17,7 @@ class page_operator_get_page_links_test extends page_operator_base
 	*
 	* @return array Array of test routes
 	*/
-	public function get_page_links_test_data()
+	public static function get_page_links_test_data()
 	{
 		return array(
 			array(
@@ -137,7 +137,7 @@ class page_operator_get_page_links_test extends page_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function get_page_links_fails_test_data()
+	public static function get_page_links_fails_test_data()
 	{
 		return array(
 			array(100, array()),

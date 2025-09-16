@@ -20,7 +20,7 @@ class page_entity_description_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function description_test_data()
+	public static function description_test_data()
 	{
 		return array(
 			// sent to set_description(), expected from get_description()
@@ -61,7 +61,7 @@ class page_entity_description_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function description_fails_test_data()
+	public static function description_fails_test_data()
 	{
 		return array(
 			// description

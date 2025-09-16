@@ -20,7 +20,7 @@ class page_entity_title_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function title_test_data()
+	public static function title_test_data()
 	{
 		return array(
 			// sent to set_title(), expected from get_title()
@@ -60,7 +60,7 @@ class page_entity_title_test extends page_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function title_fails_test_data()
+	public static function title_fails_test_data()
 	{
 		return array(
 			// title
