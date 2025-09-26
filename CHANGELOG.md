@@ -2,6 +2,12 @@
 
 ## Version 3.x (for phpBB 3.3 and later)
 
+### 3.0.1 - 2025-06-04
+
+- Added pagination to the Pages list in the Admin Control Panel for improved usability.
+- Resolved potential URL path issues on Windows-based web servers.
+- Updated version constraints to prevent installation on phpBB4, while ensuring it doesn’t cause errors if run within phpBB4.
+
 ### 3.0.0 - 2022-06-17
 
 - Dropped support for phpBB 3.2.x (new minimum requirements: phpBB 3.3.2 and PHP 7.1.3).
@@ -18,8 +24,8 @@
 
 ### 2.0.4 - 2020-03-29
 
-- New option to display page's titles before the site name in browser windows.
-- Fixed links to FontAwesome website.
+- New option to display page titles before the site name in browser windows.
+- Fixed links to the FontAwesome website.
 - Removed Subsilver2 style and support.
 
 ### 2.0.3 - 2018-03-14
