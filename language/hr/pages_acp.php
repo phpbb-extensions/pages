@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Nije pronađena niti jedna stranica.',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Isprazni ikone',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Isprazni priručnu memoriju ikona stranica',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Prilikom dodavanja ikona linkova prilagođenih stranica, (a) kako bi nove ikone postale vidljive, ponekad treba isprazniti priručnu memoriju ikona stranica.<br>Prilagođene ikone, nazvane npr. <samp>pages_route.gif</samp>, (a) gdje je <samp>route</samp> <em>usmjerno</em> ime stranice, pohrani u <samp>styles/*/theme/images/</samp> mape phpBBa.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Isprazni ikone',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Isprazni priručnu memoriju ikona stranica',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Prilikom dodavanja ikona linkova prilagođenih stranica, (a) kako bi nove ikone postale vidljive, ponekad treba isprazniti priručnu memoriju ikona stranica.<br>Prilagođene ikone, nazvane npr. <samp>pages_route.gif</samp>, (a) gdje je <samp>route</samp> <em>usmjerno</em> ime stranice, pohrani u <samp>styles/*/theme/images/</samp> mape phpBBa.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Jesi li siguran/na da želiš izbrisati stranicu?',

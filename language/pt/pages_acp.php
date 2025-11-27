@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Não há páginas',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Limpar icons',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Limpar cache dos icones das páginas',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Ao adicionar links para ícones das páginas personalizadas, tem que limpar a cache de ícones para ver os novos ícones. Coloque os ícones personalizados, usando nomes <samp>pages_route.gif</samp>, onde <samp>route</samp> é nome do caminho da página, na pasta <samp>styles/*/theme/images/</samp>.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Limpar icons',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Limpar cache dos icones das páginas',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Ao adicionar links para ícones das páginas personalizadas, tem que limpar a cache de ícones para ver os novos ícones. Coloque os ícones personalizados, usando nomes <samp>pages_route.gif</samp>, onde <samp>route</samp> é nome do caminho da página, na pasta <samp>styles/*/theme/images/</samp>.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Tem a certeza que deseja eliminar esta página?',

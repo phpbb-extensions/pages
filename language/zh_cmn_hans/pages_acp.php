@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> '没有单页',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> '清除图标缓存',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> '清除单页图标缓存',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> '当增加定制页面的链接图标，您也许需要清除图标缓存才能看到新的图标。如果 <samp>route</samp> 是页面的路径名称，放置定制图标 <samp>pages_route.gif</samp>， 到 phpBB 的 <samp>styles/*/theme/images/</samp> 文件夹。',
+//	'ACP_PAGES_PURGE_ICONS'				=> '清除图标缓存',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> '清除单页图标缓存',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> '当增加定制页面的链接图标，您也许需要清除图标缓存才能看到新的图标。如果 <samp>route</samp> 是页面的路径名称，放置定制图标 <samp>pages_route.gif</samp>， 到 phpBB 的 <samp>styles/*/theme/images/</samp> 文件夹。',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> '您确认想要删除此单页？',

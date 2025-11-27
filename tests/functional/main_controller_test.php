@@ -47,17 +47,18 @@ class main_controller_test extends pages_functional_base
 		self::assertStringContainsString("$page_title - yourdomain.com", $crawler->filter('title')->text());
 
 		// Assert the page's link appears
-		$page_links = $crawler->filter('#nav-main > li.icon-pages')->count();
+		$page_links = $crawler->filter('#nav-main i.fa-book-open')->count();
 		self::assertGreaterThan(0, $page_links, 'No navbar page links found');
 
 		// Assert the page's link is using the correct href route and title
 		for ($i = 0; $i < $page_links; $i++)
 		{
-			$subcrawler = $crawler->filter('#nav-main > li.icon-pages')->eq($i);
-			if (strpos($subcrawler->text(), $page_title) !== false)
+			$element = $crawler->filter('#nav-main i.fa-book-open')->eq($i);
+			if (strpos($element->siblings()->first()->text(), $page_title) !== false)
 			{
-				self::assertStringContainsString($route, $subcrawler->filter('a')->attr('href'));
-				self::assertStringContainsString($page_description, $subcrawler->filter('a')->attr('title'));
+				$a = $element->closest('a');
+				self::assertStringContainsString($route, $a->attr('href'));
+				self::assertStringContainsString($page_description, $a->attr('title'));
 				return $route;
 			}
 		}

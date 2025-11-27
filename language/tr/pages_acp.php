@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Hiç bir sayfa bulunamadı',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Simgeleri temizle',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Sayfa simgeleri önbelleğini temizle',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Özel sayfa bağlantı simgeleri eklediğiniz zaman, yeni simgeleri görmek için simge önbelleğini temizlemeniz gerekebilir. phpBB’nin <samp>styles/*/theme/images/</samp> dizinine <samp>pages_route.gif</samp> adında özel simge yerleştirdiğinizde, <samp>route</samp> Sayfa’nın yolu olacaktır.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Simgeleri temizle',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Sayfa simgeleri önbelleğini temizle',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Özel sayfa bağlantı simgeleri eklediğiniz zaman, yeni simgeleri görmek için simge önbelleğini temizlemeniz gerekebilir. phpBB’nin <samp>styles/*/theme/images/</samp> dizinine <samp>pages_route.gif</samp> adında özel simge yerleştirdiğinizde, <samp>route</samp> Sayfa’nın yolu olacaktır.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Bu sayfayı silmek istediğinize emin misiniz?',

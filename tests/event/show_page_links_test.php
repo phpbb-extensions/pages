@@ -84,19 +84,15 @@ class show_page_links_test extends \phpbb_database_test_case
 		$block_expectations = [
 			['overall_header_navigation_prepend_links', array(
 				'U_LINK_URL' => 'phpbb_pages_dynamic_route_1#a:0:{}',
-				'LINK_ROUTE' => 'page_1',
 				'LINK_TITLE' => 'title_1',
 				'LINK_DESC'  => '',
 				'ICON_FONT'  => 'icon-1',
-				'ICON_LINK'  => '',
 			)],
 			['overall_header_navigation_append_links', array(
 				'U_LINK_URL' => 'phpbb_pages_dynamic_route_2#a:0:{}',
-				'LINK_ROUTE' => 'page_2',
 				'LINK_TITLE' => 'title_2',
 				'LINK_DESC'  => 'description_2',
 				'ICON_FONT'  => '',
-				'ICON_LINK'  => '',
 			)]
 		];
 		$template->expects(self::exactly(2))

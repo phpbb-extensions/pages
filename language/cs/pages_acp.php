@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Nenalezeny žádné stránky',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Vymazat ikony',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Vymazat mezipaměť ikon stránek',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Při přidávání vlastních ikon pro odkazy stránek může být potřeba pročištění cache, aby byly nové ikony vidět. Ikony s názvem <samp>pages_route.gif</samp>, kde <samp>route</samp> je název cesty stránky, umístěte do složky phpBB motivů <samp>styles/*/theme/images/</samp>.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Vymazat ikony',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Vymazat mezipaměť ikon stránek',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Při přidávání vlastních ikon pro odkazy stránek může být potřeba pročištění cache, aby byly nové ikony vidět. Ikony s názvem <samp>pages_route.gif</samp>, kde <samp>route</samp> je název cesty stránky, umístěte do složky phpBB motivů <samp>styles/*/theme/images/</samp>.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Opravdu chcete tuto stránku smazat?',

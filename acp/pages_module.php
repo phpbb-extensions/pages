@@ -100,6 +100,7 @@ class pages_module
 
 			case 'purge_icons':
 				// Purge icon cache
+				// @deprecated 3.1.0 - To be removed eventually
 				$cache->destroy('_pages_icons');
 			break;
 		}

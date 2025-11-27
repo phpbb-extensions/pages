@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'No se encontraron páginas',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Purgar iconos',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purgar caché de iconos de páginas',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Al añadir enlaces de iconos a las páginas personalizados, puede que tenga que purgar el caché de iconos para ver los nuevos iconos. Coloque los iconos personalizados así, <samp>pages_ruta.gif</samp>, donde <samp>ruta</samp> es el nombre de la Página ruta, en phpBB las carpetas <samp>styles/*/theme/images/</samp>',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Purgar iconos',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purgar caché de iconos de páginas',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Al añadir enlaces de iconos a las páginas personalizados, puede que tenga que purgar el caché de iconos para ver los nuevos iconos. Coloque los iconos personalizados así, <samp>pages_ruta.gif</samp>, donde <samp>ruta</samp> es el nombre de la Página ruta, en phpBB las carpetas <samp>styles/*/theme/images/</samp>',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> '¿Seguro que quiere eliminar esta página?',

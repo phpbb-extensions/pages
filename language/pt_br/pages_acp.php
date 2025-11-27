@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Não há páginas',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Limpar cache',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Limpar cache dos icones das páginas',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Ao adicionar ícones para as páginas personalizadas, limpe o cache de ícones para vê-los. Crie os ícones usando o padrão <samp>pages_route.gif</samp>, onde <samp>route</samp> é nome do caminho da página, na pasta <samp>phpbb/styles/*/theme/images/</samp>.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Limpar cache',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Limpar cache dos icones das páginas',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Ao adicionar ícones para as páginas personalizadas, limpe o cache de ícones para vê-los. Crie os ícones usando o padrão <samp>pages_route.gif</samp>, onde <samp>route</samp> é nome do caminho da página, na pasta <samp>phpbb/styles/*/theme/images/</samp>.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Tem certeza que deseja excluir esta página?',

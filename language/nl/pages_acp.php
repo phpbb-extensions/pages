@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Geen pagina‘s gevonden',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Leeg iconen',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Leeg pagina‘s iconencache',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Wanneer je een eigen pagina link icoon toevoegd, kan het zijn dat je de iconencache moet legen om de nieuwe iconen te kunnen zien. Plaats eigen iconen genaamd <samp>pages_route.gif</samp>, waar <samp>route</samp> de Pagina‘s routenaam is, in phpBB’s <samp>styles/*/theme/images/</samp> folders.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Leeg iconen',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Leeg pagina‘s iconencache',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Wanneer je een eigen pagina link icoon toevoegd, kan het zijn dat je de iconencache moet legen om de nieuwe iconen te kunnen zien. Plaats eigen iconen genaamd <samp>pages_route.gif</samp>, waar <samp>route</samp> de Pagina‘s routenaam is, in phpBB’s <samp>styles/*/theme/images/</samp> folders.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Weet je zeker dat je deze pagina wilt verwijderen?',

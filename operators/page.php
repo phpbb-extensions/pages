@@ -172,6 +172,7 @@ class page implements page_interface
 	*
 	* @return array Array of icon image paths
 	* @access public
+	* @deprecated 3.1.0 - To be removed eventually
 	*/
 	public function get_page_icons()
 	{
@@ -193,6 +194,7 @@ class page implements page_interface
 	* @param string $name The page name (uses the route name)
 	* @return string The icon name
 	* @access public
+	* @deprecated 3.1.0 - To be removed eventually
 	*/
 	public function get_page_icon($name)
 	{

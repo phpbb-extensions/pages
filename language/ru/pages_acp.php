@@ -61,9 +61,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Страницы не найдены',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Очистить иконки',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Очистить кеш иконок',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'При добавлении иконки к ссылке вам нужно очистить кеш иконок. Иконки должны иметь имя  <samp>pages_route.gif</samp>, где <samp>route</samp> - это путь, заданный в настройках конкретной страницы, иконки загружать в папку  <samp>styles/*/theme/images/</samp>.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Очистить иконки',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Очистить кеш иконок',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'При добавлении иконки к ссылке вам нужно очистить кеш иконок. Иконки должны иметь имя  <samp>pages_route.gif</samp>, где <samp>route</samp> - это путь, заданный в настройках конкретной страницы, иконки загружать в папку  <samp>styles/*/theme/images/</samp>.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Вы действительно хотите удалить страницу?',

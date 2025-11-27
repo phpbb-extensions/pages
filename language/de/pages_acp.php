@@ -61,9 +61,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Keine Seite gefunden',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Lösche Icons',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Löscht den Icon Cache',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Wenn du selbstdefinierte Link-Icons hinzufügst musst du unter Umständen den Icon Cache löschen um neue Icons zu sehen. Lade benutzerdefinierte Icons mit dem Namen <samp>pages_route.gif</samp> nach <samp>styles/*/theme/images/</samp> hoch, wobei <samp>route</samp> der Name der URL route ist.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Lösche Icons',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Löscht den Icon Cache',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Wenn du selbstdefinierte Link-Icons hinzufügst musst du unter Umständen den Icon Cache löschen um neue Icons zu sehen. Lade benutzerdefinierte Icons mit dem Namen <samp>pages_route.gif</samp> nach <samp>styles/*/theme/images/</samp> hoch, wobei <samp>route</samp> der Name der URL route ist.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Bist du sicher, dass du diese Seite löschen willst?',

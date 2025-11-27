@@ -1,7 +1,7 @@
 {# Note: we must use the before code so the link will appear in the expected location #}
 {% if S_OVERALL_FOOTER_TEAMLINK_BEFORE %}
 	{% for link in overall_footer_teamlink_before_links %}
-		<li {% if not link.ICON_FONT %}class="small-icon icon-pages icon-page-{{ link.LINK_ROUTE }} rightside in-menu"{% if link.ICON_LINK %} style="background-image: url('{{ T_THEME_PATH }}/images/{{ link.ICON_LINK }}');"{% endif %}{% else %}class="rightside in-menu"{% endif %}>
+		<li class="rightside in-menu">
 			<a href="{{ link.U_LINK_URL }}" title="{{ link.LINK_DESC }}" role="menuitem">
 				{% if link.ICON_FONT %}{{ Icon('font', link.ICON_FONT, link.LINK_TITLE, false) }}{% else %}<span>{{ link.LINK_TITLE }}</span>{% endif %}
 			</a>

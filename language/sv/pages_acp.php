@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Ingen sida',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Töm ikoncache',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Töm sidornas ikoncache',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'När du lägger till länkikoner för dina egna sidor kan det vara erforderligt att tömma ikoncachen för att kunna se nya ikoner. Placera egna ikoner med benämningen <samp>pages_nod.gif</samp>, där <samp>nod</samp> är sidans nod-benämning i phpBBs katalog <samp>styles/*/theme/images/</samp>.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Töm ikoncache',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Töm sidornas ikoncache',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'När du lägger till länkikoner för dina egna sidor kan det vara erforderligt att tömma ikoncachen för att kunna se nya ikoner. Placera egna ikoner med benämningen <samp>pages_nod.gif</samp>, där <samp>nod</samp> är sidans nod-benämning i phpBBs katalog <samp>styles/*/theme/images/</samp>.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Är du säker på att du vill radera denna sida?',

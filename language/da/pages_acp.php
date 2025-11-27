@@ -61,9 +61,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Ingen sider fundet',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Tøm ikoner',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Tøm sidernes ikonmellemlager',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Når der tilføjes tilpassede ikoner til sidelink, kan det være nødvendigt at tømme ikonmellemlageret for at se de nye ikoner. Placer tilpassede ikoner med navnet <samp>pages_rute.gif</samp>, hvor <samp>rute</samp> er sidens rutenavn, i phpBB’s <samp>styles/*/theme/images/</samp>-mappe.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Tøm ikoner',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Tøm sidernes ikonmellemlager',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Når der tilføjes tilpassede ikoner til sidelink, kan det være nødvendigt at tømme ikonmellemlageret for at se de nye ikoner. Placer tilpassede ikoner med navnet <samp>pages_rute.gif</samp>, hvor <samp>rute</samp> er sidens rutenavn, i phpBB’s <samp>styles/*/theme/images/</samp>-mappe.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Er du sikker på, at du vil slette siden?',

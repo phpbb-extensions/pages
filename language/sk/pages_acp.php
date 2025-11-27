@@ -60,9 +60,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_PRIVATE'					=> 'Súkromná',
 	'ACP_PAGES_EMPTY'					=> 'Nenájdené žiadné stránky',
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Vymazať ikony',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Vymazať medzipamäť ikon stránok',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Pri pridávaní vlastných ikon pre odkazy stránok môže byť potrebné prečistenie cache, aby boli nové ikony vidieť. Ikony s názvom <samp>pages_route.gif</samp>, kde <samp>route</samp> je názov cesty stránky, umiestnite do zložky phpBB motivov <samp>styles/*/theme/images/</samp>.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Vymazať ikony',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Vymazať medzipamäť ikon stránok',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Pri pridávaní vlastných ikon pre odkazy stránok môže byť potrebné prečistenie cache, aby boli nové ikony vidieť. Ikony s názvom <samp>pages_route.gif</samp>, kde <samp>route</samp> je názov cesty stránky, umiestnite do zložky phpBB motivov <samp>styles/*/theme/images/</samp>.',
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Naozaj chcete túto stránku zmazať?',
 	'ACP_PAGES_DELETE_SUCCESS'			=> 'Stránka bola úspešne odstránená.',

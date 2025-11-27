@@ -61,9 +61,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'No pages found',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Purge icons',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purge pages icons cache',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'When adding custom page link icons, you may need to purge the icon cache to see the new icons. Place custom icons named <samp>pages_route.gif</samp>, where <samp>route</samp> is the Page’s route name, in phpBB’s <samp>styles/*/theme/images/</samp> folders.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Purge icons',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Purge pages icons cache',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'When adding custom page link icons, you may need to purge the icon cache to see the new icons. Place custom icons named <samp>pages_route.gif</samp>, where <samp>route</samp> is the Page’s route name, in phpBB’s <samp>styles/*/theme/images/</samp> folders.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Are you sure you want to delete this page?',
@@ -92,7 +92,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Page link locations',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Select one or more locations where the link to this page can appear. Use CTRL+CLICK (or CMD+CLICK on Mac) to select/deselect more than one item.',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank if you do not want to associate an icon with your page link.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Display page',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'If set to no, the page will not be accessible. (Note: Admins will still be able to access the page, allowing them to privately preview the page while developing it.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Display page to guests',

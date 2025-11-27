@@ -61,9 +61,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Nie znaleziono strony',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Czyść ikony',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Wyczyść pamięć podręczną ikon',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Aby niestandardowe ikony stron poprawnie się wyświetlały, koniecznie jest wyczyszczenie pamięci podręcznej tego rozszerzenia.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Czyść ikony',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Wyczyść pamięć podręczną ikon',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Aby niestandardowe ikony stron poprawnie się wyświetlały, koniecznie jest wyczyszczenie pamięci podręcznej tego rozszerzenia.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Czy na pewno chcesz usunąć tę stronę?',

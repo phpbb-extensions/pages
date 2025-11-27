@@ -67,7 +67,7 @@ class pages_functional_base extends \phpbb_functional_test_case
 			'page_display'		=> 1,
 			'page_guest_display'=> 1,
 			'page_title_switch'	=> 0,
-			'page_icon_font'	=> '',
+			'page_icon_font'	=> 'book-open',
 		), $additional_form_data);
 
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&action=add&sid={$this->sid}");

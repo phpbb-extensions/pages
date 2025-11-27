@@ -141,17 +141,6 @@
 
 	<p>{{ lang('ACP_PAGES_MANAGE_EXPLAIN') }}</p>
 
-	<form id="pages_purge_icons" method="post" action="{{ U_ACTION }}">
-		<fieldset>
-			<legend>{{ lang('GENERAL_OPTIONS') }}</legend>
-			<dl>
-				<dt><label for="action_purge_icon_cache">{{ lang('ACP_PAGES_PURGE_ICONS_LABEL') }}</label><br><span>{{ lang('ACP_PAGES_PURGE_ICONS_EXPLAIN') }}</span></dt>
-				<dd><input class="button2" type="submit" id="action_purge_icon_cache" name="action_purge_icon_cache" value="{{ lang('ACP_PAGES_PURGE_ICONS') }}"></dd>
-			</dl>
-			<input type="hidden" name="action" value="purge_icons">
-		</fieldset>
-	</form>
-
 	{% if pagination %}
 	<div class="pagination top-pagination">
 		{% include 'pagination.html' %}

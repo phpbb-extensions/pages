@@ -40,7 +40,6 @@ class admin_controller_test extends pages_functional_base
 		// Assert Pages display appears
 		$this->assertContainsLang('ACP_PAGES_EMPTY', $crawler->filter('#main')->text());
 		$this->assertContainsLang('ACP_PAGES_MANAGE', $crawler->filter('#main')->text());
-		$this->assertContainsLang('ACP_PAGES_PURGE_ICONS_LABEL', $crawler->filter('#main')->text());
 	}
 
 	/**

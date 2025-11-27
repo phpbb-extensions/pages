@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'Nessuna pagina trovata',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'Pulisci icone',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Pulisci cache delle icone delle pagine',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Quando si aggiungono icone alle pagine personalizzate potrebbe essere necessario eliminare la cache delle icone per poterle visualizzare. Per inserire le icone personalizzate è necessario denominarle es. <samp>pages_route.gif</samp>, dove <samp>route</samp> è il "nome percorso" della pagina. Inserire l´immagine nella cartella <samp>ROOT/styles/*/theme/images/</samp>.',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'Pulisci icone',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'Pulisci cache delle icone delle pagine',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'Quando si aggiungono icone alle pagine personalizzate potrebbe essere necessario eliminare la cache delle icone per poterle visualizzare. Per inserire le icone personalizzate è necessario denominarle es. <samp>pages_route.gif</samp>, dove <samp>route</samp> è il "nome percorso" della pagina. Inserire l´immagine nella cartella <samp>ROOT/styles/*/theme/images/</samp>.',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'Sei sicuro di voler cancellare questa pagina?',

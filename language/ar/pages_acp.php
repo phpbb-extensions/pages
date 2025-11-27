@@ -62,9 +62,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_EMPTY'					=> 'لم يتم العثور على الصفحات',
 
 	// Purge icons
-	'ACP_PAGES_PURGE_ICONS'				=> 'حذف',
-	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'حذف الملفات المؤقتة للأيقونات ',
-	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'قد تحتاج لحذف الملفات المؤقتة للأيقونات لكي تستطيع رؤية الايقونات الجديدة التي أضفتها للصفحة. تستطيع إضافة الأيقونات التي تريدها إلى المجلد <samp>styles/*/theme/images/</samp> على أن يكون بإسم <samp>pages_route.gif</samp> ( الـ <samp>route</samp> هو إسم مسار الصفحة )',
+//	'ACP_PAGES_PURGE_ICONS'				=> 'حذف',
+//	'ACP_PAGES_PURGE_ICONS_LABEL'		=> 'حذف الملفات المؤقتة للأيقونات ',
+//	'ACP_PAGES_PURGE_ICONS_EXPLAIN'		=> 'قد تحتاج لحذف الملفات المؤقتة للأيقونات لكي تستطيع رؤية الايقونات الجديدة التي أضفتها للصفحة. تستطيع إضافة الأيقونات التي تريدها إلى المجلد <samp>styles/*/theme/images/</samp> على أن يكون بإسم <samp>pages_route.gif</samp> ( الـ <samp>route</samp> هو إسم مسار الصفحة )',
 
 	// Messages shown to user
 	'ACP_PAGES_DELETE_CONFIRM'			=> 'متأكد أنك تريد حذف هذه الصفحة ؟',
