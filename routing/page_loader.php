@@ -21,10 +21,10 @@ use Symfony\Component\Routing\RouteCollection;
 class page_loader extends Loader
 {
 	/** @var driver_interface */
-	protected $db;
+	protected driver_interface $db;
 
 	/** @var string */
-	protected $pages_table;
+	protected string $pages_table;
 
 	/**
 	 * Constructor
@@ -33,10 +33,11 @@ class page_loader extends Loader
 	 * @param string           $pages_table Table name
 	 * @access public
 	 */
-	public function __construct(driver_interface $db, $pages_table)
+	public function __construct(driver_interface $db, string $pages_table)
 	{
 		$this->db          = $db;
 		$this->pages_table = $pages_table;
+		parent::__construct();
 	}
 
 	/**
@@ -49,7 +50,7 @@ class page_loader extends Loader
 	 *
 	 * @api
 	 */
-	public function load($resource, $type = null)
+	public function load($resource, string $type = null): RouteCollection
 	{
 		$collection = new RouteCollection();
 
@@ -73,7 +74,7 @@ class page_loader extends Loader
 	 *
 	 * @api
 	 */
-	public function supports($resource, $type = null)
+	public function supports($resource, $type = null): bool
 	{
 		return $type === 'phpbb_pages_route';
 	}
