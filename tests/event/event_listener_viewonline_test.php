@@ -51,7 +51,9 @@ class event_listener_viewonline_test extends event_listener_base
 				array(
 					1 => 'index',
 				),
-				array(),
+				array(
+					'session_page' => 'index.' . $phpEx . '/foobar'
+				),
 				'$location_url',
 				'$location',
 				'$location_url',
