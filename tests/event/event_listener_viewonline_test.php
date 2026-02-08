@@ -57,39 +57,39 @@ class event_listener_viewonline_test extends event_listener_base
 				'$location_url',
 				'$location',
 			),
-			// test when on_page is app and session_page is NOT for pages
+			// test when on_page is index and session_page is NOT for pages
 			array(
 				array(
-					1 => 'app',
+					1 => 'index',
 				),
 				array(
-					'session_page' => 'app.' . $phpEx . '/help/faq'
+					'session_page' => 'index.' . $phpEx . '/help/faq'
 				),
 				'$location_url',
 				'$location',
 				'$location_url',
 				'$location',
 			),
-			// test when on_page is app and session_page is for pages
+			// test when on_page is index and session_page is for pages
 			array(
 				array(
-					1 => 'app',
+					1 => 'index',
 				),
 				array(
-					'session_page' => 'app.' . $phpEx . '/test'
+					'session_page' => 'index.' . $phpEx . '/test'
 				),
 				'$location_url',
 				'$location',
 				'phpbb_pages_dynamic_route_1#a:0:{}',
 				$lang->lang('PAGES_VIEWONLINE', '$location'),
 			),
-			// test when on_page is app and session_page is for non-existent pages
+			// test when on_page is index and session_page is for non-existent pages
 			array(
 				array(
-					1 => 'app',
+					1 => 'index',
 				),
 				array(
-					'session_page' => 'app.' . $phpEx . '/foobar'
+					'session_page' => 'index.' . $phpEx . '/foobar'
 				),
 				'$location_url',
 				'$location',

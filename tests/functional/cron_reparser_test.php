@@ -33,14 +33,14 @@ class cron_reparser_test extends pages_functional_base
 		$route = $this->create_page($page_title, $page_content);
 
 		// Go to the test page
-		$crawler = self::request('GET', "app.php/$route?sid=$this->sid");
+		$crawler = self::request('GET', "index.php/$route?sid=$this->sid");
 		$this->assertStringContainsString($page_title, $crawler->filter('h2')->text());
 
 		// Assert no reparsers have run yet
 		$this->assertEmpty($this->get_reparser_resume());
 
 		// Run the cron task to reparse pages
-		self::request('GET', "app.php/cron/cron.task.text_reparser.phpbb_pages", [], false);
+		self::request('GET', "index.php/cron/cron.task.text_reparser.phpbb_pages", [], false);
 
 		// Try to ensure that the cron can actually run before we start to wait for it
 		sleep(1);

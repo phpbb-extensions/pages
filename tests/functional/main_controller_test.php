@@ -37,7 +37,7 @@ class main_controller_test extends pages_functional_base
 		]);
 
 		// Load the page
-		$crawler = self::request('GET', "app.php/{$route}?sid={$this->sid}");
+		$crawler = self::request('GET', "index.php/{$route}?sid={$this->sid}");
 
 		// Assert the expected page exists
 		self::assertStringContainsString($page_title, $crawler->filter('#page-body')->text());
@@ -78,7 +78,7 @@ class main_controller_test extends pages_functional_base
 	public function test_display_legacy($route)
 	{
 		// Load the page
-		$crawler = self::request('GET', "app.php/page/{$route}?sid={$this->sid}");
+		$crawler = self::request('GET', "index.php/page/{$route}?sid={$this->sid}");
 
 		// Assert the expected page exists
 		self::assertStringContainsString('Front End Test Page', $crawler->filter('#page-body')->text());
