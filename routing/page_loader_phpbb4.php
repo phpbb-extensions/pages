@@ -41,7 +41,7 @@ class page_loader_phpbb4 extends Loader
 	 * @param string|null $type The type of the resource, or null if not specified.
 	 * @return RouteCollection The collection of loaded routes.
 	 */
-	public function load(mixed $resource, ?string $type = null): RouteCollection
+	public function load(mixed $resource, string|null $type = null): RouteCollection
 	{
 		return $this->core->load_routes();
 	}
@@ -53,7 +53,7 @@ class page_loader_phpbb4 extends Loader
 	 * @param string|null $type The type of the resource, or null if not specified.
 	 * @return bool True if the loader supports the resource and type, false otherwise.
 	 */
-	public function supports(mixed $resource, ?string $type = null): bool
+	public function supports(mixed $resource, string|null $type = null): bool
 	{
 		return $this->core->supports_type($type);
 	}
