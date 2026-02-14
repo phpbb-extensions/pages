@@ -96,4 +96,16 @@ class page_routing_loader_test extends \phpbb_database_test_case
 		// Assert the route contains the expected path
 		self::assertSame($expected, $route->getPath());
 	}
+
+	public function test_loader_is_correct_adapter()
+	{
+		if (version_compare(\Symfony\Component\HttpKernel\Kernel::VERSION, '7.0.0', '>='))
+		{
+			self::assertInstanceOf(\phpbb\pages\routing\page_loader_phpbb4::class, $this->loader);
+		}
+		else
+		{
+			self::assertInstanceOf(\phpbb\pages\routing\page_loader_phpbb3::class, $this->loader);
+		}
+	}
 }

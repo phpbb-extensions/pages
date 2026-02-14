@@ -27,6 +27,7 @@
 			<directory suffix=".php">./language/</directory>
 			<directory suffix=".php">./migrations/</directory>
 			<directory suffix=".php">./tests/</directory>
+			<file>./routing/page_loader_phpbb3.php</file>
 		</exclude>
 	</source>
 </phpunit>
