@@ -48,11 +48,14 @@ class viewonline_test extends pages_functional_base
 	public function test_viewonline_check($page_title)
 	{
 		// Create user1 and send them to the Viewonline
+		self::$client->restart();
 		$this->create_user('user1');
 		$this->login('user1');
+		// PHP goes faster than DBMS, make sure session data got written to the database.
+		sleep(1);
 		$crawler = self::request('GET', "viewonline.php?sid={$this->sid}");
 
-		// Is admin still viewing the test page
+		// Is admin still viewing the test page?
 		self::assertStringContainsString('admin', $crawler->filter('#page-body table.table1')->text());
 
 		$session_entries = $crawler->filter('#page-body table.table1 tr')->count();
