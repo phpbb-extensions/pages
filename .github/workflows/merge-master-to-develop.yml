@@ -1,0 +1,62 @@
+name: Sync develop branch
+
+on:
+    push:
+        branches:
+            # Keep this in sync with SYNC_SOURCE_BRANCH below.
+            # GitHub Actions does not allow env values in trigger branch filters.
+            - master
+
+env:
+    SYNC_SOURCE_BRANCH: master
+    SYNC_TARGET_BRANCH: dev/4.0
+
+permissions:
+    contents: write
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: false
+
+jobs:
+    sync-dev-branch:
+        name: Merge master into develop branch
+        # Keep this named after the GitHub repository.
+        # GitHub Actions does not allow workflow env values in jobs.<job_id>.if.
+        if: github.repository == 'phpbb-extensions/pages' && github.event.repository.fork == false
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - name: Configure Git author
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+            - name: Merge source branch into target branch when clean
+              run: |
+                  if ! git ls-remote --exit-code --heads origin "${SYNC_TARGET_BRANCH}" > /dev/null 2>&1; then
+                      echo "origin/${SYNC_TARGET_BRANCH} does not exist; skipping."
+                      exit 0
+                  fi
+
+                  git fetch --no-tags --prune origin "${SYNC_TARGET_BRANCH}"
+                  git checkout -B "${SYNC_TARGET_BRANCH}" "origin/${SYNC_TARGET_BRANCH}"
+
+                  if git merge --no-edit "$GITHUB_SHA"; then
+                      if [ "$(git rev-list --count "origin/${SYNC_TARGET_BRANCH}..HEAD")" -eq 0 ]; then
+                          echo "${SYNC_TARGET_BRANCH} is already up to date."
+                          exit 0
+                      fi
+
+                      git push origin "HEAD:${SYNC_TARGET_BRANCH}"
+                  else
+                      echo "${SYNC_SOURCE_BRANCH} could not be merged cleanly into ${SYNC_TARGET_BRANCH}; skipping."
+                      if git rev-parse -q --verify MERGE_HEAD > /dev/null; then
+                          git merge --abort
+                      fi
+                  fi
