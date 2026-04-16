@@ -59,4 +59,5 @@ jobs:
                       if git rev-parse -q --verify MERGE_HEAD > /dev/null; then
                           git merge --abort
                       fi
+                      exit 1
                   fi
