@@ -24,6 +24,9 @@ class event_listener_base extends \phpbb_test_case
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\pages\operators\page */
 	protected $page_operator;
 
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\routing\router */
+	protected $router;
+
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\template\template */
 	protected $template;
 
@@ -58,6 +61,14 @@ class event_listener_base extends \phpbb_test_case
 		$this->page_operator = $this->getMockBuilder('\phpbb\pages\operators\page')
 			->disableOriginalConstructor()
 			->getMock();
+		$this->router = $this->getMockBuilder('\phpbb\routing\router')
+			->disableOriginalConstructor()
+			->getMock();
+
+		$route_collection = new \Symfony\Component\Routing\RouteCollection();
+		$route_collection->add('phpbb_pages_dynamic_route_1', new \Symfony\Component\Routing\Route('/test'));
+		$this->router->method('getRouteCollection')
+			->willReturn($route_collection);
 	}
 
 	/**
@@ -72,6 +83,7 @@ class event_listener_base extends \phpbb_test_case
 			$this->controller_helper,
 			$this->lang,
 			$this->page_operator,
+			$this->router,
 			$this->template,
 			$this->user,
 			$this->php_ext

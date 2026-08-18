@@ -29,6 +29,12 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\pages\operators\page */
 	protected $page_operator;
 
+	/** @var \phpbb\routing\router */
+	protected $router;
+
+	/** @var array|null Page route paths mapped to page IDs */
+	protected $page_route_ids;
+
 	/** @var \phpbb\template\template */
 	protected $template;
 
@@ -45,17 +51,19 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper    $helper          Controller helper object
 	* @param \phpbb\language\language    $lang            Language object
 	* @param \phpbb\pages\operators\page $page_operator   Pages operator object
+	* @param \phpbb\routing\router        $router          Router object
 	* @param \phpbb\template\template    $template        Template object
 	* @param \phpbb\user                 $user            User object
 	* @param string                      $php_ext         phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\pages\operators\page $page_operator, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\pages\operators\page $page_operator, \phpbb\routing\router $router, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
 		$this->auth = $auth;
 		$this->helper = $helper;
 		$this->lang = $lang;
 		$this->page_operator = $page_operator;
+		$this->router = $router;
 		$this->template = $template;
 		$this->user = $user;
 		$this->php_ext = $php_ext;
@@ -132,25 +140,47 @@ class listener implements EventSubscriberInterface
 	*/
 	public function viewonline_page($event)
 	{
-		// Are any users on app.php?
-		if ($event['on_page'][1] === 'index')
+		if (!isset($event['row']['session_page']))
 		{
-			// Load our language file
-			$this->lang->add_lang('pages_common', 'phpbb/pages');
+			return;
+		}
 
-			// Load our page routes and titles
-			$page_routes = $this->page_operator->get_page_routes();
+		$session_path = parse_url($event['row']['session_page'], PHP_URL_PATH);
+		if (!is_string($session_path))
+		{
+			return;
+		}
 
-			// If any of our pages are being viewed, update the event vars with our routes and titles
-			foreach ($page_routes as $page_id => $page_data)
+		// Session pages include the front controller, whose name differs between
+		// phpBB versions. Router paths do not include the front controller.
+		$session_path = preg_replace('#^.*\.' . preg_quote($this->php_ext, '#') . '(?=/)#', '', $session_path);
+
+		if ($this->page_route_ids === null)
+		{
+			$this->page_route_ids = array();
+			foreach ($this->router->getRouteCollection()->all() as $route_name => $route)
 			{
-				if ($event['row']['session_page'] === 'index.' . $this->php_ext . '/' . $page_data['route'])
+				if (strpos($route_name, 'phpbb_pages_dynamic_route_') === 0)
 				{
-					$event['location'] = $this->lang->lang('PAGES_VIEWONLINE', $page_data['title']);
-					$event['location_url'] = $this->helper->route('phpbb_pages_dynamic_route_' . $page_id);
-					break;
+					$this->page_route_ids[$route->getPath()] = (int) substr($route_name, strlen('phpbb_pages_dynamic_route_'));
 				}
 			}
 		}
+
+		if (!isset($this->page_route_ids[$session_path]))
+		{
+			return;
+		}
+
+		$page_id = $this->page_route_ids[$session_path];
+		$page_routes = $this->page_operator->get_page_routes();
+		if (!isset($page_routes[$page_id]))
+		{
+			return;
+		}
+
+		$this->lang->add_lang('pages_common', 'phpbb/pages');
+		$event['location'] = $this->lang->lang('PAGES_VIEWONLINE', $page_routes[$page_id]['title']);
+		$event['location_url'] = $this->helper->route('phpbb_pages_dynamic_route_' . $page_id);
 	}
 }

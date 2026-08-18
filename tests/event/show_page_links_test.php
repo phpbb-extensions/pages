@@ -59,6 +59,9 @@ class show_page_links_test extends \phpbb_database_test_case
 		$phpbb_container = $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerInterface')
 			->disableOriginalConstructor()
 			->getMock();
+		$router = $this->getMockBuilder('\phpbb\routing\router')
+			->disableOriginalConstructor()
+			->getMock();
 
 		// Set up the listener
 		$listener = new \phpbb\pages\event\listener(
@@ -75,6 +78,7 @@ class show_page_links_test extends \phpbb_database_test_case
 				'phpbb_pages_links',
 				'phpbb_pages_pages_links'
 			),
+			$router,
 			$template,
 			$user,
 			$phpEx

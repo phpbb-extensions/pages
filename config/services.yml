@@ -35,6 +35,7 @@ services:
             - '@controller.helper'
             - '@language'
             - '@phpbb.pages.operator'
+            - '@router'
             - '@template'
             - '@user'
             - '%core.php_ext%'

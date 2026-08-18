@@ -85,6 +85,32 @@ class event_listener_viewonline_test extends event_listener_base
 				'phpbb_pages_dynamic_route_1#a:0:{}',
 				$lang->lang('PAGES_VIEWONLINE', '$location'),
 			),
+			// test when the front controller has the phpBB 4 name
+			array(
+				array(
+					1 => 'index',
+				),
+				array(
+					'session_page' => 'index.' . $phpEx . '/test'
+				),
+				'$location_url',
+				'$location',
+				'phpbb_pages_dynamic_route_1#a:0:{}',
+				$this->lang->lang('PAGES_VIEWONLINE', '$location'),
+			),
+			// test without relying on a particular front-controller name
+			array(
+				array(
+					1 => 'front',
+				),
+				array(
+					'session_page' => 'front.' . $phpEx . '/test?foo=bar'
+				),
+				'$location_url',
+				'$location',
+				'phpbb_pages_dynamic_route_1#a:0:{}',
+				$this->lang->lang('PAGES_VIEWONLINE', '$location'),
+			),
 			// test when on_page is index and session_page is for non-existent pages
 			array(
 				array(
