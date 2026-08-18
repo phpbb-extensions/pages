@@ -96,7 +96,7 @@ class event_listener_viewonline_test extends event_listener_base
 				'$location_url',
 				'$location',
 				'phpbb_pages_dynamic_route_1#a:0:{}',
-				$this->lang->lang('PAGES_VIEWONLINE', '$location'),
+				$lang->lang('PAGES_VIEWONLINE', '$location'),
 			),
 			// test without relying on a particular front-controller name
 			array(
@@ -109,7 +109,7 @@ class event_listener_viewonline_test extends event_listener_base
 				'$location_url',
 				'$location',
 				'phpbb_pages_dynamic_route_1#a:0:{}',
-				$this->lang->lang('PAGES_VIEWONLINE', '$location'),
+				$lang->lang('PAGES_VIEWONLINE', '$location'),
 			),
 			// test when on_page is index and session_page is for non-existent pages
 			array(
