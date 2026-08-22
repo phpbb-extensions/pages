@@ -2,6 +2,12 @@
 
 ## Version 3.x (for phpBB 3.3 and later)
 
+### 3.0.2 - 2026-08-22
+
+- Refactored dynamic page route loading for forward compatibility with Symfony 7 and phpBB 4 internals while retaining compatibility with phpBB 3 and earlier Symfony versions.
+- Improved Who Is Online route detection so custom pages are identified reliably across phpBB front-controller and routing changes.
+- Removed obsolete phpBB 3.1 Prosilver navigation classes from page links.
+
 ### 3.0.1 - 2025-06-04
 
 - Added pagination to the Pages list in the Admin Control Panel for improved usability.
