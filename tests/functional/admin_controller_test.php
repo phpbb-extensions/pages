@@ -43,6 +43,36 @@ class admin_controller_test extends pages_functional_base
 	}
 
 	/**
+	* Test Pages ACP icon cache purge
+	*/
+	public function test_acp_purge_icons()
+	{
+		// Let the web server create the cache file. On Windows, PHPUnit and IIS
+		// run as different users, so IIS cannot reliably delete a CLI-created file.
+		$this->create_page('Icon Cache Test Page', 'Icon cache test page');
+		self::request('GET', 'index.php');
+
+		$cache = $this->get_cache_driver();
+		$cached_icons = $cache->get('_pages_icons');
+		self::assertIsArray($cached_icons);
+
+		// A request without a valid form key must not purge the icon cache
+		$crawler = self::request('POST', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&action=purge_icons&sid={$this->sid}");
+		$this->assertContainsLang('FORM_INVALID', $crawler->filter('.errorbox')->text());
+		$cache->unload();
+		$cache->load();
+		self::assertSame($cached_icons, $cache->get('_pages_icons'));
+
+		// Submitting the purge form with its form key clears the icon cache
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
+		$form = $crawler->selectButton($this->lang('ACP_PAGES_PURGE_ICONS'))->form();
+		self::submit($form);
+		$cache->unload();
+		$cache->load();
+		self::assertFalse($cache->get('_pages_icons'));
+	}
+
+	/**
 	* Test Pages ACP Create Page
 	*/
 	public function test_acp_create()

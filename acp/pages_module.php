@@ -27,9 +27,6 @@ class pages_module
 	{
 		global $phpbb_container;
 
-		/** @var \phpbb\cache\driver\driver_interface */
-		$cache = $phpbb_container->get('cache.driver');
-
 		/** @var \phpbb\language\language $lang */
 		$lang = $phpbb_container->get('language');
 
@@ -101,7 +98,7 @@ class pages_module
 			case 'purge_icons':
 				// Purge icon cache
 				// @deprecated 3.1.0 - To be removed eventually
-				$cache->destroy('_pages_icons');
+				$admin_controller->purge_icons();
 			break;
 		}
 

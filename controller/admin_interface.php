@@ -52,6 +52,14 @@ interface admin_interface
 	public function delete_page($page_id);
 
 	/**
+	* Purge the page icon cache
+	*
+	* @return void
+	* @access public
+	*/
+	public function purge_icons();
+
+	/**
 	* Set page url
 	*
 	* @param string $u_action Custom form action

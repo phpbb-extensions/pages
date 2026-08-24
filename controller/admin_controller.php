@@ -97,6 +97,8 @@ class admin_controller implements admin_interface
 	*/
 	public function display_pages()
 	{
+		add_form_key('phpbb_pages_purge_icons');
+
 		/* @var $pagination \phpbb\pagination */
 		$pagination = $this->container->get('pagination');
 		$start		= $this->request->variable('start', 0);
@@ -204,7 +206,7 @@ class admin_controller implements admin_interface
 		$this->lang->add_lang('posting');
 
 		// Add form key for form validation checks
-		add_form_key('add_edit_page');
+		add_form_key('phpbb_pages_add_edit_page');
 
 		// Collect form data
 		$data = array(
@@ -251,7 +253,7 @@ class admin_controller implements admin_interface
 		{
 			// Test if the form is valid
 			// Use -1 to allow unlimited time to submit form
-			if (!check_form_key('add_edit_page', -1))
+			if (!check_form_key('phpbb_pages_add_edit_page', -1))
 			{
 				$errors[] = $this->lang->lang('FORM_INVALID');
 			}
@@ -426,6 +428,22 @@ class admin_controller implements admin_interface
 				)
 			));
 		}
+	}
+
+	/**
+	* Purge the page icon cache
+	*
+	* @return void
+	* @access public
+	*/
+	public function purge_icons()
+	{
+		if (!check_form_key('phpbb_pages_purge_icons'))
+		{
+			trigger_error($this->lang->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+		}
+
+		$this->cache->destroy('_pages_icons');
 	}
 
 	/**
