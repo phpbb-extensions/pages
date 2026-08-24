@@ -94,12 +94,6 @@ class pages_module
 					)));
 				}
 			break;
-
-			case 'purge_icons':
-				// Purge icon cache
-				// @deprecated 3.1.0 - To be removed eventually
-				$admin_controller->purge_icons();
-			break;
 		}
 
 		// Display pages
