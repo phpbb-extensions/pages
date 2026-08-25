@@ -33,6 +33,7 @@ class page_entity_insert_test extends page_entity_base
 			'page_description_display'			=> 1,
 			'page_content'						=> 'inserted-content',
 			'page_content_allow_html'			=> 0,
+			'page_content_markdown'				=> 0,
 			'page_display'						=> 1,
 			'page_display_to_guests'			=> 0,
 			'page_title_switch'					=> 0,

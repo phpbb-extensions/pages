@@ -37,6 +37,9 @@ class page_entity_base extends \phpbb_database_test_case
 	/** @var \phpbb\textformatter\s9e\utils */
 	protected $text_formatter_utils;
 
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\pages\textformatter\litedown */
+	protected $litedown;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(__DIR__ . '/fixtures/page.xml');
@@ -52,6 +55,15 @@ class page_entity_base extends \phpbb_database_test_case
 		$config = $this->config = new \phpbb\config\config(array());
 		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
 		$this->text_formatter_utils = new \phpbb\textformatter\s9e\utils();
+		$this->litedown = $this->getMockBuilder('\phpbb\pages\textformatter\litedown')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->litedown->method('parse')->willReturnCallback(function ($text) {
+			return '<t>' . $text . '</t>';
+		});
+		$this->litedown->method('render')->willReturnCallback(function ($text) {
+			return $text;
+		});
 	}
 
 	/**
@@ -61,7 +73,7 @@ class page_entity_base extends \phpbb_database_test_case
 	*/
 	protected function get_page_entity()
 	{
-		return new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages', $this->text_formatter_utils);
+		return new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages', $this->text_formatter_utils, $this->litedown);
 	}
 
 	/**
@@ -84,6 +96,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_bbcode_bitfield'		=> '',
 				'page_content_bbcode_options'		=> 0,
 				'page_content_allow_html'			=> 0,
+				'page_content_markdown'				=> 0,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
 				'page_title_switch'					=> 0,
@@ -102,6 +115,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_bbcode_bitfield'		=> 'QA==',
 				'page_content_bbcode_options'		=> 7,
 				'page_content_allow_html'			=> 0,
+				'page_content_markdown'				=> 0,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
 				'page_title_switch'					=> 0,
@@ -120,6 +134,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_bbcode_bitfield'		=> 'IA==',
 				'page_content_bbcode_options'		=> 7,
 				'page_content_allow_html'			=> 0,
+				'page_content_markdown'				=> 0,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
 				'page_title_switch'					=> 0,
@@ -138,6 +153,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_bbcode_bitfield'		=> '',
 				'page_content_bbcode_options'		=> 0,
 				'page_content_allow_html'			=> 0,
+				'page_content_markdown'				=> 0,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
 				'page_title_switch'					=> 0,
@@ -156,6 +172,7 @@ class page_entity_base extends \phpbb_database_test_case
 				'page_content_bbcode_bitfield'		=> '',
 				'page_content_bbcode_options'		=> 0,
 				'page_content_allow_html'			=> 1,
+				'page_content_markdown'				=> 0,
 				'page_display'						=> 1,
 				'page_display_to_guests'			=> 1,
 				'page_title_switch'					=> 0,

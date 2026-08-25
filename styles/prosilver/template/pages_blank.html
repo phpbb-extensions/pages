@@ -18,10 +18,10 @@
 {% INCLUDECSS '@phpbb_pages/pages_controller.css' %}
 {% include 'overall_header.html' %}
 
-<div class="content pages-content">
-
-	{{ PAGE_CONTENT }}
-
+<div class="postbody pages-postbody">
+	<div class="content pages-content">
+		{{ PAGE_CONTENT }}
+	</div>
 </div>
 
 {% EVENT phpbb_pages_after_page_content %}

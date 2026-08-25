@@ -6,6 +6,7 @@ services:
         class: phpbb\pages\controller\admin_controller
         arguments:
             - '@cache.driver'
+            - '@phpbb.pages.routing.route_cache'
             - '@controller.helper'
             - '@language'
             - '@log'
@@ -16,6 +17,13 @@ services:
             - '@service_container'
             - '@dispatcher'
             - '%core.root_path%'
+            - '%core.php_ext%'
+
+    phpbb.pages.routing.route_cache:
+        class: phpbb\pages\routing\route_cache
+        arguments:
+            - '@filesystem'
+            - '%core.cache_dir%'
             - '%core.php_ext%'
 
     phpbb.pages.controller:
@@ -42,6 +50,46 @@ services:
         tags:
             - { name: event.listener }
 
+    phpbb.pages.text_formatter.litedown:
+        class: phpbb\pages\textformatter\litedown
+        arguments:
+            - '@service_container'
+            - '@config'
+
+    phpbb.pages.text_formatter.factory:
+        class: phpbb\pages\textformatter\factory
+        arguments:
+            - '@text_formatter.data_access'
+            - '@cache.driver'
+            - '@dispatcher'
+            - '@config'
+            - '@text_formatter.s9e.link_helper'
+            - '@log'
+            - '%text_formatter.cache.dir%'
+            - '_phpbb_pages_text_formatter_parser'
+            - '_phpbb_pages_text_formatter_renderer'
+
+    phpbb.pages.text_formatter.parser:
+        class: phpbb\textformatter\s9e\parser
+        arguments:
+            - '@cache.driver'
+            - '_phpbb_pages_text_formatter_parser'
+            - '@phpbb.pages.text_formatter.factory'
+            - '@dispatcher'
+
+    phpbb.pages.text_formatter.renderer:
+        class: phpbb\textformatter\s9e\renderer
+        arguments:
+            - '@cache.driver'
+            - '%text_formatter.cache.dir%'
+            - '_phpbb_pages_text_formatter_renderer'
+            - '@phpbb.pages.text_formatter.factory'
+            - '@dispatcher'
+        calls:
+            - [configure_quote_helper, ['@text_formatter.s9e.quote_helper']]
+            - [configure_smilies_path, ['@config', '@path_helper']]
+            - [configure_user, ['@user', '@config', '@auth']]
+
     phpbb.pages.entity:
         class: phpbb\pages\entity\page
         shared: false # service MUST not be shared for this to work!
@@ -51,6 +99,7 @@ services:
             - '@dispatcher'
             - '%phpbb.pages.tables.pages%'
             - '@text_formatter.utils'
+            - '@phpbb.pages.text_formatter.litedown'
 
     phpbb.pages.operator:
         class: phpbb\pages\operators\page
@@ -77,6 +126,7 @@ services:
         arguments:
             - '@dbal.conn'
             - '%phpbb.pages.tables.pages%'
+            - '@phpbb.pages.text_formatter.litedown'
         calls:
             - [set_name, [phpbb_pages_text]]
         tags:

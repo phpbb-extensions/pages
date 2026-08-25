@@ -303,6 +303,30 @@ interface page_interface
 	public function content_disable_smilies();
 
 	/**
+	* Check if Markdown is enabled on the content
+	*
+	* @return bool
+	* @access public
+	*/
+	public function content_markdown_enabled();
+
+	/**
+	* Enable Markdown on the content
+	*
+	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	*/
+	public function content_enable_markdown();
+
+	/**
+	* Disable Markdown on the content
+	*
+	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	*/
+	public function content_disable_markdown();
+
+	/**
 	* Check if HTML is allowed on the content
 	*
 	* @return bool allow html
@@ -313,7 +337,7 @@ interface page_interface
 	/**
 	* Enable HTML on the content
 	* This should be called before set_content(); content_enable_html()->set_content()
-	* This should also be called after the bbcode, smilies and magic url setters
+	* This should also be called after the Markdown, BBCode, smilies and magic URL setters
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public

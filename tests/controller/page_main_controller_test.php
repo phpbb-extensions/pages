@@ -59,6 +59,15 @@ class page_main_controller_test extends \phpbb_database_test_case
 			->disableOriginalConstructor()
 			->getMock();
 		$text_formatter_utils = new \phpbb\textformatter\s9e\utils();
+		$litedown = $this->getMockBuilder('\phpbb\pages\textformatter\litedown')
+			->disableOriginalConstructor()
+			->getMock();
+		$litedown->method('parse')->willReturnCallback(function ($text) {
+			return '<t>' . $text . '</t>';
+		});
+		$litedown->method('render')->willReturnCallback(function ($text) {
+			return $text;
+		});
 
 		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
 			->disableOriginalConstructor()
@@ -66,8 +75,8 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$this->container
 			->method('get')
 			->with('phpbb.pages.entity')
-			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils) {
-				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils);
+			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
+				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown);
 			})
 		;
 

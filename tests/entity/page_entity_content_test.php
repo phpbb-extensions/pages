@@ -209,4 +209,36 @@ class page_entity_content_test extends page_entity_base
 		// Assert that the content for display matches HTML decoded content
 		self::assertSame($content, $entity->get_content_for_display());
 	}
+
+	/**
+	* Test Markdown state and HTML exclusivity
+	*/
+	public function test_markdown_content_option()
+	{
+		$entity = $this->get_page_entity();
+
+		self::assertFalse($entity->content_markdown_enabled());
+		$entity->content_enable_markdown();
+		self::assertTrue($entity->content_markdown_enabled());
+		self::assertFalse($entity->content_html_enabled());
+
+		$entity->content_enable_html();
+		self::assertTrue($entity->content_html_enabled());
+		self::assertFalse($entity->content_markdown_enabled());
+	}
+
+	/**
+	* Test Markdown content uses the isolated LiteDown parser
+	*/
+	public function test_markdown_content_uses_litedown()
+	{
+		$this->litedown->expects(self::once())
+			->method('parse')
+			->with('**Markdown**', false, false, false)
+			->willReturn('<r><STRONG>Markdown</STRONG></r>');
+
+		$this->get_page_entity()
+			->content_enable_markdown()
+			->set_content('**Markdown**');
+	}
 }

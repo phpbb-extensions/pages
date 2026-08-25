@@ -75,6 +75,43 @@ class admin_controller_test extends pages_functional_base
 	}
 
 	/**
+	* Test Markdown parsing is limited to opted-in Pages content
+	*/
+	public function test_acp_create_markdown()
+	{
+		$markdown_route = 'markdown-' . time();
+		$this->create_page('Markdown Page', "# Heading\n\n**Strong text**", array(
+			'page_route' => $markdown_route,
+			'parse_markdown' => true,
+		));
+
+		$crawler = self::request('GET', "app.php/{$markdown_route}");
+		self::assertSame('Heading', $crawler->filter('.content h1')->text());
+		self::assertSame('Strong text', $crawler->filter('.content strong')->text());
+
+		$plain_route = 'plain-' . time();
+		$this->create_page('Plain Page', '**Plain text**', array(
+			'page_route' => $plain_route,
+			'parse_markdown' => false,
+		));
+
+		$crawler = self::request('GET', "app.php/{$plain_route}");
+		self::assertSame(0, $crawler->filter('.content strong')->count());
+		self::assertStringContainsString('**Plain text**', $crawler->filter('.content')->text());
+
+		// Pages Markdown formatter must not change regular forum post storage
+		$post_text = "**Forum text**\n\nSecond paragraph";
+		$post = $this->create_topic(2, 'Pages Markdown Isolation', $post_text);
+		$result = $this->db->sql_query('SELECT post_text
+			FROM ' . POSTS_TABLE . '
+			WHERE post_id = ' . (int) $post['post_id']);
+		$stored_post_text = $this->db->sql_fetchfield('post_text');
+		$this->db->sql_freeresult($result);
+
+		self::assertSame("<t>**Forum text**<br/>\n<br/>\nSecond paragraph</t>", $stored_post_text);
+	}
+
+	/**
 	* Test Pages ACP manage permission
 	*/
 	public function test_pages_acp_permissions()

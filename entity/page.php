@@ -30,6 +30,7 @@ class page implements page_interface
 	 *    page_content_bbcode_bitfield
 	 *    page_content_bbcode_options
 	 *    page_content_allow_html
+	 *    page_content_markdown
 	 *    page_display
 	 *    page_display_to_guests
 	 *    page_title_switch
@@ -51,6 +52,9 @@ class page implements page_interface
 	/** @var \phpbb\textformatter\s9e\utils */
 	protected $text_formatter_utils;
 
+	/** @var \phpbb\pages\textformatter\litedown */
+	protected $litedown;
+
 	/**
 	* The database table the page data is stored in
 	*
@@ -66,15 +70,17 @@ class page implements page_interface
 	* @param \phpbb\event\dispatcher_interface   $phpbb_dispatcher      Event dispatcher
 	* @param string                              $pages_table           Name of the table used to store page data
 	* @param \phpbb\textformatter\s9e\utils      $text_formatter_utils  Text manipulation utilities
+	* @param \phpbb\pages\textformatter\litedown $litedown             LiteDown parser manager
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table, \phpbb\textformatter\s9e\utils $text_formatter_utils)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table, \phpbb\textformatter\s9e\utils $text_formatter_utils, \phpbb\pages\textformatter\litedown $litedown)
 	{
 		$this->db = $db;
 		$this->config = $config;
 		$this->dispatcher = $phpbb_dispatcher;
 		$this->pages_table = $pages_table;
 		$this->text_formatter_utils = $text_formatter_utils;
+		$this->litedown = $litedown;
 	}
 
 	/**
@@ -146,6 +152,7 @@ class page implements page_interface
 			'page_content_bbcode_bitfield'	=> 'string',
 			'page_content_bbcode_options'	=> 'integer',
 			'page_content_allow_html'		=> 'bool',
+			'page_content_markdown'			=> 'bool',
 		);
 
 		// Go through the basic fields and set them to our data array
@@ -606,7 +613,9 @@ class page implements page_interface
 		}
 		else
 		{
-			$content = generate_text_for_display($content, $uid, $bitfield, $options, $censor_text);
+			$content = $this->content_markdown_enabled()
+				? $this->litedown->render($content, $censor_text)
+				: generate_text_for_display($content, $uid, $bitfield, $options, $censor_text);
 		}
 
 		/**
@@ -641,7 +650,14 @@ class page implements page_interface
 
 		// Prepare the text for storage
 		$uid = $bitfield = $flags = '';
-		generate_text_for_storage($content, $uid, $bitfield, $flags, $this->content_bbcode_enabled(), $this->content_magic_url_enabled(), $this->content_smilies_enabled());
+		if ($this->content_markdown_enabled())
+		{
+			$content = $this->litedown->parse($content, $this->content_bbcode_enabled(), $this->content_magic_url_enabled(), $this->content_smilies_enabled());
+		}
+		else
+		{
+			generate_text_for_storage($content, $uid, $bitfield, $flags, $this->content_bbcode_enabled(), $this->content_magic_url_enabled(), $this->content_smilies_enabled());
+		}
 
 		// Set the content to our data array
 		$this->data['page_content'] = $content;
@@ -770,6 +786,44 @@ class page implements page_interface
 	}
 
 	/**
+	* Check if Markdown is enabled on the content
+	*
+	* @return bool
+	* @access public
+	*/
+	public function content_markdown_enabled()
+	{
+		return !empty($this->data['page_content_markdown']);
+	}
+
+	/**
+	* Enable Markdown on the content
+	*
+	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	*/
+	public function content_enable_markdown()
+	{
+		$this->content_disable_html();
+		$this->set_markdown_option(true);
+
+		return $this;
+	}
+
+	/**
+	* Disable Markdown on the content
+	*
+	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	*/
+	public function content_disable_markdown()
+	{
+		$this->set_markdown_option(false);
+
+		return $this;
+	}
+
+	/**
 	* Check if HTML is allowed on the content
 	*
 	* @return bool allow html
@@ -790,10 +844,11 @@ class page implements page_interface
 	*/
 	public function content_enable_html()
 	{
-		// Disable bbcode, magic url and smiley flags
+		// Disable Markdown, BBCode, magic URL and smiley flags
 		$this->content_disable_bbcode()
 			->content_disable_smilies()
-			->content_disable_magic_url();
+			->content_disable_magic_url()
+			->content_disable_markdown();
 
 		$this->data['page_content_allow_html'] = true;
 
@@ -936,6 +991,27 @@ class page implements page_interface
 
 			decode_message($content, $this->data['page_content_bbcode_uid']);
 
+			$this->set_content($content);
+		}
+	}
+
+	/**
+	* Set Markdown content option
+	*
+	* @param bool $enabled Enable Markdown
+	* @return void
+	* @access protected
+	*/
+	protected function set_markdown_option($enabled)
+	{
+		$enabled = (bool) $enabled;
+		$changed = $this->content_markdown_enabled() !== $enabled;
+		$this->data['page_content_markdown'] = $enabled;
+
+		if ($changed && !empty($this->data['page_content']))
+		{
+			$content = $this->data['page_content'];
+			decode_message($content, $this->data['page_content_bbcode_uid']);
 			$this->set_content($content);
 		}
 	}

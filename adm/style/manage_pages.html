@@ -72,6 +72,7 @@
 						<label><input type="checkbox" class="radio html-off" name="parse_bbcode"{% if S_PARSE_BBCODE_CHECKED %} checked="checked"{% endif %}> {{ lang('PARSE_BBCODE') }}</label>
 						<label><input type="checkbox" class="radio html-off" name="parse_smilies"{% if S_PARSE_SMILIES_CHECKED %} checked="checked"{% endif %}> {{ lang('PARSE_SMILIES') }}</label>
 						<label><input type="checkbox" class="radio html-off" name="parse_magic_url"{% if S_PARSE_MAGIC_URL_CHECKED %} checked="checked"{% endif %}> {{ lang('PARSE_URLS') }}</label>
+						<label><input type="checkbox" class="radio html-off" name="parse_markdown"{% if S_PARSE_MARKDOWN_CHECKED %} checked="checked"{% endif %}> {{ lang('ACP_PAGES_PARSE_MARKDOWN') }}</label>
 						<label><input type="checkbox" class="radio html-on" name="parse_html"{% if S_PARSE_HTML_CHECKED %} checked="checked"{% endif %}> {{ lang('PARSE_HTML') }}</label>
 					</dd>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ FLASH_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>

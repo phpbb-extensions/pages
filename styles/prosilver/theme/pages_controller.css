@@ -1,8 +1,19 @@
-.content p,
-.content h1,
-.content h2,
-.content h3,
-.content h4 {
+.pages-postbody {
+	float: none;
+	width: auto;
+}
+
+/* Normalize LiteDown blocks without overriding BBCode-owned paragraphs. */
+.pages-content > p,
+.pages-content li > p,
+.pages-content blockquote > p,
+.pages-content blockquote > div > p,
+.pages-content h1,
+.pages-content h2,
+.pages-content h3,
+.pages-content h4,
+.pages-content h5,
+.pages-content h6 {
 	font: inherit;
 	font-size: 100%;
 	line-height: 1.3em;
@@ -10,13 +21,9 @@
 	text-transform: none;
 	border: 0;
 	color: inherit;
-	margin: 0;
+	float: none;
+	margin: 0 0 0.5em 0;
 	padding: 0;
-}
-
-.pages-content {
-	font-size: 1.25em;
-	line-height: 1.3em;
 }
 
 .pages-content h1 {
@@ -41,11 +48,4 @@
 
 .pages-content h6 {
 	font-size: 0.75em;
-}
-
-.pages-content .postimage {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	max-width: 100%;
 }

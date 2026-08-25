@@ -27,14 +27,15 @@ class cron_reparser_test extends pages_functional_base
 
 		// Store some of our data in variables
 		$page_title = 'Cron Reparser Test Page';
-		$page_content = '[b]This is a functional test page for the cron task reparser.[/b]';
+		$page_content = '**This is a functional test page for the cron task reparser.**';
 
 		// Create a test page
-		$route = $this->create_page($page_title, $page_content);
+		$route = $this->create_page($page_title, $page_content, array('parse_markdown' => true));
 
 		// Go to the test page
 		$crawler = self::request('GET', "index.php/$route?sid=$this->sid");
 		$this->assertStringContainsString($page_title, $crawler->filter('h2')->text());
+		$this->assertStringContainsString('This is a functional test page', $crawler->filter('.content strong')->text());
 
 		// Assert no reparsers have run yet
 		$this->assertEmpty($this->get_reparser_resume());
@@ -71,6 +72,10 @@ class cron_reparser_test extends pages_functional_base
 			['phpbb.pages.text_reparser.page_text'],
 			array_keys(unserialize($this->get_reparser_resume(), ['allowed_classes' => false]))
 		);
+
+		// Markdown remains parsed after the text reparser runs
+		$crawler = self::request('GET', "app.php/$route?sid=$this->sid");
+		$this->assertStringContainsString('This is a functional test page', $crawler->filter('.content strong')->text());
 	}
 
 	/**

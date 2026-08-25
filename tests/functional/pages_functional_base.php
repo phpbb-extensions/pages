@@ -61,6 +61,7 @@ class pages_functional_base extends \phpbb_functional_test_case
 			'parse_smilies'		=> true,
 			'parse_magic_url'	=> true,
 			'parse_html'		=> false,
+			'parse_markdown'	=> false,
 			'page_template'		=> 'pages_default.html',
 			'page_order'		=> 0,
 			'page_links'		=> array(2),

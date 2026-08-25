@@ -46,6 +46,9 @@ class page_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb\textformatter\s9e\utils */
 	protected $text_formatter_utils;
 
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\pages\textformatter\litedown */
+	protected $litedown;
+
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\user */
 	protected $user;
 
@@ -72,11 +75,20 @@ class page_operator_base extends \phpbb_database_test_case
 			->getMock();
 		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
 		$text_formatter_utils = $this->text_formatter_utils = new \phpbb\textformatter\s9e\utils();
+		$litedown = $this->litedown = $this->getMockBuilder('\phpbb\pages\textformatter\litedown')
+			->disableOriginalConstructor()
+			->getMock();
+		$litedown->method('parse')->willReturnCallback(function ($text) {
+			return '<t>' . $text . '</t>';
+		});
+		$litedown->method('render')->willReturnCallback(function ($text) {
+			return $text;
+		});
 		$this->container
 			->method('get')
 			->with('phpbb.pages.entity')
-			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils) {
-				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils);
+			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
+				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown);
 			})
 		;
 		$this->cache = new \phpbb_mock_cache();
@@ -126,7 +138,8 @@ class page_operator_base extends \phpbb_database_test_case
 			$this->config,
 			$this->dispatcher,
 			'phpbb_pages',
-			$this->text_formatter_utils
+			$this->text_formatter_utils,
+			$this->litedown
 		);
 	}
 }
