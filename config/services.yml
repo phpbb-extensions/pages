@@ -88,7 +88,7 @@ services:
         calls:
             - [configure_quote_helper, ['@text_formatter.s9e.quote_helper']]
             - [configure_smilies_path, ['@config', '@path_helper']]
-            - [configure_user, ['@user', '@config', '@auth']]
+            - [configure_user, ['@auth', '@config', '@user']]
 
     phpbb.pages.entity:
         class: phpbb\pages\entity\page

@@ -74,7 +74,7 @@ class cron_reparser_test extends pages_functional_base
 		);
 
 		// Markdown remains parsed after the text reparser runs
-		$crawler = self::request('GET', "app.php/$route?sid=$this->sid");
+		$crawler = self::request('GET', "index.php/$route?sid=$this->sid");
 		$this->assertStringContainsString('This is a functional test page', $crawler->filter('.content strong')->text());
 	}
 

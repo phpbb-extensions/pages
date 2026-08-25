@@ -44,7 +44,6 @@ class pages_text_test extends \phpbb_textreparser_test_row_based_plugin
 
 		$reparser = new \phpbb\pages\textreparser\plugins\pages_text($this->db, 'phpbb_pages', $litedown);
 		$method = new \ReflectionMethod($reparser, 'reparse_record');
-		$method->setAccessible(true);
 		$method->invoke($reparser, array(
 			'text' => $stored_text,
 			'markdown' => true,

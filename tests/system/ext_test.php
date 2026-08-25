@@ -15,7 +15,7 @@ class ext_test extends \phpbb_test_case
 	public function test_extension_is_enableable_on_supported_phpbb()
 	{
 		$container = $this->createMock(\Symfony\Component\DependencyInjection\ContainerInterface::class);
-		$finder = $this->getMockBuilder(\phpbb\finder::class)->disableOriginalConstructor()->getMock();
+		$finder = $this->getMockBuilder(\phpbb\finder\finder::class)->disableOriginalConstructor()->getMock();
 		$migrator = $this->getMockBuilder(\phpbb\db\migrator::class)->disableOriginalConstructor()->getMock();
 		$extension = new \phpbb\pages\ext($container, $finder, $migrator, 'phpbb/pages', '');
 

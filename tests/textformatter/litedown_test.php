@@ -72,7 +72,12 @@ class litedown_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 		$renderer->method('get_viewcensors')->willReturn(true);
-		$renderer->expects(self::exactly(2))->method('set_viewcensors')->withConsecutive(array(false), array(true));
+		$matcher = self::exactly(2);
+		$renderer->expects($matcher)
+			->method('set_viewcensors')
+			->willReturnCallback(function ($viewcensors) use ($matcher) {
+				self::assertSame(array(false, true)[$matcher->numberOfInvocations() - 1], $viewcensors);
+			});
 		$renderer->expects(self::once())->method('render')->with('<r/>')->willReturn('<p>Page</p>');
 
 		$container = $this->createMock('\Symfony\Component\DependencyInjection\ContainerInterface');
@@ -94,7 +99,12 @@ class litedown_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 		$renderer->method('get_viewcensors')->willReturn(true);
-		$renderer->expects(self::exactly(2))->method('set_viewcensors')->withConsecutive(array(false), array(true));
+		$matcher = self::exactly(2);
+		$renderer->expects($matcher)
+			->method('set_viewcensors')
+			->willReturnCallback(function ($viewcensors) use ($matcher) {
+				self::assertSame(array(false, true)[$matcher->numberOfInvocations() - 1], $viewcensors);
+			});
 		$renderer->method('render')->willThrowException(new \RuntimeException('Rendering failed'));
 
 		$container = $this->createMock('\Symfony\Component\DependencyInjection\ContainerInterface');

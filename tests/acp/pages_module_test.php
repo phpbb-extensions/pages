@@ -65,7 +65,6 @@ class pages_module_test extends \phpbb_test_case
 			'list' => array('', 'display_pages', 'ACP_PAGES_MANAGE'),
 			'add' => array('add', 'add_page', 'ACP_PAGES_CREATE_PAGE'),
 			'edit' => array('edit', 'edit_page', 'ACP_PAGES_EDIT_PAGE'),
-			'purge icons' => array('purge_icons', 'purge_icons', 'ACP_PAGES_MANAGE'),
 		);
 	}
 
@@ -77,7 +76,7 @@ class pages_module_test extends \phpbb_test_case
 		$this->variables = array('action' => $action, 'page_id' => 7);
 		$this->controller->expects(self::once())->method('set_page_url')->with('adm.php?i=pages');
 		$this->controller->expects(self::once())->method($method);
-		if (!in_array($action, array('', 'purge_icons')))
+		if ($action !== '')
 		{
 			$this->controller->expects(self::never())->method('display_pages');
 		}

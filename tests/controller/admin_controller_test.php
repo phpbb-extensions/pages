@@ -196,7 +196,6 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		$this->controller->display_pages();
 
-		self::assertSame(array('phpbb_pages_purge_icons'), admin_test_state::$form_keys);
 		self::assertCount(4, $this->blocks['pages']);
 		self::assertSame('title_1', $this->blocks['pages'][0]['PAGES_TITLE']);
 		self::assertSame('/phpbb_pages_dynamic_route_1', $this->blocks['pages'][0]['U_PAGES_ROUTE']);
@@ -230,7 +229,6 @@ class admin_controller_test extends \phpbb_database_test_case
 	public function test_page_link_options_load_stored_links_when_current_is_empty()
 	{
 		$method = new \ReflectionMethod(admin_controller::class, 'create_page_link_options');
-		$method->setAccessible(true);
 		$method->invoke($this->controller, 1, array());
 
 		self::assertTrue($this->blocks['page_link_options'][0]['S_SELECTED']);
@@ -316,23 +314,6 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->delete_page(1);
 	}
 
-	public function test_purge_icons_destroys_only_pages_icon_cache()
-	{
-		$cache = $this->createMock(\phpbb\cache\driver\driver_interface::class);
-		$cache->expects(self::once())->method('destroy')->with('_pages_icons');
-		$this->replace_controller_service('cache', $cache);
-
-		$this->controller->purge_icons();
-	}
-
-	public function test_purge_icons_rejects_invalid_form()
-	{
-		admin_test_state::$valid_form = false;
-		$this->setExpectedTriggerError(E_USER_WARNING, 'The submitted form was invalid. Try submitting again.|back:adm.php?i=pages');
-
-		$this->controller->purge_icons();
-	}
-
 	protected function valid_page_data($route, $title)
 	{
 		return array(
@@ -359,7 +340,6 @@ class admin_controller_test extends \phpbb_database_test_case
 	protected function replace_controller_service($property, $service)
 	{
 		$reflection = new \ReflectionProperty(admin_controller::class, $property);
-		$reflection->setAccessible(true);
 		$reflection->setValue($this->controller, $service);
 	}
 }

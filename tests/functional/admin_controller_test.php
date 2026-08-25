@@ -85,7 +85,7 @@ class admin_controller_test extends pages_functional_base
 			'parse_markdown' => true,
 		));
 
-		$crawler = self::request('GET', "app.php/{$markdown_route}");
+		$crawler = self::request('GET', "index.php/{$markdown_route}");
 		self::assertSame('Heading', $crawler->filter('.content h1')->text());
 		self::assertSame('Strong text', $crawler->filter('.content strong')->text());
 
@@ -95,7 +95,7 @@ class admin_controller_test extends pages_functional_base
 			'parse_markdown' => false,
 		));
 
-		$crawler = self::request('GET', "app.php/{$plain_route}");
+		$crawler = self::request('GET', "index.php/{$plain_route}");
 		self::assertSame(0, $crawler->filter('.content strong')->count());
 		self::assertStringContainsString('**Plain text**', $crawler->filter('.content')->text());
 

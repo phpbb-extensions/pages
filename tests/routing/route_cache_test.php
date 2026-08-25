@@ -31,6 +31,11 @@ class route_cache_test extends \phpbb_test_case
 
 	public function test_purge_invalidates_existing_compiled_routes()
 	{
+		if (!function_exists('opcache_invalidate'))
+		{
+			self::markTestSkipped('OPcache is not available.');
+		}
+
 		$filesystem = $this->createMock('\phpbb\filesystem\filesystem_interface');
 		$filesystem->expects(self::exactly(2))
 			->method('exists')
