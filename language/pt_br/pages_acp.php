@@ -80,7 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Este campo é obrigatório.',
 	'ACP_PAGES_FORM_DESC'				=> 'Descrição da página',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Apenas será exibido na lista de páginas no ACP.',
-	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Exibir como título do link',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Caminho da URL da página',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>route</strong> é um identificador exclusivo, usado no final da URL de uma página, para definir o link para a página, por exemplo, <samp>http://www.phpbb.com/<strong>route</strong></samp>. Apenas letras, números, hífens e sublinhados são permitidos. Este campo é obrigatório.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Conteúdo da página',
@@ -100,8 +100,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS'				=> 'Mostrar página aos visitantes',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Se definido como Não, apenas utilizadores registados poderão acessar a página.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Link da página',
-	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
-	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Exibir primeiro o título da página',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'Por padrão, os navegadores exibem o título desta página após o nome do site <samp style="white-space: nowrap">“Nome do site - Título da página”</samp>. Ao ativar esta opção, o título da página será exibido antes do nome do site <samp style="white-space: nowrap">“Título da página - Nome do site”</samp>.',
 	'PARSE_HTML'						=> 'Modo HTML',
 
 	// Page link location names

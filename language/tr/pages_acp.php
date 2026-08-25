@@ -80,7 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Bu gerekli bir alandır.',
 	'ACP_PAGES_FORM_DESC'				=> 'Sayfa açıklaması',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Bu, sadece YKP’de sayfaların listesinde gösterilecektir.',
-	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Bağlantı başlığı olarak göster',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Sayfa URL yolu',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>yol</strong>, sayfaya bağlantı vermek için belirlenen, sayfanın URL adresinin sonunda kullanılacak benzersiz bir tanımlayıcıdır, ör. <samp>http://www.phpbb.com/<strong>yol</strong></samp>. Sadece harfler, rakamlar, tire ve alt çizgilere izin verilir. Bu zorunlu bir alandır.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Sayfa içeriği',
@@ -100,8 +100,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS'				=> 'Sayfayı misafirlere göster',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Eğer hayır olarak ayarlarsanız, sadece kayıtlı kullanıcılar sayfaya erişebileceklerdir.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Sayfa bağlantısı',
-	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
-	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Önce sayfa başlığını göster',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'Tarayıcılar varsayılan olarak bu sayfanın başlığını site adından sonra gösterir <samp style="white-space: nowrap">“Site Adı - Sayfa Başlığı”</samp>. Bu seçenek etkinleştirildiğinde sayfa başlığı site adından önce gösterilir <samp style="white-space: nowrap">“Sayfa Başlığı - Site Adı”</samp>.',
 	'PARSE_HTML'						=> 'HTML ayrıştır',
 
 	// Page link location names

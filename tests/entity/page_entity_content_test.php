@@ -241,4 +241,37 @@ class page_entity_content_test extends page_entity_base
 			->content_enable_markdown()
 			->set_content('**Markdown**');
 	}
+
+	public function test_markdown_content_is_rendered_by_litedown()
+	{
+		$this->litedown->expects(self::once())
+			->method('parse')
+			->with('**Markdown**', false, false, false)
+			->willReturn('<r><STRONG>Markdown</STRONG></r>');
+		$this->litedown->expects(self::once())
+			->method('render')
+			->with('<t>**Markdown**</t>', true)
+			->willReturn('<strong>Markdown</strong>');
+
+		$content = $this->get_page_entity()
+			->content_enable_markdown()
+			->set_content('**Markdown**')
+			->get_content_for_display();
+
+		self::assertSame('<t>**Markdown**</t>', $content);
+	}
+
+	public function test_enabling_markdown_reparses_existing_content()
+	{
+		$this->litedown->expects(self::once())
+			->method('parse')
+			->with('Existing content', false, false, false)
+			->willReturn('<t>Existing content</t>');
+
+		$entity = $this->get_page_entity();
+		$entity->set_content('Existing content');
+		$entity->content_enable_markdown();
+
+		self::assertTrue($entity->content_markdown_enabled());
+	}
 }

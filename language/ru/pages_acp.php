@@ -79,7 +79,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Это обязательное поле.',
 	'ACP_PAGES_FORM_DESC'				=> 'Описание страницы',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Только для отображения в админ.панели в списке страниц.',
-	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Показывать как заголовок ссылки',
 	'ACP_PAGES_FORM_ROUTE'				=> 'URL путь страницы',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Путь, по которому страница будет доступна, например, <samp>http://www.phpbb.com/<strong>route</strong></samp>. Разрешены только буквы и цифры, обязательное поле.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Содержимое страницы',
@@ -99,8 +99,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS'				=> 'Показывать страницу гостям',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Если выберите Нет, то страница будет показываться только зарегистрированным пользователям',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Ссылка на страницу',
-	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
-	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Показывать заголовок страницы первым',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'По умолчанию браузеры показывают заголовок этой страницы после названия сайта <samp style="white-space: nowrap">«Название сайта - Заголовок страницы»</samp>. При включении этой настройки заголовок страницы будет показан перед названием сайта <samp style="white-space: nowrap">«Заголовок страницы - Название сайта»</samp>.',
 	'PARSE_HTML'						=> 'Обрабатывать HTML',
 
 	// Page link location names

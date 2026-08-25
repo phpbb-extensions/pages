@@ -158,4 +158,31 @@ class event_listener_viewonline_test extends event_listener_base
 		self::assertEquals($expected_location_url, $location_url);
 		self::assertEquals($expected_location, $location);
 	}
+
+	public function test_viewonline_page_ignores_invalid_session_url()
+	{
+		$event = new \phpbb\event\data(array(
+			'row' => array('session_page' => 'http://['),
+			'location' => 'unchanged',
+			'location_url' => 'unchanged',
+		));
+
+		$this->get_listener()->viewonline_page($event);
+
+		self::assertSame('unchanged', $event['location']);
+	}
+
+	public function test_viewonline_page_ignores_route_missing_from_database()
+	{
+		$this->page_operator->method('get_page_routes')->willReturn(array());
+		$event = new \phpbb\event\data(array(
+			'row' => array('session_page' => 'app.php/test'),
+			'location' => 'unchanged',
+			'location_url' => 'unchanged',
+		));
+
+		$this->get_listener()->viewonline_page($event);
+
+		self::assertSame('unchanged', $event['location']);
+	}
 }

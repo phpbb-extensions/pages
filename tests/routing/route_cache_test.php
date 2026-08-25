@@ -28,4 +28,15 @@ class route_cache_test extends \phpbb_test_case
 		$route_cache = new \phpbb\pages\routing\route_cache($filesystem, '/cache/', 'php');
 		$route_cache->purge();
 	}
+
+	public function test_purge_invalidates_existing_compiled_routes()
+	{
+		$filesystem = $this->createMock('\phpbb\filesystem\filesystem_interface');
+		$filesystem->expects(self::exactly(2))
+			->method('exists')
+			->willReturn(true);
+		$filesystem->expects(self::once())->method('remove');
+
+		(new \phpbb\pages\routing\route_cache($filesystem, '/cache/', 'php'))->purge();
+	}
 }

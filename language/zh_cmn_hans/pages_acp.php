@@ -80,7 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> '必填项',
 	'ACP_PAGES_FORM_DESC'				=> '单页描述',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> '只显示在ACP的单页列表中。',
-	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> '显示为链接标题',
 	'ACP_PAGES_FORM_ROUTE'				=> '单页 URL 路径',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '路径 <strong>route</strong> 是唯一的标识，放在单页 URL 的最后，用于表示单页的链接。 例如 <samp>http://www.phpbb.com/<strong>route</strong></samp>。 字母，数字，连字符号和下划线。这是必填项。',
 	'ACP_PAGES_FORM_CONTENT'			=> '单页内容',
@@ -101,7 +101,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> '若设置为否，只有注册用户可以访问此单页。',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> '单页链接',
 	'ACP_PAGES_TITLE_SWITCH'			=> '首先显示页面标题',
-	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> '浏览器默认在网站标题之后显示页面标题 <samp style="white-space: nowrap">“Site Name - Page Title”</samp>。 启用这个选项会让页面标题显示在网站标题的前面 <samp style="white-space: nowrap">“Page Title - Site Name”</samp>。',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> '浏览器默认在网站名称之后显示页面标题 <samp style="white-space: nowrap">“网站名称 - 页面标题”</samp>。启用此选项后，页面标题将显示在网站名称之前 <samp style="white-space: nowrap">“页面标题 - 网站名称”</samp>。',
 	'PARSE_HTML'						=> '解析 HTML',
 
 	// Page link location names

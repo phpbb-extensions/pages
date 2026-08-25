@@ -79,7 +79,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Feltet er obligatorisk.',
 	'ACP_PAGES_FORM_DESC'				=> 'Sidens beskrivelse',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Vises kun i ACP-listen med sider.',
-	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Vis som linktitel',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Sidens URL-rute',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'En renset version af sidens navn, bruges til at bygge sidens URL, f.eks. <samp>http://www.phpbb.com/<strong>din-rute</strong></samp>. Kun bogstaver, tal, bindestreger og underscores er tilladt. Feltet er obligatorisk.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Sidens indhold',
@@ -99,8 +99,8 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS'				=> 'Vis side til gæster',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Hvis den er sat til nej, er det kun tilmeldte brugere som kan tilgå siden.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Sidens link',
-	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
-	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Vis sidetitlen først',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'Browsere viser som standard denne sides titel efter webstedets navn <samp style="white-space: nowrap">“Webstedets navn - Sidetitel”</samp>. Aktivering af denne indstilling viser sidetitlen før webstedets navn <samp style="white-space: nowrap">“Sidetitel - Webstedets navn”</samp>.',
 	'PARSE_HTML'						=> 'Analyser HTML',
 
 	// Page link location names

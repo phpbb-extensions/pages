@@ -101,4 +101,12 @@ class exception_test extends \phpbb_test_case
 	{
 		self::assertEquals('Required field missing', $this->lang->lang('EXCEPTION_FIELD_MISSING'));
 	}
+
+	public function test_array_exception_can_be_rendered_as_string()
+	{
+		$exception = new \phpbb\pages\exception\base(array('EXCEPTION_OUT_OF_BOUNDS', 'page_id'));
+
+		self::assertStringContainsString('EXCEPTION_OUT_OF_BOUNDS', (string) $exception);
+		self::assertStringContainsString('page_id', (string) $exception);
+	}
 }
