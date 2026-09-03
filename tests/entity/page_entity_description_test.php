@@ -27,6 +27,7 @@ class page_entity_description_test extends page_entity_base
 			array('hello world', 'hello world'),
 			array(1, '1'),
 			array(null, ''),
+			array('Emoji 😀 中文 Кириллица', 'Emoji 😀 中文 Кириллица'),
 
 			// Maximum length
 			array(

@@ -157,7 +157,7 @@ class page implements page_interface
 		{
 			$routes[$row['page_id']] = array(
 				'route' => $row['page_route'],
-				'title' => $row['page_title'],
+				'title' => utf8_decode_ncr($row['page_title']),
 			);
 		}
 		$this->db->sql_freeresult($result);
@@ -288,6 +288,13 @@ class page implements page_interface
 
 		$rows = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
+
+		foreach ($rows as &$row)
+		{
+			$row['page_title'] = utf8_decode_ncr($row['page_title']);
+			$row['page_description'] = utf8_decode_ncr($row['page_description']);
+		}
+		unset($row);
 
 		return $rows;
 	}

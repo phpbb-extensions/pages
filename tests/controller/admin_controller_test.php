@@ -256,11 +256,11 @@ class admin_controller_test extends \phpbb_database_test_case
 	public function test_add_page_submission_persists_and_purges_routes()
 	{
 		$this->post['submit'] = true;
-		$this->variables = $this->valid_page_data('new-page', 'New page');
+		$this->variables = $this->valid_page_data('new-page', 'New 😀 中文 page');
 		$this->route_cache->expects(self::once())->method('purge');
 		$this->log->expects(self::once())
 			->method('add')
-			->with('admin', 2, '127.0.0.1', 'ACP_PAGES_ADDED_LOG');
+			->with('admin', 2, '127.0.0.1', 'ACP_PAGES_ADDED_LOG', self::isType('int'), array('New &#128512; &#20013;&#25991; page'));
 		$this->setExpectedTriggerError(E_USER_NOTICE, 'Page successfully added.|back:adm.php?i=pages');
 
 		$this->controller->add_page();
@@ -269,11 +269,11 @@ class admin_controller_test extends \phpbb_database_test_case
 	public function test_edit_page_submission_persists_and_purges_routes()
 	{
 		$this->post['submit'] = true;
-		$this->variables = $this->valid_page_data('page-1-updated', 'Updated page');
+		$this->variables = $this->valid_page_data('page-1-updated', 'Updated 😀 Кириллица page');
 		$this->route_cache->expects(self::once())->method('purge');
 		$this->log->expects(self::once())
 			->method('add')
-			->with('admin', 2, '127.0.0.1', 'ACP_PAGES_EDITED_LOG');
+			->with('admin', 2, '127.0.0.1', 'ACP_PAGES_EDITED_LOG', self::isType('int'), array('Updated &#128512; &#1050;&#1080;&#1088;&#1080;&#1083;&#1083;&#1080;&#1094;&#1072; page'));
 		$this->setExpectedTriggerError(E_USER_NOTICE, 'Page successfully updated.|back:adm.php?i=pages');
 
 		$this->controller->edit_page(1);
@@ -281,9 +281,13 @@ class admin_controller_test extends \phpbb_database_test_case
 
 	public function test_delete_page_removes_real_page_and_logs()
 	{
+		$this->db->sql_query("UPDATE phpbb_pages
+			SET page_title = 'Deleted &#128512; page'
+			WHERE page_id = 1");
+
 		$this->log->expects(self::once())
 			->method('add')
-			->with('admin', 2, '127.0.0.1', 'ACP_PAGES_DELETED_LOG');
+			->with('admin', 2, '127.0.0.1', 'ACP_PAGES_DELETED_LOG', self::isType('int'), array('Deleted &#128512; page'));
 
 		$this->controller->delete_page(1);
 

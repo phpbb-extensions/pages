@@ -87,4 +87,33 @@ class page_entity_save_test extends page_entity_base
 		// Save the entity with no rule ID set
 		$entity->save();
 	}
+
+	/**
+	 * Test Unicode data is safely encoded for storage and decoded by the entity
+	 */
+	public function test_save_unicode_page_details()
+	{
+		$entity = $this->get_page_entity();
+		$entity
+			->load(1)
+			->set_title('Emoji 😀 title')
+			->set_description('中文 and Кириллица 😀 description')
+			->save();
+
+		$result = $this->db->sql_query('SELECT page_title, page_description
+			FROM phpbb_pages
+			WHERE page_id = 1');
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		self::assertSame('Emoji &#128512; title', $row['page_title']);
+		$expected_description = strpos($this->db->get_sql_layer(), 'mssql') === 0
+			? '&#20013;&#25991; and &#1050;&#1080;&#1088;&#1080;&#1083;&#1083;&#1080;&#1094;&#1072; &#128512; description'
+			: '中文 and Кириллица &#128512; description';
+		self::assertSame($expected_description, $row['page_description']);
+
+		$entity->load(1);
+		self::assertSame('Emoji 😀 title', $entity->get_title());
+		self::assertSame('中文 and Кириллица 😀 description', $entity->get_description());
+	}
 }

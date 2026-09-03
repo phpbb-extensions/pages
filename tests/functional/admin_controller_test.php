@@ -62,12 +62,12 @@ class admin_controller_test extends pages_functional_base
 		$this->assertContainsLang('EXCEPTION_FIELD_MISSING', $crawler->text());
 
 		// Create page
-		$page_title = 'Functional Test Page';
+		$page_title = 'Functional 😀 中文 Кириллица Page';
 		$this->create_page($page_title, 'This is a functional test page');
 
 		// Confirm new page appears in Pages list
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
-		self::assertStringContainsString('Functional Test Page', $crawler->text());
+		self::assertStringContainsString($page_title, $crawler->text());
 
 		// Confirm the log entry has been added correctly
 		$crawler = self::request('GET', "adm/index.php?i=acp_logs&mode=admin&sid={$this->sid}");

@@ -309,7 +309,7 @@ class admin_controller implements admin_interface
 					$this->page_operator->insert_page_links($entity->get_id(), $data['page_links']);
 
 					// Log the action
-					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_EDITED_LOG', time(), array($entity->get_title()));
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_EDITED_LOG', time(), array(utf8_encode_ncr($entity->get_title())));
 
 					// The result message to use
 					$message = 'ACP_PAGES_EDIT_SUCCESS';
@@ -323,7 +323,7 @@ class admin_controller implements admin_interface
 					$this->page_operator->insert_page_links($entity->get_id(), $data['page_links']);
 
 					// Log the action
-					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_ADDED_LOG', time(), array($entity->get_title()));
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_ADDED_LOG', time(), array(utf8_encode_ncr($entity->get_title())));
 
 					// The result message to use
 					$message = 'ACP_PAGES_ADD_SUCCESS';
@@ -420,7 +420,7 @@ class admin_controller implements admin_interface
 		}
 
 		// Log the action
-		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_DELETED_LOG', time(), array($entity->get_title()));
+		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_DELETED_LOG', time(), array(utf8_encode_ncr($entity->get_title())));
 
 		// If AJAX was used, show user a result message
 		if ($this->request->is_ajax())

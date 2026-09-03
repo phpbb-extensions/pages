@@ -46,4 +46,18 @@ class page_operator_get_page_routes_test extends page_operator_base
 
 		self::assertEquals($expected, $routes);
 	}
+
+	/**
+	 * Test NCR-encoded page titles are decoded
+	 */
+	public function test_get_routes_decodes_page_titles()
+	{
+		$this->db->sql_query("UPDATE phpbb_pages
+			SET page_title = 'Emoji &#128512; title'
+			WHERE page_id = 1");
+
+		$routes = $this->get_page_operator()->get_page_routes();
+
+		self::assertSame('Emoji 😀 title', $routes[1]['title']);
+	}
 }

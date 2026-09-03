@@ -26,6 +26,7 @@ class page_entity_title_test extends page_entity_base
 			// sent to set_title(), expected from get_title()
 			array('foo', 'foo'),
 			array(1, '1'),
+			array('Emoji 😀 中文 Кириллица', 'Emoji 😀 中文 Кириллица'),
 
 			// Maximum length
 			array(

@@ -133,6 +133,26 @@ class page_operator_get_page_links_test extends page_operator_base
 	}
 
 	/**
+	 * Test NCR-encoded page titles and descriptions are decoded
+	 */
+	public function test_get_page_links_decodes_page_details()
+	{
+		$this->db->sql_query("UPDATE phpbb_pages
+			SET page_title = 'Emoji &#128512; title',
+				page_description = 'Emoji &#128512; description'
+			WHERE page_id = 1");
+
+		$rows = $this->get_page_operator()->get_page_links(1);
+
+		self::assertCount(2, $rows);
+		foreach ($rows as $row)
+		{
+			self::assertSame('Emoji 😀 title', $row['page_title']);
+			self::assertSame('Emoji 😀 description', $row['page_description']);
+		}
+	}
+
+	/**
 	* Test data for the test_get_page_links_fails() function
 	*
 	* @return array Array of test data

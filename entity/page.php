@@ -276,7 +276,7 @@ class page implements page_interface
 	*/
 	public function get_title()
 	{
-		return isset($this->data['page_title']) ? (string) $this->data['page_title'] : '';
+		return isset($this->data['page_title']) ? utf8_decode_ncr((string) $this->data['page_title']) : '';
 	}
 
 	/**
@@ -292,14 +292,16 @@ class page implements page_interface
 		// Enforce a string
 		$title = (string) $title;
 
+		$title = $this->encode_unicode_for_storage($title);
+
 		// Title is a required field
 		if ($title === '')
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('title', 'FIELD_MISSING'));
 		}
 
-		// We limit the title length to 200 characters
-		if (truncate_string($title, 200) !== $title)
+		// Limit both the displayed and stored title lengths to the column size.
+		if (truncate_string($title, 200, 200) !== $title)
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}
@@ -318,7 +320,7 @@ class page implements page_interface
 	*/
 	public function get_description()
 	{
-		return isset($this->data['page_description']) ? (string) $this->data['page_description'] : '';
+		return isset($this->data['page_description']) ? utf8_decode_ncr((string) $this->data['page_description']) : '';
 	}
 
 	/**
@@ -334,8 +336,10 @@ class page implements page_interface
 		// Enforce a string
 		$description = (string) $description;
 
-		// We limit the title length to 255 characters
-		if (truncate_string($description, 255) !== $description)
+		$description = $this->encode_unicode_for_storage($description);
+
+		// Limit both the displayed and stored description lengths to the column size.
+		if (truncate_string($description, 255, 255) !== $description)
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('description', 'TOO_LONG'));
 		}
@@ -1014,5 +1018,25 @@ class page implements page_interface
 			decode_message($content, $this->data['page_content_bbcode_uid']);
 			$this->set_content($content);
 		}
+	}
+
+	/**
+	 * Encode Unicode characters that cannot be stored safely by the DBMS.
+	 *
+	 * MSSQL string literals do not preserve raw Unicode reliably, so encode all
+	 * non-ASCII characters there. Other DBMSes only need four-byte characters
+	 * encoded for compatibility with utf8mb3 columns.
+	 *
+	 * @param string $text
+	 * @return string
+	 */
+	protected function encode_unicode_for_storage($text)
+	{
+		if (strpos($this->db->get_sql_layer(), 'mssql') === 0)
+		{
+			return utf8_encode_ncr($text);
+		}
+
+		return utf8_encode_ucr($text);
 	}
 }
