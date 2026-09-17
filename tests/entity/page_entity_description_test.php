@@ -34,6 +34,10 @@ class page_entity_description_test extends page_entity_base
 				str_repeat('a', 255),
 				str_repeat('a', 255),
 			),
+			array(
+				str_repeat('😀', 28),
+				str_repeat('😀', 28),
+			),
 		);
 	}
 
@@ -70,6 +74,9 @@ class page_entity_description_test extends page_entity_base
 			// One character more than maximum length
 			array(
 				str_repeat('a', 256),
+			),
+			array(
+				str_repeat('😀', 29),
 			),
 		);
 	}

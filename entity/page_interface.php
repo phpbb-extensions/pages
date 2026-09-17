@@ -13,57 +13,38 @@ namespace phpbb\pages\entity;
 /**
 * Interface for a page
 *
-* This describes all of the methods we'll have for a single page
+* This describes all the methods we'll have for a single page
 */
 interface page_interface
 {
-	/**
-	* Load the data from the database for a page
-	*
-	* @param int $id Page identifier
-	* @param string $route Page route
-	* @return page_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
-	*/
-	public function load($id = 0, $route = '');
-
 	/**
 	* Import data for a page
 	*
 	* Used when the data is already loaded externally.
 	* Any existing data on this page is over-written.
-	* All data is validated and an exception is thrown if any data is invalid.
+	* Required fields are checked and storage types are normalized. Values already loaded
+	* from storage are not passed through write-time transformations again.
 	*
 	* @param array $data Data array, typically from the database
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\base
 	*/
 	public function import($data);
 
 	/**
-	* Insert the page data for the first time
-	*
-	* Will throw an exception if the page was already inserted (call save() instead)
-	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
-	*/
-	public function insert();
+	 * Export current storage-form data.
+	 *
+	 * @return array
+	 */
+	public function get_data();
 
 	/**
-	* Save the current settings to the database
-	*
-	* This must be called before closing or any changes will not be saved!
-	* If adding a page (saving for the first time), you must call insert() or an exeception will be thrown
-	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
-	*/
-	public function save();
+	 * Export storage-form fields changed since hydration.
+	 *
+	 * @return array
+	 */
+	public function get_changes();
 
 	/**
 	* Get id
@@ -85,7 +66,7 @@ interface page_interface
 	* Set title
 	*
 	* @param string $title
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -103,7 +84,7 @@ interface page_interface
 	* Set description
 	*
 	* @param string $description Description text
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -121,7 +102,7 @@ interface page_interface
 	 * Set description display setting
 	 *
 	 * @param bool $option Description display setting
-	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @return page_interface $this object for chaining calls
 	 * @access public
 	 */
 	public function set_description_display($option);
@@ -138,7 +119,7 @@ interface page_interface
 	* Set route
 	*
 	* @param string $route Route text
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -156,7 +137,7 @@ interface page_interface
 	* Set order
 	*
 	* @param int $order Page sort order
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\out_of_bounds
 	*/
@@ -174,7 +155,7 @@ interface page_interface
 	* Set page template
 	*
 	* @param string $template Page template name
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -192,7 +173,7 @@ interface page_interface
 	* Set page icon font name
 	*
 	* @param string $name icon font name
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -219,7 +200,7 @@ interface page_interface
 	* Set content
 	*
 	* @param string $content
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function set_content($content);
@@ -236,7 +217,7 @@ interface page_interface
 	* Enable bbcode on the content
 	* This should be called before set_content(); content_enable_bbcode()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_bbcode();
@@ -245,7 +226,7 @@ interface page_interface
 	* Disable bbcode on the content
 	* This should be called before set_content(); content_disable_bbcode()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_bbcode();
@@ -262,7 +243,7 @@ interface page_interface
 	* Enable magic url on the content
 	* This should be called before set_content(); content_enable_magic_url()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_magic_url();
@@ -271,7 +252,7 @@ interface page_interface
 	* Disable magic url on the content
 	* This should be called before set_content(); content_disable_magic_url()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_magic_url();
@@ -288,7 +269,7 @@ interface page_interface
 	* Enable smilies on the content
 	* This should be called before set_content(); content_enable_smilies()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_smilies();
@@ -297,7 +278,7 @@ interface page_interface
 	* Disable smilies on the content
 	* This should be called before set_content(); content_disable_smilies()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_smilies();
@@ -313,7 +294,7 @@ interface page_interface
 	/**
 	* Enable Markdown on the content
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_markdown();
@@ -321,7 +302,7 @@ interface page_interface
 	/**
 	* Disable Markdown on the content
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_markdown();
@@ -339,7 +320,7 @@ interface page_interface
 	* This should be called before set_content(); content_enable_html()->set_content()
 	* This should also be called after the Markdown, BBCode, smilies and magic URL setters
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_html();
@@ -348,7 +329,7 @@ interface page_interface
 	* Disable HTML on the content
 	* This should be called before set_content(); content_disable_html()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_html();
@@ -365,7 +346,7 @@ interface page_interface
 	* Set page display setting
 	*
 	* @param bool $option Page display setting
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function set_page_display($option);
@@ -382,7 +363,7 @@ interface page_interface
 	* Set page display to guests setting
 	*
 	* @param bool $option Page display to guests setting
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function set_page_display_to_guests($option);
@@ -399,7 +380,7 @@ interface page_interface
 	 * Set page title switch setting
 	 *
 	 * @param bool $option Page title switch setting
-	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @return page_interface $this object for chaining calls
 	 * @access public
 	 */
 	public function set_page_title_switch($option);

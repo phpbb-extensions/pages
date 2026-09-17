@@ -33,6 +33,10 @@ class page_entity_title_test extends page_entity_base
 				str_repeat('a', 200),
 				str_repeat('a', 200),
 			),
+			array(
+				str_repeat('😀', 22),
+				str_repeat('😀', 22),
+			),
 		);
 	}
 
@@ -71,6 +75,9 @@ class page_entity_title_test extends page_entity_base
 			// One character more than maximum length
 			array(
 				str_repeat('a', 201),
+			),
+			array(
+				str_repeat('😀', 23),
 			),
 		);
 	}

@@ -158,7 +158,7 @@ class page_entity_route_test extends page_entity_base
 		// Load the page from the db if it exists
 		if (null !== $id)
 		{
-			$entity->load($id);
+			$entity->import($this->get_import_data()[$id]);
 		}
 
 		// Set the route
@@ -202,7 +202,7 @@ class page_entity_route_test extends page_entity_base
 		// Load the page from the db if it exists
 		if (null !== $id)
 		{
-			$entity->load($id);
+			$entity->import($this->get_import_data()[$id]);
 		}
 
 		// Set the route

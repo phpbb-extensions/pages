@@ -31,8 +31,8 @@ class page_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
-	protected $container;
+	/** @var \phpbb\pages\entity\factory */
+	protected $entity_factory;
 
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
@@ -64,15 +64,9 @@ class page_operator_base extends \phpbb_database_test_case
 		global $config, $phpbb_dispatcher, $phpbb_root_path;
 
 		$this->db = $this->new_dbal();
-		$db = $this->db;
-
 		// Global vars called upon during execution
 		$config = $this->config = new \phpbb\config\config(array());
 
-		// mock container for the entity service
-		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
-			->disableOriginalConstructor()
-			->getMock();
 		$phpbb_dispatcher = $this->dispatcher = new \phpbb_mock_event_dispatcher();
 		$text_formatter_utils = $this->text_formatter_utils = new \phpbb\textformatter\s9e\utils();
 		$litedown = $this->litedown = $this->getMockBuilder('\phpbb\pages\textformatter\litedown')
@@ -84,13 +78,14 @@ class page_operator_base extends \phpbb_database_test_case
 		$litedown->method('render')->willReturnCallback(function ($text) {
 			return $text;
 		});
-		$this->container
-			->method('get')
-			->with('phpbb.pages.entity')
-			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
-				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown);
-			})
-		;
+		$this->entity_factory = new \phpbb\pages\entity\factory(
+			$this->db,
+			$config,
+			$phpbb_dispatcher,
+			'phpbb_pages',
+			$text_formatter_utils,
+			$litedown
+		);
 		$this->cache = new \phpbb_mock_cache();
 		$this->user = $this->getMockBuilder('\phpbb\user')
 			->disableOriginalConstructor()
@@ -116,7 +111,7 @@ class page_operator_base extends \phpbb_database_test_case
 	{
 		return new \phpbb\pages\operators\page(
 			$this->cache,
-			$this->container,
+			$this->entity_factory,
 			$this->db,
 			$this->extension_manager,
 			$this->user,

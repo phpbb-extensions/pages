@@ -10,7 +10,6 @@
 
 namespace phpbb\pages\controller;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use phpbb\exception\http_exception;
 
 /**
@@ -21,8 +20,8 @@ class main_controller implements main_interface
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
-	/** @var ContainerInterface */
-	protected $container;
+	/** @var \phpbb\pages\operators\page */
+	protected $page_operator;
 
 	/** @var \phpbb\controller\helper */
 	protected $helper;
@@ -39,18 +38,18 @@ class main_controller implements main_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\auth\auth         $auth      Authentication object
-	* @param ContainerInterface       $container Service container interface
-	* @param \phpbb\controller\helper $helper    Controller helper object
-	* @param \phpbb\language\language $lang      Language object
-	* @param \phpbb\template\template $template  Template object
-	* @param \phpbb\user              $user      User object
+	* @param \phpbb\auth\auth            $auth          Authentication object
+	* @param \phpbb\pages\operators\page $page_operator Pages operator
+	* @param \phpbb\controller\helper    $helper        Controller helper object
+	* @param \phpbb\language\language    $lang          Language object
+	* @param \phpbb\template\template    $template      Template object
+	* @param \phpbb\user                 $user          User object
 	* @access public
 	*/
-	public function __construct(\phpbb\auth\auth $auth, ContainerInterface $container, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\pages\operators\page $page_operator, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->auth = $auth;
-		$this->container = $container;
+		$this->page_operator = $page_operator;
 		$this->helper = $helper;
 		$this->lang = $lang;
 		$this->template = $template;
@@ -104,14 +103,10 @@ class main_controller implements main_interface
 	*/
 	protected function load_page_data($route)
 	{
-		// Initiate the page entity
-		/* @var $entity \phpbb\pages\entity\page */
-		$entity = $this->container->get('phpbb.pages.entity');
-
 		// Load the requested page by route
 		try
 		{
-			$entity->load(0, $route);
+			$entity = $this->page_operator->get_page(0, $route);
 		}
 		catch (\phpbb\pages\exception\base $e)
 		{
@@ -119,7 +114,7 @@ class main_controller implements main_interface
 		}
 
 		// Throw 404 error if page display to guests is disabled
-		if ($this->user->data['user_id'] == ANONYMOUS && !$entity->get_page_display_to_guests())
+		if ((int) $this->user->data['user_id'] === ANONYMOUS && !$entity->get_page_display_to_guests())
 		{
 			throw new http_exception(404, 'PAGE_NOT_AVAILABLE', array($route));
 		}

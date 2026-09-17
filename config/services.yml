@@ -34,7 +34,7 @@ services:
             - '@request'
             - '@template'
             - '@user'
-            - '@service_container'
+            - '@pagination'
             - '@dispatcher'
             - '%core.root_path%'
             - '%core.php_ext%'
@@ -50,7 +50,7 @@ services:
         class: phpbb\pages\controller\main_controller
         arguments:
             - '@auth'
-            - '@service_container'
+            - '@phpbb.pages.operator'
             - '@controller.helper'
             - '@language'
             - '@template'
@@ -110,9 +110,8 @@ services:
             - [configure_smilies_path, ['@config', '@path_helper']]
             - [configure_user, ['@user', '@config', '@auth']]
 
-    phpbb.pages.entity:
-        class: phpbb\pages\entity\page
-        shared: false # service MUST not be shared for this to work!
+    phpbb.pages.entity_factory:
+        class: phpbb\pages\entity\factory
         arguments:
             - '@dbal.conn'
             - '@config'
@@ -125,7 +124,7 @@ services:
         class: phpbb\pages\operators\page
         arguments:
             - '@cache.driver'
-            - '@service_container'
+            - '@phpbb.pages.entity_factory'
             - '@dbal.conn'
             - '@ext.manager'
             - '@user'

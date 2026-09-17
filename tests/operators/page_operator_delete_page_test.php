@@ -45,10 +45,7 @@ class page_operator_delete_page_test extends page_operator_base
 		// Try to load the deleted page
 		try
 		{
-			// Setup the entity class
-			$entity = new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages', $this->text_formatter_utils, $this->litedown);
-
-			$deleted = $entity->load($page_id);
+			$deleted = $operator->get_page($page_id);
 		}
 		catch (\phpbb\pages\exception\base $e)
 		{
