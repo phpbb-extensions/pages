@@ -18,11 +18,29 @@ namespace phpbb\pages\operators;
 interface page_interface
 {
 	/**
+	 * Create an empty page entity.
+	 *
+	 * @return \phpbb\pages\entity\page_interface
+	 */
+	public function create_page();
+
+	/**
+	 * Get one page by identifier or route.
+	 *
+	 * @param int $id Page identifier
+	 * @param string $route Page route
+	 * @return \phpbb\pages\entity\page_interface
+	 * @throws \phpbb\pages\exception\base If the page is missing or stored data is invalid
+	 */
+	public function get_page($id = 0, $route = '');
+
+	/**
 	 * Get all pages
 	 *
 	 * @param int $limit
 	 * @param int $start
 	 * @return array Array of page data entities
+	 * @throws \phpbb\pages\exception\base If stored page data is invalid
 	 * @access public
 	 */
 	public function get_pages($limit = 0, $start = 0);
@@ -31,11 +49,20 @@ interface page_interface
 	* Add a page
 	*
 	* @param \phpbb\pages\entity\page_interface $entity Page entity with new data to insert
-	* @return page_interface Added page entity
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @return \phpbb\pages\entity\page_interface Added page entity
+	* @throws \phpbb\pages\exception\base If the entity already exists or stored data is invalid
 	* @access public
 	*/
 	public function add_page($entity);
+
+	/**
+	 * Persist changes to an existing page.
+	 *
+	 * @param \phpbb\pages\entity\page_interface $entity Page entity
+	 * @return \phpbb\pages\entity\page_interface Persisted page entity
+	 * @throws \phpbb\pages\exception\base If the entity is new, missing, or stored data is invalid
+	 */
+	public function save_page($entity);
 
 	/**
 	* Delete a page
@@ -48,7 +75,7 @@ interface page_interface
 	public function delete_page($page_id);
 
 	/**
-	* Get page routes (for use in viewonline)
+	* Get page routes (for use in view online)
 	*
 	* @return array Array of routes and page titles for all pages
 	* @access public
@@ -78,7 +105,7 @@ interface page_interface
 
 	/**
 	* Get custom page templates (pages_*.html)
-	* Added by the user to the core style/template directores
+	* Added by the user to the core style/template directories
 	*
 	* @return array Array of template file paths
 	* @access public

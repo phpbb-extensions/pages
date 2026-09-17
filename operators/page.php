@@ -10,8 +10,6 @@
 
 namespace phpbb\pages\operators;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
 * Operator for a set of pages
 */
@@ -20,8 +18,8 @@ class page implements page_interface
 	/** @var \phpbb\cache\driver\driver_interface */
 	protected $cache;
 
-	/** @var ContainerInterface */
-	protected $container;
+	/** @var \phpbb\pages\entity\factory */
+	protected $entity_factory;
 
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
@@ -45,7 +43,7 @@ class page implements page_interface
 	* Constructor
 	*
 	* @param \phpbb\cache\driver\driver_interface $cache                    Cache driver interface
-	* @param ContainerInterface                   $container                Service container interface
+	* @param \phpbb\pages\entity\factory         $entity_factory           Page entity factory
 	* @param \phpbb\db\driver\driver_interface    $db                       Database connection
 	* @param \phpbb\extension\manager             $extension_manager        Extension manager object
 	* @param \phpbb\user                          $user                     User object
@@ -54,10 +52,10 @@ class page implements page_interface
 	* @param string                               $pages_pages_links_table  Table name
 	* @access public
 	*/
-	public function __construct(\phpbb\cache\driver\driver_interface $cache, ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, \phpbb\user $user, $pages_table, $pages_links_table, $pages_pages_links_table)
+	public function __construct(\phpbb\cache\driver\driver_interface $cache, \phpbb\pages\entity\factory $entity_factory, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $extension_manager, \phpbb\user $user, $pages_table, $pages_links_table, $pages_pages_links_table)
 	{
 		$this->cache = $cache;
-		$this->container = $container;
+		$this->entity_factory = $entity_factory;
 		$this->db = $db;
 		$this->extension_manager = $extension_manager;
 		$this->user = $user;
@@ -67,11 +65,51 @@ class page implements page_interface
 	}
 
 	/**
+	 * Create an empty page entity.
+	 *
+	 * @return \phpbb\pages\entity\page_interface
+	 */
+	public function create_page()
+	{
+		return $this->entity_factory->create();
+	}
+
+	/**
+	 * Get one page by identifier or route.
+	 *
+	 * @param int $id Page identifier
+	 * @param string $route Page route
+	 * @return \phpbb\pages\entity\page_interface
+	 * @throws \phpbb\pages\exception\base If the page is missing or stored data is invalid
+	 */
+	public function get_page($id = 0, $route = '')
+	{
+		$sql_where = ($id !== 0)
+			? 'page_id = ' . (int) $id
+			: "page_route = '" . $this->db->sql_escape($route) . "'";
+
+		$sql = 'SELECT *
+			FROM ' . $this->pages_table . '
+			WHERE ' . $sql_where;
+		$result = $this->db->sql_query($sql);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		if ($row === false)
+		{
+			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+		}
+
+		return $this->create_page()->import($row);
+	}
+
+	/**
 	 * Get all pages
 	 *
 	 * @param int $limit
 	 * @param int $start
 	 * @return array Array of page data entities
+	 * @throws \phpbb\pages\exception\base If stored page data is invalid
 	 * @access public
 	 */
 	public function get_pages($limit = 0, $start = 0)
@@ -87,7 +125,7 @@ class page implements page_interface
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			// Import each page row into an entity
-			$entities[] = $this->container->get('phpbb.pages.entity')->import($row);
+			$entities[] = $this->create_page()->import($row);
 		}
 		$this->db->sql_freeresult($result);
 
@@ -100,19 +138,49 @@ class page implements page_interface
 	*
 	* @param \phpbb\pages\entity\page_interface $entity Page entity with new data to insert
 	* @return \phpbb\pages\entity\page_interface Added page entity
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \phpbb\pages\exception\base If the entity already exists or stored data is invalid
 	* @access public
 	*/
 	public function add_page($entity)
 	{
-		// Insert the page data to the database
-		$entity->insert();
+		if ($entity->get_id())
+		{
+			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+		}
 
-		// Get the newly inserted page's identifier
+		$data = array_diff_key($entity->get_data(), array('page_id' => null));
+		$sql = 'INSERT INTO ' . $this->pages_table . ' ' . $this->db->sql_build_array('INSERT', $data);
+		$this->db->sql_query($sql);
+		$page_id = (int) $this->db->sql_last_inserted_id();
+
+		return $this->get_page($page_id);
+	}
+
+	/**
+	 * Persist changes to an existing page.
+	 *
+	 * @param \phpbb\pages\entity\page_interface $entity Page entity
+	 * @return \phpbb\pages\entity\page_interface Persisted page entity
+	 * @throws \phpbb\pages\exception\base If the entity is new, missing, or stored data is invalid
+	 */
+	public function save_page($entity)
+	{
 		$page_id = $entity->get_id();
+		if (!$page_id)
+		{
+			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+		}
 
-		// Reload the data to return a fresh page entity
-		return $entity->load($page_id);
+		$changes = array_diff_key($entity->get_changes(), array('page_id' => null));
+		if (!empty($changes))
+		{
+			$sql = 'UPDATE ' . $this->pages_table . '
+				SET ' . $this->db->sql_build_array('UPDATE', $changes) . '
+				WHERE page_id = ' . $page_id;
+			$this->db->sql_query($sql);
+		}
+
+		return $this->get_page($page_id);
 	}
 
 	/**
@@ -139,7 +207,7 @@ class page implements page_interface
 	}
 
 	/**
-	* Get page routes (for use in viewonline)
+	* Get page routes (for use in view online)
 	*
 	* @return array Array of routes and page titles for all pages
 	* @access public
@@ -221,7 +289,7 @@ class page implements page_interface
 
 	/**
 	* Get custom page templates (pages_*.html)
-	* Added by the user to the core style/template directores
+	* Added by the user to the core style/template directories
 	*
 	* @return array Array of template file paths
 	* @access public

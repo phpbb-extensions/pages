@@ -103,24 +103,17 @@ class admin_controller_test extends \phpbb_database_test_case
 		$user->data['user_id'] = 2;
 		$user->ip = '127.0.0.1';
 
-		$entity_factory = function () use ($config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
-			return new \phpbb\pages\entity\page(
-				$this->db,
-				$config,
-				$phpbb_dispatcher,
-				'phpbb_pages',
-				$text_formatter_utils,
-				$litedown
-			);
-		};
-
-		$operator_container = $this->createMock(\Symfony\Component\DependencyInjection\ContainerInterface::class);
-		$operator_container->method('get')
-			->with('phpbb.pages.entity')
-			->willReturnCallback($entity_factory);
+		$entity_factory = new \phpbb\pages\entity\factory(
+			$this->db,
+			$config,
+			$phpbb_dispatcher,
+			'phpbb_pages',
+			$text_formatter_utils,
+			$litedown
+		);
 		$this->page_operator = new \phpbb\pages\operators\page(
 			$cache,
-			$operator_container,
+			$entity_factory,
 			$this->db,
 			$extension_manager,
 			$user,
@@ -132,10 +125,6 @@ class admin_controller_test extends \phpbb_database_test_case
 		$pagination = $this->getMockBuilder(\phpbb\pagination::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$container = $this->createMock(\Symfony\Component\DependencyInjection\ContainerInterface::class);
-		$container->method('get')->willReturnCallback(function ($service) use ($entity_factory, $pagination) {
-			return $service === 'pagination' ? $pagination : $entity_factory();
-		});
 
 		$this->request = $this->createMock(\phpbb\request\request::class);
 		$this->request->method('variable')->willReturnCallback(function ($name, $default) {
@@ -184,7 +173,7 @@ class admin_controller_test extends \phpbb_database_test_case
 			$this->request,
 			$this->template,
 			$user,
-			$container,
+			$pagination,
 			$phpbb_dispatcher,
 			$phpbb_root_path,
 			$phpEx
@@ -202,6 +191,19 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertSame('adm.php?i=pages&amp;action=add', $this->assigned_vars['U_ADD_PAGE']);
 	}
 
+	public function test_display_pages_reports_hydration_failure()
+	{
+		$operator = $this->getMockBuilder(\phpbb\pages\operators\page::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('get_total_pages')->willReturn(1);
+		$operator->method('get_pages')->willThrowException(new \phpbb\pages\exception\invalid_argument(array('page_title', 'FIELD_MISSING')));
+		$this->replace_controller_service('page_operator', $operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'Invalid argument specified for `page_title`. Reason: Required field missing|back:adm.php?i=pages');
+
+		$this->controller->display_pages();
+	}
+
 	public function test_add_page_initial_form_uses_real_entity()
 	{
 		$this->controller->add_page();
@@ -214,6 +216,22 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertSame(1, admin_test_state::$custom_bbcodes_displayed);
 	}
 
+	public function test_add_page_reports_persistence_failure()
+	{
+		$entity = $this->page_operator->create_page();
+		$operator = $this->getMockBuilder(\phpbb\pages\operators\page::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('create_page')->willReturn($entity);
+		$operator->method('add_page')->willThrowException(new \phpbb\pages\exception\invalid_argument(array('page_title', 'FIELD_MISSING')));
+		$this->replace_controller_service('page_operator', $operator);
+		$this->post['submit'] = true;
+		$this->variables = $this->valid_page_data('new-page', 'New page');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'Invalid argument specified for `page_title`. Reason: Required field missing|back:adm.php?i=pages');
+
+		$this->controller->add_page();
+	}
+
 	public function test_edit_page_initial_form_loads_links_and_parse_options()
 	{
 		$this->controller->edit_page(1);
@@ -224,6 +242,18 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertFalse($this->blocks['page_link_options'][0]['S_SELECTED']);
 		self::assertFalse($this->blocks['page_link_options'][1]['S_SELECTED']);
 		self::assertSame(0, $this->assigned_vars['S_PARSE_BBCODE_CHECKED']);
+	}
+
+	public function test_edit_page_reports_hydration_failure()
+	{
+		$operator = $this->getMockBuilder(\phpbb\pages\operators\page::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('get_page')->willThrowException(new \phpbb\pages\exception\invalid_argument(array('page_title', 'FIELD_MISSING')));
+		$this->replace_controller_service('page_operator', $operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'Invalid argument specified for `page_title`. Reason: Required field missing|back:adm.php?i=pages');
+
+		$this->controller->edit_page(1);
 	}
 
 	public function test_page_link_options_load_stored_links_when_current_is_empty()
@@ -316,6 +346,21 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be deleted.|back:adm.php?i=pages');
 
 		$this->controller->delete_page(1);
+	}
+
+	public function test_delete_page_reports_lookup_failure()
+	{
+		$operator = $this->getMockBuilder(\phpbb\pages\operators\page::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('get_page')
+			->willThrowException(new \phpbb\pages\exception\out_of_bounds('page_id'));
+		$operator->expects(self::never())->method('delete_page');
+		$this->log->expects(self::never())->method('add');
+		$this->replace_controller_service('page_operator', $operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be deleted.|back:adm.php?i=pages');
+
+		$this->controller->delete_page(99);
 	}
 
 	protected function valid_page_data($route, $title)

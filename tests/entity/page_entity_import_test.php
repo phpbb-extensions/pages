@@ -23,6 +23,8 @@ class page_entity_import_test extends page_entity_base
 	public static function import_test_data()
 	{
 		$import_data = parent::get_import_data();
+		$import_data[1]['page_title'] = str_repeat('К', 200);
+		$import_data[1]['page_description'] = str_repeat('Ж', 255);
 
 		return array(
 			array($import_data[1]),
@@ -72,6 +74,51 @@ class page_entity_import_test extends page_entity_base
 	}
 
 	/**
+	 * Stored values bypass write-time validation and remain unchanged.
+	 */
+	public function test_import_preserves_storage_values()
+	{
+		$data = $this->get_import_data()[1];
+		$data['page_title'] = 'Emoji &#128512; title';
+		$data['page_route'] = str_repeat('a', 101);
+		$data['page_template'] = 'legacy-template';
+		$data['page_icon_font'] = 'legacy_icon';
+
+		$entity = $this->get_page_entity()->import($data);
+
+		self::assertSame('Emoji &#128512; title', $entity->get_data()['page_title']);
+		self::assertSame('Emoji 😀 title', $entity->get_title());
+		self::assertSame($data['page_route'], $entity->get_route());
+		self::assertSame($data['page_template'], $entity->get_template());
+		self::assertSame($data['page_icon_font'], $entity->get_icon_font());
+		self::assertSame(array(), $entity->get_changes());
+
+		$entity->set_title('Changed title');
+		self::assertSame(array('page_title' => 'Changed title'), $entity->get_changes());
+	}
+
+	/**
+	 * Failed hydration does not leave partially replaced entity state.
+	 */
+	public function test_import_is_atomic()
+	{
+		$data = $this->get_import_data()[1];
+		$entity = $this->get_page_entity()->import($data);
+		unset($data['page_route']);
+
+		try
+		{
+			$entity->import($data);
+			self::fail('Expected invalid_argument exception was not thrown.');
+		}
+		catch (\phpbb\pages\exception\invalid_argument $e)
+		{
+			self::assertSame(1, $entity->get_id());
+			self::assertSame('route1', $entity->get_route());
+		}
+	}
+
+	/**
 	* Test data for the test_import_fail() function
 	*
 	* @return array Array of test data
@@ -95,31 +142,6 @@ class page_entity_import_test extends page_entity_base
 		// Out of range
 		$data[] = array_merge($import_data[1], array(
 			'page_content_bbcode_options'	=> -1,
-		));
-
-		// Too long
-		$data[] = array_merge($import_data[1], array(
-			'page_route'	=> str_repeat('a', 101),
-		));
-
-		// Too long
-		$data[] = array_merge($import_data[1], array(
-			'page_title'	=> str_repeat('a', 201),
-		));
-
-		// Too long
-		$data[] = array_merge($import_data[1], array(
-			'page_description'	=> str_repeat('a', 256),
-		));
-
-		// Too long
-		$data[] = array_merge($import_data[1], array(
-			'page_template'	=> str_repeat('a', 256),
-		));
-
-		// Too long
-		$data[] = array_merge($import_data[1], array(
-			'page_icon_font'	=> str_repeat('a', 256),
 		));
 
 		// Go through every field and unset it while submitting everything else

@@ -135,19 +135,7 @@ class base extends \Exception
 	*/
 	public function add_lang(\phpbb\language\language $lang)
 	{
-		static $is_loaded = false;
-
-		// We only need to load the language file once
-		if ($is_loaded)
-		{
-			return;
-		}
-
-		// Add our language file
 		$lang->add_lang('exceptions', 'phpbb/pages');
-
-		// So the language file is only loaded once
-		$is_loaded = true;
 	}
 
 	/**

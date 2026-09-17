@@ -10,8 +10,6 @@
 
 namespace phpbb\pages\controller;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
 * Admin controller
 */
@@ -44,8 +42,8 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var ContainerInterface */
-	protected $container;
+	/** @var \phpbb\pagination */
+	protected $pagination;
 
 	/** @var \phpbb\event\dispatcher_interface */
 	protected $dispatcher;
@@ -71,13 +69,13 @@ class admin_controller implements admin_interface
 	* @param \phpbb\request\request               $request          Request object
 	* @param \phpbb\template\template             $template         Template object
 	* @param \phpbb\user                          $user             User object
-	* @param ContainerInterface                   $phpbb_container  Service container interface
+	* @param \phpbb\pagination                    $pagination       Pagination service
 	* @param \phpbb\event\dispatcher_interface    $phpbb_dispatcher Event dispatcher
 	* @param string                               $root_path        phpBB root path
 	* @param string                               $php_ext          phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\cache\driver\driver_interface $cache, \phpbb\pages\routing\route_cache $route_cache, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
+	public function __construct(\phpbb\cache\driver\driver_interface $cache, \phpbb\pages\routing\route_cache $route_cache, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, \phpbb\pagination $pagination, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
 	{
 		$this->cache = $cache;
 		$this->route_cache = $route_cache;
@@ -88,7 +86,7 @@ class admin_controller implements admin_interface
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
-		$this->container = $phpbb_container;
+		$this->pagination = $pagination;
 		$this->dispatcher = $phpbb_dispatcher;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
@@ -102,14 +100,20 @@ class admin_controller implements admin_interface
 	*/
 	public function display_pages()
 	{
-		/* @var $pagination \phpbb\pagination */
-		$pagination = $this->container->get('pagination');
 		$start		= $this->request->variable('start', 0);
 		$total		= $this->page_operator->get_total_pages();
 		$limit		= 25;
 
 		// Grab all the pages from the db
-		$entities = $this->page_operator->get_pages($limit, $start);
+		try
+		{
+			$entities = $this->page_operator->get_pages($limit, $start);
+		}
+		catch (\phpbb\pages\exception\base $e)
+		{
+			$this->display_page_error($e);
+			return;
+		}
 
 		// Process each page entity for display
 		/* @var $entity \phpbb\pages\entity\page */
@@ -132,7 +136,7 @@ class admin_controller implements admin_interface
 			));
 		}
 
-		$pagination->generate_template_pagination($this->u_action, 'pagination', 'start', $total, $limit, $start);
+		$this->pagination->generate_template_pagination($this->u_action, 'pagination', 'start', $total, $limit, $start);
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -146,16 +150,23 @@ class admin_controller implements admin_interface
 	 *
 	 * @return void
 	 * @access public
-	 * @throws \phpbb\pages\exception\out_of_bounds
 	 */
 	public function add_page()
 	{
-		// Initiate a page entity
-		/* @var $entity \phpbb\pages\entity\page */
-		$entity = $this->container->get('phpbb.pages.entity');
+		try
+		{
+			// Initiate a page entity
+			/* @var $entity \phpbb\pages\entity\page */
+			$entity = $this->page_operator->create_page();
 
-		// Process the new page
-		$this->add_edit_page_data($entity);
+			// Process the new page
+			$this->add_edit_page_data($entity);
+		}
+		catch (\phpbb\pages\exception\base $e)
+		{
+			$this->display_page_error($e);
+			return;
+		}
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -170,16 +181,23 @@ class admin_controller implements admin_interface
 	 * @param int $page_id The page identifier to edit
 	 * @return void
 	 * @access public
-	 * @throws \phpbb\pages\exception\out_of_bounds
 	 */
 	public function edit_page($page_id)
 	{
-		// Initiate and load the page entity
-		/* @var $entity \phpbb\pages\entity\page */
-		$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
+		try
+		{
+			// Initiate and load the page entity
+			/* @var $entity \phpbb\pages\entity\page */
+			$entity = $this->page_operator->get_page($page_id);
 
-		// Process the edited page
-		$this->add_edit_page_data($entity);
+			// Process the edited page
+			$this->add_edit_page_data($entity);
+		}
+		catch (\phpbb\pages\exception\base $e)
+		{
+			$this->display_page_error($e);
+			return;
+		}
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -195,7 +213,7 @@ class admin_controller implements admin_interface
 	 * @param \phpbb\pages\entity\page_interface $entity The page entity object
 	 * @return void
 	 * @access protected
-	 * @throws \phpbb\pages\exception\out_of_bounds
+	 * @throws \phpbb\pages\exception\base If persistence or hydration fails
 	 */
 	protected function add_edit_page_data($entity)
 	{
@@ -303,7 +321,7 @@ class admin_controller implements admin_interface
 				if ($entity->get_id())
 				{
 					// Save the edited page entity to the database
-					$entity->save();
+					$entity = $this->page_operator->save_page($entity);
 
 					// Save the page link location data
 					$this->page_operator->insert_page_links($entity->get_id(), $data['page_links']);
@@ -404,12 +422,11 @@ class admin_controller implements admin_interface
 	*/
 	public function delete_page($page_id)
 	{
-		// Initiate and load the page entity
-		/* @var $entity \phpbb\pages\entity\page */
-		$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
-
 		try
 		{
+			// Load the page before deleting it so its title remains available for logging.
+			$entity = $this->page_operator->get_page($page_id);
+
 			// Delete the page
 			$this->page_operator->delete_page($page_id);
 		}
@@ -417,6 +434,7 @@ class admin_controller implements admin_interface
 		{
 			// Display an error message if delete failed
 			trigger_error($this->lang->lang('ACP_PAGES_DELETE_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
+			return;
 		}
 
 		// Log the action
@@ -461,7 +479,7 @@ class admin_controller implements admin_interface
 		$page_templates = $this->page_operator->get_page_templates();
 
 		// Clean up template names and simplify the array
-		$page_templates = array_map(function ($value) {
+		$page_templates = array_map(static function ($value) {
 			return basename($value);
 		}, array_keys($page_templates));
 
@@ -473,7 +491,7 @@ class admin_controller implements admin_interface
 		{
 			$this->template->assign_block_vars('page_template_options', array(
 				'VALUE'			=> $page_template,
-				'S_SELECTED'	=> $page_template == $current,
+				'S_SELECTED'	=> $page_template === $current,
 			));
 		}
 	}
@@ -511,5 +529,16 @@ class admin_controller implements admin_interface
 				'S_SELECTED'	=> in_array($link['page_link_id'], $current),
 			));
 		}
+	}
+
+	/**
+	 * Display a translated entity or operator failure in the ACP.
+	 *
+	 * @param \phpbb\pages\exception\base $exception
+	 * @return void
+	 */
+	protected function display_page_error(\phpbb\pages\exception\base $exception)
+	{
+		trigger_error($exception->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
 	}
 }

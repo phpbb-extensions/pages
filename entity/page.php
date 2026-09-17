@@ -38,7 +38,14 @@ class page implements page_interface
 	 *    page_icon_font
 	 * @access protected
 	 */
-	protected $data;
+	protected $data = array();
+
+	/**
+	 * Storage-form data captured when this entity was hydrated.
+	 *
+	 * @var array
+	 */
+	protected $original_data = array();
 
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
@@ -84,67 +91,34 @@ class page implements page_interface
 	}
 
 	/**
-	* Load the data from the database for a page
-	*
-	* @param int $id Page identifier
-	* @param string $route Page route
-	* @return page_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
-	*/
-	public function load($id = 0, $route = '')
-	{
-		// Load by id if provided, otherwise default to load by page route
-		$sql_where = ($id !== 0) ? 'page_id = ' . (int) $id : "page_route = '" . $this->db->sql_escape($route) . "'";
-
-		// Get page from the database
-		$sql = 'SELECT *
-			FROM ' . $this->pages_table . '
-			WHERE ' . $sql_where;
-		$result = $this->db->sql_query($sql);
-		$this->data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
-
-		if ($this->data === false)
-		{
-			// The page does not exist
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
-		}
-
-		return $this;
-	}
-
-	/**
 	* Import data for a page
 	*
 	* Used when the data is already loaded externally.
 	* Any existing data on this page is over-written.
-	* All data is validated and an exception is thrown if any data is invalid.
+	* Required fields are checked and storage types are normalized. Values already loaded
+	* from storage are not passed through write-time transformations again.
 	*
 	* @param array $data Data array, typically from the database
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\base
 	*/
 	public function import($data)
 	{
-		// Clear out any saved data
-		$this->data = array();
-
 		// All of our fields
 		$fields = array(
 			// column						=> data type (see settype())
 			'page_id'						=> 'integer',
-			'page_order'					=> 'set_order', // call set_order()
-			'page_title'					=> 'set_title', // call set_title()
-			'page_description'				=> 'set_description', // call set_description()
-			'page_description_display'		=> 'set_description_display', // call set_description_display()
-			'page_route'					=> 'set_route', // call set_route()
-			'page_display'					=> 'set_page_display', // call set_page_display()
-			'page_display_to_guests'		=> 'set_page_display_to_guests', // call set_page_display_to_guests()
-			'page_title_switch'				=> 'set_page_title_switch', // call set_page_title_switch()
-			'page_template'					=> 'set_template', // call set_template()
-			'page_icon_font'				=> 'set_icon_font', // call set_icon_font()
+			'page_order'					=> 'integer',
+			'page_title'					=> 'string',
+			'page_description'				=> 'string',
+			'page_description_display'		=> 'bool',
+			'page_route'					=> 'string',
+			'page_display'					=> 'bool',
+			'page_display_to_guests'		=> 'bool',
+			'page_title_switch'				=> 'bool',
+			'page_template'					=> 'string',
+			'page_icon_font'				=> 'string',
 
 			// We do not pass to set_content() as generate_text_for_storage would run twice
 			'page_content'					=> 'string',
@@ -155,7 +129,9 @@ class page implements page_interface
 			'page_content_markdown'			=> 'bool',
 		);
 
-		// Go through the basic fields and set them to our data array
+		$hydrated = array();
+
+		// Cast storage values without invoking write-time setters.
 		foreach ($fields as $field => $type)
 		{
 			// If the data wasn't sent to us, throw an exception
@@ -164,97 +140,58 @@ class page implements page_interface
 				throw new \phpbb\pages\exception\invalid_argument(array($field, 'FIELD_MISSING'));
 			}
 
-			// If the type is a method on this class, call it
-			if (method_exists($this, $type))
-			{
-				$this->$type($data[$field]);
-			}
-			else
-			{
-				// settype passes values by reference
-				$value = $data[$field];
-
-				// We're using settype to enforce data types
-				settype($value, $type);
-
-				$this->data[$field] = $value;
-			}
+			// settype passes values by reference
+			$value = $data[$field];
+			settype($value, $type);
+			$hydrated[$field] = $value;
 		}
 
 		// Some fields must be unsigned (>= 0)
 		$validate_unsigned = array(
 			'page_id',
+			'page_order',
 			'page_content_bbcode_options',
 		);
 
 		foreach ($validate_unsigned as $field)
 		{
-			// If the data is less than 0, it's not unsigned and we'll throw an exception
-			if ($this->data[$field] < 0)
+			// If the data is less than 0, it's not unsigned, and we'll throw an exception
+			if ($hydrated[$field] < 0)
 			{
 				throw new \phpbb\pages\exception\out_of_bounds($field);
 			}
 		}
 
-		return $this;
-	}
-
-	/**
-	* Insert the page data for the first time
-	*
-	* Will throw an exception if the page was already inserted (call save() instead)
-	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
-	*/
-	public function insert()
-	{
-		if (!empty($this->data['page_id']))
+		if ($hydrated['page_order'] > 16777215)
 		{
-			// The page already exists
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+			throw new \phpbb\pages\exception\out_of_bounds('page_order');
 		}
 
-		// Insert the page data to the database
-		$sql = 'INSERT INTO ' . $this->pages_table . ' ' . $this->db->sql_build_array('INSERT', $this->data);
-		$this->db->sql_query($sql);
-
-		// Set the page_id using the id created by the SQL insert
-		$this->data['page_id'] = (int) $this->db->sql_last_inserted_id();
+		// Replace state only after the entire row has passed hydration checks.
+		$this->data = $hydrated;
+		$this->original_data = $hydrated;
 
 		return $this;
 	}
 
 	/**
-	* Save the current settings to the database
-	*
-	* This must be called before closing or any changes will not be saved!
-	* If adding a page (saving for the first time), you must call insert() or an exeception will be thrown
-	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
-	*/
-	public function save()
+	 * Export current storage-form data.
+	 *
+	 * @return array
+	 */
+	public function get_data()
 	{
-		if (empty($this->data['page_id']))
-		{
-			// The page does not exist
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
-		}
+		return $this->data;
+	}
 
-		// Copy the data array, filtering out the page_id identifier
-		// so we do not attempt to update the row's identity column.
-		$sql_array = array_diff_key($this->data, array('page_id' => null));
-
-		// Update the page data in the database
-		$sql = 'UPDATE ' . $this->pages_table . '
-			SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . '
-			WHERE page_id = ' . $this->get_id();
-		$this->db->sql_query($sql);
-
-		return $this;
+	/**
+	 * Export storage-form fields changed since hydration.
+	 *
+	 * @return array
+	 */
+	public function get_changes()
+	{
+		return array_diff_assoc($this->data, $this->original_data);
 	}
 
 	/**
@@ -283,7 +220,7 @@ class page implements page_interface
 	* Set title
 	*
 	* @param string $title
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -300,8 +237,8 @@ class page implements page_interface
 			throw new \phpbb\pages\exception\unexpected_value(array('title', 'FIELD_MISSING'));
 		}
 
-		// Limit both the displayed and stored title lengths to the column size.
-		if (truncate_string($title, 200, 200) !== $title)
+		// Enforce the database column length after storage encoding.
+		if (utf8_strlen($title) > 200)
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}
@@ -327,7 +264,7 @@ class page implements page_interface
 	* Set description
 	*
 	* @param string $description Description text
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -338,8 +275,8 @@ class page implements page_interface
 
 		$description = $this->encode_unicode_for_storage($description);
 
-		// Limit both the displayed and stored description lengths to the column size.
-		if (truncate_string($description, 255, 255) !== $description)
+		// Enforce the database column length after storage encoding.
+		if (utf8_strlen($description) > 255)
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('description', 'TOO_LONG'));
 		}
@@ -365,7 +302,7 @@ class page implements page_interface
 	 * Set description display setting
 	 *
 	 * @param bool $option Description display setting
-	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @return page_interface $this object for chaining calls
 	 * @access public
 	 */
 	public function set_description_display($option)
@@ -394,7 +331,7 @@ class page implements page_interface
 	* Set route
 	*
 	* @param string $route Route text
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -459,7 +396,7 @@ class page implements page_interface
 	* Set order
 	*
 	* @param int $order Page sort order
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\out_of_bounds
 	*/
@@ -499,7 +436,7 @@ class page implements page_interface
 	* Set page template
 	*
 	* @param string $template Page template name
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -542,7 +479,7 @@ class page implements page_interface
 	* Set page icon font name
 	*
 	* @param string $name icon font name
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\pages\exception\unexpected_value
 	*/
@@ -594,6 +531,9 @@ class page implements page_interface
 	* @param bool $censor_text True to censor the text (Default: true)
 	* @return string
 	* @access public
+	* @noinspection PhpVarTagWithoutVariableNameInspection
+	* @noinspection PassingByReferenceCorrectnessInspection
+	* @noinspection PhpUnusedLocalVariableInspection
 	*/
 	public function get_content_for_display($censor_text = true)
 	{
@@ -610,7 +550,7 @@ class page implements page_interface
 		if ($content_html_enabled)
 		{
 			// This is required by s9e text formatter to
-			// remove extra xml formatting from the content.
+			// remove extra XML formatting from the content.
 			$content = $this->text_formatter_utils->unparse($content);
 
 			$content = htmlspecialchars_decode($content, ENT_COMPAT);
@@ -644,7 +584,7 @@ class page implements page_interface
 	* Set content
 	*
 	* @param string $content
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function set_content($content)
@@ -687,7 +627,7 @@ class page implements page_interface
 	* Enable bbcode on the content
 	* This should be called before set_content(); content_enable_bbcode()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_bbcode()
@@ -701,7 +641,7 @@ class page implements page_interface
 	* Disable bbcode on the content
 	* This should be called before set_content(); content_disable_bbcode()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_bbcode()
@@ -726,7 +666,7 @@ class page implements page_interface
 	* Enable magic url on the content
 	* This should be called before set_content(); content_enable_magic_url()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_magic_url()
@@ -740,7 +680,7 @@ class page implements page_interface
 	* Disable magic url on the content
 	* This should be called before set_content(); content_disable_magic_url()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_magic_url()
@@ -765,7 +705,7 @@ class page implements page_interface
 	* Enable smilies on the content
 	* This should be called before set_content(); content_enable_smilies()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_smilies()
@@ -779,7 +719,7 @@ class page implements page_interface
 	* Disable smilies on the content
 	* This should be called before set_content(); content_disable_smilies()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_smilies()
@@ -803,7 +743,7 @@ class page implements page_interface
 	/**
 	* Enable Markdown on the content
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_markdown()
@@ -817,7 +757,7 @@ class page implements page_interface
 	/**
 	* Disable Markdown on the content
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_markdown()
@@ -843,7 +783,7 @@ class page implements page_interface
 	* This should be called before set_content(); content_enable_html()->set_content()
 	* This should also be called after the bbcode, smilies and magic url setters
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_enable_html()
@@ -863,7 +803,7 @@ class page implements page_interface
 	* Disable HTML on the content
 	* This should be called before set_content(); content_disable_html()->set_content()
 	*
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function content_disable_html()
@@ -888,7 +828,7 @@ class page implements page_interface
 	* Set page display setting
 	*
 	* @param bool $option Page display setting
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function set_page_display($option)
@@ -917,7 +857,7 @@ class page implements page_interface
 	* Set page display to guests setting
 	*
 	* @param bool $option Page display to guests setting
-	* @return page_interface $this object for chaining calls; load()->set()->save()
+	* @return page_interface $this object for chaining calls
 	* @access public
 	*/
 	public function set_page_display_to_guests($option)
@@ -946,7 +886,7 @@ class page implements page_interface
 	 * Set page title switch setting
 	 *
 	 * @param bool $option Page title switch setting
-	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @return page_interface $this object for chaining calls
 	 * @access public
 	 */
 	public function set_page_title_switch($option)

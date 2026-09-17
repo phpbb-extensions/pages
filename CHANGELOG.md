@@ -1,6 +1,17 @@
 # Changelog
 
-## Version 3.x (for phpBB 3.3 and later)
+## Version 4.x (for phpBB 4.0 and later)
+
+### 4.0.0 - Unreleased
+
+- Dropped support for phpBB 3.x (new minimum requirements: phpBB 4.0.0 and PHP 8.1).
+- Replaced the non-shared `phpbb.pages.entity` service with `phpbb.pages.entity_factory`. Replace `$container->get('phpbb.pages.entity')` with `$container->get('phpbb.pages.entity_factory')->create()`, or use `$container->get('phpbb.pages.operator')->create_page()`.
+- Removed `load()`, `insert()`, and `save()` from `phpbb\pages\entity\page_interface` and `phpbb\pages\entity\page`. Use the page operator instead:
+  - Replace `$entity->load($id, $route)` with `$operator->get_page($id, $route)`.
+  - Replace `$entity->insert()` with `$entity = $operator->add_page($entity)`.
+  - Replace `$entity->save()` with `$entity = $operator->save_page($entity)`.
+
+## Version 3.x (for phpBB 3.3)
 
 ### 3.1.1 - 2026-09-22
 
@@ -27,7 +38,7 @@
 - Use structured data in the breadcrumb links.
 - Fixed installation failures if default phpBB Admin roles no longer exist.
 
-## Version 2.x (for phpBB 3.2 and later)
+## Version 2.x (for phpBB 3.2)
 
 ### 2.0.5 - 2021-05-28
 
