@@ -62,12 +62,19 @@ class m5_update_link_names extends \phpbb\db\migration\migration
 			'Quick Links Menu Bottom'		=> 'QUICK_LINK_MENU_AFTER',
 		);
 
+		$sql_case = 'page_link_location';
 		foreach ($map_names as $old_name => $new_name)
 		{
-			$sql = 'UPDATE ' . $this->table_prefix . 'pages_links' . "
-				SET page_link_location = '{$new_name}'
-				WHERE page_link_location = '{$old_name}'";
-			$this->db->sql_query($sql);
+			$sql_case = $this->db->sql_case(
+				"page_link_location = '" . $this->db->sql_escape($old_name) . "'",
+				"'" . $this->db->sql_escape($new_name) . "'",
+				$sql_case
+			);
 		}
+
+		$sql = 'UPDATE ' . $this->table_prefix . 'pages_links
+			SET page_link_location = ' . $sql_case . '
+			WHERE ' . $this->db->sql_in_set('page_link_location', array_keys($map_names));
+		$this->db->sql_query($sql);
 	}
 }
