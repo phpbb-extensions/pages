@@ -2,6 +2,26 @@ imports:
     - { resource: tables.yml }
 
 services:
+    # Keep phpBB's canonical text formatter services as the autowiring targets.
+    # Pages registers isolated instances of these classes for LiteDown support.
+    phpbb\textformatter\s9e\factory:
+        alias: text_formatter.s9e.factory
+
+    phpbb\textformatter\s9e\parser:
+        alias: text_formatter.s9e.parser
+
+    phpbb\textformatter\s9e\renderer:
+        alias: text_formatter.s9e.renderer
+
+    phpbb\textformatter\cache_interface:
+        alias: text_formatter.cache
+
+    phpbb\textformatter\parser_interface:
+        alias: text_formatter.parser
+
+    phpbb\textformatter\renderer_interface:
+        alias: text_formatter.renderer
+
     phpbb.pages.admin.controller:
         class: phpbb\pages\controller\admin_controller
         arguments:
