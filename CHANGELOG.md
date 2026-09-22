@@ -2,6 +2,10 @@
 
 ## Version 3.x (for phpBB 3.3 and later)
 
+### 3.1.1 - 2026-09-22
+
+- Prevent PHP failures with extensions that autowire s9e.textformatter services.
+
 ### 3.1.0 - 2026-08-25
 
 - Added new feature: Markdown support for page content.
