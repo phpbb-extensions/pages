@@ -27,6 +27,13 @@ class factory extends \phpbb\textformatter\s9e\factory
 			$configurator->Litedown;
 		}
 
+		$configurator->Litedown->addHeadersId();
+
+		if (!isset($configurator->PipeTables))
+		{
+			$configurator->PipeTables;
+		}
+
 		return $configurator;
 	}
 }
