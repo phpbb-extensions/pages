@@ -30,9 +30,9 @@ class viewonline_test extends pages_functional_base
 		// Create a test page
 		$route = $this->create_page($page_title, $page_content);
 
-		// Viewonline only displays the first session for each registered user,
-		// ordered by second-resolution session times. Ensure the page session is
-		// newer than the admin's ACP session so database tie ordering cannot win.
+		// Viewonline displays only the newest session for each registered user.
+		// Session timestamps have one-second resolution, so ensure this page visit
+		// is newer than the admin session used to create the page.
 		sleep(1);
 
 		// Send the admin to the test page
