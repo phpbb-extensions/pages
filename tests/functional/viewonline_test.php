@@ -60,9 +60,35 @@ class viewonline_test extends pages_functional_base
 		sleep(1);
 		$crawler = self::request('GET', "viewonline.php?sid={$this->sid}");
 
-		self::assertStringContainsString(
-			$this->lang('PAGES_VIEWONLINE', $page_title),
-			$crawler->filter('#page-body table.table1')->text()
-		);
+		// Is admin still viewing the test page?
+		self::assertStringContainsString('admin', $crawler->filter('#page-body table.table1')->text());
+
+		$session_entries = $crawler->filter('#page-body table.table1 tr')->count();
+		self::assertGreaterThanOrEqual(3, $session_entries, 'Too few session entries found');
+
+		// Check each entry in the viewonline table
+		// Skip the first row (header)
+		$admin_found = false;
+		$expected_location = $this->lang('PAGES_VIEWONLINE', $page_title);
+		$matching_session_found = false;
+		for ($i = 1; $i < $session_entries; $i++)
+		{
+			// Multiple admin sessions can exist from earlier functional tests.
+			// Look for the session visiting this test page rather than relying
+			// on database row order.
+			$subcrawler = $crawler->filter('#page-body table.table1 tr')->eq($i);
+			if (strpos($subcrawler->filter('td')->text(), 'admin') !== false)
+			{
+				$admin_found = true;
+				if (strpos($subcrawler->filter('td.info')->text(), $expected_location) !== false)
+				{
+					$matching_session_found = true;
+					break;
+				}
+			}
+		}
+
+		self::assertTrue($admin_found, 'User "admin" was not found on viewonline page.');
+		self::assertTrue($matching_session_found, 'The admin session for the Viewonline test page was not found.');
 	}
 }

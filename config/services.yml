@@ -14,13 +14,13 @@ services:
         alias: text_formatter.s9e.renderer
 
     phpbb\textformatter\cache_interface:
-        alias: text_formatter.cache
+        alias: text_formatter.s9e.factory
 
     phpbb\textformatter\parser_interface:
-        alias: text_formatter.parser
+        alias: text_formatter.s9e.parser
 
     phpbb\textformatter\renderer_interface:
-        alias: text_formatter.renderer
+        alias: text_formatter.s9e.renderer
 
     phpbb.pages.admin.controller:
         class: phpbb\pages\controller\admin_controller
