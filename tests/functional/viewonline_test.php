@@ -30,6 +30,11 @@ class viewonline_test extends pages_functional_base
 		// Create a test page
 		$route = $this->create_page($page_title, $page_content);
 
+		// Viewonline displays only the newest session for each registered user.
+		// Session timestamps have one-second resolution, so ensure this page visit
+		// is newer than the admin session used to create the page.
+		sleep(1);
+
 		// Send the admin to the test page
 		$crawler = self::request('GET', "app.php/{$route}?sid={$this->sid}");
 		self::assertStringContainsString($page_title, $crawler->filter('h2')->text());
