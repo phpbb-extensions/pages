@@ -63,18 +63,27 @@ class viewonline_test extends pages_functional_base
 
 		// Check each entry in the viewonline table
 		// Skip the first row (header)
+		$admin_found = false;
+		$expected_location = $this->lang('PAGES_VIEWONLINE', $page_title);
+		$matching_session_found = false;
 		for ($i = 1; $i < $session_entries; $i++)
 		{
-			// If we found the admin, we check his page info and leave
+			// Multiple admin sessions can exist from earlier functional tests.
+			// Look for the session visiting this test page rather than relying
+			// on database row order.
 			$subcrawler = $crawler->filter('#page-body table.table1 tr')->eq($i);
 			if (strpos($subcrawler->filter('td')->text(), 'admin') !== false)
 			{
-				self::assertStringContainsString($this->lang('PAGES_VIEWONLINE', $page_title), $subcrawler->filter('td.info')->text());
-				return;
+				$admin_found = true;
+				if (strpos($subcrawler->filter('td.info')->text(), $expected_location) !== false)
+				{
+					$matching_session_found = true;
+					break;
+				}
 			}
 		}
 
-		// If we did not find the admin, we fail
-		self::fail('User "admin" was not found on viewonline page.');
+		self::assertTrue($admin_found, 'User "admin" was not found on viewonline page.');
+		self::assertTrue($matching_session_found, 'The admin session for the Viewonline test page was not found.');
 	}
 }
