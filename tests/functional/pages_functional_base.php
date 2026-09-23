@@ -54,7 +54,7 @@ class pages_functional_base extends \phpbb_functional_test_case
 		$form_data = array_merge(array(
 			'page_title'		=> $page_title,
 			'page_content'		=> $page_content,
-			'page_route'		=> 'fn_' . time(),
+			'page_route'		=> str_replace('.', '_', uniqid('fn_', true)),
 			'page_description'	=> '',
 			'page_description_display'	=> false,
 			'parse_bbcode'		=> true,
@@ -76,7 +76,8 @@ class pages_functional_base extends \phpbb_functional_test_case
 
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
 		$crawler = self::submit($form, $form_data);
-		self::assertGreaterThan(0, $crawler->filter('.successbox')->count());
+		$error = $crawler->filter('.errorbox')->count() ? $crawler->filter('.errorbox')->text() : '';
+		self::assertGreaterThan(0, $crawler->filter('.successbox')->count(), $error);
 		$this->assertContainsLang('ACP_PAGES_ADD_SUCCESS', $crawler->text());
 
 		return $form_data['page_route'];
