@@ -56,7 +56,7 @@ class show_page_links_test extends \phpbb_database_test_case
 			->willReturnCallback(function ($route, array $params = array()) {
 				return $route . '#' . serialize($params);
 			});
-		$phpbb_container = $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerInterface')
+		$entity_factory = $this->getMockBuilder('\phpbb\pages\entity\factory')
 			->disableOriginalConstructor()
 			->getMock();
 		$router = $this->getMockBuilder('\phpbb\routing\router')
@@ -70,7 +70,7 @@ class show_page_links_test extends \phpbb_database_test_case
 			$lang,
 			new \phpbb\pages\operators\page(
 				$cache,
-				$phpbb_container,
+				$entity_factory,
 				$db,
 				$ext_manager,
 				$user,

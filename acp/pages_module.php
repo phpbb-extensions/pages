@@ -37,6 +37,7 @@ class pages_module
 		$lang->add_lang('pages_acp', 'phpbb/pages');
 
 		// Get an instance of the admin controller
+		/** @var \phpbb\pages\controller\admin_controller $admin_controller */
 		$admin_controller = $phpbb_container->get('phpbb.pages.admin.controller');
 
 		// Requests

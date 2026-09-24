@@ -15,14 +15,14 @@ class page_main_controller_test extends \phpbb_database_test_case
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\auth\auth */
 	protected $auth;
 
-	/** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
-	protected $container;
-
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\controller\helper */
 	protected $controller_helper;
 
 	/** @var \phpbb\language\language */
 	protected $lang;
+
+	/** @var \phpbb\pages\operators\page */
+	protected $page_operator;
 
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\template\template */
 	protected $template;
@@ -69,16 +69,14 @@ class page_main_controller_test extends \phpbb_database_test_case
 			return $text;
 		});
 
-		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
-			->disableOriginalConstructor()
-			->getMock();
-		$this->container
-			->method('get')
-			->with('phpbb.pages.entity')
-			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
-				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown);
-			})
-		;
+		$entity_factory = new \phpbb\pages\entity\factory(
+			$db,
+			$config,
+			$phpbb_dispatcher,
+			'phpbb_pages',
+			$text_formatter_utils,
+			$litedown
+		);
 
 		$this->template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock()
@@ -107,13 +105,23 @@ class page_main_controller_test extends \phpbb_database_test_case
 			))
 			->getMock();
 		$phpbb_extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
+		$this->page_operator = new \phpbb\pages\operators\page(
+			$cache,
+			$entity_factory,
+			$db,
+			$phpbb_extension_manager,
+			$user,
+			'phpbb_pages',
+			'phpbb_pages_links',
+			'phpbb_pages_pages_links'
+		);
 	}
 
 	public function get_controller()
 	{
 		return  new \phpbb\pages\controller\main_controller(
 			$this->auth,
-			$this->container,
+			$this->page_operator,
 			$this->controller_helper,
 			$this->lang,
 			$this->template,

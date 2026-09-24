@@ -60,14 +60,9 @@ class page_operator_add_page_test extends page_operator_base
 	{
 		$this->expectException(\phpbb\pages\exception\base::class);
 
-		// Setup the entity class
-		$entity = $this->get_page_entity();
-
-		// Load an existing page data
-		$entity->load(1);
-
 		// Setup the operator class
 		$operator = $this->get_page_operator();
+		$entity = $operator->get_page(1);
 
 		// Attempt to add the existing the page data
 		$operator->add_page($entity);
