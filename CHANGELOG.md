@@ -1,6 +1,23 @@
 # Changelog
 
-## Version 3.x (for phpBB 3.3 and later)
+## Version 3.x (for phpBB 3.3.x)
+
+### 3.2.0 - 2026-11-07
+
+- Added support for Markdown pipe tables.
+- Added automatic anchor IDs to Markdown headings.
+- Prevented bots and crawlers from accessing or discovering members-only pages.
+- Prevented Who Is Online from exposing unpublished pages to anyone or members-only page titles and URLs to guests and bots.
+- Rejected page routes that conflict with routes registered by phpBB or other extensions.
+- Purged compiled routes after page deletion to prevent stale routes.
+- Preserved intentional HTML entities in HTML-mode page content.
+- Improved handling of stale ACP Edit and Delete actions.
+- Improved caching to prevent stale page rendering after text-formatting configuration changes.
+- Fixed structured-data positions for page links inserted before core breadcrumbs.
+- Aligned ACP route-length and page-order limits with backend validation.
+- Removed obsolete Flash BBCode support from the Pages content editor.
+- Replaced custom exception classes with native SPL exceptions and improved ACP validation messages.
+- Fixed text formatter service aliases for phpBB 4 compatibility.
 
 ### 3.1.1 - 2026-09-22
 
@@ -27,7 +44,7 @@
 - Use structured data in the breadcrumb links.
 - Fixed installation failures if default phpBB Admin roles no longer exist.
 
-## Version 2.x (for phpBB 3.2 and later)
+## Version 2.x (for phpBB 3.2.x)
 
 ### 2.0.5 - 2021-05-28
 
@@ -63,7 +80,7 @@
 - New minimum requirements: phpBB 3.2.0 and PHP 5.4
 - New dynamic routing has allowed us to remove the `/page/` requirement from page URLs. This means your pages can be accessed directly: `forum.com/pagename` (the old method still works as well: `forum.com/page/pagename`)
 
-## Version 1.x (for phpBB 3.1)
+## Version 1.x (for phpBB 3.1.x)
 
 ### 1.0.5 - 2016-11-10
 
