@@ -485,11 +485,11 @@ class admin_controller implements admin_interface
 	*/
 	protected function create_page_template_options($current)
 	{
-		// Grab all avaliable pages_*.html files
+		// Grab all available pages_*.html files
 		$page_templates = $this->page_operator->get_page_templates();
 
 		// Clean up template names and simplify the array
-		$page_templates = array_map(function ($value) {
+		$page_templates = array_map(static function ($value) {
 			return basename($value);
 		}, array_keys($page_templates));
 
@@ -501,7 +501,7 @@ class admin_controller implements admin_interface
 		{
 			$this->template->assign_block_vars('page_template_options', array(
 				'VALUE'			=> $page_template,
-				'S_SELECTED'	=> $page_template == $current,
+				'S_SELECTED'	=> (string) $page_template === (string) $current,
 			));
 		}
 	}
