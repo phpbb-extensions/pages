@@ -86,6 +86,10 @@ class admin_controller_test extends \phpbb_database_test_case
 		$litedown->method('render')->willReturnCallback(function ($text) {
 			return $text;
 		});
+		$router = $this->getMockBuilder(\phpbb\routing\router::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$router->method('getRouteCollection')->willReturn(new \Symfony\Component\Routing\RouteCollection());
 
 		$extension_manager = new \phpbb_mock_extension_manager(
 			$phpbb_root_path,
@@ -103,14 +107,15 @@ class admin_controller_test extends \phpbb_database_test_case
 		$user->data['user_id'] = 2;
 		$user->ip = '127.0.0.1';
 
-		$entity_factory = function () use ($config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
+		$entity_factory = function () use ($config, $phpbb_dispatcher, $text_formatter_utils, $litedown, $router) {
 			return new \phpbb\pages\entity\page(
 				$this->db,
 				$config,
 				$phpbb_dispatcher,
 				'phpbb_pages',
 				$text_formatter_utils,
-				$litedown
+				$litedown,
+				$router
 			);
 		};
 

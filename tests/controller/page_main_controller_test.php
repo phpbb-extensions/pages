@@ -68,6 +68,10 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$litedown->method('render')->willReturnCallback(function ($text) {
 			return $text;
 		});
+		$router = $this->getMockBuilder('\phpbb\routing\router')
+			->disableOriginalConstructor()
+			->getMock();
+		$router->method('getRouteCollection')->willReturn(new \Symfony\Component\Routing\RouteCollection());
 
 		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
 			->disableOriginalConstructor()
@@ -75,8 +79,8 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$this->container
 			->method('get')
 			->with('phpbb.pages.entity')
-			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
-				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown);
+			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown, $router) {
+				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown, $router);
 			})
 		;
 

@@ -131,6 +131,16 @@ class page_entity_route_test extends page_entity_base
 	}
 
 	/**
+	* Test setting a route already registered by phpBB
+	*/
+	public function test_registered_route_fails()
+	{
+		$this->expectException(\phpbb\pages\exception\unexpected_value::class);
+
+		$this->get_page_entity()->set_route('feed');
+	}
+
+	/**
 	* Test data for the test_unique_route() function
 	*
 	* @return array Array of test data

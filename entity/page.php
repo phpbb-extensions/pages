@@ -49,6 +49,9 @@ class page implements page_interface
 	/** @var \phpbb\event\dispatcher_interface */
 	protected $dispatcher;
 
+	/** @var \phpbb\routing\router */
+	protected $router;
+
 	/** @var \phpbb\textformatter\s9e\utils */
 	protected $text_formatter_utils;
 
@@ -71,9 +74,10 @@ class page implements page_interface
 	* @param string                              $pages_table           Name of the table used to store page data
 	* @param \phpbb\textformatter\s9e\utils      $text_formatter_utils  Text manipulation utilities
 	* @param \phpbb\pages\textformatter\litedown $litedown             LiteDown parser manager
+	* @param \phpbb\routing\router               $router               Router
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table, \phpbb\textformatter\s9e\utils $text_formatter_utils, \phpbb\pages\textformatter\litedown $litedown)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table, \phpbb\textformatter\s9e\utils $text_formatter_utils, \phpbb\pages\textformatter\litedown $litedown, \phpbb\routing\router $router)
 	{
 		$this->db = $db;
 		$this->config = $config;
@@ -81,6 +85,7 @@ class page implements page_interface
 		$this->pages_table = $pages_table;
 		$this->text_formatter_utils = $text_formatter_utils;
 		$this->litedown = $litedown;
+		$this->router = $router;
 	}
 
 	/**
@@ -433,6 +438,16 @@ class page implements page_interface
 			$this->db->sql_freeresult($result);
 
 			if ($row)
+			{
+				throw new \phpbb\pages\exception\unexpected_value(array('route', 'NOT_UNIQUE'));
+			}
+		}
+
+		// Routes registered by phpBB or another extension take precedence over page routes
+		foreach ($this->router->getRouteCollection()->all() as $route_name => $registered_route)
+		{
+			// Page-to-page conflicts are handled by the database uniqueness check above
+			if (strpos($route_name, 'phpbb_pages_dynamic_route_') !== 0 && $registered_route->getPath() === '/' . $route)
 			{
 				throw new \phpbb\pages\exception\unexpected_value(array('route', 'NOT_UNIQUE'));
 			}
