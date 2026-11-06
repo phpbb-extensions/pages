@@ -303,6 +303,7 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->log->expects(self::once())
 			->method('add')
 			->with('admin', 2, '127.0.0.1', 'ACP_PAGES_DELETED_LOG', self::isType('int'), array('Deleted &#128512; page'));
+		$this->route_cache->expects(self::once())->method('purge');
 
 		$this->controller->delete_page(1);
 
@@ -322,6 +323,7 @@ class admin_controller_test extends \phpbb_database_test_case
 
 	public function test_delete_page_reports_operator_failure()
 	{
+		$this->route_cache->expects(self::never())->method('purge');
 		$operator = $this->getMockBuilder(\phpbb\pages\operators\page::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -337,6 +339,7 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		$this->ajax = true;
 		$this->log->expects(self::never())->method('add');
+		$this->route_cache->expects(self::never())->method('purge');
 		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be deleted.|back:adm.php?i=pages');
 
 		$this->controller->delete_page(9999);

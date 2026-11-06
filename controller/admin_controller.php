@@ -420,6 +420,9 @@ class admin_controller implements admin_interface
 
 			// Delete the page
 			$this->page_operator->delete_page($page_id);
+
+			// Purge compiled routes so the route collection is rebuilt
+			$this->route_cache->purge();
 		}
 		catch (\phpbb\pages\exception\base $e)
 		{
