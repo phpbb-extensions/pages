@@ -72,6 +72,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Sidan kunde ej raderas.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Sidan har skapats.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Sidan har uppdaterats.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Sidan kunde inte redigeras.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Sidinställningar',

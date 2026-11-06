@@ -72,6 +72,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Sayfa silinemedi.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Sayfa başarıyla eklendi.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Sayfa başarıyla güncellendi.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Sayfa düzenlenemedi.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Sayfa ayarları',

@@ -71,6 +71,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Side kunne ikke slettes.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Side tilføjet.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Side opdateret.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Side kunne ikke redigeres.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Indstillinger for side',

@@ -176,9 +176,17 @@ class admin_controller implements admin_interface
 	 */
 	public function edit_page($page_id)
 	{
-		// Initiate and load the page entity
-		/* @var $entity \phpbb\pages\entity\page */
-		$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
+		try
+		{
+			// Initiate and load the page entity
+			/* @var $entity \phpbb\pages\entity\page */
+			$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
+		}
+		catch (\phpbb\pages\exception\base $e)
+		{
+			trigger_error($this->lang->lang('ACP_PAGES_EDIT_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
+			return;
+		}
 
 		// Process the edited page
 		$this->add_edit_page_data($entity);
@@ -404,12 +412,12 @@ class admin_controller implements admin_interface
 	*/
 	public function delete_page($page_id)
 	{
-		// Initiate and load the page entity
-		/* @var $entity \phpbb\pages\entity\page */
-		$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
-
 		try
 		{
+			// Initiate and load the page entity
+			/* @var $entity \phpbb\pages\entity\page */
+			$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
+
 			// Delete the page
 			$this->page_operator->delete_page($page_id);
 		}
@@ -417,6 +425,7 @@ class admin_controller implements admin_interface
 		{
 			// Display an error message if delete failed
 			trigger_error($this->lang->lang('ACP_PAGES_DELETE_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
+			return;
 		}
 
 		// Log the action

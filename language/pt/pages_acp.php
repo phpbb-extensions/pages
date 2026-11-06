@@ -72,6 +72,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'A página não pode ser eliminada.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Página criada com sucesso.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Página atualizada com sucesso.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'A página não pode ser editada.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Configurar página',

@@ -72,6 +72,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Stranicu nije bilo moguće izbrisati.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Stranica je dodana.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Stranica je ažurirana.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Stranicu nije bilo moguće urediti.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Postavke stranice',

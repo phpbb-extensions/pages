@@ -281,6 +281,14 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->edit_page(1);
 	}
 
+	public function test_edit_page_reports_missing_page()
+	{
+		$this->log->expects(self::never())->method('add');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be edited.|back:adm.php?i=pages');
+
+		$this->controller->edit_page(9999);
+	}
+
 	public function test_delete_page_removes_real_page_and_logs()
 	{
 		$this->db->sql_query("UPDATE phpbb_pages
@@ -318,6 +326,15 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be deleted.|back:adm.php?i=pages');
 
 		$this->controller->delete_page(1);
+	}
+
+	public function test_delete_page_reports_missing_page()
+	{
+		$this->ajax = true;
+		$this->log->expects(self::never())->method('add');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be deleted.|back:adm.php?i=pages');
+
+		$this->controller->delete_page(9999);
 	}
 
 	public function test_purge_icons_destroys_only_pages_icon_cache()

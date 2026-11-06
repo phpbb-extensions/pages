@@ -69,6 +69,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Stránku nemôžete odstrániť.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Stránka bola úspešne pridaná.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Stránka bola úspešne aktualizovaná.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Stránku nemôžete upraviť.',
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Nastavenie stránky',
 	'ACP_PAGES_OPTIONS'					=> 'Možnosti stránky',
