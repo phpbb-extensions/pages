@@ -176,6 +176,7 @@ class page_entity_content_test extends page_entity_base
 			array('This is a test <b>message</b><br />This is a <a href="#">new line</a>. Føó.'),
 			array('This is a test <b>message</b><br />This has [b]bbcodes[/b] and smilies :) and urls http://www.phpbb.com to test.'),
 			array('<script>if (window.open && !window.closed) console.log("hello world");</script>'),
+			array('&lt;b&gt;should stay literal&lt;/b&gt;'),
 		);
 	}
 
@@ -206,7 +207,7 @@ class page_entity_content_test extends page_entity_base
 		// Assert that the content for edit matches the original encoded content
 		self::assertSame($encoded_content, $entity->get_content_for_edit());
 
-		// Assert that the content for display matches HTML decoded content
+		// Assert that the content for display matches the original content
 		self::assertSame($content, $entity->get_content_for_display());
 	}
 

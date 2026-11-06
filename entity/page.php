@@ -609,11 +609,8 @@ class page implements page_interface
 		// Generate for display
 		if ($content_html_enabled)
 		{
-			// This is required by s9e text formatter to
-			// remove extra xml formatting from the content.
+			// Restore the original HTML content from the s9e XML format.
 			$content = $this->text_formatter_utils->unparse($content);
-
-			$content = htmlspecialchars_decode($content, ENT_COMPAT);
 		}
 		else
 		{
