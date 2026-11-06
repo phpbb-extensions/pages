@@ -75,7 +75,7 @@
 						<label><input type="checkbox" class="radio html-off" name="parse_markdown"{% if S_PARSE_MARKDOWN_CHECKED %} checked="checked"{% endif %} /> {{ lang('ACP_PAGES_PARSE_MARKDOWN') }}</label>
 						<label><input type="checkbox" class="radio html-on" name="parse_html"{% if S_PARSE_HTML_CHECKED %} checked="checked"{% endif %} /> {{ lang('PARSE_HTML') }}</label>
 					</dd>
-					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ FLASH_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
+					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
 				</dl>
 				<script>
 					const textarea = document.querySelector("textarea[name='page_content']");

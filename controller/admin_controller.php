@@ -379,13 +379,11 @@ class admin_controller implements admin_interface
 			'BBCODE_STATUS'		=> $this->lang->lang('BBCODE_IS_ON', '<a href="' . $this->helper->route('phpbb_help_bbcode_controller') . '">', '</a>'),
 			'SMILIES_STATUS'	=> $this->lang->lang('SMILIES_ARE_ON'),
 			'IMG_STATUS'		=> $this->lang->lang('IMAGES_ARE_ON'),
-			'FLASH_STATUS'		=> $this->lang->lang('FLASH_IS_ON'),
 			'URL_STATUS'		=> $this->lang->lang('URL_IS_ON'),
 
 			'S_BBCODE_ALLOWED'	=> true,
 			'S_SMILIES_ALLOWED'	=> true,
 			'S_BBCODE_IMG'		=> true,
-			'S_BBCODE_FLASH'	=> true,
 			'S_LINKS_ALLOWED'	=> true,
 
 			'U_BACK'			=> $this->u_action,
