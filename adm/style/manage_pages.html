@@ -53,7 +53,7 @@
 			</dl>
 			<dl>
 				<dt><label for="page_route">{{ lang('ACP_PAGES_FORM_ROUTE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ROUTE_EXPLAIN') }}</span></dt>
-				<dd><input class="text medium" type="text" id="page_route" name="page_route" value="{{ PAGES_ROUTE }}" maxlength="200" /></dd>
+				<dd><input class="text medium" type="text" id="page_route" name="page_route" value="{{ PAGES_ROUTE }}" maxlength="100" /></dd>
 			</dl>
 		</fieldset>
 		<fieldset>
@@ -99,7 +99,7 @@
 			</dl>
 			<dl>
 				<dt><label for="page_order">{{ lang('ACP_PAGES_FORM_ORDER') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ORDER_EXPLAIN') }}</span></dt>
-				<dd><input type="number" id="page_order" min="0" max="999999" name="page_order" value="{{ PAGES_ORDER }}" /></dd>
+				<dd><input type="number" id="page_order" min="0" max="16777215" name="page_order" value="{{ PAGES_ORDER }}" /></dd>
 			</dl>
 			<dl>
 				<dt><label for="page_links">{{ lang('ACP_PAGES_FORM_LINKS') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_LINKS_EXPLAIN') }}</span></dt>
