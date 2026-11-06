@@ -105,7 +105,19 @@ class exception_test extends \phpbb_test_case
 	{
 		$exception = new \phpbb\pages\exception\base(array('EXCEPTION_OUT_OF_BOUNDS', 'page_id'));
 
+		self::assertSame('EXCEPTION_OUT_OF_BOUNDS', $exception->getMessage());
+		self::assertNull($exception->getPrevious());
 		self::assertStringContainsString('EXCEPTION_OUT_OF_BOUNDS', (string) $exception);
 		self::assertStringContainsString('page_id', (string) $exception);
+	}
+
+	public function test_exception_preserves_native_exception_data()
+	{
+		$previous = new \Error('Previous error');
+		$exception = new \phpbb\pages\exception\base('EXCEPTION_FIELD_MISSING', 42, $previous);
+
+		self::assertSame('EXCEPTION_FIELD_MISSING', $exception->getMessage());
+		self::assertSame(42, $exception->getCode());
+		self::assertSame($previous, $exception->getPrevious());
 	}
 }
