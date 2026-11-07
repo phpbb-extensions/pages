@@ -82,4 +82,29 @@ class main_controller_test extends pages_functional_base
 		// Assert the expected page exists
 		self::assertStringContainsString('Front End Test Page', $crawler->filter('#page-body')->text());
 	}
+
+	/**
+	 * Test breadcrumb positions remain sequential with links inserted before core breadcrumbs
+	 */
+	public function test_breadcrumb_positions()
+	{
+		$this->login();
+		$this->admin_login();
+
+		$this->create_page('First Breadcrumb Page', 'First breadcrumb page', array(
+			'page_links' => array(3),
+			'page_order' => 1,
+		));
+		$this->create_page('Second Breadcrumb Page', 'Second breadcrumb page', array(
+			'page_links' => array(3),
+			'page_order' => 2,
+		));
+
+		$crawler = self::request('GET', "index.php?sid={$this->sid}");
+		$positions = $crawler->filter('#nav-breadcrumbs li.icon-pages meta[itemprop="position"]')->each(function ($node) {
+			return (int) $node->attr('content');
+		});
+
+		self::assertSame(array(1, 2), $positions);
+	}
 }
