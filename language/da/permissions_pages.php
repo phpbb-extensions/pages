@@ -38,5 +38,5 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ACL_A_PAGES'		=> 'Kan ikke håndtere Pages-udvidelse',
+	'ACL_A_PAGES'		=> 'Kan håndtere Pages-udvidelse',
 ));

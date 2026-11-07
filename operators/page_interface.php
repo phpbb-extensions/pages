@@ -31,7 +31,7 @@ interface page_interface
 	* Add a page
 	*
 	* @param \phpbb\pages\entity\page_interface $entity Page entity with new data to insert
-	* @return page_interface Added page entity
+	* @return \phpbb\pages\entity\page_interface Added page entity
 	* @throws \LogicException
 	* @throws \OutOfBoundsException
 	* @access public
