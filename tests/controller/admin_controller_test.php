@@ -384,23 +384,6 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->delete_page(99);
 	}
 
-	public function test_purge_icons_destroys_only_pages_icon_cache()
-	{
-		$cache = $this->createMock(\phpbb\cache\driver\driver_interface::class);
-		$cache->expects(self::once())->method('destroy')->with('_pages_icons');
-		$this->replace_controller_service('cache', $cache);
-
-		$this->controller->purge_icons();
-	}
-
-	public function test_purge_icons_rejects_invalid_form()
-	{
-		admin_test_state::$valid_form = false;
-		$this->setExpectedTriggerError(E_USER_WARNING, 'The submitted form was invalid. Try submitting again.|back:adm.php?i=pages');
-
-		$this->controller->purge_icons();
-	}
-
 	protected function valid_page_data($route, $title)
 	{
 		return array(

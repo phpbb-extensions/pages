@@ -102,7 +102,7 @@ class main_controller_test extends pages_functional_base
 		));
 
 		$crawler = self::request('GET', "index.php?sid={$this->sid}");
-		$positions = $crawler->filter('#nav-breadcrumbs li.icon-pages meta[itemprop="position"]')->each(function ($node) {
+		$positions = $crawler->filter('#nav-breadcrumbs > li[data-skip-responsive] meta[itemprop="position"]')->each(function ($node) {
 			return (int) $node->attr('content');
 		});
 

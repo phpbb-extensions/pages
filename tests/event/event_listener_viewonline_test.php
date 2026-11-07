@@ -168,7 +168,7 @@ class event_listener_viewonline_test extends event_listener_base
 	*
 	* @return array Array of test data
 	*/
-	public function viewonline_page_visibility_data()
+	public static function viewonline_page_visibility_data()
 	{
 		return array(
 			'public page is visible to guest' => array(false, false, 1, 1, true),

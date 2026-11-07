@@ -79,6 +79,7 @@ class page_entity_title_test extends page_entity_base
 			),
 			array(
 				str_repeat('😀', 23),
+				'TOO_LONG',
 			),
 		);
 	}
@@ -87,7 +88,6 @@ class page_entity_title_test extends page_entity_base
 	* Test setting invalid data on the title which should throw an exception
 	*
 	* @dataProvider title_fails_test_data
-
 	*/
 	public function test_title_fails($title, $expected_message)
 	{
