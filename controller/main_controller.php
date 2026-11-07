@@ -113,7 +113,7 @@ class main_controller implements main_interface
 		{
 			$entity->load(0, $route);
 		}
-		catch (\phpbb\pages\exception\base $e)
+		catch (\OutOfBoundsException | \InvalidArgumentException $e)
 		{
 			throw new http_exception(404, 'PAGE_NOT_AVAILABLE', array($route));
 		}

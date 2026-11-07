@@ -73,6 +73,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Stránka byla úspěšně přidána.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Stránka byla úspěšně aktualizována.',
 	'ACP_PAGES_EDIT_ERRORED'			=> 'Stránku nelze upravit.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Požadované pole chybí',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Vstupní údaje nejsou jedinečné.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Vstupní údaje obsahují nepovolené znaky.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Nastavení stránky',

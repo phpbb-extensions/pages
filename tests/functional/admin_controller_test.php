@@ -90,7 +90,7 @@ class admin_controller_test extends pages_functional_base
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
 		$crawler = self::submit($form);
 		self::assertGreaterThan(0, $crawler->filter('.errorbox')->count());
-		$this->assertContainsLang('EXCEPTION_FIELD_MISSING', $crawler->text());
+		self::assertStringContainsString($this->lang('ACP_PAGES_FORM_TITLE') . $this->lang('COLON') . ' ' . $this->lang('ACP_PAGES_VALIDATION_REQUIRED'), $crawler->text());
 
 		// Create page
 		$page_title = 'Functional 😀 中文 Кириллица Page';

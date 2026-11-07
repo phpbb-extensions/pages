@@ -73,6 +73,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_ADD_SUCCESS'				=> '单页已成功添加。',
 	'ACP_PAGES_EDIT_SUCCESS'			=> '单页已完成更新。',
 	'ACP_PAGES_EDIT_ERRORED'			=> '单页无法被编辑。',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> '必填项缺失',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> '输入值不是唯一。',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => '输入值包含非法字符。',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> '单页设置',

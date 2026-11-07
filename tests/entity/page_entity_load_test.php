@@ -151,7 +151,8 @@ class page_entity_load_test extends page_entity_base
 	*/
 	public function test_load_fails($id)
 	{
-		$this->expectException(\phpbb\pages\exception\out_of_bounds::class);
+		$this->expectException(\OutOfBoundsException::class);
+		$this->expectExceptionMessage('PAGE_NOT_FOUND');
 
 		// Setup the entity class
 		$entity = $this->get_page_entity();

@@ -87,7 +87,7 @@ class page_entity_template_test extends page_entity_base
 	*/
 	public function test_template_fails($template)
 	{
-		$this->expectException(\phpbb\pages\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
 
 		// Setup the entity class
 		$entity = $this->get_page_entity();

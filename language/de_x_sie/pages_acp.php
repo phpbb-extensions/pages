@@ -72,6 +72,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Seite erfolgreich hinzugefügt.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Seite erfolgreich aktualisiert.',
 	'ACP_PAGES_EDIT_ERRORED'			=> 'Seite konnte nicht bearbeitet werden.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Erforderliche Eingabe fehlt',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Die Eingabe war nicht einmalig.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Die Eingabe enthielt illegale Zeichen.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Seiten Einstellungen',

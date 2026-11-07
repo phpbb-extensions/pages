@@ -99,7 +99,8 @@ class page_entity_insert_test extends page_entity_base
 	*/
 	public function test_insert_fails()
 	{
-		$this->expectException(\phpbb\pages\exception\out_of_bounds::class);
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('PAGE_ALREADY_INSERTED');
 
 		// Load some import test data
 		$import_data = $this->get_import_data();

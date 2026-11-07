@@ -75,7 +75,7 @@ class page_operator_insert_page_links_test extends page_operator_base
 	*/
 	public function test_insert_page_links_fails($page_id, $data)
 	{
-		$this->expectException(\phpbb\pages\exception\base::class);
+		$this->expectException(\OutOfBoundsException::class);
 
 		// Setup the operator class
 		$operator = $this->get_page_operator();

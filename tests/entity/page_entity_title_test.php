@@ -65,12 +65,13 @@ class page_entity_title_test extends page_entity_base
 	{
 		return array(
 			// title
-			array(''),
-			array(null),
+			array('', 'ACP_PAGES_VALIDATION_REQUIRED'),
+			array(null, 'ACP_PAGES_VALIDATION_REQUIRED'),
 
 			// One character more than maximum length
 			array(
 				str_repeat('a', 201),
+				'TOO_LONG',
 			),
 		);
 	}
@@ -81,9 +82,10 @@ class page_entity_title_test extends page_entity_base
 	* @dataProvider title_fails_test_data
 
 	*/
-	public function test_title_fails($title)
+	public function test_title_fails($title, $expected_message)
 	{
-		$this->expectException(\phpbb\pages\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage($expected_message);
 
 		// Setup the entity class
 		$entity = $this->get_page_entity();

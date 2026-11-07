@@ -257,7 +257,32 @@ class admin_controller_test extends \phpbb_database_test_case
 
 		self::assertTrue($this->assigned_vars['S_ERROR']);
 		self::assertStringContainsString('The submitted form was invalid', $this->assigned_vars['ERROR_MSG']);
-		self::assertStringContainsString('Required field missing', $this->assigned_vars['ERROR_MSG']);
+		self::assertStringContainsString('Page title: Required field missing', $this->assigned_vars['ERROR_MSG']);
+		self::assertStringContainsString('Page URL route: The input contained illegal characters.', $this->assigned_vars['ERROR_MSG']);
+		self::assertStringContainsString('Page template: The input contained illegal characters.', $this->assigned_vars['ERROR_MSG']);
+	}
+
+	public function test_add_page_reports_duplicate_route_with_friendly_label()
+	{
+		$this->post['submit'] = true;
+		$this->variables = $this->valid_page_data('page_1', 'Duplicate route');
+
+		$this->controller->add_page();
+
+		self::assertTrue($this->assigned_vars['S_ERROR']);
+		self::assertStringContainsString('Page URL route: The input was not unique.', $this->assigned_vars['ERROR_MSG']);
+	}
+
+	public function test_add_page_reports_out_of_range_order_with_friendly_label()
+	{
+		$this->post['submit'] = true;
+		$this->variables = $this->valid_page_data('new-page', 'Invalid order');
+		$this->variables['page_order'] = 16777216;
+
+		$this->controller->add_page();
+
+		self::assertTrue($this->assigned_vars['S_ERROR']);
+		self::assertStringContainsString('Page order: The value you entered is too large.', $this->assigned_vars['ERROR_MSG']);
 	}
 
 	public function test_add_page_submission_persists_and_purges_routes()
@@ -328,7 +353,7 @@ class admin_controller_test extends \phpbb_database_test_case
 			->disableOriginalConstructor()
 			->getMock();
 		$operator->method('delete_page')
-			->willThrowException(new \phpbb\pages\exception\out_of_bounds('page_id'));
+			->willThrowException(new \OutOfBoundsException('PAGE_NOT_FOUND'));
 		$this->replace_controller_service('page_operator', $operator);
 		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be deleted.|back:adm.php?i=pages');
 

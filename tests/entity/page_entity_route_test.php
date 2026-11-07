@@ -121,7 +121,7 @@ class page_entity_route_test extends page_entity_base
 	*/
 	public function test_route_fails($route)
 	{
-		$this->expectException(\phpbb\pages\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
 
 		// Setup the entity class
 		$entity = $this->get_page_entity();
@@ -135,7 +135,8 @@ class page_entity_route_test extends page_entity_base
 	*/
 	public function test_registered_route_fails()
 	{
-		$this->expectException(\phpbb\pages\exception\unexpected_value::class);
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('ACP_PAGES_VALIDATION_NOT_UNIQUE');
 
 		$this->get_page_entity()->set_route('feed');
 	}
@@ -204,7 +205,7 @@ class page_entity_route_test extends page_entity_base
 	*/
 	public function test_unique_route_fails($id, $route)
 	{
-		$this->expectException(\phpbb\pages\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
 
 		// Setup the entity class
 		$entity = $this->get_page_entity();

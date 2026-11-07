@@ -148,7 +148,7 @@ class admin_controller implements admin_interface
 	 *
 	 * @return void
 	 * @access public
-	 * @throws \phpbb\pages\exception\out_of_bounds
+	 * @throws \OutOfBoundsException
 	 */
 	public function add_page()
 	{
@@ -172,7 +172,7 @@ class admin_controller implements admin_interface
 	 * @param int $page_id The page identifier to edit
 	 * @return void
 	 * @access public
-	 * @throws \phpbb\pages\exception\out_of_bounds
+	 * @throws \OutOfBoundsException
 	 */
 	public function edit_page($page_id)
 	{
@@ -182,7 +182,7 @@ class admin_controller implements admin_interface
 			/* @var $entity \phpbb\pages\entity\page */
 			$entity = $this->container->get('phpbb.pages.entity')->load($page_id);
 		}
-		catch (\phpbb\pages\exception\base $e)
+		catch (\OutOfBoundsException | \InvalidArgumentException $e)
 		{
 			trigger_error($this->lang->lang('ACP_PAGES_EDIT_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
 			return;
@@ -205,7 +205,7 @@ class admin_controller implements admin_interface
 	 * @param \phpbb\pages\entity\page_interface $entity The page entity object
 	 * @return void
 	 * @access protected
-	 * @throws \phpbb\pages\exception\out_of_bounds
+	 * @throws \OutOfBoundsException
 	 */
 	protected function add_edit_page_data($entity)
 	{
@@ -288,6 +288,14 @@ class admin_controller implements admin_interface
 				'set_page_title_switch'			=> $data['page_title_switch'],
 
 			);
+			$field_labels = array(
+				'set_title' => 'ACP_PAGES_FORM_TITLE',
+				'set_route' => 'ACP_PAGES_FORM_ROUTE',
+				'set_description' => 'ACP_PAGES_FORM_DESC',
+				'set_template' => 'ACP_PAGES_FORM_TEMPLATE',
+				'set_order' => 'ACP_PAGES_FORM_ORDER',
+				'set_icon_font' => 'ACP_PAGES_FORM_ICON_FONT',
+			);
 
 			// Set the mapped page data in the entity
 			foreach ($map_fields as $entity_function => $page_data)
@@ -297,10 +305,10 @@ class admin_controller implements admin_interface
 					// Calling the $entity_function on the entity and passing it $page_data
 					$entity->$entity_function($page_data);
 				}
-				catch (\phpbb\pages\exception\base $e)
+				catch (\InvalidArgumentException $e)
 				{
 					// Catch exceptions and add them to errors array
-					$errors[] = $e->get_message($this->lang);
+					$errors[] = $this->lang->lang($field_labels[$entity_function]) . $this->lang->lang('COLON') . ' ' . $this->lang->lang($e->getMessage());
 				}
 			}
 
@@ -424,7 +432,7 @@ class admin_controller implements admin_interface
 			// Purge compiled routes so the route collection is rebuilt
 			$this->route_cache->purge();
 		}
-		catch (\phpbb\pages\exception\base $e)
+		catch (\OutOfBoundsException | \InvalidArgumentException $e)
 		{
 			// Display an error message if delete failed
 			trigger_error($this->lang->lang('ACP_PAGES_DELETE_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);

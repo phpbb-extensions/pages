@@ -72,6 +72,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Strona została dodana.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Strona została zaktualizowana.',
 	'ACP_PAGES_EDIT_ERRORED'			=> 'Strona nie może zostać edytowana.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Uzupełnij wymagane pola.',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Taka ścieżka już istnieje.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Ścieżka zawiera niedozwolone znaki.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Ustawienia strony',

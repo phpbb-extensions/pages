@@ -73,6 +73,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Sidan har skapats.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Sidan har uppdaterats.',
 	'ACP_PAGES_EDIT_ERRORED'			=> 'Sidan kunde inte redigeras.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Erforderligt fält saknas',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Inmatningen var ej unik.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Inmatningen innehöll otillåtna tecken.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Sidinställningar',

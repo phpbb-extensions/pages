@@ -73,6 +73,9 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_ADD_SUCCESS'				=> 'تم إضافة الصفحة بنجاح.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'تم تحديث الصفحة بنجاح.',
 	'ACP_PAGES_EDIT_ERRORED'			=> 'تعذر تعديل الصفحة.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'يجب تعبئة الحقل الفارغ',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'البيانات المُدخلة موجودة مُسبقاً.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'البيانات التي أدخلتها تحتوي على حروف غير مقبولة.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'الإعدادات',
