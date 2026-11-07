@@ -51,7 +51,7 @@ interface page_interface
 	/**
 	* Get page routes (for use in viewonline)
 	*
-	* @return array Array of routes and page titles for all pages
+	* @return array Array of routes, page titles, and guest visibility settings for published pages
 	* @access public
 	*/
 	public function get_page_routes();

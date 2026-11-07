@@ -176,13 +176,14 @@ class listener implements EventSubscriberInterface
 
 		$page_id = $this->page_route_ids[$session_path];
 		$page_routes = $this->page_operator->get_page_routes();
-		if (!isset($page_routes[$page_id]))
+		$page = $page_routes[$page_id] ?? null;
+		if (!$page || (!$page['page_display_to_guests'] && !$this->user->data['is_registered']))
 		{
 			return;
 		}
 
 		$this->lang->add_lang('pages_common', 'phpbb/pages');
-		$event['location'] = $this->lang->lang('PAGES_VIEWONLINE', $page_routes[$page_id]['title']);
+		$event['location'] = $this->lang->lang('PAGES_VIEWONLINE', $page['title']);
 		$event['location_url'] = $this->helper->route('phpbb_pages_dynamic_route_' . $page_id);
 	}
 }

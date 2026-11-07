@@ -142,16 +142,17 @@ class page implements page_interface
 	/**
 	* Get page routes (for use in viewonline)
 	*
-	* @return array Array of routes and page titles for all pages
+	* @return array Array of routes, page titles, and guest visibility settings for published pages
 	* @access public
 	*/
 	public function get_page_routes()
 	{
 		$routes = array();
 
-		// Load all page routes and titles
-		$sql = 'SELECT page_id, page_route, page_title
-			FROM ' . $this->pages_table;
+		// Load published page routes, titles, and guest visibility settings
+		$sql = 'SELECT page_id, page_route, page_title, page_display_to_guests
+			FROM ' . $this->pages_table . '
+			WHERE page_display = 1';
 		$result = $this->db->sql_query($sql);
 
 		while ($row = $this->db->sql_fetchrow($result))
@@ -159,11 +160,12 @@ class page implements page_interface
 			$routes[$row['page_id']] = array(
 				'route' => $row['page_route'],
 				'title' => utf8_decode_ncr($row['page_title']),
+				'page_display_to_guests' => $row['page_display_to_guests'],
 			);
 		}
 		$this->db->sql_freeresult($result);
 
-		// Return an array of all page routes
+		// Return an array of published page routes
 		return $routes;
 	}
 
