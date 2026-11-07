@@ -72,6 +72,10 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'La página no pudo ser borrada.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Página añadida correctamente.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Página actualizada correctamente.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'La página no pudo ser editada.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Campo requerido ausente',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'La entrada no fue única.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'La entrada contiene caracteres no válidos.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Ajustes de la página',

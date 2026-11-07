@@ -86,6 +86,10 @@ class admin_controller_test extends \phpbb_database_test_case
 		$litedown->method('render')->willReturnCallback(function ($text) {
 			return $text;
 		});
+		$router = $this->getMockBuilder(\phpbb\routing\router::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$router->method('getRouteCollection')->willReturn(new \Symfony\Component\Routing\RouteCollection());
 
 		$extension_manager = new \phpbb_mock_extension_manager(
 			$phpbb_root_path,
@@ -103,14 +107,15 @@ class admin_controller_test extends \phpbb_database_test_case
 		$user->data['user_id'] = 2;
 		$user->ip = '127.0.0.1';
 
-		$entity_factory = function () use ($config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
+		$entity_factory = function () use ($config, $phpbb_dispatcher, $text_formatter_utils, $litedown, $router) {
 			return new \phpbb\pages\entity\page(
 				$this->db,
 				$config,
 				$phpbb_dispatcher,
 				'phpbb_pages',
 				$text_formatter_utils,
-				$litedown
+				$litedown,
+				$router
 			);
 		};
 
@@ -252,7 +257,32 @@ class admin_controller_test extends \phpbb_database_test_case
 
 		self::assertTrue($this->assigned_vars['S_ERROR']);
 		self::assertStringContainsString('The submitted form was invalid', $this->assigned_vars['ERROR_MSG']);
-		self::assertStringContainsString('Required field missing', $this->assigned_vars['ERROR_MSG']);
+		self::assertStringContainsString('Page title: Required field missing', $this->assigned_vars['ERROR_MSG']);
+		self::assertStringContainsString('Page URL route: The input contained illegal characters.', $this->assigned_vars['ERROR_MSG']);
+		self::assertStringContainsString('Page template: The input contained illegal characters.', $this->assigned_vars['ERROR_MSG']);
+	}
+
+	public function test_add_page_reports_duplicate_route_with_friendly_label()
+	{
+		$this->post['submit'] = true;
+		$this->variables = $this->valid_page_data('page_1', 'Duplicate route');
+
+		$this->controller->add_page();
+
+		self::assertTrue($this->assigned_vars['S_ERROR']);
+		self::assertStringContainsString('Page URL route: The input was not unique.', $this->assigned_vars['ERROR_MSG']);
+	}
+
+	public function test_add_page_reports_out_of_range_order_with_friendly_label()
+	{
+		$this->post['submit'] = true;
+		$this->variables = $this->valid_page_data('new-page', 'Invalid order');
+		$this->variables['page_order'] = 16777216;
+
+		$this->controller->add_page();
+
+		self::assertTrue($this->assigned_vars['S_ERROR']);
+		self::assertStringContainsString('Page order: The value you entered is too large.', $this->assigned_vars['ERROR_MSG']);
 	}
 
 	public function test_add_page_submission_persists_and_purges_routes()
@@ -281,6 +311,14 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->edit_page(1);
 	}
 
+	public function test_edit_page_reports_missing_page()
+	{
+		$this->log->expects(self::never())->method('add');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be edited.|back:adm.php?i=pages');
+
+		$this->controller->edit_page(9999);
+	}
+
 	public function test_delete_page_removes_real_page_and_logs()
 	{
 		$this->db->sql_query("UPDATE phpbb_pages
@@ -290,6 +328,7 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->log->expects(self::once())
 			->method('add')
 			->with('admin', 2, '127.0.0.1', 'ACP_PAGES_DELETED_LOG', self::isType('int'), array('Deleted &#128512; page'));
+		$this->route_cache->expects(self::once())->method('purge');
 
 		$this->controller->delete_page(1);
 
@@ -309,15 +348,26 @@ class admin_controller_test extends \phpbb_database_test_case
 
 	public function test_delete_page_reports_operator_failure()
 	{
+		$this->route_cache->expects(self::never())->method('purge');
 		$operator = $this->getMockBuilder(\phpbb\pages\operators\page::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$operator->method('delete_page')
-			->willThrowException(new \phpbb\pages\exception\out_of_bounds('page_id'));
+			->willThrowException(new \OutOfBoundsException('PAGE_NOT_FOUND'));
 		$this->replace_controller_service('page_operator', $operator);
 		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be deleted.|back:adm.php?i=pages');
 
 		$this->controller->delete_page(1);
+	}
+
+	public function test_delete_page_reports_missing_page()
+	{
+		$this->ajax = true;
+		$this->log->expects(self::never())->method('add');
+		$this->route_cache->expects(self::never())->method('purge');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'Page could not be deleted.|back:adm.php?i=pages');
+
+		$this->controller->delete_page(9999);
 	}
 
 	public function test_purge_icons_destroys_only_pages_icon_cache()

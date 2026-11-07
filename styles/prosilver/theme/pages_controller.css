@@ -49,3 +49,17 @@
 .pages-content h6 {
 	font-size: 0.75em;
 }
+
+.pages-content table {
+	border-collapse: collapse;
+}
+
+.pages-content th,
+.pages-content td {
+	border: 1px solid #bfc1cf;
+	padding: 5px;
+}
+
+.pages-content th {
+	font-weight: bold;
+}

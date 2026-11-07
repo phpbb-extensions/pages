@@ -68,6 +68,10 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$litedown->method('render')->willReturnCallback(function ($text) {
 			return $text;
 		});
+		$router = $this->getMockBuilder('\phpbb\routing\router')
+			->disableOriginalConstructor()
+			->getMock();
+		$router->method('getRouteCollection')->willReturn(new \Symfony\Component\Routing\RouteCollection());
 
 		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
 			->disableOriginalConstructor()
@@ -75,8 +79,8 @@ class page_main_controller_test extends \phpbb_database_test_case
 		$this->container
 			->method('get')
 			->with('phpbb.pages.entity')
-			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
-				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown);
+			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown, $router) {
+				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown, $router);
 			})
 		;
 
@@ -129,7 +133,8 @@ class page_main_controller_test extends \phpbb_database_test_case
 	public function display_data()
 	{
 		return array(
-			array('page_1', 200, 'pages_default.html', 2), // normal viewable page by member
+			array('page_1', 200, 'pages_default.html', 2, true, false), // normal viewable page by member
+			array('page_3', 200, 'pages_default.html', 2, true, false), // member-only page by member
 		);
 	}
 
@@ -138,9 +143,11 @@ class page_main_controller_test extends \phpbb_database_test_case
 	*
 	* @dataProvider display_data
 	*/
-	public function test_display($route, $status_code, $page_content, $user_id)
+	public function test_display($route, $status_code, $page_content, $user_id, $is_registered, $is_bot)
 	{
 		$this->user->data['user_id'] = $user_id;
+		$this->user->data['is_registered'] = $is_registered;
+		$this->user->data['is_bot'] = $is_bot;
 
 		$controller = $this->get_controller();
 
@@ -158,9 +165,11 @@ class page_main_controller_test extends \phpbb_database_test_case
 	public function display_fails_data()
 	{
 		return array(
-			array('page_4', 404, 'PAGE_NOT_AVAILABLE', 2), // disabled page, member sees page missing message
-			array('page_4', 404, 'PAGE_NOT_AVAILABLE', 1), // disabled page, guests sees page missing message
-			array('page_foo', 404, 'PAGE_NOT_AVAILABLE', 2), // non-existent page, loads page missing message
+			array('page_4', 404, 'PAGE_NOT_AVAILABLE', 2, true, false), // disabled page, member sees page missing message
+			array('page_4', 404, 'PAGE_NOT_AVAILABLE', ANONYMOUS, false, false), // disabled page, guest sees page missing message
+			array('page_3', 404, 'PAGE_NOT_AVAILABLE', ANONYMOUS, false, false), // member-only page, guest sees page missing message
+			array('page_3', 404, 'PAGE_NOT_AVAILABLE', 99, false, true), // member-only page, bot sees page missing message
+			array('page_foo', 404, 'PAGE_NOT_AVAILABLE', 2, true, false), // non-existent page, loads page missing message
 		);
 	}
 
@@ -169,9 +178,11 @@ class page_main_controller_test extends \phpbb_database_test_case
 	 *
 	 * @dataProvider display_fails_data
 	 */
-	public function test_display_fails($route, $status_code, $page_content, $user_id)
+	public function test_display_fails($route, $status_code, $page_content, $user_id, $is_registered, $is_bot)
 	{
 		$this->user->data['user_id'] = $user_id;
+		$this->user->data['is_registered'] = $is_registered;
+		$this->user->data['is_bot'] = $is_bot;
 
 		$controller = $this->get_controller();
 

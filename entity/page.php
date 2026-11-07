@@ -49,6 +49,9 @@ class page implements page_interface
 	/** @var \phpbb\event\dispatcher_interface */
 	protected $dispatcher;
 
+	/** @var \phpbb\routing\router */
+	protected $router;
+
 	/** @var \phpbb\textformatter\s9e\utils */
 	protected $text_formatter_utils;
 
@@ -71,9 +74,10 @@ class page implements page_interface
 	* @param string                              $pages_table           Name of the table used to store page data
 	* @param \phpbb\textformatter\s9e\utils      $text_formatter_utils  Text manipulation utilities
 	* @param \phpbb\pages\textformatter\litedown $litedown             LiteDown parser manager
+	* @param \phpbb\routing\router               $router               Router
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table, \phpbb\textformatter\s9e\utils $text_formatter_utils, \phpbb\pages\textformatter\litedown $litedown)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $pages_table, \phpbb\textformatter\s9e\utils $text_formatter_utils, \phpbb\pages\textformatter\litedown $litedown, \phpbb\routing\router $router)
 	{
 		$this->db = $db;
 		$this->config = $config;
@@ -81,6 +85,7 @@ class page implements page_interface
 		$this->pages_table = $pages_table;
 		$this->text_formatter_utils = $text_formatter_utils;
 		$this->litedown = $litedown;
+		$this->router = $router;
 	}
 
 	/**
@@ -90,7 +95,7 @@ class page implements page_interface
 	* @param string $route Page route
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	*/
 	public function load($id = 0, $route = '')
 	{
@@ -108,7 +113,7 @@ class page implements page_interface
 		if ($this->data === false)
 		{
 			// The page does not exist
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+			throw new \OutOfBoundsException('PAGE_NOT_FOUND');
 		}
 
 		return $this;
@@ -124,7 +129,7 @@ class page implements page_interface
 	* @param array $data Data array, typically from the database
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\base
+	* @throws \InvalidArgumentException
 	*/
 	public function import($data)
 	{
@@ -161,7 +166,7 @@ class page implements page_interface
 			// If the data wasn't sent to us, throw an exception
 			if (!isset($data[$field]))
 			{
-				throw new \phpbb\pages\exception\invalid_argument(array($field, 'FIELD_MISSING'));
+				throw new \InvalidArgumentException('PAGE_FIELD_MISSING:' . $field);
 			}
 
 			// If the type is a method on this class, call it
@@ -192,7 +197,7 @@ class page implements page_interface
 			// If the data is less than 0, it's not unsigned and we'll throw an exception
 			if ($this->data[$field] < 0)
 			{
-				throw new \phpbb\pages\exception\out_of_bounds($field);
+				throw new \InvalidArgumentException('PAGE_FIELD_NOT_UNSIGNED:' . $field);
 			}
 		}
 
@@ -206,14 +211,14 @@ class page implements page_interface
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \LogicException
 	*/
 	public function insert()
 	{
 		if (!empty($this->data['page_id']))
 		{
 			// The page already exists
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+			throw new \LogicException('PAGE_ALREADY_INSERTED');
 		}
 
 		// Insert the page data to the database
@@ -234,14 +239,14 @@ class page implements page_interface
 	*
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \LogicException
 	*/
 	public function save()
 	{
 		if (empty($this->data['page_id']))
 		{
 			// The page does not exist
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+			throw new \LogicException('PAGE_NOT_INSERTED');
 		}
 
 		// Copy the data array, filtering out the page_id identifier
@@ -285,7 +290,7 @@ class page implements page_interface
 	* @param string $title
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_title($title)
 	{
@@ -297,13 +302,13 @@ class page implements page_interface
 		// Title is a required field
 		if ($title === '')
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('title', 'FIELD_MISSING'));
+			throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_REQUIRED');
 		}
 
 		// Limit both the displayed and stored title lengths to the column size.
 		if (truncate_string($title, 200, 200) !== $title)
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('title', 'TOO_LONG'));
+			throw new \InvalidArgumentException('TOO_LONG');
 		}
 
 		// Set the title on our data array
@@ -329,7 +334,7 @@ class page implements page_interface
 	* @param string $description Description text
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_description($description)
 	{
@@ -341,7 +346,7 @@ class page implements page_interface
 		// Limit both the displayed and stored description lengths to the column size.
 		if (truncate_string($description, 255, 255) !== $description)
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('description', 'TOO_LONG'));
+			throw new \InvalidArgumentException('TOO_LONG');
 		}
 
 		// Set the title on our data array
@@ -396,7 +401,7 @@ class page implements page_interface
 	* @param string $route Route text
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_route($route)
 	{
@@ -406,19 +411,19 @@ class page implements page_interface
 		// Route is a required field
 		if ($route === '')
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('route', 'FIELD_MISSING'));
+			throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_REQUIRED');
 		}
 
 		// Route should not contain any unexpected special characters
 		if (!preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\\[\\]^`{|}~ ]*$/', $route))
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('route', 'ILLEGAL_CHARACTERS'));
+			throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_INVALID_CHARACTERS');
 		}
 
 		// We limit the route length to 100 characters
 		if (truncate_string($route, 100) !== $route)
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('route', 'TOO_LONG'));
+			throw new \InvalidArgumentException('TOO_LONG');
 		}
 
 		// Routes must be unique
@@ -434,7 +439,17 @@ class page implements page_interface
 
 			if ($row)
 			{
-				throw new \phpbb\pages\exception\unexpected_value(array('route', 'NOT_UNIQUE'));
+				throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_NOT_UNIQUE');
+			}
+		}
+
+		// Routes registered by phpBB or another extension take precedence over page routes
+		foreach ($this->router->getRouteCollection()->all() as $route_name => $registered_route)
+		{
+			// Page-to-page conflicts are handled by the database uniqueness check above
+			if (strpos($route_name, 'phpbb_pages_dynamic_route_') !== 0 && $registered_route->getPath() === '/' . $route)
+			{
+				throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_NOT_UNIQUE');
 			}
 		}
 
@@ -461,7 +476,7 @@ class page implements page_interface
 	* @param int $order Page sort order
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \InvalidArgumentException
 	*/
 	public function set_order($order)
 	{
@@ -473,9 +488,14 @@ class page implements page_interface
 		* maximum because it matches the MySQL unsigned mediumint maximum value which
 		* is the lowest amongst the DBMS supported by phpBB.
 		*/
-		if ($order < 0 || $order > 16777215)
+		if ($order < 0)
 		{
-			throw new \phpbb\pages\exception\out_of_bounds('page_order');
+			throw new \InvalidArgumentException('TOO_SMALL');
+		}
+
+		if ($order > 16777215)
+		{
+			throw new \InvalidArgumentException('TOO_LARGE');
 		}
 
 		// Set the route on our data array
@@ -501,7 +521,7 @@ class page implements page_interface
 	* @param string $template Page template name
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_template($template)
 	{
@@ -512,13 +532,13 @@ class page implements page_interface
 		// and contain only letters, numbers, hyphens and underscores
 		if ($template !== '' && !preg_match('/^pages_[A-Za-z\d\-_]+\.html$/', $template))
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('template', 'ILLEGAL_CHARACTERS'));
+			throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_INVALID_CHARACTERS');
 		}
 
 		// We limit the template name length to 255 characters
 		if (truncate_string($template, 255) !== $template)
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('template', 'TOO_LONG'));
+			throw new \InvalidArgumentException('TOO_LONG');
 		}
 
 		// Set the title on our data array
@@ -544,7 +564,7 @@ class page implements page_interface
 	* @param string $name icon font name
 	* @return page_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_icon_font($name)
 	{
@@ -554,13 +574,13 @@ class page implements page_interface
 		// Validate icon font name
 		if ($name !== '' && !preg_match('/^[a-z]+[a-z\d\-]+$/', $name))
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('icon_font', 'ILLEGAL_CHARACTERS'));
+			throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_INVALID_CHARACTERS');
 		}
 
 		// We limit the icon font name length to 255 characters
 		if (truncate_string($name, 255) !== $name)
 		{
-			throw new \phpbb\pages\exception\unexpected_value(array('icon_font', 'TOO_LONG'));
+			throw new \InvalidArgumentException('TOO_LONG');
 		}
 
 		// Set the title on our data array
@@ -609,11 +629,8 @@ class page implements page_interface
 		// Generate for display
 		if ($content_html_enabled)
 		{
-			// This is required by s9e text formatter to
-			// remove extra xml formatting from the content.
+			// Restore the original HTML content from the s9e XML format.
 			$content = $this->text_formatter_utils->unparse($content);
-
-			$content = htmlspecialchars_decode($content, ENT_COMPAT);
 		}
 		else
 		{

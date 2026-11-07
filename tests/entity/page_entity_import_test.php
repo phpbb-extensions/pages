@@ -149,12 +149,34 @@ class page_entity_import_test extends page_entity_base
 	*/
 	public function test_import_fail($data)
 	{
-		$this->expectException(\phpbb\pages\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
 
 		// Setup the entity class
 		$entity = $this->get_page_entity();
 
 		// Set the data
 		$entity->import($data);
+	}
+
+	public function test_import_missing_field_uses_symbolic_message()
+	{
+		$data = $this->get_import_data()[1];
+		unset($data['page_title']);
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('PAGE_FIELD_MISSING:page_title');
+
+		$this->get_page_entity()->import($data);
+	}
+
+	public function test_import_unsigned_field_uses_symbolic_message()
+	{
+		$data = $this->get_import_data()[1];
+		$data['page_content_bbcode_options'] = -1;
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('PAGE_FIELD_NOT_UNSIGNED:page_content_bbcode_options');
+
+		$this->get_page_entity()->import($data);
 	}
 }

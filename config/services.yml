@@ -120,6 +120,7 @@ services:
             - '%phpbb.pages.tables.pages%'
             - '@text_formatter.utils'
             - '@phpbb.pages.text_formatter.litedown'
+            - '@router'
 
     phpbb.pages.operator:
         class: phpbb\pages\operators\page

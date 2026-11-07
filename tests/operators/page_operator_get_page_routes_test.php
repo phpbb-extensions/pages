@@ -22,10 +22,9 @@ class page_operator_get_page_routes_test extends page_operator_base
 		return array(
 			array(
 				array(
-					1 => array('route' => 'page_1', 'title' => 'title_1'),
-					2 => array('route' => 'page_2', 'title' => 'title_2'),
-					3 => array('route' => 'page_3', 'title' => 'title_3'),
-					4 => array('route' => 'page_4', 'title' => 'title_4'),
+					1 => array('route' => 'page_1', 'title' => 'title_1', 'page_display_to_guests' => 1),
+					2 => array('route' => 'page_2', 'title' => 'title_2', 'page_display_to_guests' => 1),
+					3 => array('route' => 'page_3', 'title' => 'title_3', 'page_display_to_guests' => 0),
 				),
 			),
 		);

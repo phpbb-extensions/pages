@@ -49,6 +49,9 @@ class page_operator_base extends \phpbb_database_test_case
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\pages\textformatter\litedown */
 	protected $litedown;
 
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\routing\router */
+	protected $router;
+
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\user */
 	protected $user;
 
@@ -84,11 +87,16 @@ class page_operator_base extends \phpbb_database_test_case
 		$litedown->method('render')->willReturnCallback(function ($text) {
 			return $text;
 		});
+		$this->router = $this->getMockBuilder('\phpbb\routing\router')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->router->method('getRouteCollection')->willReturn(new \Symfony\Component\Routing\RouteCollection());
+		$router = $this->router;
 		$this->container
 			->method('get')
 			->with('phpbb.pages.entity')
-			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown) {
-				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown);
+			->willReturnCallback(function () use ($db, $config, $phpbb_dispatcher, $text_formatter_utils, $litedown, $router) {
+				return new \phpbb\pages\entity\page($db, $config, $phpbb_dispatcher, 'phpbb_pages', $text_formatter_utils, $litedown, $router);
 			})
 		;
 		$this->cache = new \phpbb_mock_cache();
@@ -139,7 +147,8 @@ class page_operator_base extends \phpbb_database_test_case
 			$this->dispatcher,
 			'phpbb_pages',
 			$this->text_formatter_utils,
-			$this->litedown
+			$this->litedown,
+			$this->router
 		);
 	}
 }

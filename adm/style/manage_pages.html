@@ -53,7 +53,7 @@
 			</dl>
 			<dl>
 				<dt><label for="page_route">{{ lang('ACP_PAGES_FORM_ROUTE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ROUTE_EXPLAIN') }}</span></dt>
-				<dd><input class="text medium" type="text" id="page_route" name="page_route" value="{{ PAGES_ROUTE }}" maxlength="200" /></dd>
+				<dd><input class="text medium" type="text" id="page_route" name="page_route" value="{{ PAGES_ROUTE }}" maxlength="100" /></dd>
 			</dl>
 		</fieldset>
 		<fieldset>
@@ -75,7 +75,7 @@
 						<label><input type="checkbox" class="radio html-off" name="parse_markdown"{% if S_PARSE_MARKDOWN_CHECKED %} checked="checked"{% endif %} /> {{ lang('ACP_PAGES_PARSE_MARKDOWN') }}</label>
 						<label><input type="checkbox" class="radio html-on" name="parse_html"{% if S_PARSE_HTML_CHECKED %} checked="checked"{% endif %} /> {{ lang('PARSE_HTML') }}</label>
 					</dd>
-					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ FLASH_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
+					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
 				</dl>
 				<script>
 					const textarea = document.querySelector("textarea[name='page_content']");
@@ -99,7 +99,7 @@
 			</dl>
 			<dl>
 				<dt><label for="page_order">{{ lang('ACP_PAGES_FORM_ORDER') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_ORDER_EXPLAIN') }}</span></dt>
-				<dd><input type="number" id="page_order" min="0" max="999999" name="page_order" value="{{ PAGES_ORDER }}" /></dd>
+				<dd><input type="number" id="page_order" min="0" max="16777215" name="page_order" value="{{ PAGES_ORDER }}" /></dd>
 			</dl>
 			<dl>
 				<dt><label for="page_links">{{ lang('ACP_PAGES_FORM_LINKS') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_PAGES_FORM_LINKS_EXPLAIN') }}</span></dt>

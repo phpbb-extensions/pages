@@ -58,7 +58,7 @@ class page_operator_add_page_test extends page_operator_base
 	*/
 	public function test_add_page_fails()
 	{
-		$this->expectException(\phpbb\pages\exception\base::class);
+		$this->expectException(\LogicException::class);
 
 		// Setup the entity class
 		$entity = $this->get_page_entity();

@@ -79,7 +79,8 @@ class page_entity_save_test extends page_entity_base
 	*/
 	public function test_save_fails()
 	{
-		$this->expectException(\phpbb\pages\exception\out_of_bounds::class);
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('PAGE_NOT_INSERTED');
 
 		// Setup the entity class
 		$entity = $this->get_page_entity();
