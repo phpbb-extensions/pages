@@ -14,6 +14,7 @@ use phpbb\config\config;
 use phpbb\db\driver\driver_interface;
 use phpbb\event\dispatcher_interface;
 use phpbb\pages\textformatter\litedown;
+use phpbb\routing\router;
 use phpbb\textformatter\s9e\utils;
 
 /**
@@ -39,6 +40,9 @@ class factory
 	/** @var litedown */
 	protected $litedown;
 
+	/** @var router */
+	protected $router;
+
 	/**
 	 * Constructor.
 	 *
@@ -48,8 +52,9 @@ class factory
 	 * @param string $pages_table
 	 * @param utils $text_formatter_utils
 	 * @param litedown $litedown
+	 * @param router $router
 	 */
-	public function __construct(driver_interface $db, config $config, dispatcher_interface $dispatcher, string $pages_table, utils $text_formatter_utils, litedown $litedown)
+	public function __construct(driver_interface $db, config $config, dispatcher_interface $dispatcher, string $pages_table, utils $text_formatter_utils, litedown $litedown, router $router)
 	{
 		$this->db = $db;
 		$this->config = $config;
@@ -57,6 +62,7 @@ class factory
 		$this->pages_table = $pages_table;
 		$this->text_formatter_utils = $text_formatter_utils;
 		$this->litedown = $litedown;
+		$this->router = $router;
 	}
 
 	/**
@@ -72,7 +78,8 @@ class factory
 			$this->dispatcher,
 			$this->pages_table,
 			$this->text_formatter_utils,
-			$this->litedown
+			$this->litedown,
+			$this->router
 		);
 	}
 }

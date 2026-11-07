@@ -58,7 +58,7 @@ class page_loader_phpbb3_test extends \phpbb_database_test_case
 	public function test_load_throws_on_invalid_type()
 	{
 		$this->expectException(\InvalidArgumentException::class);
-		$this->expectExceptionMessage('Type must be string or null');
+		$this->expectExceptionMessage('ROUTE_TYPE_INVALID');
 		$this->loader->load('resource', 123);
 	}
 

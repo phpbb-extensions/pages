@@ -71,6 +71,10 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Страница не может быть удалена.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Страница успешно добавлена.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Страница успешно обновлена.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Страница не может быть отредактирована.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Отсутствует обязательное поле',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Данные повторяются',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Введенные данные содержут недопустимые символы',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Настройки страницы',

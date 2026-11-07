@@ -137,7 +137,11 @@ class event_listener_viewonline_test extends event_listener_base
 		$this->page_operator->expects(self::atMost(1))
 			->method('get_page_routes')
 			->willReturn(array(
-				1 => array('route' => 'test', 'title' => $location)
+				1 => array(
+					'route' => 'test',
+					'title' => $location,
+					'page_display_to_guests' => 1,
+				)
 			));
 
 		$this->controller_helper->expects(self::atMost(1))
@@ -157,6 +161,61 @@ class event_listener_viewonline_test extends event_listener_base
 
 		self::assertEquals($expected_location_url, $location_url);
 		self::assertEquals($expected_location, $location);
+	}
+
+	/**
+	* Data set for test_viewonline_page_visibility
+	*
+	* @return array Array of test data
+	*/
+	public function viewonline_page_visibility_data()
+	{
+		return array(
+			'public page is visible to guest' => array(false, false, 1, 1, true),
+			'guest-restricted page is hidden from guest' => array(false, false, 1, 0, false),
+			'guest-restricted page is visible to registered user' => array(true, false, 1, 0, true),
+			'unpublished page is hidden from registered user' => array(true, false, 0, 1, false),
+			'unpublished page is hidden from admin' => array(true, true, 0, 1, false),
+		);
+	}
+
+	/**
+	* Test page visibility is enforced for viewonline locations
+	*
+	* @dataProvider viewonline_page_visibility_data
+	*/
+	public function test_viewonline_page_visibility($is_registered, $is_admin, $page_display, $page_display_to_guests, $is_visible)
+	{
+		$this->user->data['is_registered'] = $is_registered;
+		$this->auth->method('acl_get')->with('a_')->willReturn($is_admin);
+		$page_routes = $page_display ? array(
+			1 => array(
+				'route' => 'test',
+				'title' => 'Secret page title',
+				'page_display_to_guests' => $page_display_to_guests,
+			),
+		) : array();
+		$this->page_operator->method('get_page_routes')->willReturn($page_routes);
+		$this->controller_helper->method('route')->willReturn('page-url');
+
+		$event = new \phpbb\event\data(array(
+			'row' => array('session_page' => 'app.php/test'),
+			'location' => 'Index page',
+			'location_url' => 'index.php',
+		));
+
+		$this->get_listener()->viewonline_page($event);
+
+		if ($is_visible)
+		{
+			self::assertSame($this->lang->lang('PAGES_VIEWONLINE', 'Secret page title'), $event['location']);
+			self::assertSame('page-url', $event['location_url']);
+		}
+		else
+		{
+			self::assertSame('Index page', $event['location']);
+			self::assertSame('index.php', $event['location_url']);
+		}
 	}
 
 	public function test_viewonline_page_ignores_invalid_session_url()

@@ -72,6 +72,10 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Stranicu nije bilo moguće izbrisati.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Stranice je dodana.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Stranice je ažurirana.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Stranicu nije bilo moguće urediti.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Nedostaje traženo polje.',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Upis nije jedinstven.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Upis sadrži nedopuštene znakove.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Postavke stranice',

@@ -72,6 +72,10 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Sayfa silinemedi.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Sayfa başarıyla eklendi.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Sayfa başarıyla güncellendi.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Sayfa düzenlenemedi.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Gerekli alan eksik',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Giriş, özgün ve benzersiz değil.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Giriş, illegal karakterler içeriyor.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Sayfa ayarları',

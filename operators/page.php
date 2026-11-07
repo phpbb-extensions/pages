@@ -80,7 +80,8 @@ class page implements page_interface
 	 * @param int $id Page identifier
 	 * @param string $route Page route
 	 * @return \phpbb\pages\entity\page_interface
-	 * @throws \phpbb\pages\exception\base If the page is missing or stored data is invalid
+	 * @throws \OutOfBoundsException If the page is missing
+	 * @throws \InvalidArgumentException If stored page data is invalid
 	 */
 	public function get_page($id = 0, $route = '')
 	{
@@ -97,7 +98,7 @@ class page implements page_interface
 
 		if ($row === false)
 		{
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+			throw new \OutOfBoundsException('PAGE_NOT_FOUND');
 		}
 
 		return $this->create_page()->import($row);
@@ -109,7 +110,7 @@ class page implements page_interface
 	 * @param int $limit
 	 * @param int $start
 	 * @return array Array of page data entities
-	 * @throws \phpbb\pages\exception\base If stored page data is invalid
+	 * @throws \InvalidArgumentException If stored page data is invalid
 	 * @access public
 	 */
 	public function get_pages($limit = 0, $start = 0)
@@ -138,14 +139,16 @@ class page implements page_interface
 	*
 	* @param \phpbb\pages\entity\page_interface $entity Page entity with new data to insert
 	* @return \phpbb\pages\entity\page_interface Added page entity
-	* @throws \phpbb\pages\exception\base If the entity already exists or stored data is invalid
+	* @throws \LogicException If the entity already exists
+	* @throws \OutOfBoundsException If the inserted page cannot be reloaded
+	* @throws \InvalidArgumentException If stored page data is invalid
 	* @access public
 	*/
 	public function add_page($entity)
 	{
 		if ($entity->get_id())
 		{
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+			throw new \LogicException('PAGE_ALREADY_INSERTED');
 		}
 
 		$data = array_diff_key($entity->get_data(), array('page_id' => null));
@@ -161,14 +164,16 @@ class page implements page_interface
 	 *
 	 * @param \phpbb\pages\entity\page_interface $entity Page entity
 	 * @return \phpbb\pages\entity\page_interface Persisted page entity
-	 * @throws \phpbb\pages\exception\base If the entity is new, missing, or stored data is invalid
+	 * @throws \LogicException If the entity is new
+	 * @throws \OutOfBoundsException If the page is missing
+	 * @throws \InvalidArgumentException If stored page data is invalid
 	 */
 	public function save_page($entity)
 	{
 		$page_id = $entity->get_id();
 		if (!$page_id)
 		{
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+			throw new \LogicException('PAGE_NOT_INSERTED');
 		}
 
 		$changes = array_diff_key($entity->get_changes(), array('page_id' => null));
@@ -188,7 +193,7 @@ class page implements page_interface
 	*
 	* @param int $page_id The page identifier to delete
 	* @return bool True if row was deleted, false otherwise
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	* @access public
 	*/
 	public function delete_page($page_id)
@@ -209,16 +214,17 @@ class page implements page_interface
 	/**
 	* Get page routes (for use in view online)
 	*
-	* @return array Array of routes and page titles for all pages
+	* @return array Array of routes, page titles, and guest visibility settings for published pages
 	* @access public
 	*/
 	public function get_page_routes()
 	{
 		$routes = array();
 
-		// Load all page routes and titles
-		$sql = 'SELECT page_id, page_route, page_title
-			FROM ' . $this->pages_table;
+		// Load published page routes, titles, and guest visibility settings
+		$sql = 'SELECT page_id, page_route, page_title, page_display_to_guests
+			FROM ' . $this->pages_table . '
+			WHERE page_display = 1';
 		$result = $this->db->sql_query($sql);
 
 		while ($row = $this->db->sql_fetchrow($result))
@@ -226,11 +232,12 @@ class page implements page_interface
 			$routes[$row['page_id']] = array(
 				'route' => $row['page_route'],
 				'title' => utf8_decode_ncr($row['page_title']),
+				'page_display_to_guests' => $row['page_display_to_guests'],
 			);
 		}
 		$this->db->sql_freeresult($result);
 
-		// Return an array of all page routes
+		// Return an array of published page routes
 		return $routes;
 	}
 
@@ -373,7 +380,7 @@ class page implements page_interface
 	* @param int $page_id Page identifier
 	* @param array $link_ids Page link location identifiers
 	* @return page_interface $this object for chaining calls
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	* @access public
 	*/
 	public function insert_page_links($page_id, $link_ids)
@@ -405,7 +412,7 @@ class page implements page_interface
 	*
 	* @param int $page_id Page identifier
 	* @return page_interface $this object for chaining calls
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	* @access protected
 	*/
 	protected function remove_page_links($page_id)
@@ -413,7 +420,7 @@ class page implements page_interface
 		// Throw an exception if page identifier is invalid
 		if (!$this->page_id_exists($page_id))
 		{
-			throw new \phpbb\pages\exception\out_of_bounds('page_id');
+			throw new \OutOfBoundsException('PAGE_NOT_FOUND');
 		}
 
 		// Delete the page's links from the database

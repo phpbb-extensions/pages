@@ -47,9 +47,10 @@ class page_operator_delete_page_test extends page_operator_base
 		{
 			$deleted = $operator->get_page($page_id);
 		}
-		catch (\phpbb\pages\exception\base $e)
+		catch (\OutOfBoundsException $e)
 		{
 			// Page was not found/deleted
+			self::assertSame('PAGE_NOT_FOUND', $e->getMessage());
 			$deleted = true;
 		}
 
@@ -77,7 +78,8 @@ class page_operator_delete_page_test extends page_operator_base
 	*/
 	public function test_delete_page_fails($page_id)
 	{
-		$this->expectException(\phpbb\pages\exception\base::class);
+		$this->expectException(\OutOfBoundsException::class);
+		$this->expectExceptionMessage('PAGE_NOT_FOUND');
 
 		// Setup the operator class
 		$operator = $this->get_page_operator();

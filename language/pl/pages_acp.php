@@ -71,6 +71,10 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Strona nie może zostać usunięta.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Strona została dodana.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Strona została zaktualizowana.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Strona nie może zostać edytowana.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Uzupełnij wymagane pola.',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Taka ścieżka już istnieje.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Ścieżka zawiera niedozwolone znaki.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Ustawienia strony',
@@ -86,7 +90,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> 'Treść może być tworzona przy użyciu Markdown, standardowych znaczników BBCode phpBB, emotikonów i automatycznie rozpoznawanych adresów URL albo można włączyć tryb HTML. W trybie HTML Markdown, BBCode, emotikony i automatycznie rozpoznawane adresy URL nie będą działać, ale można używać dowolnej poprawnej składni HTML. Należy pamiętać, że treść zostanie dodana do istniejącego szablonu HTML, dlatego nie należy dołączać znaczników DOCTYPE, HTML, BODY ani HEAD. Można jednak używać wszystkich innych znaczników formatowania HTML, w tym IFRAME, SCRIPT, STYLE, EMBED, VIDEO itd.',
 	'ACP_PAGES_PARSE_MARKDOWN'			=> 'Przetwarzaj Markdown',
 	'ACP_PAGES_FORM_TEMPLATE'			=> 'Szablon strony',
-	'ACP_PAGES_FORM_TEMPLATE_EXPLAIN'	=> 'Własne szablony stron możesz dodać do pliku <samp>ext/phpbb/styles/*/template</samp>.',
+	'ACP_PAGES_FORM_TEMPLATE_EXPLAIN'	=> 'Niestandardowe szablony stron, których nazwy mają postać <samp>pages_*.html</samp>, można dodawać do folderów <samp>styles/*/template</samp> w phpBB.',
 	'ACP_PAGES_FORM_TEMPLATE_SELECT'	=> 'Wybierz szablon',
 	'ACP_PAGES_FORM_ORDER'				=> 'Kolejność strony',
 	'ACP_PAGES_FORM_ORDER_EXPLAIN'		=> 'Strony zostaną posortowane według numeracji. Niższe numery mają pierwszeństwo przed wyższymi numerami.',

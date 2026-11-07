@@ -60,9 +60,9 @@ class page_entity_order_test extends page_entity_base
 	public static function order_fails_test_data()
 	{
 		return array(
-			array(-1),
-			array('-1'),
-			array(16777216),
+			array(-1, 'TOO_SMALL'),
+			array('-1', 'TOO_SMALL'),
+			array(16777216, 'TOO_LARGE'),
 		);
 	}
 
@@ -71,9 +71,10 @@ class page_entity_order_test extends page_entity_base
 	*
 	* @dataProvider order_fails_test_data
 	*/
-	public function test_order_fails($order)
+	public function test_order_fails($order, $expected_message)
 	{
-		$this->expectException(\phpbb\pages\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage($expected_message);
 
 		// Setup the entity class
 		$entity = $this->get_page_entity();

@@ -28,7 +28,7 @@ interface page_interface
 	* @param array $data Data array, typically from the database
 	* @return page_interface $this object for chaining calls
 	* @access public
-	* @throws \phpbb\pages\exception\base
+	* @throws \InvalidArgumentException
 	*/
 	public function import($data);
 
@@ -68,7 +68,7 @@ interface page_interface
 	* @param string $title
 	* @return page_interface $this object for chaining calls
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_title($title);
 
@@ -86,7 +86,7 @@ interface page_interface
 	* @param string $description Description text
 	* @return page_interface $this object for chaining calls
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_description($description);
 
@@ -121,7 +121,7 @@ interface page_interface
 	* @param string $route Route text
 	* @return page_interface $this object for chaining calls
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_route($route);
 
@@ -139,7 +139,7 @@ interface page_interface
 	* @param int $order Page sort order
 	* @return page_interface $this object for chaining calls
 	* @access public
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \InvalidArgumentException
 	*/
 	public function set_order($order);
 
@@ -157,7 +157,7 @@ interface page_interface
 	* @param string $template Page template name
 	* @return page_interface $this object for chaining calls
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_template($template);
 
@@ -175,7 +175,7 @@ interface page_interface
 	* @param string $name icon font name
 	* @return page_interface $this object for chaining calls
 	* @access public
-	* @throws \phpbb\pages\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_icon_font($name);
 

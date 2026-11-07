@@ -29,16 +29,16 @@ class page_operator_save_page_test extends page_operator_base
 
 	public function test_save_page_rejects_new_entity()
 	{
-		$this->expectException(\phpbb\pages\exception\out_of_bounds::class);
-		$this->expectExceptionMessage('page_id');
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('PAGE_NOT_INSERTED');
 
 		$this->get_page_operator()->save_page($this->entity_factory->create());
 	}
 
 	public function test_get_page_rejects_unknown_id()
 	{
-		$this->expectException(\phpbb\pages\exception\out_of_bounds::class);
-		$this->expectExceptionMessage('page_id');
+		$this->expectException(\OutOfBoundsException::class);
+		$this->expectExceptionMessage('PAGE_NOT_FOUND');
 
 		$this->get_page_operator()->get_page(100);
 	}

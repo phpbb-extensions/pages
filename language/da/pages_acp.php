@@ -71,6 +71,10 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Side kunne ikke slettes.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Side tilføjet.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Side opdateret.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Side kunne ikke redigeres.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Obligatorisk felt mangler',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Inputtet var ikke unikt.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Inputtet indeholder tegn som ikke er tilladte.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Indstillinger for side',

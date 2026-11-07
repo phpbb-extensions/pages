@@ -31,7 +31,6 @@ class pages_functional_base extends \phpbb_functional_test_case
 
 		// Load all of Pages language files
 		$this->add_lang_ext('phpbb/pages', array(
-			'exceptions',
 			'info_acp_pages',
 			'pages_acp',
 			'pages_common',

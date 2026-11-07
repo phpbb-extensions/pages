@@ -108,13 +108,13 @@ class main_controller implements main_interface
 		{
 			$entity = $this->page_operator->get_page(0, $route);
 		}
-		catch (\phpbb\pages\exception\base $e)
+		catch (\OutOfBoundsException | \InvalidArgumentException $e)
 		{
 			throw new http_exception(404, 'PAGE_NOT_AVAILABLE', array($route));
 		}
 
 		// Throw 404 error if page display to guests is disabled
-		if ((int) $this->user->data['user_id'] === ANONYMOUS && !$entity->get_page_display_to_guests())
+		if (!$this->user->data['is_registered'] && !$entity->get_page_display_to_guests())
 		{
 			throw new http_exception(404, 'PAGE_NOT_AVAILABLE', array($route));
 		}

@@ -30,7 +30,8 @@ interface page_interface
 	 * @param int $id Page identifier
 	 * @param string $route Page route
 	 * @return \phpbb\pages\entity\page_interface
-	 * @throws \phpbb\pages\exception\base If the page is missing or stored data is invalid
+	 * @throws \OutOfBoundsException If the page is missing
+	 * @throws \InvalidArgumentException If stored page data is invalid
 	 */
 	public function get_page($id = 0, $route = '');
 
@@ -40,7 +41,7 @@ interface page_interface
 	 * @param int $limit
 	 * @param int $start
 	 * @return array Array of page data entities
-	 * @throws \phpbb\pages\exception\base If stored page data is invalid
+	 * @throws \InvalidArgumentException If stored page data is invalid
 	 * @access public
 	 */
 	public function get_pages($limit = 0, $start = 0);
@@ -50,7 +51,9 @@ interface page_interface
 	*
 	* @param \phpbb\pages\entity\page_interface $entity Page entity with new data to insert
 	* @return \phpbb\pages\entity\page_interface Added page entity
-	* @throws \phpbb\pages\exception\base If the entity already exists or stored data is invalid
+	* @throws \LogicException If the entity already exists
+	* @throws \OutOfBoundsException If the inserted page cannot be reloaded
+	* @throws \InvalidArgumentException If stored page data is invalid
 	* @access public
 	*/
 	public function add_page($entity);
@@ -60,7 +63,9 @@ interface page_interface
 	 *
 	 * @param \phpbb\pages\entity\page_interface $entity Page entity
 	 * @return \phpbb\pages\entity\page_interface Persisted page entity
-	 * @throws \phpbb\pages\exception\base If the entity is new, missing, or stored data is invalid
+	 * @throws \LogicException If the entity is new
+	 * @throws \OutOfBoundsException If the page is missing
+	 * @throws \InvalidArgumentException If stored page data is invalid
 	 */
 	public function save_page($entity);
 
@@ -69,7 +74,7 @@ interface page_interface
 	*
 	* @param int $page_id The page identifier to delete
 	* @return bool True if row was deleted, false otherwise
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	* @access public
 	*/
 	public function delete_page($page_id);
@@ -77,7 +82,7 @@ interface page_interface
 	/**
 	* Get page routes (for use in view online)
 	*
-	* @return array Array of routes and page titles for all pages
+	* @return array Array of routes, page titles, and guest visibility settings for published pages
 	* @access public
 	*/
 	public function get_page_routes();
@@ -127,7 +132,7 @@ interface page_interface
 	* @param int $page_id Page identifier
 	* @param array $link_ids Page link location identifiers
 	* @return page_interface $this object for chaining calls
-	* @throws \phpbb\pages\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	* @access public
 	*/
 	public function insert_page_links($page_id, $link_ids);

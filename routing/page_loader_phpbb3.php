@@ -45,7 +45,7 @@ class page_loader_phpbb3 extends Loader
 	{
 		if (!is_string($type) && $type !== null)
 		{
-			throw new InvalidArgumentException('Type must be string or null');
+			throw new InvalidArgumentException('ROUTE_TYPE_INVALID');
 		}
 		return $this->core->load_routes();
 	}

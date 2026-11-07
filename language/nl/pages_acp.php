@@ -72,6 +72,10 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Pagina kan niet verwijderd worden.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Pagina succesvol toegevoegd.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Pagina succesvol bijgewerkt.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Pagina kan niet bewerkt worden.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Vereist veld mist',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'De invoer is niet uniek.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'De invoer bevat illegale tekens.',
 
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Pagina-instellingen',

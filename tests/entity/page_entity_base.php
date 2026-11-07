@@ -40,6 +40,9 @@ class page_entity_base extends \phpbb_database_test_case
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\pages\textformatter\litedown */
 	protected $litedown;
 
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\routing\router */
+	protected $router;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(__DIR__ . '/fixtures/page.xml');
@@ -64,6 +67,14 @@ class page_entity_base extends \phpbb_database_test_case
 		$this->litedown->method('render')->willReturnCallback(function ($text) {
 			return $text;
 		});
+
+		$route_collection = new \Symfony\Component\Routing\RouteCollection();
+		$route_collection->add('phpbb_feed_index', new \Symfony\Component\Routing\Route('/feed'));
+		$route_collection->add('phpbb_pages_dynamic_route_1', new \Symfony\Component\Routing\Route('/page_1'));
+		$this->router = $this->getMockBuilder('\phpbb\routing\router')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->router->method('getRouteCollection')->willReturn($route_collection);
 	}
 
 	/**
@@ -73,7 +84,7 @@ class page_entity_base extends \phpbb_database_test_case
 	*/
 	protected function get_page_entity()
 	{
-		return new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages', $this->text_formatter_utils, $this->litedown);
+		return new \phpbb\pages\entity\page($this->db, $this->config, $this->dispatcher, 'phpbb_pages', $this->text_formatter_utils, $this->litedown, $this->router);
 	}
 
 	/**

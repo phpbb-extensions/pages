@@ -105,15 +105,7 @@ class admin_controller implements admin_interface
 		$limit		= 25;
 
 		// Grab all the pages from the db
-		try
-		{
-			$entities = $this->page_operator->get_pages($limit, $start);
-		}
-		catch (\phpbb\pages\exception\base $e)
-		{
-			$this->display_page_error($e);
-			return;
-		}
+		$entities = $this->page_operator->get_pages($limit, $start);
 
 		// Process each page entity for display
 		/* @var $entity \phpbb\pages\entity\page */
@@ -150,23 +142,16 @@ class admin_controller implements admin_interface
 	 *
 	 * @return void
 	 * @access public
+	 * @throws \OutOfBoundsException
 	 */
 	public function add_page()
 	{
-		try
-		{
-			// Initiate a page entity
-			/* @var $entity \phpbb\pages\entity\page */
-			$entity = $this->page_operator->create_page();
+		// Initiate a page entity
+		/* @var $entity \phpbb\pages\entity\page */
+		$entity = $this->page_operator->create_page();
 
-			// Process the new page
-			$this->add_edit_page_data($entity);
-		}
-		catch (\phpbb\pages\exception\base $e)
-		{
-			$this->display_page_error($e);
-			return;
-		}
+		// Process the new page
+		$this->add_edit_page_data($entity);
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -181,6 +166,7 @@ class admin_controller implements admin_interface
 	 * @param int $page_id The page identifier to edit
 	 * @return void
 	 * @access public
+	 * @throws \OutOfBoundsException
 	 */
 	public function edit_page($page_id)
 	{
@@ -189,15 +175,15 @@ class admin_controller implements admin_interface
 			// Initiate and load the page entity
 			/* @var $entity \phpbb\pages\entity\page */
 			$entity = $this->page_operator->get_page($page_id);
-
-			// Process the edited page
-			$this->add_edit_page_data($entity);
 		}
-		catch (\phpbb\pages\exception\base $e)
+		catch (\OutOfBoundsException | \InvalidArgumentException $e)
 		{
-			$this->display_page_error($e);
+			trigger_error($this->lang->lang('ACP_PAGES_EDIT_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
 			return;
 		}
+
+		// Process the edited page
+		$this->add_edit_page_data($entity);
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -213,7 +199,7 @@ class admin_controller implements admin_interface
 	 * @param \phpbb\pages\entity\page_interface $entity The page entity object
 	 * @return void
 	 * @access protected
-	 * @throws \phpbb\pages\exception\base If persistence or hydration fails
+	 * @throws \OutOfBoundsException
 	 */
 	protected function add_edit_page_data($entity)
 	{
@@ -296,6 +282,14 @@ class admin_controller implements admin_interface
 				'set_page_title_switch'			=> $data['page_title_switch'],
 
 			);
+			$field_labels = array(
+				'set_title' => 'ACP_PAGES_FORM_TITLE',
+				'set_route' => 'ACP_PAGES_FORM_ROUTE',
+				'set_description' => 'ACP_PAGES_FORM_DESC',
+				'set_template' => 'ACP_PAGES_FORM_TEMPLATE',
+				'set_order' => 'ACP_PAGES_FORM_ORDER',
+				'set_icon_font' => 'ACP_PAGES_FORM_ICON_FONT',
+			);
 
 			// Set the mapped page data in the entity
 			foreach ($map_fields as $entity_function => $page_data)
@@ -305,10 +299,10 @@ class admin_controller implements admin_interface
 					// Calling the $entity_function on the entity and passing it $page_data
 					$entity->$entity_function($page_data);
 				}
-				catch (\phpbb\pages\exception\base $e)
+				catch (\InvalidArgumentException $e)
 				{
 					// Catch exceptions and add them to errors array
-					$errors[] = $e->get_message($this->lang);
+					$errors[] = $this->lang->lang($field_labels[$entity_function]) . $this->lang->lang('COLON') . ' ' . $this->lang->lang($e->getMessage());
 				}
 			}
 
@@ -395,13 +389,11 @@ class admin_controller implements admin_interface
 			'BBCODE_STATUS'		=> $this->lang->lang('BBCODE_IS_ON', '<a href="' . $this->helper->route('phpbb_help_bbcode_controller') . '">', '</a>'),
 			'SMILIES_STATUS'	=> $this->lang->lang('SMILIES_ARE_ON'),
 			'IMG_STATUS'		=> $this->lang->lang('IMAGES_ARE_ON'),
-			'FLASH_STATUS'		=> $this->lang->lang('FLASH_IS_ON'),
 			'URL_STATUS'		=> $this->lang->lang('URL_IS_ON'),
 
 			'S_BBCODE_ALLOWED'	=> true,
 			'S_SMILIES_ALLOWED'	=> true,
 			'S_BBCODE_IMG'		=> true,
-			'S_BBCODE_FLASH'	=> true,
 			'S_LINKS_ALLOWED'	=> true,
 
 			'U_BACK'			=> $this->u_action,
@@ -429,8 +421,11 @@ class admin_controller implements admin_interface
 
 			// Delete the page
 			$this->page_operator->delete_page($page_id);
+
+			// Purge compiled routes so the route collection is rebuilt
+			$this->route_cache->purge();
 		}
-		catch (\phpbb\pages\exception\base $e)
+		catch (\OutOfBoundsException | \InvalidArgumentException $e)
 		{
 			// Display an error message if delete failed
 			trigger_error($this->lang->lang('ACP_PAGES_DELETE_ERRORED') . adm_back_link($this->u_action), E_USER_WARNING);
@@ -475,7 +470,7 @@ class admin_controller implements admin_interface
 	*/
 	protected function create_page_template_options($current)
 	{
-		// Grab all avaliable pages_*.html files
+		// Grab all available pages_*.html files
 		$page_templates = $this->page_operator->get_page_templates();
 
 		// Clean up template names and simplify the array
@@ -491,7 +486,7 @@ class admin_controller implements admin_interface
 		{
 			$this->template->assign_block_vars('page_template_options', array(
 				'VALUE'			=> $page_template,
-				'S_SELECTED'	=> $page_template === $current,
+				'S_SELECTED'	=> (string) $page_template === (string) $current,
 			));
 		}
 	}
@@ -529,16 +524,5 @@ class admin_controller implements admin_interface
 				'S_SELECTED'	=> in_array($link['page_link_id'], $current),
 			));
 		}
-	}
-
-	/**
-	 * Display a translated entity or operator failure in the ACP.
-	 *
-	 * @param \phpbb\pages\exception\base $exception
-	 * @return void
-	 */
-	protected function display_page_error(\phpbb\pages\exception\base $exception)
-	{
-		trigger_error($exception->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
 	}
 }

@@ -69,6 +69,10 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_DELETE_ERRORED'			=> 'Stránku nemôžete odstrániť.',
 	'ACP_PAGES_ADD_SUCCESS'				=> 'Stránka bola úspešne pridaná.',
 	'ACP_PAGES_EDIT_SUCCESS'			=> 'Stránka bola úspešne aktualizovaná.',
+	'ACP_PAGES_EDIT_ERRORED'			=> 'Stránku nemôžete upraviť.',
+	'ACP_PAGES_VALIDATION_REQUIRED'		=> 'Požadované pole chýba',
+	'ACP_PAGES_VALIDATION_NOT_UNIQUE'	=> 'Vstupné údaje niesu jedinečné.',
+	'ACP_PAGES_VALIDATION_INVALID_CHARACTERS' => 'Vstupné údaje obsahujú nepovolené znaky.',
 	// Add/edit page
 	'ACP_PAGES_SETTINGS'				=> 'Nastavenie stránky',
 	'ACP_PAGES_OPTIONS'					=> 'Možnosti stránky',
