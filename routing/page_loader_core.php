@@ -46,7 +46,7 @@ class page_loader_core
 	{
 		$collection = new RouteCollection();
 
-		$sql = 'SELECT page_id, page_route
+		$sql = 'SELECT page_id, page_route, page_title, page_display, page_display_to_guests
 			FROM ' . $this->pages_table;
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
@@ -54,6 +54,9 @@ class page_loader_core
 			$route = new Route('/' . $row['page_route']);
 			$route->setDefault('_controller', 'phpbb.pages.controller:display');
 			$route->setDefault('route', $row['page_route']);
+			$route->setDefault('_pages_title', $row['page_title']);
+			$route->setDefault('_pages_display', (bool) $row['page_display']);
+			$route->setDefault('_pages_display_to_guests', (bool) $row['page_display_to_guests']);
 			$collection->add('phpbb_pages_dynamic_route_' . $row['page_id'], $route);
 		}
 		$this->db->sql_freeresult($result);

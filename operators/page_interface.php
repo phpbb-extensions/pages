@@ -49,14 +49,6 @@ interface page_interface
 	public function delete_page($page_id);
 
 	/**
-	* Get page routes (for use in viewonline)
-	*
-	* @return array Array of routes, page titles, and guest visibility settings for published pages
-	* @access public
-	*/
-	public function get_page_routes();
-
-	/**
 	* Get all custom page link icons (pages_*.gif)
 	* Added by the user to the core style/theme/images directories
 	*

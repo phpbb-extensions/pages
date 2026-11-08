@@ -62,6 +62,27 @@ class page_loader_core_test extends \phpbb_database_test_case
 		self::assertSame($expected, $route->getPath());
 	}
 
+	public static function route_metadata_data()
+	{
+		return array(
+			array(1, 'title_1', true, true),
+			array(3, 'title_3', true, false),
+			array(4, 'title_4', false, false),
+		);
+	}
+
+	/**
+	 * @dataProvider route_metadata_data
+	 */
+	public function test_routes_have_viewonline_metadata($id, $title, $display, $display_to_guests)
+	{
+		$route = $this->loader->load_routes()->get('phpbb_pages_dynamic_route_' . $id);
+
+		self::assertSame($title, $route->getDefault('_pages_title'));
+		self::assertSame($display, $route->getDefault('_pages_display'));
+		self::assertSame($display_to_guests, $route->getDefault('_pages_display_to_guests'));
+	}
+
 	public function test_supports_type()
 	{
 		self::assertTrue($this->loader->supports_type('phpbb_pages_route'));

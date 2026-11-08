@@ -32,9 +32,6 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\routing\router */
 	protected $router;
 
-	/** @var array|null Page route paths mapped to page IDs */
-	protected $page_route_ids;
-
 	/** @var \phpbb\template\template */
 	protected $template;
 
@@ -43,6 +40,9 @@ class listener implements EventSubscriberInterface
 
 	/** @var string phpEx */
 	protected $php_ext;
+
+	/** @var array|null Page route paths mapped to viewonline data */
+	protected $viewonline_pages;
 
 	/**
 	* Constructor
@@ -157,33 +157,42 @@ class listener implements EventSubscriberInterface
 		// phpBB versions. Router paths do not include the front controller.
 		$session_path = preg_replace('#^.*\.' . preg_quote($this->php_ext, '#') . '(?=/)#', '', $session_path);
 
-		if ($this->page_route_ids === null)
+		if ($this->viewonline_pages === null)
 		{
-			$this->page_route_ids = array();
+			$this->viewonline_pages = array();
 			foreach ($this->router->getRouteCollection()->all() as $route_name => $route)
 			{
 				if (strpos($route_name, 'phpbb_pages_dynamic_route_') === 0)
 				{
-					$this->page_route_ids[$route->getPath()] = (int) substr($route_name, strlen('phpbb_pages_dynamic_route_'));
+					$defaults = $route->getDefaults();
+					if (array_key_exists('_pages_title', $defaults)
+						&& array_key_exists('_pages_display', $defaults)
+						&& array_key_exists('_pages_display_to_guests', $defaults))
+					{
+						$this->viewonline_pages[$route->getPath()] = array(
+							'route_name' => $route_name,
+							'title' => utf8_decode_ncr($defaults['_pages_title']),
+							'page_display' => $defaults['_pages_display'],
+							'page_display_to_guests' => $defaults['_pages_display_to_guests'],
+						);
+					}
 				}
 			}
 		}
 
-		if (!isset($this->page_route_ids[$session_path]))
+		if (!isset($this->viewonline_pages[$session_path]))
 		{
 			return;
 		}
 
-		$page_id = $this->page_route_ids[$session_path];
-		$page_routes = $this->page_operator->get_page_routes();
-		$page = $page_routes[$page_id] ?? null;
-		if (!$page || (!$page['page_display_to_guests'] && !$this->user->data['is_registered']))
+		$page = $this->viewonline_pages[$session_path];
+		if (!$page['page_display'] || (!$page['page_display_to_guests'] && !$this->user->data['is_registered']))
 		{
 			return;
 		}
 
 		$this->lang->add_lang('pages_common', 'phpbb/pages');
 		$event['location'] = $this->lang->lang('PAGES_VIEWONLINE', $page['title']);
-		$event['location_url'] = $this->helper->route('phpbb_pages_dynamic_route_' . $page_id);
+		$event['location_url'] = $this->helper->route($page['route_name']);
 	}
 }
