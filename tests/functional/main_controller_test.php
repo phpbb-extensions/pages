@@ -84,7 +84,7 @@ class main_controller_test extends pages_functional_base
 	}
 
 	/**
-	 * Test breadcrumb positions remain sequential with links inserted before core breadcrumbs
+	 * Test each breadcrumb list maintains its own position sequence
 	 */
 	public function test_breadcrumb_positions()
 	{
@@ -99,12 +99,26 @@ class main_controller_test extends pages_functional_base
 			'page_links' => array(3),
 			'page_order' => 2,
 		));
+		$this->create_page('Third Breadcrumb Page', 'Third breadcrumb page', array(
+			'page_links' => array(4),
+			'page_order' => 3,
+		));
+		$this->create_page('Fourth Breadcrumb Page', 'Fourth breadcrumb page', array(
+			'page_links' => array(4),
+			'page_order' => 4,
+		));
 
 		$crawler = self::request('GET', "index.php?sid={$this->sid}");
-		$positions = $crawler->filter('#nav-breadcrumbs li.icon-pages meta[itemprop="position"]')->each(function ($node) {
+		$page_positions = $crawler->filter('#nav-breadcrumbs > li.icon-pages')->each(function ($node) {
+			return $node->filter('meta[itemprop="position"]')->each(function ($position) {
+				return (int) $position->attr('content');
+			});
+		});
+		$core_positions = $crawler->filter('#nav-breadcrumbs > li.breadcrumbs:not(.icon-pages) meta[itemprop="position"]')->each(function ($node) {
 			return (int) $node->attr('content');
 		});
 
-		self::assertSame(array(1, 2), $positions);
+		self::assertSame(array(array(1), array(1), array(1), array(1)), $page_positions);
+		self::assertSame(range(1, count($core_positions)), $core_positions);
 	}
 }
