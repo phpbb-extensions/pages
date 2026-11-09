@@ -208,7 +208,7 @@ interface page_interface
 	/**
 	* Check if bbcode is enabled on the content
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function content_bbcode_enabled();
@@ -234,7 +234,7 @@ interface page_interface
 	/**
 	* Check if magic_url is enabled on the content
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function content_magic_url_enabled();
@@ -260,7 +260,7 @@ interface page_interface
 	/**
 	* Check if smilies are enabled on the content
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function content_smilies_enabled();

@@ -14,7 +14,7 @@ services:
         alias: text_formatter.s9e.renderer
 
     phpbb\textformatter\cache_interface:
-        alias: text_formatter.s9e.factory
+        alias: text_formatter.cache
 
     phpbb\textformatter\parser_interface:
         alias: text_formatter.s9e.parser
@@ -75,6 +75,13 @@ services:
         arguments:
             - '@service_container'
             - '@config'
+
+    phpbb.pages.text_formatter.cache:
+        class: phpbb\pages\textformatter\cache
+        decorates: text_formatter.cache
+        arguments:
+            - '@phpbb.pages.text_formatter.cache.inner'
+            - '@phpbb.pages.text_formatter.factory'
 
     phpbb.pages.text_formatter.factory:
         class: phpbb\pages\textformatter\factory
