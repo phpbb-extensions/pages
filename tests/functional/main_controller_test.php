@@ -115,7 +115,7 @@ class main_controller_test extends pages_functional_base
 				return (int) $position->attr('content');
 			});
 		});
-		$core_positions = $crawler->filter('#nav-breadcrumbs > li.breadcrumbs:not(.icon-pages) meta[itemprop="position"]')->each(function ($node) {
+		$core_positions = $crawler->filter('#nav-breadcrumbs > li.breadcrumbs:not([data-skip-responsive]) meta[itemprop="position"]')->each(function ($node) {
 			return (int) $node->attr('content');
 		});
 
