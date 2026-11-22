@@ -124,7 +124,7 @@ class page implements page_interface
 	*
 	* Used when the data is already loaded externally.
 	* Any existing data on this page is over-written.
-	* All data is validated and an exception is thrown if any data is invalid.
+	* Fields are validated on import. Route uniqueness is checked for rows without a page ID.
 	*
 	* @param array $data Data array, typically from the database
 	* @return page_interface $this object for chaining calls; load()->set()->save()
@@ -426,7 +426,7 @@ class page implements page_interface
 			throw new \InvalidArgumentException('TOO_LONG');
 		}
 
-		// Routes must be unique
+		// Check uniqueness for new pages and route changes. Imports have an ID but no current route.
 		if (!$this->get_id() || ($this->get_id() && $this->get_route() !== '' && $this->get_route() !== $route))
 		{
 			$sql = 'SELECT 1
@@ -441,15 +441,15 @@ class page implements page_interface
 			{
 				throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_NOT_UNIQUE');
 			}
-		}
 
-		// Routes registered by phpBB or another extension take precedence over page routes
-		foreach ($this->router->getRouteCollection()->all() as $route_name => $registered_route)
-		{
-			// Page-to-page conflicts are handled by the database uniqueness check above
-			if (strpos($route_name, 'phpbb_pages_dynamic_route_') !== 0 && $registered_route->getPath() === '/' . $route)
+			// Routes registered by phpBB or another extension take precedence over page routes
+			foreach ($this->router->getRouteCollection()->all() as $route_name => $registered_route)
 			{
-				throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_NOT_UNIQUE');
+				// Page-to-page conflicts are handled by the database uniqueness check above
+				if (strpos($route_name, 'phpbb_pages_dynamic_route_') !== 0 && $registered_route->getPath() === '/' . $route)
+				{
+					throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_NOT_UNIQUE');
+				}
 			}
 		}
 

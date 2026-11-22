@@ -131,14 +131,32 @@ class page_entity_route_test extends page_entity_base
 	}
 
 	/**
-	* Test setting a route already registered by phpBB
+	* Test setting a route already registered by phpBB or an extension
+	*
+	* @dataProvider registered_route_data
 	*/
-	public function test_registered_route_fails()
+	public function test_registered_route_fails($id, $route)
 	{
+		$entity = $this->get_page_entity();
+		if ($id !== null)
+		{
+			$entity->load($id);
+		}
+
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('ACP_PAGES_VALIDATION_NOT_UNIQUE');
 
-		$this->get_page_entity()->set_route('feed');
+		$entity->set_route($route);
+	}
+
+	public static function registered_route_data()
+	{
+		return array(
+			'new core conflict' => array(null, 'feed'),
+			'changed core conflict' => array(1, 'feed'),
+			'new extension conflict' => array(null, 'extension-route'),
+			'changed extension conflict' => array(1, 'extension-route'),
+		);
 	}
 
 	/**
