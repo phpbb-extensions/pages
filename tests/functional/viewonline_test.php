@@ -24,11 +24,14 @@ class viewonline_test extends pages_functional_base
 		$this->admin_login();
 
 		// Store some of our data in variables
-		$page_title = 'Viewonline Test Page';
+		$page_title = 'Sale: 10%-20% off';
 		$page_content = 'This is a functional test page for Viewonline';
 
 		// Create a test page
 		$route = $this->create_page($page_title, $page_content);
+
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}");
+		self::assertStringContainsString($page_title, $crawler->filter('#main')->text());
 
 		// Viewonline displays only the newest session for each registered user.
 		// Session timestamps have one-second resolution, so ensure this page visit

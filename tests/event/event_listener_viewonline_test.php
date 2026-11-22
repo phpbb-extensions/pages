@@ -179,7 +179,7 @@ class event_listener_viewonline_test extends event_listener_base
 		$this->user->data['is_registered'] = $is_registered;
 		$this->auth->method('acl_get')->with('a_')->willReturn($is_admin);
 		$route = $this->route_collection->get('phpbb_pages_dynamic_route_1');
-		$route->setDefault('_pages_title', 'Secret page title');
+		$route->setOption('_pages_title', 'Secret page title');
 		$route->setDefault('_pages_display', (bool) $page_display);
 		$route->setDefault('_pages_display_to_guests', (bool) $page_display_to_guests);
 		$this->controller_helper->method('route')->willReturn('page-url');
@@ -219,7 +219,7 @@ class event_listener_viewonline_test extends event_listener_base
 
 	public function test_viewonline_page_ignores_route_missing_metadata()
 	{
-		$this->route_collection->get('phpbb_pages_dynamic_route_1')->setDefaults(array());
+		$this->route_collection->get('phpbb_pages_dynamic_route_1')->setOptions(array());
 		$event = new \phpbb\event\data(array(
 			'row' => array('session_page' => 'app.php/test'),
 			'location' => 'unchanged',
@@ -234,7 +234,7 @@ class event_listener_viewonline_test extends event_listener_base
 	public function test_viewonline_page_decodes_title_entities()
 	{
 		$this->route_collection->get('phpbb_pages_dynamic_route_1')
-			->setDefault('_pages_title', 'Caf&#233;');
+			->setOption('_pages_title', 'Caf&#233;');
 		$this->controller_helper->method('route')->willReturn('page-url');
 		$event = new \phpbb\event\data(array(
 			'row' => array('session_page' => 'app.php/test'),
@@ -250,7 +250,8 @@ class event_listener_viewonline_test extends event_listener_base
 	public function test_viewonline_page_uses_route_metadata_for_repeated_entries()
 	{
 		$route = $this->route_collection->get('phpbb_pages_dynamic_route_1');
-		$route->setDefault('_pages_title', 'Test page');
+		$title = 'Sale: 10%-20% off %% %example%';
+		$route->setOption('_pages_title', $title);
 		$this->controller_helper->method('route')->willReturn('page-url');
 
 		$listener = $this->get_listener();
@@ -264,7 +265,7 @@ class event_listener_viewonline_test extends event_listener_base
 
 			$listener->viewonline_page($event);
 
-			self::assertSame($this->lang->lang('PAGES_VIEWONLINE', 'Test page'), $event['location']);
+			self::assertSame($this->lang->lang('PAGES_VIEWONLINE', $title), $event['location']);
 			self::assertSame('page-url', $event['location_url']);
 		}
 	}

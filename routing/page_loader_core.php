@@ -54,7 +54,8 @@ class page_loader_core
 			$route = new Route('/' . $row['page_route']);
 			$route->setDefault('_controller', 'phpbb.pages.controller:display');
 			$route->setDefault('route', $row['page_route']);
-			$route->setDefault('_pages_title', $row['page_title']);
+			// Route options keep literal percent signs out of parameter substitution.
+			$route->setOption('_pages_title', $row['page_title']);
 			$route->setDefault('_pages_display', (bool) $row['page_display']);
 			$route->setDefault('_pages_display_to_guests', (bool) $row['page_display_to_guests']);
 			$collection->add('phpbb_pages_dynamic_route_' . $row['page_id'], $route);

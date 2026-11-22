@@ -75,6 +75,46 @@ class admin_controller_test extends pages_functional_base
 	}
 
 	/**
+	* Test managing a stored route that now conflicts with phpBB
+	*/
+	public function test_acp_edit_stored_route_conflict()
+	{
+		$title = 'Legacy feed page';
+		$route = $this->create_page($title, 'Legacy content');
+		$other_title = 'Page with a free route';
+		$this->create_page($other_title, 'Another page');
+
+		// Simulate a route saved before the collision was checked.
+		$this->db->sql_query('UPDATE ' . self::$config['table_prefix'] . "pages
+			SET page_route = 'feed'
+			WHERE page_route = '" . $this->db->sql_escape($route) . "'");
+
+		$manage_url = "adm/index.php?i=\\phpbb\\pages\\acp\\pages_module&mode=manage&sid={$this->sid}";
+		$crawler = self::request('GET', $manage_url);
+		self::assertStringContainsString($other_title, $crawler->filter('#main')->text());
+		$row = $crawler->filterXPath('//tr[td/strong = "Legacy feed page"]');
+		self::assertSame('feed', $row->filter('td')->eq(2)->text());
+		$edit_link = $row->filter('a[href*="action=edit"]')->link();
+
+		$crawler = self::$client->click($edit_link);
+		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
+		self::assertSame('feed', $form['page_route']->getValue());
+		$updated_title = 'Edited legacy feed page';
+		$crawler = self::submit($form, array('page_title' => $updated_title));
+		$this->assertContainsLang('ACP_PAGES_EDIT_SUCCESS', $crawler->text());
+
+		$crawler = self::$client->click($edit_link);
+		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
+		self::assertSame($updated_title, $form['page_title']->getValue());
+		self::assertSame('feed', $form['page_route']->getValue());
+		$crawler = self::submit($form, array('page_route' => $route));
+		$this->assertContainsLang('ACP_PAGES_EDIT_SUCCESS', $crawler->text());
+
+		$crawler = self::request('GET', 'app.php/' . $route);
+		self::assertSame($updated_title, $crawler->filter('.pages-title')->text());
+	}
+
+	/**
 	* Test Markdown parsing is limited to opted-in Pages content
 	*/
 	public function test_acp_create_markdown()

@@ -70,7 +70,7 @@ class admin_controller_test extends \phpbb_database_test_case
 		global $config, $phpbb_container, $phpbb_dispatcher, $phpbb_extension_manager, $phpbb_root_path, $phpEx;
 
 		admin_test_state::reset();
-		\phpbb\json_response::$data = null;
+		json_response_test_double::reset();
 
 		$this->db = $this->new_dbal();
 		$config = new \phpbb\config\config(array());
@@ -340,9 +340,10 @@ class admin_controller_test extends \phpbb_database_test_case
 
 		$this->controller->delete_page(1);
 
-		self::assertSame('Information', \phpbb\json_response::$data['MESSAGE_TITLE']);
-		self::assertSame('Page successfully deleted.', \phpbb\json_response::$data['MESSAGE_TEXT']);
-		self::assertSame(3, \phpbb\json_response::$data['REFRESH_DATA']['time']);
+		$response = json_response_test_double::get_data();
+		self::assertSame('Information', $response['MESSAGE_TITLE']);
+		self::assertSame('Page successfully deleted.', $response['MESSAGE_TEXT']);
+		self::assertSame(3, $response['REFRESH_DATA']['time']);
 	}
 
 	public function test_delete_page_reports_operator_failure()

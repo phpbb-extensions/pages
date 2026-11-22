@@ -134,6 +134,42 @@ class page_entity_content_test extends page_entity_base
 	}
 
 	/**
+	* Pages parse outside forum post limits without modifying those limits.
+	*/
+	public function test_content_ignores_forum_post_limits()
+	{
+		$this->config['min_post_chars'] = 20;
+		$this->config['max_post_chars'] = 60;
+		$this->config['max_post_urls'] = 1;
+
+		$short_content = '[b]Short[/b]';
+		$long_text = str_repeat('Long ', 15) . 'page';
+		$long_content = '[b]' . $long_text . '[/b] https://example.com/one https://example.com/two';
+		$entity = $this->get_page_entity()->content_enable_bbcode()->content_enable_magic_url();
+
+		$entity->set_content($short_content);
+		self::assertSame($short_content, $entity->get_content_for_edit());
+		$display = new \Symfony\Component\DomCrawler\Crawler($entity->get_content_for_display());
+		self::assertSame('Short', $display->filter('strong')->text());
+
+		$entity->set_content($long_content);
+		self::assertSame($long_content, $entity->get_content_for_edit());
+		$display = new \Symfony\Component\DomCrawler\Crawler($entity->get_content_for_display());
+		self::assertSame($long_text, $display->filter('strong')->text());
+		self::assertSame(2, $display->filter('a[href^="https://example.com/"]')->count());
+
+		self::assertSame(20, $this->config['min_post_chars']);
+		self::assertSame(60, $this->config['max_post_chars']);
+		self::assertSame(1, $this->config['max_post_urls']);
+
+		$uid = $bitfield = $flags = '';
+		$warnings = generate_text_for_storage($short_content, $uid, $bitfield, $flags, true, true);
+		self::assertStringContainsString('TOO_FEW_CHARS_LIMIT', implode(' ', $warnings));
+		$warnings = generate_text_for_storage($long_content, $uid, $bitfield, $flags, true, true);
+		self::assertStringContainsString('TOO_MANY_CHARS_LIMIT', implode(' ', $warnings));
+	}
+
+	/**
 	* Helper for content test
 	*
 	* @param string $content The content

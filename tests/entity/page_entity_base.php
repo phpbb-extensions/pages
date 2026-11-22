@@ -70,6 +70,7 @@ class page_entity_base extends \phpbb_database_test_case
 
 		$route_collection = new \Symfony\Component\Routing\RouteCollection();
 		$route_collection->add('phpbb_feed_index', new \Symfony\Component\Routing\Route('/feed'));
+		$route_collection->add('other_extension_route', new \Symfony\Component\Routing\Route('/extension-route'));
 		$route_collection->add('phpbb_pages_dynamic_route_1', new \Symfony\Component\Routing\Route('/page_1'));
 		$this->router = $this->getMockBuilder('\phpbb\routing\router')
 			->disableOriginalConstructor()
