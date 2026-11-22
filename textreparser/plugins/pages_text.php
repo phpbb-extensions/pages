@@ -99,7 +99,6 @@ class pages_text extends \phpbb\textreparser\row_based_plugin
 			$unparsed['enable_magic_url'] || $force_bbcode_reparsing,
 			$unparsed['enable_smilies'] || $force_bbcode_reparsing,
 			$unparsed['enable_img_bbcode'] || $force_bbcode_reparsing,
-			$unparsed['enable_flash_bbcode'],
 			$unparsed['enable_quote_bbcode'] || $force_bbcode_reparsing,
 			$unparsed['enable_url_bbcode'] || $force_bbcode_reparsing,
 			'text_reparser.' . $this->get_name()

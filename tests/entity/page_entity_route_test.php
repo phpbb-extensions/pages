@@ -140,7 +140,7 @@ class page_entity_route_test extends page_entity_base
 		$entity = $this->get_page_entity();
 		if ($id !== null)
 		{
-			$entity->load($id);
+			$entity->import($this->get_import_data()[$id]);
 		}
 
 		$this->expectException(\InvalidArgumentException::class);
