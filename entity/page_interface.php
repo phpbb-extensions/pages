@@ -33,7 +33,7 @@ interface page_interface
 	*
 	* Used when the data is already loaded externally.
 	* Any existing data on this page is over-written.
-	* All data is validated and an exception is thrown if any data is invalid.
+	* Fields are validated on import. Route uniqueness is checked for rows without a page ID.
 	*
 	* @param array $data Data array, typically from the database
 	* @return page_interface $this object for chaining calls; load()->set()->save()

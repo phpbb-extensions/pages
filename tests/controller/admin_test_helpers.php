@@ -62,17 +62,30 @@ function build_hidden_fields(array $fields)
 	return http_build_query($fields, '', '&');
 }
 
-namespace phpbb;
+namespace phpbb\pages\tests\controller;
 
-if (!class_exists(json_response::class, false))
+class json_response_test_double
 {
-	class json_response
-	{
-		public static $data;
+	private const DATA_KEY = 'phpbb_test_json_response_data';
 
-		public function send($data, $exit = true)
-		{
-			self::$data = $data;
-		}
+	public static function reset()
+	{
+		$GLOBALS[self::DATA_KEY] = null;
 	}
+
+	public static function get_data()
+	{
+		return $GLOBALS[self::DATA_KEY] ?? null;
+	}
+
+	public function send($data, $exit = true)
+	{
+		$GLOBALS[self::DATA_KEY] = $data;
+	}
+}
+
+if (!class_exists(\phpbb\json_response::class, false))
+{
+	//noinspection PhpIgnoredClassAliasDeclaration
+	class_alias(json_response_test_double::class, \phpbb\json_response::class);
 }

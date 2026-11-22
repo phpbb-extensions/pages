@@ -124,7 +124,7 @@ class page implements page_interface
 	*
 	* Used when the data is already loaded externally.
 	* Any existing data on this page is over-written.
-	* All data is validated and an exception is thrown if any data is invalid.
+	* Fields are validated on import. Route uniqueness is checked for rows without a page ID.
 	*
 	* @param array $data Data array, typically from the database
 	* @return page_interface $this object for chaining calls; load()->set()->save()
@@ -426,7 +426,7 @@ class page implements page_interface
 			throw new \InvalidArgumentException('TOO_LONG');
 		}
 
-		// Routes must be unique
+		// Check uniqueness for new pages and route changes. Imports have an ID but no current route.
 		if (!$this->get_id() || ($this->get_id() && $this->get_route() !== '' && $this->get_route() !== $route))
 		{
 			$sql = 'SELECT 1
@@ -441,15 +441,15 @@ class page implements page_interface
 			{
 				throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_NOT_UNIQUE');
 			}
-		}
 
-		// Routes registered by phpBB or another extension take precedence over page routes
-		foreach ($this->router->getRouteCollection()->all() as $route_name => $registered_route)
-		{
-			// Page-to-page conflicts are handled by the database uniqueness check above
-			if (strpos($route_name, 'phpbb_pages_dynamic_route_') !== 0 && $registered_route->getPath() === '/' . $route)
+			// Routes registered by phpBB or another extension take precedence over page routes
+			foreach ($this->router->getRouteCollection()->all() as $route_name => $registered_route)
 			{
-				throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_NOT_UNIQUE');
+				// Page-to-page conflicts are handled by the database uniqueness check above
+				if (strpos($route_name, 'phpbb_pages_dynamic_route_') !== 0 && $registered_route->getPath() === '/' . $route)
+				{
+					throw new \InvalidArgumentException('ACP_PAGES_VALIDATION_NOT_UNIQUE');
+				}
 			}
 		}
 
@@ -666,9 +666,6 @@ class page implements page_interface
 	*/
 	public function set_content($content)
 	{
-		// Override maximum post characters limit
-		$this->config['max_post_chars'] = 0;
-
 		// Prepare the text for storage
 		$uid = $bitfield = $flags = '';
 		if ($this->content_markdown_enabled())
@@ -677,7 +674,20 @@ class page implements page_interface
 		}
 		else
 		{
-			generate_text_for_storage($content, $uid, $bitfield, $flags, $this->content_bbcode_enabled(), $this->content_magic_url_enabled(), $this->content_smilies_enabled());
+			generate_text_for_storage(
+				$content,
+				$uid,
+				$bitfield,
+				$flags,
+				$this->content_bbcode_enabled(),
+				$this->content_magic_url_enabled(),
+				$this->content_smilies_enabled(),
+				true,
+				true,
+				true,
+				true,
+				'phpbb_pages'
+			);
 		}
 
 		// Set the content to our data array
