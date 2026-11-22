@@ -165,13 +165,13 @@ class listener implements EventSubscriberInterface
 				if (strpos($route_name, 'phpbb_pages_dynamic_route_') === 0)
 				{
 					$defaults = $route->getDefaults();
-					if (array_key_exists('_pages_title', $defaults)
+					if ($route->hasOption('_pages_title')
 						&& array_key_exists('_pages_display', $defaults)
 						&& array_key_exists('_pages_display_to_guests', $defaults))
 					{
 						$this->viewonline_pages[$route->getPath()] = array(
 							'route_name' => $route_name,
-							'title' => utf8_decode_ncr($defaults['_pages_title']),
+							'title' => utf8_decode_ncr($route->getOption('_pages_title')),
 							'page_display' => $defaults['_pages_display'],
 							'page_display_to_guests' => $defaults['_pages_display_to_guests'],
 						);

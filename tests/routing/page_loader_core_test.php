@@ -78,9 +78,22 @@ class page_loader_core_test extends \phpbb_database_test_case
 	{
 		$route = $this->loader->load_routes()->get('phpbb_pages_dynamic_route_' . $id);
 
-		self::assertSame($title, $route->getDefault('_pages_title'));
+		self::assertSame($title, $route->getOption('_pages_title'));
 		self::assertSame($display, $route->getDefault('_pages_display'));
 		self::assertSame($display_to_guests, $route->getDefault('_pages_display_to_guests'));
+	}
+
+	public function test_route_title_preserves_literal_percent_signs()
+	{
+		$title = 'Sale: 10%-20% off %% %example%';
+		$this->db->sql_query("UPDATE phpbb_pages
+			SET page_title = '" . $this->db->sql_escape($title) . "'
+			WHERE page_id = 1");
+
+		$route = $this->loader->load_routes()->get('phpbb_pages_dynamic_route_1');
+
+		self::assertSame($title, $route->getOption('_pages_title'));
+		self::assertFalse($route->hasDefault('_pages_title'));
 	}
 
 	public function test_supports_type()

@@ -70,7 +70,7 @@ class event_listener_base extends \phpbb_test_case
 
 		$this->route_collection = new \Symfony\Component\Routing\RouteCollection();
 		$route = new \Symfony\Component\Routing\Route('/test');
-		$route->setDefault('_pages_title', '$location');
+		$route->setOption('_pages_title', '$location');
 		$route->setDefault('_pages_display', true);
 		$route->setDefault('_pages_display_to_guests', true);
 		$this->route_collection->add('phpbb_pages_dynamic_route_1', $route);
