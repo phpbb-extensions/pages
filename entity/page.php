@@ -666,9 +666,6 @@ class page implements page_interface
 	*/
 	public function set_content($content)
 	{
-		// Override maximum post characters limit
-		$this->config['max_post_chars'] = 0;
-
 		// Prepare the text for storage
 		$uid = $bitfield = $flags = '';
 		if ($this->content_markdown_enabled())
@@ -677,7 +674,20 @@ class page implements page_interface
 		}
 		else
 		{
-			generate_text_for_storage($content, $uid, $bitfield, $flags, $this->content_bbcode_enabled(), $this->content_magic_url_enabled(), $this->content_smilies_enabled());
+			generate_text_for_storage(
+				$content,
+				$uid,
+				$bitfield,
+				$flags,
+				$this->content_bbcode_enabled(),
+				$this->content_magic_url_enabled(),
+				$this->content_smilies_enabled(),
+				true,
+				true,
+				true,
+				true,
+				'phpbb_pages'
+			);
 		}
 
 		// Set the content to our data array
